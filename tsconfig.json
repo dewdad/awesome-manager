@@ -8,10 +8,18 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "allowUnreachableCode": false,
+    "noEmitOnError": true,
+    "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "node",
+      "lodash",
+      "webpack",
       "webpack-env",
       "jest"
     ],
@@ -32,7 +40,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/util/vue-apollo.js",
+    "docs/.vuepress/mixin.js"
   ],
   "exclude": [
     "node_modules"
