@@ -27,6 +27,12 @@ import { get, sync, call } from "vuex-pathify";
 
 import ActivityInfo from "@/components/Activity/ActivityInfo.vue";
 
-@Component()
-export default class ActivityTable extends Vue {}
+@Component({
+  components: {
+    ActivityInfo,
+  },
+})
+export default class ActivityTable extends Vue {
+  editing: boolean = true;
+}
 </script>

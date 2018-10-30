@@ -20,6 +20,13 @@
           <router-link to="/helloworld">Home</router-link>
         </span>
       </v-btn>
+      <v-btn
+          flat
+        >
+        <span class="mr-2">
+          <router-link to="/activity">Activity</router-link>
+        </span>
+      </v-btn>
     </v-toolbar>
 
     <v-content>

@@ -6,6 +6,18 @@ import path from "./path";
 
 Vue.use(Router);
 
+/**
+ * Dynamic module routes
+ * NOTE: require.context is availabe after intalled `webpack-env`
+ * and in `tsconfig.json`, must set `types: ['webpack-env']`
+ */
+let files = require.context(".", false, /\.ts$/);
+
+files.keys().forEach(key => {
+  if (key === "./index.ts" || key === "./path.ts") return;
+  path.push(files(key).default);
+});
+
 const router = new Router({
   routes: path,
 });

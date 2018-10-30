@@ -14,6 +14,6 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { get, sync, call } from "vuex-pathify";
 
-@Component()
+@Component({})
 export default class ActivityInfo extends Vue {}
 </script>
