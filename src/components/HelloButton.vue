@@ -1,18 +1,18 @@
 <template>
   <button
       class="button is-primary"
-      @click="onClick">
-    <slot></slot>
+      @click="HelloClick">
+    click to emmit event
   </button>
 </template>
 
 <script>
 export default {
-  name: "my-button",
+  name: "hello-button",
 
   methods: {
-    onClick() {
-      this.$emit("click");
+    HelloClick() {
+      this.$emit("click", "name", "password");
     },
   },
 };

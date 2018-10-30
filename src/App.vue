@@ -13,26 +13,23 @@
         >
         <span class="mr-2">Latest Release</span>
       </v-btn>
+      <v-btn
+          flat
+        >
+        <span class="mr-2">
+          <router-link to="/helloworld">Home</router-link>
+        </span>
+      </v-btn>
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
-  data() {
-    return {
-      //
-    };
-  },
 };
 </script>

@@ -3,7 +3,7 @@ import Vuex from "vuex";
 
 import { make } from "vuex-pathify";
 
-import { dbInit } from "../../api/lowdb";
+import { dbInit } from "@/api/lowdb";
 // Modules Activated
 import modules from "./modules";
 import Base from "./modules/Base";
