@@ -1,0 +1,277 @@
+# 人事
+
+type Person {
+  id: ID! @unique
+  name: String!
+  gender: String!
+  birthday: DateTime!
+}
+
+type User {
+  id: ID! @unique
+  protocolId: String
+  name: String!
+  gender: String!
+  position: String
+  etnia: String!
+  birthday: DateTime!
+  academicBackground: String
+  foreignLanguage: String
+  politicalRole: String
+  rank: String
+  promotionDate: DateTime
+  outRole: String
+  innerRole: String
+  chargeOf: String
+  sendingEntity: String
+  arrivingDate: DateTime
+  leavingDate: DateTime
+  fromEntity: String
+  memo: String
+  contact: Contact
+  partyMembership: PartyMembership
+  documents: [Document!]!
+}
+
+# 文档
+
+type Article {
+  id: ID! @unique
+  author: String!
+  title: String!
+  tags: [String!]
+  isPublished: Boolean! @default(value: "false")
+  description: String
+  text: String
+  featuredImage: String
+  format: ArticleFormat
+  publishDate: DateTime! @default(value: "2018-01-26")
+}
+
+type Document {
+  id: ID! @unique
+  type: String
+  mark: String
+  classification: String
+  startDate: DateTime!
+  title: String!
+  text: String!
+  fromEntity: Entity! @relation(name: "DocumentFromEntity")
+  sendingEntity: Entity! @relation(name: "DocumentSendingEntity")
+  toEntity: Entity! @relation(name: "DocumentToEntity")
+  copyEntity: Entity @relation(name: "DocumentCopyEntity")
+  attachment: String
+  tags: String
+  author: User!
+}
+
+type Entity {
+  id: ID! @unique
+  name: String!
+  fullName: String!
+  abbr: String!
+  address: Address! @relation(name: "EntityAddress")
+  avatar: String
+}
+
+# 活动
+
+type Activity {
+  id: ID! @unique
+  address: Address! @relation(name: "ActivityAddress")
+  occurrenceDate: DateTime!
+  content: String!
+  applicant: User! @relation(name: "ActivityApplicantUser")
+  participants: [User!]! @relation(name: "ActivityParticipantsUser")
+  currentDate: DateTime!
+  startTime: DateTime!
+  endTime: DateTime!
+  reporter: [User!]! @relation(name: "ActivityReporterUser")
+  reportDate: DateTime!
+  reportContent: String!
+  instructor: [User!]! @relation(name: "ActivityInstructorUser")
+  instructionDate: DateTime!
+  instruction: String!
+  priority: PriorityLevel!
+}
+
+# 党务
+type PartyMembership {
+  id: ID! @unique
+  name: String!
+  preEnrollDate: DateTime!
+  EnrollDate: DateTime!
+  registerInDate: DateTime!
+  registerOutDate: DateTime!
+  membershipState: String!
+  contact: Contact
+  belongToEntity: PartyEntity!
+}
+
+type PartyEntity {
+  id: ID! @unique
+  name: String!
+  fullName: String!
+  startDate: DateTime
+  endDate: DateTime
+}
+
+# 流程管理
+type Procedure {
+  id: ID! @unique
+  name: String!
+  startDate: DateTime!
+  deadline: DateTime
+  progress: Float
+  color: String
+  previousProcedure: Procedure @relation(name: "PreProcedure")
+  nextProcedure: Procedure @relation(name: "NextProcedure")
+  users: [User!]!
+  documents: [Document!]!
+  entities: [Entity!]!
+}
+
+type PromotionProcedure {
+  id: ID! @unique
+  previousRank: String!
+  currentRank: String!
+  promitionDate: DateTime!
+  previousSalary: String!
+  currentSalary: String!
+  procedureState: Procedure!
+}
+
+type EvaluationProcedure {
+  id: ID! @unique
+  target: User! @relation(name: "EvaluationTargetUser")
+  positiveObservation: String
+  negativeObservation: String
+  expectation: String
+  performanceLevel: String!
+  proposal: String
+  directSuperior: User! @relation(name: "EvaluationDirectUser")
+  headOfInstitution: User @relation(name: "EvaluationHeadUser")
+  procedureState: Procedure!
+}
+
+type DocumentProcedure {
+  id: ID! @unique
+  from: String!
+  to: String!
+  procedureState: Procedure!
+}
+
+type ItemProcedure {
+  id: ID! @unique
+  previousPlace: String!
+  currentPlace: String!
+  devaluation: String!
+  procedureState: Procedure!
+}
+
+# 财务管理
+type Item {
+  id: ID! @unique
+  name: String!
+  brand: String!
+  model: String!
+  productionDate: DateTime
+  overdueDate: DateTime
+  description: String
+  price: Float!
+  mutationProcedure: ItemProcedure!
+}
+
+type Storage {
+  id: ID! @unique
+  storageName: String!
+  guardName: User!
+  items: [Item!]!
+}
+
+type Transaction {
+  id: ID! @unique
+  name: String!
+  place: String
+  date: DateTime!
+  description: String
+  applicant: String!
+  item: Item
+  quantity: Int
+  total: String!
+  type: TransactionType!
+  tags: [String!]
+}
+
+type Banquete {
+  id: ID! @unique
+  applicant: String!
+  purpose: String!
+  offerer: User! @relation(name: "BanqueteOffer")
+  authorizer: User! @relation(name: "BanqueteAuthorizer")
+  companions: [User!]! @relation(name: "BanqueteComponions")
+  guests: [User!]! @relation(name: "BanqueteQuests")
+  place: Entity!
+  date: DateTime!
+  description: String
+  total: String!
+  tags: [String!]
+}
+
+# 通用信息
+type Address {
+  id: ID! @unique
+  street: String!
+  suite: String!
+  area: String!
+  city: String!
+  state: String!
+  country: String!
+  zipcode: String
+  geo: Location
+}
+
+type Location {
+  id: ID! @unique
+  latitude: Float!
+  longitude: Float!
+}
+
+type Contact {
+  id: ID! @unique
+  homePhone: String!
+  officePhone: String!
+  cellPhone: String!
+  email: String!
+  wechat: String
+  whatsapp: String
+  github: String
+  twitter: String
+  instagram: String
+  homepage: String
+  avatar: String
+}
+
+type Vacation {
+  id: ID! @unique
+  applicant: [User!]!
+  startDate: DateTime!
+  endDate: DateTime!
+  routes: Route!
+  type: VacationType!
+  flightTicket: String! @default(value: "economy")
+  hotelRoom: String! @default(value: "standard")
+  transport: String! @default(value: "private")
+}
+
+type BussinessTrip {
+  id: ID! @unique
+  applicant: [User!]!
+  purpose: String!
+  startDate: DateTime!
+  endDate: DateTime!
+  routes: [String!]!
+  flightTicket: String! @default(value: "economy")
+  hotelRoom: String! @default(value: "standard")
+  transport: String! @default(value: "private")
+}

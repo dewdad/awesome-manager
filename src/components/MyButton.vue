@@ -1,5 +1,7 @@
 <template>
-  <button class="button is-primary" @click="onClick">
+  <button
+      class="button is-primary"
+      @click="onClick">
     <slot></slot>
   </button>
 </template>
@@ -11,8 +13,8 @@ export default {
   methods: {
     onClick() {
       this.$emit("click");
-    }
-  }
+    },
+  },
 };
 </script>
 

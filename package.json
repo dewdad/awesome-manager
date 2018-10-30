@@ -3,18 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "dev": "yarn electron:serve",
+    "dist": "yarn electron:build",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build:storybook": "vue-cli-service build:storybook -c config/storybook",
+    "install:plugins": "vue add i18n && vue add prisma",
+    "rake:install": "yarn add -D file:lib/vue-cli-plugins/vue-cli-plugin-vuex-db-module-generator",
+    "rake:invoke": "vue invoke vuex-db-module-generator",
     "serve:storybook": "vue-cli-service serve:storybook -p 6006 -c config/storybook",
-    "build:storybook": "vue-cli-service build:storybook -c config/storybook"
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/webpack": "^4.4.17",
+    "lodash-id": "^0.14.0",
+    "lowdb": "^1.0.0",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
@@ -28,6 +38,7 @@
     "@storybook/addon-actions": "4.0.0-alpha.20",
     "@storybook/addon-links": "4.0.0-alpha.20",
     "@types/jest": "^23.1.4",
+    "@types/nedb": "^1.8.6",
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-e2e-cypress": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
@@ -48,8 +59,11 @@
     "vue-cli-plugin-pug": "^1.0.7",
     "vue-cli-plugin-storybook": "^0.4.8",
     "vue-cli-plugin-vuetify": "^0.4.5",
+    "vue-cli-plugin-vuex-db-module-generator": "file:lib/vue-cli-plugins/vue-cli-plugin-vuex-db-module-generator",
     "vue-template-compiler": "^2.5.17",
-    "vuetify-loader": "^1.0.5"
+    "vuetify-loader": "^1.0.5",
+    "vuex-class": "^0.3.1",
+    "vuex-pathify": "^1.1.3"
   },
   "main": "background.js"
 }

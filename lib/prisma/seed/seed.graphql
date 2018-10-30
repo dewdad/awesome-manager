@@ -1,0 +1,83 @@
+mutation {
+  createUser(data: { name: "xingwenju", gender: "male", etnia: "han", birthday: "2009-09-09" }) {
+    id
+    name
+    gender
+    etnia
+  }
+}
+
+mutation {
+  createDocument(
+    data: {
+      author: {
+        create: {
+          name: "wanglulu"
+          etnia: "han"
+          gender: "male"
+          birthday: "2009-09-09"
+          position: "x"
+        }
+      }
+      title: "x"
+      text: "x"
+      startDate: "2009-01-01"
+      fromEntity: {
+        create: {
+          name: "xx"
+          fullName: "xx"
+          abbr: "xxx"
+          address: {
+            create: {
+              country: "china"
+              suite: ""
+              area: ""
+              street: "calle c"
+              city: "caracas"
+              state: "miranda"
+            }
+          }
+        }
+      }
+      toEntity: {
+        create: {
+          name: "xx"
+          fullName: "xx"
+          abbr: "xxx"
+          address: {
+            create: {
+              country: "china"
+              suite: ""
+              area: ""
+              street: "calle c"
+              city: "caracas"
+              state: "miranda"
+            }
+          }
+        }
+      }
+      sendingEntity: {
+        create: {
+          name: "xx"
+          fullName: "xx"
+          abbr: "xxx"
+          address: {
+            create: {
+              country: "china"
+              suite: ""
+              area: ""
+              street: "calle c"
+              city: "caracas"
+              state: "miranda"
+            }
+          }
+        }
+      }
+    }
+  ) {
+    title
+    author {
+      name
+    }
+  }
+}

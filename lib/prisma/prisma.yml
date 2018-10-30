@@ -1,0 +1,15 @@
+endpoint: https://eu1.prisma.sh/wenju-xing-3d984a/demo/dev
+datamodel:
+  - datamodel/enums.prisma
+  - datamodel/types.prisma
+
+seed:
+  import: seed/seed.graphql
+
+generate:
+  - generator: typescript-client
+    output: ../../src/api/prisma
+
+hooks:
+  post-deploy:
+    - prisma generate

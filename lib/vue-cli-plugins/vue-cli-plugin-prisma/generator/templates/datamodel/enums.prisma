@@ -1,0 +1,59 @@
+enum TransactionType {
+  IN
+  OUT
+  OTHER
+}
+
+enum PriorityLevel {
+  HIGH
+  MIDDLE
+  LOW
+}
+
+enum DiplomaticRank {
+  EMBASSADOR
+  POLITICALCONSOLLER
+  ECONOMICCONSOLLER
+  MILITARYOFFICIAL
+  ADMINISTRATIVECONSOLLER
+  FIRSTSECRETARY
+  SECONDSECRETARY
+  THIRDSECRETARY
+  ATTACHE
+  ADMINISTRATIVE
+}
+
+enum AdministrativeRank {
+  GENERALDIRECTORIAL
+  SUBGENERALDIRECTORIAL
+  DIRECTORIAL
+  SUBDIRECTORIAL
+}
+
+enum ArticleFormat {
+  COMPACT
+  WIDE
+  COVER
+}
+
+enum ProcedureState {
+  TODO
+  HOLD
+  FOLLOW
+  DONE
+}
+
+enum ProcedureAction {
+  RECEIVED
+  DOMYSELF
+  DOOTHERS
+  DROP
+}
+
+enum VacationType {
+  ANUAL
+  MISSION
+  STUFF
+  PUBLICHOLIDAY
+  OTHER
+}
