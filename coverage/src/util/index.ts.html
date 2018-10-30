@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/util/index.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">src/util</a> index.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/27</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Beautiful log with colors and fonts
+ * Suitable for chrome console display
+ */
+export const <span class="cstat-no" title="statement not covered" >log = {</span>
+  suc: <span class="fstat-no" title="function not covered" >(_</span>: any, ...args: any[]) =&gt; {
+<span class="cstat-no" title="statement not covered" >    console.log(`%c ${_}`, "color: #86d850;font-size:12px;font-weight:bold;", ...args);</span>
+  },
+  info: <span class="fstat-no" title="function not covered" >(_</span>: any, ...args: any[]) =&gt; {
+<span class="cstat-no" title="statement not covered" >    console.log(`%c ${_}`, "color: #27a8f2;font-size:12px;font-weight:bold;", ...args);</span>
+  },
+  err: <span class="fstat-no" title="function not covered" >(_</span>: any, ...args: any[]) =&gt; {
+<span class="cstat-no" title="statement not covered" >    console.log(`%c ${_}`, "color: red;font-size:12px;font-weight:bold;", ...args);</span>
+  },
+};
+/**
+ * @计算属性
+ * 返回过滤并排序后的数组items
+ * @filterKey: 过滤器，用来模糊查询一个数组中的每个对象的每个字段
+ *  1. 对数组items，使用filter方法，获取每一个item
+ *  2. 对每一个item，使用Object.keys方法，获取键值组成的数组
+ *  3. 对键值数组，使用some方法，迭代每个键名
+ *  4. 对每个键名，代入到item对象，获取每个键值。
+ *  5. 对每一个键值，使用indexOf方法，根据filterkey返回符合条件的数据
+ *c
+ * @sortKey:   用来排序的排序器
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >baseFilter(</span>items: any[], sortKey: any, filterKey: any): any[] {</span>
+  var filter = <span class="cstat-no" title="statement not covered" >filterKey &amp;&amp; filterKey.toLowerCase();</span>
+  var order = <span class="cstat-no" title="statement not covered" >1;</span>
+  var data = <span class="cstat-no" title="statement not covered" >items;</span>
+<span class="cstat-no" title="statement not covered" >  if (filter) {</span>
+<span class="cstat-no" title="statement not covered" >    data = data.filter(<span class="fstat-no" title="function not covered" >function(</span>item: any) {</span>
+<span class="cstat-no" title="statement not covered" >      return Object.keys(item).some(<span class="fstat-no" title="function not covered" >function(</span>key) {</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+          String(item[key])
+            .toLowerCase()
+            .indexOf(filter) &gt; -1
+        );
+      });
+    });
+  }
+<span class="cstat-no" title="statement not covered" >  if (sortKey) {</span>
+<span class="cstat-no" title="statement not covered" >    data = data.slice().sort(<span class="fstat-no" title="function not covered" >function(</span>a: any, b: any) {</span>
+<span class="cstat-no" title="statement not covered" >      a = a[sortKey];</span>
+<span class="cstat-no" title="statement not covered" >      b = b[sortKey];</span>
+<span class="cstat-no" title="statement not covered" >      return (a === b ? 0 : a &gt; b ? 1 : -1) * order;</span>
+    });
+  }
+<span class="cstat-no" title="statement not covered" >  return data;</span>
+}
+&nbsp;
+/**
+ * Convert keys of a Object to Array to display
+ * @param item Object with keys and values
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >ObjectKeysToArray(</span>item: any): any[] {</span>
+  let ArrayOfKeys = <span class="cstat-no" title="statement not covered" >Object.keys(item);</span>
+<span class="cstat-no" title="statement not covered" >  return ArrayOfKeys;</span>
+}
+&nbsp;
+/**
+ * Convert keys of a Object to Array to display
+ * @param item Object with keys and values
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >LimitedObjectKeysToArray(</span>item: any): any[] {</span>
+  let LimitedArrayOfKeys: any[] = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >  Object.keys(item).map(<span class="fstat-no" title="function not covered" >(k</span>ey: any, index: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (index &gt; 10) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    LimitedArrayOfKeys.push({ text: key, value: key });</span>
+  });
+<span class="cstat-no" title="statement not covered" >  return LimitedArrayOfKeys;</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 30 2018 18:37:06 GMT-0400 (大西洋标准时间)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>

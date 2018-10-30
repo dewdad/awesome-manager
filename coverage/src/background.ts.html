@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/background.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\prettify.css" />
+    <link rel="stylesheet" href="..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\index.html">All files</a> / <a href="index.html">src</a> background.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { app, protocol, BrowserWindow } from "electron";</span>
+<span class="cstat-no" title="statement not covered" >import { createProtocol, installVueDevtools } from "vue-cli-plugin-electron-builder/lib";</span>
+const isDevelopment = <span class="cstat-no" title="statement not covered" >process.env.NODE_ENV !== "production";</span>
+&nbsp;
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let win;
+&nbsp;
+// Standard scheme must be registered before the app is ready
+<span class="cstat-no" title="statement not covered" >protocol.registerStandardSchemes(["app"], { secure: true });</span>
+function <span class="fstat-no" title="function not covered" >createWindow(</span>) {
+  // Create the browser window.
+<span class="cstat-no" title="statement not covered" >  win = new BrowserWindow({ width: 800, height: 600 });</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (isDevelopment) {</span>
+    // Load the url of the dev server if in development mode
+<span class="cstat-no" title="statement not covered" >    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);</span>
+<span class="cstat-no" title="statement not covered" >    if (!process.env.IS_TEST) <span class="cstat-no" title="statement not covered" >win.webContents.openDevTools();</span></span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    createProtocol("app");</span>
+    // Load the index.html when not in development
+<span class="cstat-no" title="statement not covered" >    win.loadFile("index.html");</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  win.on("closed", <span class="fstat-no" title="function not covered" >() </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    win = null;</span>
+  });
+}
+&nbsp;
+// Quit when all windows are closed.
+<span class="cstat-no" title="statement not covered" >app.on("window-all-closed", <span class="fstat-no" title="function not covered" >() </span>=&gt; {</span>
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+<span class="cstat-no" title="statement not covered" >  if (process.platform !== "darwin") {</span>
+<span class="cstat-no" title="statement not covered" >    app.quit();</span>
+  }
+});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >app.on("activate", <span class="fstat-no" title="function not covered" >() </span>=&gt; {</span>
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+<span class="cstat-no" title="statement not covered" >  if (win === null) {</span>
+<span class="cstat-no" title="statement not covered" >    createWindow();</span>
+  }
+});
+&nbsp;
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+<span class="cstat-no" title="statement not covered" >app.on("ready", <span class="fstat-no" title="function not covered" >async</span> () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (isDevelopment &amp;&amp; !process.env.IS_TEST) {</span>
+    // Install Vue Devtools
+<span class="cstat-no" title="statement not covered" >    await installVueDevtools();</span>
+  }
+<span class="cstat-no" title="statement not covered" >  createWindow();</span>
+});
+&nbsp;
+// Exit cleanly on request from parent process in development mode.
+<span class="cstat-no" title="statement not covered" >if (isDevelopment) {</span>
+<span class="cstat-no" title="statement not covered" >  if (process.platform === "win32") {</span>
+<span class="cstat-no" title="statement not covered" >    process.on("message", <span class="fstat-no" title="function not covered" >data</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (data === "graceful-exit") {</span>
+<span class="cstat-no" title="statement not covered" >        app.quit();</span>
+      }
+    });
+  } else {
+<span class="cstat-no" title="statement not covered" >    process.on("SIGTERM", <span class="fstat-no" title="function not covered" >() </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      app.quit();</span>
+    });
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 30 2018 18:37:06 GMT-0400 (大西洋标准时间)
+</div>
+</div>
+<script src="..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\sorter.js"></script>
+</body>
+</html>

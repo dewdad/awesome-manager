@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/api/nedb/index.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/api/nedb</a> index.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/64</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { join } from "path";</span>
+<span class="cstat-no" title="statement not covered" >import fs from "fs-extra";</span>
+import * as _ from "lodash";
+&nbsp;
+// import datastore from "nedb";
+<span class="cstat-no" title="statement not covered" >import datastore from "nedb-promise";</span>
+<span class="cstat-no" title="statement not covered" >import { collections } from "@/api/globals";</span>
+<span class="cstat-no" title="statement not covered" >import { log } from "@/util";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { remote, app } from "electron";</span>
+&nbsp;
+/////////////////////////////////////////////////////////////////////////
+// Module
+/////////////////////////////////////////////////////////////////////////
+&nbsp;
+const APP = <span class="cstat-no" title="statement not covered" >process.type === "renderer" ? remote.app : app;</span>
+const userPath = <span class="cstat-no" title="statement not covered" >join(APP.getPath("userData"), "data");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >if (process.type !== "renderer") {</span>
+<span class="cstat-no" title="statement not covered" >  if (!fs.pathExistsSync(userPath)) {</span>
+<span class="cstat-no" title="statement not covered" >    fs.mkdirpSync(userPath);</span>
+  }
+}
+&nbsp;
+let pool: any = <span class="cstat-no" title="statement not covered" >{};</span>
+&nbsp;
+/**
+ * Database persistence Module
+ */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbOpen(</span>collection: string): any {</span>
+<span class="cstat-no" title="statement not covered" >  return pool[collection];</span>
+}
+&nbsp;
+/**
+ * Init persistence database pool
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbInit(</span>) {</span>
+  // Create user-level collections like user.json
+<span class="cstat-no" title="statement not covered" >  dbCreateUserLevelCollection(collections);</span>
+}
+&nbsp;
+/**
+ * Init persistence database pool
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbResetAll(</span>) {</span>
+  // Create user-level collections like user.json
+<span class="cstat-no" title="statement not covered" >  collections.map(<span class="fstat-no" title="function not covered" >item</span> =&gt; <span class="cstat-no" title="statement not covered" >dbRemove(item))</span>;</span>
+}
+&nbsp;
+/**
+ * Creating a collection with real path and add to pool
+ * @param collection Name of the db collection
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbCreate(</span>collection: string) {</span>
+  let fileName = <span class="cstat-no" title="statement not covered" >`${collection}.json`;</span>
+  let filePath = <span class="cstat-no" title="statement not covered" >join(userPath, fileName);</span>
+  // Create collections instance and add to pool
+  let DB = <span class="cstat-no" title="statement not covered" >datastore({</span>
+    autoload: true,
+    filename: filePath,
+  });
+<span class="cstat-no" title="statement not covered" >  pool[collection] = DB;</span>
+  // add collection information to collections
+  let systemDB = <span class="cstat-no" title="statement not covered" >dbOpen("database");</span>
+<span class="cstat-no" title="statement not covered" >  systemDB.find({ collection: collection }).then(<span class="fstat-no" title="function not covered" >(d</span>ocs: any[]) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (docs.length === 0) <span class="cstat-no" title="statement not covered" >systemDB.insert({ collection, fileName, filePath });</span></span>
+  });
+}
+&nbsp;
+/**
+ * Create Default Collections if not exist
+ *
+ * Check the UserData Folder if user.json and other files exist
+ * If not, call defaultCollections as array
+ * Loop through and create databases files
+ * Load into pool
+ */
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbCreateUserLevelCollection(</span>collections: string[]) {</span>
+<span class="cstat-no" title="statement not covered" >  for (let collection of collections) {</span>
+    // check if other user-level collection exists
+<span class="cstat-no" title="statement not covered" >    dbCreate(collection);</span>
+<span class="cstat-no" title="statement not covered" >    log.suc("Created " + collection + ".json in you UserData directory!");</span>
+  }
+}
+&nbsp;
+/**
+ * Remove the collections.json files from hard disk
+ */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export function <span class="fstat-no" title="function not covered" >dbRemove(</span>collection: string) {</span>
+  let fileName = <span class="cstat-no" title="statement not covered" >`${collection}.json`;</span>
+  let filePath = <span class="cstat-no" title="statement not covered" >join(userPath, fileName);</span>
+<span class="cstat-no" title="statement not covered" >  if (fs.existsSync(filePath)) {</span>
+<span class="cstat-no" title="statement not covered" >    log.err("Removing...");</span>
+<span class="cstat-no" title="statement not covered" >    fs.rmdirSync(filePath);</span>
+  }
+}
+&nbsp;
+/**
+ * Database table operation Module
+ * TODO: DEPRECATED: Now Every operation with `nedb-promise`
+ * /
+&nbsp;
+ /**
+ * 通过查询语句，获取数据，返回一个Promise&lt;数据[]&gt;
+ * @param db Nedb datastore
+ * @param query MongoDB-style query
+ */
+export const <span class="cstat-no" title="statement not covered" >findItem = <span class="fstat-no" title="function not covered" >(d</span>b: any, query: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (db === undefined || query === undefined) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    db.find(query, <span class="fstat-no" title="function not covered" >(e</span>rr: Error, document: any[]) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (err !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        reject(err);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        resolve(document);</span>
+      }
+    });
+  });
+};
+&nbsp;
+/**
+ * 获取Vuex中传递的载荷，如果有就删除Id字段，创建并返回Promise&lt;插入的新数据&gt;
+ * @param db Nedb datastore
+ * @param cleanPayload MongoDB-style query
+ */
+export const <span class="cstat-no" title="statement not covered" >addItem = <span class="fstat-no" title="function not covered" >(d</span>b: any, cleanPayload: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (db === undefined || cleanPayload === undefined) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    db.insert(cleanPayload, <span class="fstat-no" title="function not covered" >(e</span>rr: Error, insertedDoc: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (err !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        reject(err);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        resolve(insertedDoc);</span>
+      }
+    });
+  });
+};
+/**
+ * 获取Vuex中传递的载荷，如果有就删除Id字段，更改并返回Promise&lt;修改数据的数量&gt;
+ * @param db Nedb datastore
+ * @param query MongoDB-style query
+ * @param cleanPayload MongoDB-style query
+ */
+export const <span class="cstat-no" title="statement not covered" >updateItem = <span class="fstat-no" title="function not covered" >async</span> (db: any, query: any, cleanPayload: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (db === undefined || cleanPayload === undefined || query === undefined) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    db.update(query, cleanPayload, {}, <span class="fstat-no" title="function not covered" >(e</span>rr: Error, numberOfUpdated: number) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (err !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        reject(err);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        resolve(numberOfUpdated);</span>
+      }
+    });
+  });
+};
+&nbsp;
+/**
+ * 获取Vuex中传递的载荷，如果有就删除Id字段，删除并返回Promise&lt;删除数据的数量&gt;
+ * @param db Nedb datastore
+ * @param query MongoDB-style query
+ */
+export const <span class="cstat-no" title="statement not covered" >removeItem = <span class="fstat-no" title="function not covered" >async</span> (db: any, query: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (db === undefined || query === undefined) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    db.remove(query, {}, <span class="fstat-no" title="function not covered" >(e</span>rr: Error, numberOfDeleted: number) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (err !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        reject(err);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        resolve(numberOfDeleted);</span>
+      }
+    });
+  });
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 30 2018 18:37:06 GMT-0400 (大西洋标准时间)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>
