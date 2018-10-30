@@ -10,9 +10,10 @@
     </v-layout>
   </v-container>
 </template>
-<script>
+<script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { get, sync, call } from "vuex-pathify";
 
+@Component()
 export default class ActivityInfo extends Vue {}
 </script>

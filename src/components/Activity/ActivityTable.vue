@@ -20,12 +20,13 @@
 
   </v-card>
 </template>
-<script>
+<script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { get, sync, call } from "vuex-pathify";
 
 import ActivityInfo from "@/components/Activity/ActivityInfo.vue";
 
+@Component()
 export default class ActivityTable extends Vue {}
 </script>
