@@ -5,7 +5,6 @@ import * as _ from "lodash";
 // import datastore from "nedb";
 import datastore from "nedb-promise";
 import { collections } from "@/api/globals";
-import { log } from "@/util";
 
 import { remote, app } from "electron";
 
@@ -80,7 +79,7 @@ export function dbCreateUserLevelCollection(collections: string[]) {
   for (let collection of collections) {
     // check if other user-level collection exists
     dbCreate(collection);
-    log.suc("Created " + collection + ".json in you UserData directory!");
+    console.log("Created " + collection + ".json in you UserData directory!");
   }
 }
 
@@ -92,7 +91,7 @@ export function dbRemove(collection: string) {
   let fileName = `${collection}.json`;
   let filePath = join(userPath, fileName);
   if (fs.existsSync(filePath)) {
-    log.err("Removing...");
+    console.log("Removing...");
     fs.rmdirSync(filePath);
   }
 }

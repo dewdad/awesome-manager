@@ -11,7 +11,7 @@
 
 - [vue-cli 3](https://github.com/vuejs/vue-cli)插件，用于生成 Vuex store 模块和相应组件
 
-- 主要面向`electron`应用，存储`nedb`的持久化数据到用户数据目录下的`data`文件夹内
+- 主要面向`electron`应用，存储`nedb`和`lowdb`的持久化数据到用户数据目录下的`data`文件夹内
 
 - 面向`typescript`应用
 
@@ -38,8 +38,8 @@ $ vue add vue-cli-plugin-vuex-nedb-module-generator
 $ vue invoke vue-cli-plugin-vuex-nedb-module-generator
 ? Where's your store's root directory? ./src/store
 ? Where's your component's root directory? ./src/components
-? What's your new module's name? code
 ? What's your router's path? ./src/router
+? What's your new module's name? Activity
 ```
 
 ## 自动生成的主要文件
@@ -60,15 +60,15 @@ $ vue invoke vue-cli-plugin-vuex-nedb-module-generator
 
 ```sh
 store/modules/Base/index.ts
-store/modules/Base/actions.ts
-store/modules/Base/mutations.ts
+store/modules/Base/actions.nedb.ts
+store/modules/Base/mutations.lowdb.ts
 store/modules/Base/getters.ts
 store/modules/code.ts
 ```
 
-**Nedb 的 API，主要在 actions 中异步调用**
+**Db 的 API，主要在 actions 中异步调用**
 
-`store/api/NedbSDK.ts`
+`api/lowdb/index.ts`
 
 **Store 插件，加入了 pathify 和 persistent**
 
@@ -80,8 +80,8 @@ store/plugins/PersistentPlugin.ts
 **自动生成的组件**
 
 ```sh
-components/code/codeTable.ts
-components/code/codeInfo.ts
+components/Activity/ActivityCodeTable.ts
+components/Activity/ActivityInfo.ts
 ```
 
 ## 借鉴：

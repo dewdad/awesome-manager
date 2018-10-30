@@ -5,7 +5,7 @@ Vue.use(Vuex);
 import { make } from "vuex-pathify";
 
 // Init Database
-import { dbInit } from "@/api/nedb";
+import { dbInit } from "@/api/lowdb";
 dbInit();
 
 // Modules Activated

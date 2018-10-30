@@ -41,14 +41,14 @@ import { get, sync, call } from "vuex-pathify";
 
 @Component({
   props: {
-    editing: Boolean
+    editing: Boolean,
   },
   computed: {
-    ...sync("activity/*")
+    ...sync("activity/*"),
   },
   methods: {
-    ...call("activity/*")
-  }
+    ...call("activity/*"),
+  },
 })
 export default class ActivityInfo extends Vue {
   saveItem() {

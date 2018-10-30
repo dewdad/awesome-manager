@@ -1,5 +1,5 @@
 {
-  "name": "vue-cli-plugin-vuex-db-module-generator",
+  "name": "vue-cli-plugin-vuex-nedb-module-generator",
   "description": "Vuex store module generator plugin with base model and extension for vue-cli 3",
   "version": "0.1.25",
   "main": "index.js",
