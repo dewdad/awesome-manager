@@ -18,6 +18,19 @@ install:
 build_script:
   - npm run electron:build
 
+artifacts:
+  - path: dist_electron\*.exe
+    name: awesome-manager-v$(appveyor_build_version)
+
+deploy:
+  - provider: GitHub
+    artifacts: awesome-manager-v$(appveyor_build_version)
+    draft: false
+    prerelease: false
+    on:
+      branch: master # release from master branch only
+      appveyor_repo_tag: true # deploy on tag push only
+
 test: off
 
 branches:
