@@ -2,9 +2,10 @@ interface IPayload {
     [key: string] : any
 }
 
-type ommit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
 type PayloadProps = Pick<IPayload, "id"|"name">
+type PayloadOmmitedProps = Omit<IPayload, "id"|"name">
 
 export const CheckInterfacePlugin = (options: any) => {
   return (store: any) => {
