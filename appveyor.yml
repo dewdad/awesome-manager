@@ -6,10 +6,10 @@ environment:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
 
 cache:
-  # - node_modules
-  # - lib\vue-cli-plugins\vue-cli-plugin-vuex-nedb-module-generator\node_modules
-  # - '%APPDATA%\npm-cache'
-  # - '%USERPROFILE%\.electron'
+  - node_modules
+  - lib\vue-cli-plugins\vue-cli-plugin-vuex-nedb-module-generator\node_modules
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
 
 install:
   - ps: Install-Product node 8 x86
