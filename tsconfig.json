@@ -16,11 +16,24 @@
     "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["node", "lodash", "webpack", "webpack-env", "jest"],
+    "types": [
+      "node",
+      "lodash",
+      "webpack",
+      "webpack-env",
+      "jest",
+    ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -28,8 +41,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "src/util/vue-apollo.js",
-    "docs/.vuepress/mixin.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

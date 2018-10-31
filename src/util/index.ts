@@ -1,3 +1,7 @@
+import Papa from "papaparse/papaparse.js";
+import fs from "fs";
+import path from "path";
+const stringify = require("csv-stringify");
 /**
  * Beautiful log with colors and fonts
  * Suitable for chrome console display
@@ -71,3 +75,82 @@ export function LimitedObjectKeysToArray(item: any): any[] {
   });
   return LimitedArrayOfKeys;
 }
+
+/**
+ * Using csv-stringify to convert a array to string
+ * Save the string to a csv file with utf8 encoding
+ * Note that if you are using windows, you may experience trouble
+ * with encoding. Should you use schema.ini file to specify the csv
+ * encoding.
+ * @param inputData
+ * @param datasourcePath
+ */
+export function GenerateCSV(inputData: any[], datasourcePath: string) {
+  // const input = [ [ 'a', 'b', 'c', 'd' ],[ '1', '2', '3', '4' ] ];
+  stringify(
+    inputData,
+    {
+      delimiter: ",",
+      header: true,
+      quoted: true,
+      quotedEmpty: true,
+    },
+    function(_err: string, output: any) {
+      console.log("Data to be written:");
+      console.log(output);
+      fs.writeFileSync(datasourcePath, output, "utf8");
+      console.log("File Name:");
+      console.log(datasourcePath);
+    },
+  );
+}
+
+/**
+ * Parse a file uploaded by html page
+ * Return a Promise which resolve results as a object
+ * results have a key [data] holding the real array
+ */
+
+export const ImportCSV = async (file: any) => {
+  return new Promise((resolve, reject) => {
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      complete: function(results: any) {
+        log.info(results.data[0]);
+        resolve(results.data);
+      },
+    });
+  });
+};
+
+export function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+export function uncapitalizeFirstLetter(string: string) {
+  return string.charAt(0).toLowerCase() + string.slice(1).toLowerCase();
+}
+
+export const kebab = (str: string) => {
+  return (str || "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+};
+
+export function getFilesByExtentionInDir(path: string, ext: string): any[] {
+  const Docs: any = [];
+  fs.readdir(path, (_, files) => {
+    files.forEach((file: string) => {
+      log.info(file);
+      if (file.substring(file.length - ext.length) !== ext) return;
+      // Regex Replacement:   ./    .doc     .json
+      let keyName: string = file.replace(/(\.\/|\.doc|\.json|\.js|\.ts)/g, "");
+      Docs.push(keyName);
+    });
+  });
+  return Docs;
+}
+
+export const randomElement = (arr = []) => {
+  return arr[Math.floor(Math.random() * arr.length)];
+};
