@@ -6,6 +6,7 @@ environment:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
   access_token:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
+  appveyor_repo_tag: true
 
 cache:
   - node_modules

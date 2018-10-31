@@ -1,5 +1,6 @@
 // Useful types
 type UnRequiredKeys<T> = { [P in keyof T]?: T[P] };
+
 // Keep types the same, but make each property to be read-only.
 type ReadOnly<T> = { readonly [P in keyof T]: T[P] };
 // Same property names, but make the value a promise instead of a concrete one
@@ -32,3 +33,5 @@ declare function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K>;
  * const lengths = mapObject(names, s => s.length);  // { foo: number, bar: number, baz: number }
  */
 declare function mapObject<K extends string, T, U>(obj: Record<K, T>, f: (x: T) => U): Record<K, U>;
+
+declare function objectKeyType<T, K extends keyof T>(obj: T, key: K): any;

@@ -1,0 +1,36 @@
+interface IDocument {
+  "主送机关": String!
+  "收发类型": String!
+  "事由": String!
+  "文种": String!
+  "密级": String!
+  "时间": String!
+  "发文代码": String!
+  "序号": String!
+  "主题词": String!
+  "抄送机关": String!
+  "正文": String!
+  "附件": String!
+}
+
+interface IUser{
+  "序号": String!
+  "部门": String!
+  "姓名": String!
+  "性别": String!
+  "民族": String!
+  "出生日期": String!
+  "学历": String!
+  "外语语种": String!
+  "政治面貌": String!
+  "行政级别": String!
+  "提级时间": String!
+  "对外身份": String!
+  "对内身份": String!
+  "担任工作": String!
+  "派出单位": String!
+  "到馆时间": String!
+  "离馆时间": String!
+  "出国前单位": String!
+  "备注": String!
+}
