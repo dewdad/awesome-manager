@@ -20,11 +20,11 @@ build_script:
 
 artifacts:
   - path: dist_electron\*.exe
-    name: awesome-manager-v$(appveyor_build_version)
+    name: bin
 
 deploy:
   - provider: GitHub
-    artifacts: awesome-manager-v$(appveyor_build_version)
+    artifacts: bin
     draft: false
     prerelease: false
     on:
