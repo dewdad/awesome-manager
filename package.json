@@ -1,6 +1,6 @@
 {
   "name": "awesome-manager",
-  "version": "0.1.0",
+  "version": "1.0.6",
   "author": "linuxing3<linuxing3@qq.com>",
   "description": "A awesome dashbaord manager powered by vue and electron",
   "private": true,
