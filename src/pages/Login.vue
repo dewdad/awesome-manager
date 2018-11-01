@@ -92,6 +92,7 @@ export default {
   }),
   computed: {
     currentItem: sync("account/currentItem"),
+    status: sync("account/status"),
   },
   mounted() {
     console.log(this.baseUrl);
@@ -106,7 +107,7 @@ export default {
         this.loading = true;
         setTimeout(() => {
           if (this.status) {
-            this.$router.push("/projects");
+            this.$router.push("/activity");
           } else {
             this.loading = false;
             window.getApp.$emit("APP_LOGIN_DATA_INVALID");
