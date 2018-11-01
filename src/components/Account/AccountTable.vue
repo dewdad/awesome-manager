@@ -1,11 +1,11 @@
 <template>
   <v-card>
-      <v-card-title>
-          Account
-      </v-card-title>
-      <v-card-text>
-          <AccountInfo :editing="editing"></AccountInfo>
-      </v-card-text>
+    <v-card-title>
+      Account
+    </v-card-title>
+    <v-card-text>
+      <AccountInfo :editing="editing"></AccountInfo>
+    </v-card-text>
   </v-card>
 </template>
 <script lang="js">
