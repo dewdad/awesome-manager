@@ -256,12 +256,9 @@ import EChart from "@/components/chart/echart";
 import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
 import PostListCard from "@/components/widgets/card/PostListCard";
 
-import AccountProfile from "@/components/Account/AccountProfile";
 import PostSingleCard from "@/components/widgets/card/PostSingleCard";
 import WeatherCard from "@/components/widgets/card/WeatherCard";
 
-import ProjectTable from "@/components/Project/ProjectTable";
-import UserTable from "@/components/User/UserTable";
 
 import VWidget from "@/components/VWidget";
 import Material from "vuetify/es5/util/colors";
@@ -281,9 +278,6 @@ export default {
     WeatherCard,
     PostSingleCard,
     PostListCard,
-    AccountProfile,
-    ProjectTable,
-    UserTable,
     EChart,
     BoxChart,
     CircleStatistic,

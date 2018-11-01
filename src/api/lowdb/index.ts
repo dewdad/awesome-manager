@@ -8,7 +8,12 @@ import { remote, app } from "electron";
 import { collections } from "../globals";
 
 const APP = process.type === "renderer" ? remote.app : app;
-const userPath = join(APP.getPath("userData"), "data") || "";
+let userPath;
+if (APP !== undefined) {
+  userPath = join(APP.getPath("userData"), "data") || "";
+} else {
+  userPath = join(__dirname, "data");
+}
 
 // if (process.type !== "renderer") {
 if (!fs.pathExistsSync(userPath)) {

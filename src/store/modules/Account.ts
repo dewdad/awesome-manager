@@ -18,7 +18,11 @@ const mutations: any = {
   ...Base.mutations,
 };
 
-const actions: any = { ...make.actions(state), ...Base.actions };
+const actions: any = {
+  ...make.actions(state),
+  ...Base.actions,
+  signup(ctx, payload) {},
+};
 
 const getters: any = { ...make.getters(state), ...Base.getters };
 

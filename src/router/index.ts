@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Vue from "vue";
-import Router from "vue-router";
+import Router, { RouteConfig } from "vue-router";
 
-import path from "./path";
+import path from "./path.awesome";
 
 Vue.use(Router);
 
@@ -14,12 +14,12 @@ Vue.use(Router);
 let files = require.context(".", false, /\.ts$/);
 
 files.keys().forEach(key => {
-  if (key === "./index.ts" || key === "./path.ts") return;
+  if (key === "./index.ts" || key === "./path.awesome.ts") return;
   path.push(files(key).default);
 });
 
 const router = new Router({
-  routes: path,
+  routes: path as RouteConfig[],
 });
 
 // router gards

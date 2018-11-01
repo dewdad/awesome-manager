@@ -6,6 +6,7 @@ import AccountTable from "@/components/Account/AccountTable.vue";
 
 const localVue = createLocalVue();
 
+// FIXME: spread functions not work
 localVue.use(Vuetify);
 
 describe("Vue Component Testing", () => {

@@ -91,14 +91,14 @@ export default {
     baseUrl: process.env.BASE_URL,
   }),
   computed: {
-    ...sync("account/*"),
+    currentItem: sync("account/currentItem"),
   },
   mounted() {
     console.log(this.baseUrl);
   },
 
   methods: {
-    ...call("account/*"),
+    signup: call("account/signup"),
     async login() {
       // account/signin/signup
       if ((this.model.name !== "" && this.model.password !== "") || this.model.email !== "") {

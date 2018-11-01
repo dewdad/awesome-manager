@@ -1,11 +1,11 @@
 import Vue from "vue";
-import "./plugins/vuetify";
-import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 import i18n from "./plugins/i18n";
-import "@/plugins/styles";
+import "./plugins/vuetify";
+import "./plugins/styles";
+import App from "./entry/App.awesome.vue";
 
 Vue.config.productionTip = false;
 
