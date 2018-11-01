@@ -6,7 +6,7 @@ environment:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
   access_token:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
-  appveyor_repo_tag: true
+  APPVEYOR_REPO_TAG: false
 
 cache:
   - node_modules
@@ -37,7 +37,7 @@ deploy:
     prerelease: false
     on:
       branch: master
-      appveyor_repo_tag: true
+      appveyor_repo_tag: false
 
 test: off
 
