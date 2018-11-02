@@ -1,6 +1,7 @@
 <template lang="pug">
     div
       AccountHistory
+      AccountTree
       v-timeline
         v-timeline-item(v-for="n in itemCounts" :key="n" color="red lighten-2" large)
           span(slot="opposite") {{currentItem.name}}
@@ -13,10 +14,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { get, sync, call } from "vuex-pathify";
 import AccountHistory from "./AccountHistory";
+import AccountTree from "./AccountTree";
 
 export default {
   components: {
-      AccountHistory
+      AccountHistory,
+      AccountTree
   },
   props: {
      editing: false
