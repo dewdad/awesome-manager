@@ -250,16 +250,11 @@
 
 <script>
 import API from "@/api";
-
 import EChart from "@/components/chart/echart";
-
 import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
 import PostListCard from "@/components/widgets/card/PostListCard";
-
 import PostSingleCard from "@/components/widgets/card/PostSingleCard";
 import WeatherCard from "@/components/widgets/card/WeatherCard";
-
-
 import VWidget from "@/components/VWidget";
 import Material from "vuetify/es5/util/colors";
 import VCircle from "@/components/circle/VCircle";

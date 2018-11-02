@@ -1,6 +1,9 @@
 const defaultAccount = {
-  name: "account title",
-  description: "account description ",
+  name: "embajadachina",
+  email: "embajadachina@gmail.com",
+  password: "embajadachina",
+  hash: "",
+  role: "manager",
 };
 
 export default defaultAccount;

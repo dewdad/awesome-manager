@@ -111,7 +111,7 @@ const extraMenu = [
     title: "账户信息",
     group: "apps",
     icon: "fas fa-user-edit",
-    name: "Accounts",
+    name: "AccountProfile",
   },
   {
     title: "即时通讯",

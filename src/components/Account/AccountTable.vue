@@ -6,6 +6,9 @@
     <v-card-text>
       <AccountInfo :editing="editing"></AccountInfo>
     </v-card-text>
+    <v-card-action>
+      <AccountProfile></AccountProfile>
+    </v-card-action>
   </v-card>
 </template>
 <script lang="js">
@@ -13,10 +16,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { get, sync, call } from "vuex-pathify";
 import AccountInfo from "./AccountInfo";
+import AccountProfile from "./AccountProfile";
 
 export default {
   components: {
-    AccountInfo
+    AccountInfo,
+    AccountProfile
   },
   props: {
      editing: false

@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuetify from "vuetify";
 
-import App from "@/entry/app.awesome.vue";
+import App from "@/entry/App.awesome.vue";
 
 import AppDrawer from "@/components/AppDrawer.vue";
 import AppToolbar from "@/components/AppToolbar.vue";
