@@ -44,6 +44,4 @@ jobs:
       # - run: yarn test:unit
       - run: yarn electron:build
       - store_artifacts:
-          path: ./dist_electron/*.AppImage
-      - store_artifacts:
-          path: ./dist_electron/*.snap
+          path: ./dist_electron
