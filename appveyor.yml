@@ -3,9 +3,9 @@ platform:
 
 environment:
   GH_TOKEN:
-    secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   access_token:
-    secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   APPVEYOR_REPO_TAG: true
 
 cache:
@@ -26,16 +26,16 @@ artifacts:
   - path: dist_electron\*.exe
     name: bin
 
-deploy:
-  - provider: GitHub
-    release: awesome-manager-v$(appveyor_build_version)
-    description: "A awesome dashbaord manager powered by vue and electron"
-    artifacts: bin
-    auth_token:
-      secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
-    on:
-      branch: master
-      appveyor_repo_tag: true
+# deploy:
+#   - provider: GitHub
+#     release: awesome-manager-v$(appveyor_build_version)
+#     description: "A awesome dashbaord manager powered by vue and electron"
+#     artifacts: bin
+#     auth_token:
+#       secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+#     on:
+#       branch: master
+#       appveyor_repo_tag: true
 
 test: off
 
