@@ -6,6 +6,7 @@ environment:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
   access_token:
     secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
+  APPVEYOR_REPO_TAG: true
 
 cache:
   - node_modules
@@ -32,10 +33,11 @@ deploy:
     artifacts: bin
     auth_token:
       secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
-    draft: true
-    prerelease: true
+    draft: false
+    prerelease: false
     on:
       branch: master
+      appveyor_repo_tag: true
 
 test: off
 
