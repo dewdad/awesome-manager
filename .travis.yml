@@ -27,14 +27,14 @@ cache:
 script:
   - npm run electron:build
 
-# deploy:
-#   provider: releases
-#   api_key:
-#     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-#   file: dist_electron\*.exe
-#   skip_cleanup: true
-#   on:
-#     tags: true
+deploy:
+  provider: releases
+  api_key:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+  file: dist_electron\*.exe
+  skip_cleanup: true
+  on:
+    tags: true
 
 branches:
   only:
