@@ -34,7 +34,7 @@ deploy:
   file: dist_electron\*.exe
   skip_cleanup: true
   on:
-    tags: true
+    branch: release
 
 branches:
   only:
