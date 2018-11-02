@@ -32,10 +32,10 @@ deploy:
     artifacts: bin
     auth_token:
       secure: cojifY92Y+3E21ZWUklskTlfQ1pTe6TuNK56WtaZbK1JX+OXv1m/ya1EyKxiYsUS
-    draft: false
-    prerelease: false
+    draft: true
+    prerelease: true
     on:
-      branch: release
+      branch: master
 
 test: off
 
