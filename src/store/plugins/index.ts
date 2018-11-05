@@ -1,4 +1,5 @@
 import { PersistentPlugin } from "./persistentPlugin";
+import ormPlugin from "./ormPlugin";
 
 import { collections } from "@/api/globals";
 
@@ -14,5 +15,8 @@ plugins.push(pathify.plugin);
 collections.forEach((collection: string) => {
   plugins.push(PersistentPlugin({ namespace: collection }));
 });
+
+// 启用orm
+plugins.push(ormPlugin);
 
 export default plugins;
