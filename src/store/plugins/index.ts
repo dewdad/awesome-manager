@@ -1,5 +1,5 @@
 import { PersistentPlugin } from "./persistentPlugin";
-import ormPlugin from "./ormPlugin";
+// import ormPlugin from "./ormPlugin";
 
 import { collections } from "@/api/globals";
 
@@ -17,6 +17,6 @@ collections.forEach((collection: string) => {
 });
 
 // 启用orm
-plugins.push(ormPlugin);
+// plugins.push(ormPlugin);
 
 export default plugins;
