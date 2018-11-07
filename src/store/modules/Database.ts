@@ -3,7 +3,6 @@ import lowdbActions from "@/store/shared/actions.orm";
 import sharedMutations from "@/store/shared/mutations";
 import sharedGetters from "@/store/shared/getters";
 
-
 const state: any = {
   name: "database",
   items: [],
