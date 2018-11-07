@@ -1,7 +1,8 @@
 import { make } from "vuex-pathify";
-import Base from "@/store/modules/Base";
+import lowdbActions from "@/store/shared/actions.orm";
+import sharedMutations from "@/store/shared/mutations";
+import sharedGetters from "@/store/shared/getters";
 
-import { collections } from "@/api/globals";
 
 const state: any = {
   name: "database",
@@ -19,12 +20,12 @@ const state: any = {
 
 const mutations: any = {
   ...make.mutations(state),
-  ...Base.mutations,
+  ...sharedMutations,
 };
 
-const actions: any = { ...make.actions(state), ...Base.actions };
+const actions: any = { ...make.actions(state), ...lowdbActions };
 
-const getters: any = { ...make.getters(state), ...Base.getters };
+const getters: any = { ...make.getters(state), ...sharedGetters };
 
 export default {
   namespaced: true,

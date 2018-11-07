@@ -3,17 +3,18 @@ import Vuex from "vuex";
 
 import { make } from "vuex-pathify";
 
-import { dbInit } from "@/api/lowdb";
+import { defaultDB } from "@/api/lowdb";
 // Modules Activated
 import modules from "./modules";
-import Base from "./modules/Base";
+import lowdbActions from "@/store/shared/actions.lowdb";
+import sharedMutations from "@/store/shared/mutations";
 
 // Plugins will handle persistence
 import plugins from "./plugins";
 
 Vue.use(Vuex);
 
-dbInit();
+defaultDB.dbInit("data");
 
 const state = {
   title: "xing wenju",
@@ -25,9 +26,9 @@ const state = {
   loggedIn: false,
 };
 
-const mutations: any = { ...make.mutations(state), ...Base.mutations };
+const mutations: any = { ...make.mutations(state), ...sharedMutations };
 
-const actions: any = { ...make.actions(state), ...Base.actions };
+const actions: any = { ...make.actions(state), ...lowdbActions };
 
 /**
  * Awesome store created here!

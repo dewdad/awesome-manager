@@ -1,6 +1,8 @@
 import { ActionContext } from "vuex";
 import { make } from "vuex-pathify";
-import Base from "@/store/modules/Base";
+import lowdbActions from "@/store/shared/actions.lowdb";
+import sharedMutations from "@/store/shared/mutations";
+import sharedGetters from "@/store/shared/getters";
 import defaultAccount from "@/api/models/Account";
 import db from "@/api/lowdb";
 import bcrypt from "bcryptjs";
@@ -24,7 +26,7 @@ const state = {
 
 const mutations: any = {
   ...make.mutations(state),
-  ...Base.mutations,
+  ...sharedMutations,
 };
 
 const AccountActions = {
@@ -85,11 +87,11 @@ const AccountActions = {
 
 const actions: any = {
   ...make.actions(state),
-  ...Base.actions,
+  ...lowdbActions,
   ...AccountActions,
 };
 
-const getters: any = { ...make.getters(state), ...Base.getters };
+const getters: any = { ...make.getters(state), ...sharedGetters };
 
 export default {
   namespaced: true,

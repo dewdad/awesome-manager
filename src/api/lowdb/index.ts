@@ -1,68 +1,86 @@
+/* eslint-disable */
 import Datastore from "lowdb";
 import LodashId from "lodash-id";
 import FileSync from "lowdb/adapters/FileSync";
+import Memory from "lowdb/adapters/Memory";
 import { join } from "path";
 import fs from "fs-extra";
 import { remote, app } from "electron";
 
-import { collections } from "../globals";
+export class LowdbForElectron {
+  electronApp;
+  adapter;
+  db;
+  dbPath;
 
-const APP = process.type === "renderer" ? remote.app : app;
-let userPath;
-if (APP !== undefined) {
-  userPath = join(APP.getPath("userData"), "data") || "";
-} else {
-  userPath = join(__dirname, "data");
-}
+  constructor(dbName) {
+    this.electronApp = process.type === "renderer" ? remote.app : app;
+    this.dbPath = this.enSuredbPath("data");
+    this.createPersistence(dbName);
+  }
 
-// if (process.type !== "renderer") {
-if (!fs.pathExistsSync(userPath)) {
-  fs.mkdirpSync(userPath);
-}
-// }
+  enSuredbPath(subDir) {
+    let path;
+    if (this.electronApp !== undefined) {
+      path = join(this.electronApp.getPath("userData"), subDir);
+    } else {
+      path = join(__dirname, subDir);
+    }
 
-/**
- * 只使用一个大的数据文件,用键值表示每个集合 collection
- * db = {
- *   user: { name: user, data: [] }
- * }
- */
-const adapter = new FileSync(join(userPath, "data.json"));
+    if (!fs.pathExistsSync(path)) {
+      fs.mkdirpSync(path);
+    }
+    return path;
+  }
 
-const db = Datastore(adapter);
-db._.mixin(LodashId);
+  createPersistence(dbName) {
+    if (this.dbPath !== undefined) {
+      this.adapter = new FileSync(join(this.dbPath, `${dbName}.json`));
+    } else {
+      this.adapter = new Memory(dbName);
+    }
+    this.db = Datastore(this.adapter);
+    this.db._.mixin(LodashId);
+  }
 
-/**
- * Database persistence Module
- */
+  /**
+   * Database persistence Module
+   */
 
-export function dbOpen(collection: string): any {
-  return db.get(collection).value();
-}
-/**
- * Init persistence database pool
- */
-export function dbInit() {
-  // Create user-level collections like user.json
-  dbCreateUserLevelCollection(collections);
-}
+  dbOpen(node) {
+    return this.db.get(node).value();
+  }
+  /**
+   * Init persistence database pool
+   */
+  dbInit(nodes) {
+    // Create user-level nodes like user.json
+    this.dbCreateUserLevelnode(nodes);
+  }
 
-export function dbCreateUserLevelCollection(collections: string[]) {
-  collections.forEach(collection => {
-    dbCreate(collection);
-  });
-}
-export function dbCreate(collection: string) {
-  if (!db.has(collection).value()) {
-    db.set(collection, { name: collection, data: [] }).write();
+  /**
+   * Create nodes from a array
+   */
+  dbCreateUserLevelnode(nodes) {
+    nodes.forEach(node => {
+      this.dbCreate(node);
+    });
+  }
+  dbCreate(node) {
+    if (!this.db.has(node).value()) {
+      this.db.set(node, { name: node, data: [] }).write();
+    }
+  }
+  dbRemove(node) {
+    if (!this.db.has(node).value()) {
+      this.db
+        .get(node)
+        .remove()
+        .write();
+    }
   }
 }
-export function dbRemove(collection: string) {
-  if (!db.has(collection).value()) {
-    db.get(collection)
-      .remove()
-      .write();
-  }
-}
 
-export default db;
+export const defaultDB = new LowdbForElectron("data");
+
+export default defaultDB.db;
