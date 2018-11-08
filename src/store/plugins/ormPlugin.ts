@@ -4,6 +4,7 @@ import modules from "@/store/modules";
 
 const database = new Database();
 
+
 Object.keys(models).map(key => {
   console.log(key);
   database.register(models[key], modules[key]);

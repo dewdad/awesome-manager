@@ -1,9 +1,4 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue"
----
-<%
-if (blocks.indexOf('script') !== -1) {
-%><script>
+<script>
 export default {
   components: {
   },
@@ -15,30 +10,23 @@ export default {
     }
   },
   computed: {
-    ...sync("<%= h.inflection.singularize(model) %>/*"),
+    ...sync("User/*"),
   },
   methods: {
-    ...call("<%= h.inflection.singularize(model) %>/*"),
+    ...call("User/*"),
     saveItem() {
       if (this.editing) {
         // this.updateItem(this.currentItem);
       } else {
-        // this.$store.set("<%= h.inflection.singularize(model) %>/currentItem@id", "");
+        // this.$store.set("User/currentItem@id", "");
         // this.createItem(this.currentItem);
       }
     }
   },
-  <% if (blocks.indexOf('template') === -1) {
-  %>render(h) {
-    return <div/>
-  }<% } %>
+  
 }
 </script>
-<%
-}
 
-if (blocks.indexOf('template') !== -1) {
-%>
 <template>
   <v-container grid-list-md>
     <v-layout wrap>
@@ -62,13 +50,7 @@ if (blocks.indexOf('template') !== -1) {
     </v-layout>
   </v-container>
 </template>
-<%
-}
 
-if (blocks.indexOf('style') !== -1) {
-%>
 <style lang="scss" module>
 @import '@design';
-</style><%
-}
-%>
+</style>

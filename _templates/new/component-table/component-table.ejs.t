@@ -1,11 +1,10 @@
 ---
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.inflection.dasherize(name) %>.vue"
+to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.vue"
 ---
 <%
 if (blocks.indexOf('script') !== -1) {
 %><script>
 export default {
-  name: "<%= h.inflection.dasherize(name) %>",
   components: {
   },
   data() {
@@ -14,7 +13,7 @@ export default {
     }
   },
   computed: {
-    // ...get("<%= h.inflection.pluralize(model) %>/*"),
+    ...get("<%= h.inflection.singularize(model) %>/*"),
   },
   created() {
     this.$on("INFO_CLOSE", () => {
@@ -23,13 +22,12 @@ export default {
     window.<%= h.inflection.pluralize(model) %>App = this;
   },
   methods: {
-    ...call("<%= h.inflection.pluralize(model) %>/*"),
+    ...call("<%= h.inflection.singularize(model) %>/*"),
     deleteItem(item) {
-      // deleting methods
+
     },
     editItem(item) {
       this.editing = true;
-      // editing methods
     },
   },
   <% if (blocks.indexOf('template') === -1) {
@@ -50,7 +48,7 @@ if (blocks.indexOf('template') !== -1) {
     </v-card-title>
     <v-responsive>
       <v-data-table
-          :headers="itemKeysFiltered"
+          :headers="itemKeys"
           :items="itemFiltered"
           hide-actions
           class="elevation-0"

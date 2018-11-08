@@ -1,4 +1,13 @@
 module.exports = {
+  globals: {
+    "vue-jest": {
+      // Disable CSS compilation until it's more stable
+      experimentalCSSCompile: false,
+    },
+  },
+  setupFiles: ["<rootDir>/tests/unit/setup.ts"],
+  globalSetup: '<rootDir>/tests/unit/global-setup.ts',
+  globalTeardown: '<rootDir>/tests/unit/global-teardown.ts',
   moduleFileExtensions: ["js", "jsx", "json", "vue", "ts", "tsx"],
   transform: {
     "^.+\\.vue$": "vue-jest",
@@ -9,7 +18,9 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   snapshotSerializers: ["jest-serializer-vue"],
-  testMatch: ["**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"],
+  testMatch: [
+    "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)|**/**/*.spec.(js|jsx|ts|tsx)|**/**/*.unit.(js|jsx|ts|tsx)",
+  ],
   testURL: "http://localhost/",
   collectCoverage: false,
   collectCoverageFrom: ["src/**/*.{js,ts,vue}", "!**/node_modules/**", "!src/stories/*.{js,ts}"],

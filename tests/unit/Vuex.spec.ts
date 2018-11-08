@@ -1,47 +1,48 @@
-import { createLocalVue, shallowMount, config } from "@vue/test-utils";
-import Vuex from "vuex";
-import mutations from "@/store/modules/Base/mutations";
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
+import { shallowMount, config } from "@vue/test-utils";
+import mutations from "@/store/shared/mutations";
+import { createVuexModule } from "./setup";
 
 const ActivityComponent = {
-  template: `<button @click="$store.commit('mutationCreate', {})"></button>`,
+  template: `<button @click="$store.commit('CREATE_ITEM', {})"></button>`,
 };
 
 const mockMutations = {
-  mutationCreate: jest.fn((state, payload) => mutations.mutationCreate(state, payload)),
-  mutationUpdate: jest.fn((state, payload) => mutations.mutationUpdate(state, payload)),
+  CREATE_ITEM: jest.fn((state, payload) => mutations.CREATE_ITEM(state, payload)),
+  UPDATE_ITEM: jest.fn((state, payload) => mutations.UPDATE_ITEM(state, payload)),
 };
 
+
+const { store, localVue } = createVuexModule(
+  {
+    state: {
+      currentItem: {},
+      items: [],
+    },
+  },
+  {
+    mutations: {
+      ...mockMutations,
+    }
+  }
+);
+
+
 describe("Vuex Testing", () => {
-  let mutations;
-  let store;
-  beforeEach(() => {
-    mutations = { ...mockMutations };
-    store = new Vuex.Store({
-      state: {
-        currentItem: {},
-        items: [],
-      },
-      mutations,
-    });
-  });
 
   describe("vuex", () => {
     describe("modules", () => {
       it("should commit mutation create", () => {
-        store.commit("mutationCreate", {
+        store.commit("CREATE_ITEM", {
           id: 1,
           name: "xingwenju",
         });
-        expect(mutations.mutationCreate).toHaveBeenCalled();
-        expect(store.state.items.length).toBe(1);
-        expect(store.state.items[0].name).toBe("xingwenju");
+        expect(mockMutations.CREATE_ITEM).toHaveBeenCalled();
+        expect(store.state["items"].length).toBe(1);
+        expect(store.state["items"][0].name).toBe("xingwenju");
       });
       it("should commit mutation update", () => {
-        store.commit("mutationUpdate", {});
-        expect(mutations.mutationUpdate).toHaveBeenCalled();
+        store.commit("UPDATE_ITEM", {});
+        expect(mockMutations.UPDATE_ITEM).toHaveBeenCalled();
       });
     });
     describe("modules called from component", () => {
@@ -50,14 +51,14 @@ describe("Vuex Testing", () => {
         const wrapper = shallowMount(ActivityComponent, { store, localVue });
         const input = wrapper.find("button");
         input.trigger("click");
-        expect(mutations.mutationCreate).toHaveBeenCalled();
+        expect(mockMutations.CREATE_ITEM).toHaveBeenCalled();
       });
       it("should commit update mutations from component", () => {
         // wrapper
         const wrapper = shallowMount(ActivityComponent, { store, localVue });
         const input = wrapper.find("button");
         input.trigger("click");
-        expect(mutations.mutationUpdate).toHaveBeenCalled();
+        expect(mockMutations.UPDATE_ITEM).toHaveBeenCalled();
       });
     });
   });

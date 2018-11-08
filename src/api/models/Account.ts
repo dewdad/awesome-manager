@@ -1,9 +1,17 @@
-const defaultAccount = {
-  name: "embajadachina",
-  email: "embajadachina@gmail.com",
-  password: "embajadachina",
-  hash: "",
-  role: "manager",
-};
+import { Model } from "@vuex-orm/core";
+export default class Account extends Model {
+  static entity = "account";
 
-export default defaultAccount;
+  static primaryKey = "_id";
+
+  static fields() {
+    return {
+      _id: Model.increment(),
+      name: Model.string("embajadachina"),
+      email: Model.string("embajadachina@gmail.com"),
+      password: Model.string("embajadachina"),
+      hash: Model.string(""),
+      role: Model.string(""),
+    };
+  }
+}

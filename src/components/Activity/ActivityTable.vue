@@ -5,7 +5,7 @@
     </v-card-title>
     <v-responsive>
       <v-data-table
-          :headers="itemKeysFiltered"
+          :headers="itemKeys"
           :items="itemFiltered"
           hide-actions
           class="elevation-0"

@@ -14,7 +14,7 @@ import plugins from "./plugins";
 
 Vue.use(Vuex);
 
-defaultDB.dbInit("data");
+defaultDB.dbInit(["account"]);
 
 const state = {
   title: "xing wenju",
