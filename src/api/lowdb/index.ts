@@ -152,6 +152,22 @@ export class LowdbForElectron {
       return e;
     }
   }
+  /**
+   * Find and Query data in a specific key with orm entity namespace
+   * @param entity e
+   * @param type
+   */
+  all(entity) {
+    console.log("Querying in lowdb...");
+    try {
+      return this.db
+        .read()
+        .get(`${entity}.data`)
+        .value();
+    } catch (e) {
+      return e;
+    }
+  }
 }
 
 export const defaultDB = new LowdbForElectron("data");
