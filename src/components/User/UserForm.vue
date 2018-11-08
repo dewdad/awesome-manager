@@ -1,13 +1,11 @@
 <script>
 export default {
-  components: {
-  },
+  components: {},
   props: {
-    editing: false
+    editing: false,
   },
   data() {
-    return {
-    }
+    return {};
   },
   computed: {
     ...sync("User/*"),
@@ -21,10 +19,9 @@ export default {
         // this.$store.set("User/currentItem@id", "");
         // this.createItem(this.currentItem);
       }
-    }
+    },
   },
-  
-}
+};
 </script>
 
 <template>
@@ -52,5 +49,5 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+@import "@design";
 </style>

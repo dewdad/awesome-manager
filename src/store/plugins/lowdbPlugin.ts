@@ -1,37 +1,26 @@
-import db from "@/api/lowdb";
+import { defaultDB } from "@/api/lowdb";
+
 export default options => {
   return store => {
-    // Every Mutations will be logged
-    store.subscribe((mutation, state) => {
-      console.log(`${options.namespace} type: ${mutation.type}`);
-      console.log(`${options.namespace} payload _id: ${mutation.payload._id}`);
-      let type = mutation.type.split("/")[1];
-      if (type === "CREATE_ITEM") {
-        db.read()
-          .get(`${options.namespace}.data`)
-          .insert(mutation.payload)
-          .write();
+    store.subscribeAction((action, state) => {
+      let { entity, data, where } = action.payload;
+      // only persist data for current namespace
+      if (entity !== options.namespace) return;
+
+      if (action.type === "entities/insert") {
+        console.log(action.type);
+        console.log(action.payload);
+        defaultDB.insert(entity, data);
       }
-      if (type === "UPDATE_ITEM") {
-        db.read()
-          .get(`${options.namespace}.data`)
-          .find({ _id: mutation.payload._id })
-          .assign(mutation.payload)
-          .write();
+      if (action.type === "entities/delete") {
+        console.log(action.type);
+        console.log(action.payload);
+        defaultDB.delete(entity, { _id: where.toString() });
       }
-      if (type === "DELETE_ITEM") {
-        db.read()
-          .get(`${options.namespace}.data`)
-          .remove({ _id: mutation.payload._id })
-          .write();
-      }
-      if (type === "SET_STATUS" && mutation.payload === "loading") {
-        let data = db
-          .read()
-          .get(`${options.namespace}.data`)
-          .value();
-        store.commit("LOAD_ITEMS", data);
-        store.commit("SET_STATUS", "doneLoading");
+      if (action.type === "entities/update") {
+        console.log(action.type);
+        console.log(action.payload);
+        defaultDB.update(entity, { _id: where.toString() }, data);
       }
     });
   };

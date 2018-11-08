@@ -1,5 +1,5 @@
 import { make } from "vuex-pathify";
-import lowdbActions from "@/store/shared/actions.lowdb";
+import ormActions from "@/store/shared/actions.orm";
 import sharedMutations from "@/store/shared/mutations";
 import sharedGetters from "@/store/shared/getters";
 
@@ -20,7 +20,7 @@ const mutations: any = {
   ...sharedMutations,
 };
 
-const actions: any = { ...make.actions(state), ...lowdbActions };
+const actions: any = { ...make.actions(state), ...ormActions };
 
 const getters: any = { ...make.getters(state), ...sharedGetters };
 

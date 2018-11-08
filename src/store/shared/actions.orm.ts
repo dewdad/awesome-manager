@@ -4,7 +4,7 @@ export default {
      * Model.create(data: {})
      */
     const entities = await ctx.dispatch(
-      `entities/${ctx.state.name}/create`,
+      `entities/${ctx.state.name}/insert`,
       { data },
       { root: true },
     );

@@ -1,14 +1,17 @@
-/* eslint-disable */
-function uncapitalizeFirstLetter(str) {
-  return str.charAt(0).toLowerCase() + str.slice(1).toLowerCase();
-}
+/**
+ * models is object to hold
+ * {
+ *   "user" : [user: UserModule extends VuexModel]
+ * }
+ */
+import { toLower } from "lodash";
 
 let files = require["context"](".", false, /\.ts$/);
 let modules = {};
 
 files.keys().forEach(key => {
   if (key === "./index.ts") return;
-  let moduleName = uncapitalizeFirstLetter(key.replace(/(\.\/|\.ts)/g, ""));
+  let moduleName = toLower(key.replace(/(\.\/|\.ts)/g, ""));
   modules[moduleName] = files(key).default;
 });
 

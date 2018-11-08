@@ -1,53 +1,52 @@
 <template>
   <v-container grid-list-md>
     <v-layout wrap>
-      <v-flex
-          @click=" editing = !editing"
-          xs12
-          md12
-          sm12>
-        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+      <v-flex @click="reset" xs12 md12 sm12>
+        <h2>{{ editing ? "你在进行编辑更新" : "你在添加模式" }}</h2>
       </v-flex>
-      <v-text-field
-          v-for="(v, k) of currentItem"
-          v-if="k !== 'id'"
-          v-model="currentItem[k]"
-          :key="k"
-          :label=" $t(k)">
+      <v-text-field v-for="field in fields" v-model="model[field]" :key="field" :label="$t(field)">
       </v-text-field>
-      <v-btn
-          color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn color="primary" @click="saveItem">{{ editing ? "更新" : "添加" }}</v-btn>
     </v-layout>
   </v-container>
 </template>
 <script lang="js">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { get, sync, call } from "vuex-pathify";
-
+import Activity from "@/api/models/Activity";
 export default {
-  props: {
-     editing: false
-  },
   data() {
-      return {
-      model: {
-        actions: "Do it!"
-      }
+    return {
+      editing: false,
+      model: {},
     }
   },
+  created() {
+    this.model = new Activity()
+    this.$on("SET_EDITING", (item) => {
+      this.editing = true
+      this.model = item
+    })
+    window.activityForm = this;
+  },
   computed: {
-    ...sync("activity/*"),
+    fields: () => Activity.fieldsList()
   },
   methods: {
-    ...call("activity/*"),
+    reset() {
+      this.editing = false
+      this.model = new Activity()
+    },
     saveItem() {
-      if (this.editing) {
-        this.actionUpdate(this.currentItem);
+      if(!this.editing) {
+        Activity.insert({
+          data: this.model
+        })
+        this.model = new Activity()
       } else {
-        this.$store.set("activity/currentItem@id", "");
-        this.actionCreate(this.currentItem);
+        Activity.update(this.model)
+        this.editing = false
+        this.model = new Activity()
       }
+      console.log(Activity.all())
     }
   }
 }

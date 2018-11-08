@@ -11,7 +11,6 @@ const mockMutations = {
   UPDATE_ITEM: jest.fn((state, payload) => mutations.UPDATE_ITEM(state, payload)),
 };
 
-
 const { store, localVue } = createVuexModule(
   {
     state: {
@@ -22,13 +21,11 @@ const { store, localVue } = createVuexModule(
   {
     mutations: {
       ...mockMutations,
-    }
-  }
+    },
+  },
 );
 
-
 describe("Vuex Testing", () => {
-
   describe("vuex", () => {
     describe("modules", () => {
       it("should commit mutation create", () => {

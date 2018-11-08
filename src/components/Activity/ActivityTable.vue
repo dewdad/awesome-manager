@@ -5,8 +5,8 @@
     </v-card-title>
     <v-responsive>
       <v-data-table
-          :headers="itemKeys"
-          :items="itemFiltered"
+          :headers="headers"
+          :items="all"
           hide-actions
           class="elevation-0"
         >
@@ -16,10 +16,9 @@
           <tr>
             <th
                 v-for="header in props.headers"
-                v-if="header.text !== 'id'"
                 class="text-xs-left"
-                :key="header.text">
-              {{ $t(header.text) }}
+                :key="header">
+              {{ $t(header) }}
             </th>
           </tr>
         </template>
@@ -28,11 +27,10 @@
             slot-scope="props">
           <td
               class="text-xs-left"
-              :key="header.text"
-              :autocomplete="props.item[header.text]"
-              v-if="header.text !== 'id'"
-              v-for="header in itemKeysFiltered">
-            {{ props.item[header.text] }}
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
           <td class="justify-center layout px-0">
             <v-btn
@@ -53,14 +51,13 @@
 
     </v-responsive>
     <v-responsive>
-      <ActivityInfo :editing="editing"></ActivityInfo>
+      <ActivityInfo></ActivityInfo>
     </v-responsive>
   </v-card>
 </template>
 <script lang="js">
-/* eslint-disable */
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { get, sync, call } from "vuex-pathify";
+import { cloneDeep } from 'lodash';
+import Activity from "@/api/models/Activity";
 import ActivityInfo from "./ActivityInfo";
 
 export default {
@@ -70,30 +67,22 @@ export default {
   data() {
     return {
       editing: false,
-      model: {
-        actions: "Do it!"
-      }
     }
   },
   computed: {
-    ...get("activity/*"),
+    all: () => Activity.all(),
+    headers: () => Activity.fieldsList()
   },
   created() {
-    // Listen for event
-    this.$on("INFO_CLOSE", () => {
-      this.editing = false;
-    });
-    window.activityApp = this;
+    window.activityTable = this;
   },
   methods: {
-    ...call("activity/*"),
     deleteItem(item) {
-      this.actionDelete(item);
+      Activity.delete(item._id)
     },
     editItem(item) {
-      this.editing = true;
-      this.$store.set("activity/currentItem", item);
-    },
+      window.activityForm.$emit("SET_EDITING", item)
+    }
   }
 }
 </script>

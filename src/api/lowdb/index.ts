@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Datastore from "lowdb";
 import LodashId from "lodash-id";
 import FileSync from "lowdb/adapters/FileSync";
@@ -77,6 +76,80 @@ export class LowdbForElectron {
         .get(node)
         .remove()
         .write();
+    }
+  }
+  /**
+   * Inserta data in a specific key with orm entity namespace
+   * @param entity orm entity namespace like activity
+   * @param data data without id, since lodash-id will use unique id
+   */
+  insert(entity, data) {
+    console.log("Inserting in lowdb...");
+    try {
+      delete data.id;
+      this.db
+        .read()
+        .get(`${entity}.data`)
+        .insert(data)
+        .write();
+    } catch (e) {
+      return e;
+    }
+  }
+
+  /**
+   * Update data in a specific key with orm entity namespace
+   * @param entity orm entity namespace
+   * @param query query statements
+   * @param data data
+   */
+  update(entity, query, data) {
+    console.log("Updating in lowdb...");
+    try {
+      this.db
+        .read()
+        .get(`${entity}.data`)
+        .find(query)
+        .assign(data)
+        .write();
+    } catch (e) {
+      return e;
+    }
+  }
+
+  /**
+   * Delete data in a specific key with orm entity namespace
+   * @param entity orm entity namespace
+   * @param query query statement
+   */
+  delete(entity, query) {
+    console.log("Deleting in lowdb...");
+    try {
+      this.db
+        .read()
+        .get(`${entity}.data`)
+        .remove(query)
+        .write();
+    } catch (e) {
+      return e;
+    }
+  }
+
+  /**
+   * Find and Query data in a specific key with orm entity namespace
+   * @param entity e
+   * @param type
+   */
+  query(entity, query) {
+    console.log("Querying in lowdb...");
+    try {
+      return this.db
+        .read()
+        .get(`${entity}.data`)
+        .find(query)
+        .value();
+    } catch (e) {
+      return e;
     }
   }
 }
