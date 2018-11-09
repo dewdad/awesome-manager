@@ -5,8 +5,7 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%>
-<%
+%><%
 if (blocks.indexOf('script') !== -1) {
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
