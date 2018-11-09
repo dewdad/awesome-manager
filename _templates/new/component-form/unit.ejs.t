@@ -1,5 +1,5 @@
 ---
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.spec.ts"
+to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.spec.ts"
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))

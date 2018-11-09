@@ -35,3 +35,4 @@ declare function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K>;
 declare function mapObject<K extends string, T, U>(obj: Record<K, T>, f: (x: T) => U): Record<K, U>;
 
 declare function objectKeyType<T, K extends keyof T>(obj: T, key: K): any;
+declare function createComponentMocks({ store, router, style, mocks, stubs }): void;
