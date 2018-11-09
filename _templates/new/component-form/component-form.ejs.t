@@ -2,32 +2,52 @@
 to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue"
 ---
 <%
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+%>
+<%
 if (blocks.indexOf('script') !== -1) {
 %><script>
+import <%= modelName %> from "@/api/models/<%= modelName %>";
 export default {
-  components: {
-  },
-  props: {
-    editing: false
-  },
   data() {
     return {
+      editing: false,
+      model: {},
     }
+  },
+  created() {
+    this.model = new <%= modelName %>()
+    this.$on("SET_EDITING", (item) => {
+      this.editing = true
+      this.model = item
+    })
+    window.<%= modelFormName %> = this;
   },
   computed: {
-    ...sync("<%= h.inflection.singularize(model) %>/*"),
+    fields: () => <%= modelName %>.fieldsList()
   },
   methods: {
-    ...call("<%= h.inflection.singularize(model) %>/*"),
+    reset() {
+      this.editing = false
+      this.model = new <%= modelName %>()
+    },
     saveItem() {
-      if (this.editing) {
-        // this.updateItem(this.currentItem);
+      if(!this.editing) {
+        <%= modelName %>.insert({
+          data: this.model
+        })
+        this.model = new <%= modelName %>()
       } else {
-        // this.$store.set("<%= h.inflection.singularize(model) %>/currentItem@id", "");
-        // this.createItem(this.currentItem);
+        <%= modelName %>.update(this.model)
+        this.editing = false
+        this.model = new <%= modelName %>()
       }
+      console.log(<%= modelName %>.all())
     }
-  },
+  }
+}
   <% if (blocks.indexOf('template') === -1) {
   %>render(h) {
     return <div/>
@@ -43,18 +63,17 @@ if (blocks.indexOf('template') !== -1) {
   <v-container grid-list-md>
     <v-layout wrap>
       <v-flex
-          @click=" editing = !editing"
+          @click="reset"
           xs12
           md12
           sm12>
         {{editing ? "你在进行编辑更新" : "你在添加模式"}}
       </v-flex>
       <v-text-field
-          v-for="(v, k) of currentItem"
-          v-if="k !== 'id'"
-          v-model="currentItem[k]"
-          :key="k"
-          :label=" $t !== undefined ? $t(k) : k">
+          v-for="field in fields"
+          v-model="model[field]"
+          :key="field"
+          :label=" $t !== undefined ? $t(field) : field">
       </v-text-field>
       <v-btn
           color="primary"

@@ -1,13 +1,14 @@
 ---
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.spec.ts"
+to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.spec.ts"
 ---
 <%
-  const fileName = h.capitalize(h.inflection.singularize(model)) + 'Form.vue'
-  const importName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%>import <%= importName %> from './<%= fileName %>'
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+%>import <%= modelFormName %> from './<%= modelFormName %>.vue'
 
-describe('@/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= fileName %>', () => {
+describe('@/components/<%= modelName %>/<%= modelFormName %>', () => {
   it('exports a valid component', () => {
-    expect(<%= importName %>).toBeAComponent()
+    expect(<%= modelFormName %>).toBeAComponent()
   })
 })

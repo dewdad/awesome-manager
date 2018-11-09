@@ -1,40 +1,36 @@
 import { defaultDB } from "@/api/lowdb";
-
+import models from "@/api/models";
 export default options => {
   return store => {
-    // Load data from lowdb persistence as array
-    let data = defaultDB.all(options.namespace);
-    console.log(data);
-    store.dispatch(
-      "entities/insert",
-      {
-        entity: options.namespace, data
-      },
-    );
-
-    // Subscriptions
+    /**
+     * Get data from lowdb and use Model to load data
+     * Use create to set all file
+     */
+    const Model = models[options.namespace];
+    const data = defaultDB.all(options.namespace);
+    Model.create({ data });
+    /**
+     * Subscription to actions for logging each entity mutation
+     * payload before persiste to state
+     */
     store.subscribeAction((action, state) => {
-      let { entity, data, where } = action.payload;
-      // Only persist data for current namespace
+      let { entity } = action.payload;
       if (entity !== options.namespace) return;
-      // FIXME payload lacks _id as increment value, lifecycle issue
+
       if (action.type === "entities/insert") {
-        console.log("Executing entities/insert...")
+        console.log("Executing entities/insert...");
         console.log(action.type);
         console.log(action.payload);
-        // defaultDB.insert(entity, data);
       }
       if (action.type === "entities/delete") {
-        console.log("Executing entities/delete...")
+        console.log("Executing entities/delete...");
         console.log(action.type);
         console.log(action.payload);
-        // defaultDB.delete(entity, { _id: where.toString() });
       }
       if (action.type === "entities/update") {
-        console.log("Executing entities/update...")
+        console.log("Executing entities/update...");
         console.log(action.type);
         console.log(action.payload);
-        // defaultDB.update(entity, { _id: where.toString() }, data);
       }
     });
   };

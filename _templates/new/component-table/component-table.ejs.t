@@ -2,10 +2,18 @@
 to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.vue"
 ---
 <%
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+%>
+<%
 if (blocks.indexOf('script') !== -1) {
 %><script>
+import <%= modelName %> from "@/api/models/<%= modelName %>";
+import <%= modelFormName %> from "./<%= modelFormName %>";
 export default {
   components: {
+    <%= modelFormName %>
   },
   data() {
     return {
@@ -13,22 +21,19 @@ export default {
     }
   },
   computed: {
-    ...get("<%= h.inflection.singularize(model) %>/*"),
+    all: ()=><%= modelName %>.all(),
+    headers: ()=><%= modelName %>.fieldsList(),
   },
   created() {
-    this.$on("INFO_CLOSE", () => {
-      this.editing = false;
-    });
-    window.<%= h.inflection.pluralize(model) %>App = this;
+    window.<%= modelName %>App = this;
   },
   methods: {
-    ...call("<%= h.inflection.singularize(model) %>/*"),
     deleteItem(item) {
-
+      <%= modelName %>.delete(item._id)
     },
     editItem(item) {
-      this.editing = true;
-    },
+      window.<%= h.capitalize(h.inflection.singularize(model)) %>Form.$emit("SET_EDITING", item)
+    }
   },
   <% if (blocks.indexOf('template') === -1) {
   %>render(h) {
@@ -44,12 +49,12 @@ if (blocks.indexOf('template') !== -1) {
 <template>
   <v-card>
     <v-card-title>
-      <%= h.inflection.pluralize(model) %>
+      <%= exportName %>
     </v-card-title>
     <v-responsive>
       <v-data-table
-          :headers="itemKeys"
-          :items="itemFiltered"
+          :headers="headers"
+          :items="all"
           hide-actions
           class="elevation-0"
         >
@@ -59,10 +64,9 @@ if (blocks.indexOf('template') !== -1) {
           <tr>
             <th
                 v-for="header in props.headers"
-                v-if="header.text !== 'id'"
                 class="text-xs-left"
-                :key="header.text">
-              {{ $t !== undefined ? $t(header.text) : header.text }}
+                :key="header">
+              {{ $t !== undefined ? $t(header) : header }}
             </th>
           </tr>
         </template>
@@ -71,11 +75,10 @@ if (blocks.indexOf('template') !== -1) {
             slot-scope="props">
           <td
               class="text-xs-left"
-              :key="header.text"
-              :autocomplete="props.item[header.text]"
-              v-if="header.text !== 'id'"
-              v-for="header in itemKeysFiltered">
-            {{ props.item[header.text] }}
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
           <td class="justify-center layout px-0">
             <v-btn
@@ -94,6 +97,9 @@ if (blocks.indexOf('template') !== -1) {
         </template>
       </v-data-table>
 
+    </v-responsive>
+    <v-responsive>
+      <%= modelFormName%>
     </v-responsive>
   </v-card>
 </template>
