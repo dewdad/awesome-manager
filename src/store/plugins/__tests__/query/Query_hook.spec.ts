@@ -21,7 +21,18 @@ describe("Unit – Query", () => {
     Query.on("afterCreate", model => {
       console.log(model);
       expect(model).toBe(Activity);
-      expect(model.applicant).toBe("xingwenju");
+
+      const applicant = model.applicant;
+      expect(applicant).toBe("xingwenju");
+
+      const modelModel = model.$self();
+      expect(modelModel).toBe(Activity);
+
+      const query = model.$query();
+      expect(query.get()).toBe("xingwenju");
+
+      const entity = model.$self().entity;
+      expect(entity).toBe("activity");
     });
   });
 });

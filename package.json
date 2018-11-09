@@ -28,6 +28,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/lowdb": "^1.0.6",
     "@vuex-orm/core": "^0.29.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",

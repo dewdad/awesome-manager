@@ -50,7 +50,7 @@ export class LowdbForElectron {
     return this.db.get(node).value();
   }
   /**
-   * Init persistence database pool
+   * Init a set of default values
    */
   dbInit(nodes) {
     // Create user-level nodes like user.json
@@ -65,17 +65,22 @@ export class LowdbForElectron {
       this.dbCreate(node);
     });
   }
+  /**
+   * Write a array to a key
+   * { entity: []}
+   * @param node key/entity as string, i.e. activity
+   */
   dbCreate(node) {
     if (!this.db.has(node).value()) {
-      this.db.set(node, { name: node, data: [] }).write();
+      this.db.set(node, []).write();
     }
   }
+  /**
+   * Remove a key
+   */
   dbRemove(node) {
     if (!this.db.has(node).value()) {
-      this.db
-        .get(node)
-        .remove()
-        .write();
+      this.db.unset(node).write();
     }
   }
   /**
@@ -89,7 +94,7 @@ export class LowdbForElectron {
       delete data.id;
       this.db
         .read()
-        .get(`${entity}.data`)
+        .get(`${entity}`)
         .insert(data)
         .write();
     } catch (e) {
@@ -108,7 +113,7 @@ export class LowdbForElectron {
     try {
       this.db
         .read()
-        .get(`${entity}.data`)
+        .get(`${entity}`)
         .find(query)
         .assign(data)
         .write();
@@ -127,7 +132,7 @@ export class LowdbForElectron {
     try {
       this.db
         .read()
-        .get(`${entity}.data`)
+        .get(`${entity}`)
         .remove(query)
         .write();
     } catch (e) {
@@ -140,17 +145,13 @@ export class LowdbForElectron {
    * @param entity e
    * @param type
    */
-  query(entity, query) {
+  find(entity, query) {
     console.log("Querying in lowdb...");
-    try {
-      return this.db
-        .read()
-        .get(`${entity}.data`)
-        .find(query)
-        .value();
-    } catch (e) {
-      return e;
-    }
+    return this.db
+      .read()
+      .get(`${entity}`)
+      .filter(query)
+      .value();
   }
   /**
    * Find and Query data in a specific key with orm entity namespace
@@ -159,14 +160,23 @@ export class LowdbForElectron {
    */
   all(entity) {
     console.log("Querying in lowdb...");
-    try {
-      return this.db
-        .read()
-        .get(`${entity}.data`)
-        .value();
-    } catch (e) {
-      return e;
-    }
+    return this.db
+      .read()
+      .get(`${entity}`)
+      .value();
+  }
+
+  /**
+   * Find and Query data in a specific key with orm entity namespace
+   * @param entity e
+   * @param type
+   */
+  clear(entity) {
+    console.log("Querying in lowdb...");
+    this.db
+      .read()
+      .unset(`${entity}`)
+      .write();
   }
 }
 

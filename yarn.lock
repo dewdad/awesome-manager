@@ -1961,10 +1961,22 @@
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.2.16.tgz#04419c404a3194350e7d3f339a90e72c88db3111"
   integrity sha512-q2WC02YxQoX2nY1HRKlYGHpGP1saPmD7GN0pwCDlTz35a4eOtJG+aHRlXyjCuXokUukSrR2aXyBhSW3j+jPc0A==
 
+"@types/lodash@*":
+  version "4.14.118"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.118.tgz#247bab39bfcc6d910d4927c6e06cbc70ec376f27"
+  integrity sha512-iiJbKLZbhSa6FYRip/9ZDX6HXhayXLDGY2Fqws9cOkEQ6XeKfaxB0sC541mowZJueYyMnVUmmG+al5/4fCDrgw==
+
 "@types/lodash@4.14.87":
   version "4.14.87"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
   integrity sha512-AqRC+aEF4N0LuNHtcjKtvF9OTfqZI0iaBoe3dA6m/W+/YZJBZjBmW/QIZ8fBeXC6cnytSY9tBoFBqZ9uSCeVsw==
+
+"@types/lowdb@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lowdb/-/lowdb-1.0.6.tgz#0e7adecb87cd79c1e97d50043d9835b65d59023f"
+  integrity sha512-C/p2p3ud6buHPUaj5QTN3gGera9Pi39aCQoQ1ngRZ2hsWeoqok4aCF/Jjj8FDsnSOTaQHrKI92/KHGt6S+Oy+Q==
+  dependencies:
+    "@types/lodash" "*"
 
 "@types/minimatch@3.0.3":
   version "3.0.3"

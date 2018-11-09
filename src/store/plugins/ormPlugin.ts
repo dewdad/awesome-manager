@@ -74,21 +74,22 @@ VuexORM.use(testPlugin);
 
 Query.on("afterCreate", model => {
   console.log(model);
-  // let { entity, last } = model.query();
-  // defaultDB.insert(entity, last);
+  const entity = model.$self().entity;
+  defaultDB.insert(entity, model);
 });
 
 Query.on("afterDelete", model => {
-  let { entity, record } = model.query();
-  // console.log(model);
-  // defaultDB.delete(entity, { _id: record._id });
+  console.log(model);
+  const entity = model.$self().entity;
+  defaultDB.delete(entity, { _id: model._id });
 });
 
 Query.on("afterUpdate", model => {
-  let { $entity, $record } = model.query();
-  // console.log(model);
-  // defaultDB.update($entity, { _id: $record._id }, $record);
+  console.log(model);
+  const entity = model.$self().entity;
+  defaultDB.update(entity, { _id: model._id }, model);
 });
+
 /**
  * Database register model and modules
  */
