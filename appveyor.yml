@@ -39,14 +39,6 @@ artifacts:
 
 test: off
 
-# on_success:
-#   - git config --global credential.helper store
-#   - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-#   - git config --global user.email "linuxing3@qq.com"
-#   - git config --global user.name "linuxing3"
-#   - git commit -m "appveyor commit on success"
-#   - git push origin master
-
 branches:
   only:
     - master
