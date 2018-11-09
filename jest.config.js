@@ -19,7 +19,7 @@ module.exports = {
   },
   snapshotSerializers: ["jest-serializer-vue"],
   testMatch: [
-    "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)|**/**/*.spec.(js|jsx|ts|tsx)|**/**/*.unit.(js|jsx|ts|tsx)",
+    "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.spec.(js|jsx|ts|tsx)|**/**/*.spec.(js|jsx|ts|tsx)|**/**/*.unit.(js|jsx|ts|tsx)",
   ],
   testURL: "http://localhost/",
   collectCoverage: false,

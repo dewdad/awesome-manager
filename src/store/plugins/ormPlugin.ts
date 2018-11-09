@@ -68,28 +68,27 @@ VuexORM.use(fieldPlugin);
 VuexORM.use(queryPlugin);
 VuexORM.use(testPlugin);
 
-
 /**
  * Query hooks
  */
 
-Query.on("afterCreate", (model) => {
-    if classOf(model) !== Model return
-    console.log(model)
-    defaultDB.insert(model.$entity, model.$record);
-})
+Query.on("afterCreate", model => {
+  console.log(model);
+  // let { entity, last } = model.query();
+  // defaultDB.insert(entity, last);
+});
 
-Query.on("afterDelete", (model) => {
-    if classOf(model) !== Model return
-    console.log(model)
-    defaultDB.delete(model.$entity, { _id: model.$record._id });
-})
+Query.on("afterDelete", model => {
+  let { entity, record } = model.query();
+  // console.log(model);
+  // defaultDB.delete(entity, { _id: record._id });
+});
 
-Query.on("afterUpdate", (model) => {
-    if classOf(model) !== Model return
-    console.log(model)
-    defaultDB.delete(model.$entity, { _id: model.$record._id }, model.$record);
-})
+Query.on("afterUpdate", model => {
+  let { $entity, $record } = model.query();
+  // console.log(model);
+  // defaultDB.update($entity, { _id: $record._id }, $record);
+});
 /**
  * Database register model and modules
  */
