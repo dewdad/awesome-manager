@@ -1,4 +1,5 @@
-import VuexORM, { Database } from "@vuex-orm/core";
+import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
+import { defaultDB } from "@/api/lowdb";
 import models from "@/api/models";
 import modules from "@/store/modules";
 
@@ -67,6 +68,28 @@ VuexORM.use(fieldPlugin);
 VuexORM.use(queryPlugin);
 VuexORM.use(testPlugin);
 
+
+/**
+ * Query hooks
+ */
+
+Query.on("afterCreate", (model) => {
+    if classOf(model) !== Model return
+    console.log(model)
+    defaultDB.insert(model.$entity, model.$record);
+})
+
+Query.on("afterDelete", (model) => {
+    if classOf(model) !== Model return
+    console.log(model)
+    defaultDB.delete(model.$entity, { _id: model.$record._id });
+})
+
+Query.on("afterUpdate", (model) => {
+    if classOf(model) !== Model return
+    console.log(model)
+    defaultDB.delete(model.$entity, { _id: model.$record._id }, model.$record);
+})
 /**
  * Database register model and modules
  */
