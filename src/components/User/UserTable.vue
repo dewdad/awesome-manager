@@ -1,19 +1,10 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.vue"
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%>
-<%
-if (blocks.indexOf('script') !== -1) {
-%><script>
-import <%= modelName %> from "@/api/models/<%= modelName %>";
-import <%= modelFormName %> from "./<%= modelFormName %>";
+
+<script>
+import User from "@/api/models/User";
+import UserForm from "./UserForm";
 export default {
   components: {
-    <%= modelFormName %>
+    UserForm
   },
   data() {
     return {
@@ -21,35 +12,28 @@ export default {
     }
   },
   computed: {
-    all: ()=><%= modelName %>.all(),
-    headers: ()=><%= modelName %>.fieldsList(),
+    all: ()=>User.all(),
+    headers: ()=>User.fieldsList(),
   },
   created() {
-    window.<%= modelName %>App = this;
+    window.UserApp = this;
   },
   methods: {
     deleteItem(item) {
-      <%= modelName %>.delete(item._id)
+      User.delete(item._id)
     },
     editItem(item) {
-      window.<%= h.capitalize(h.inflection.singularize(model)) %>Form.$emit("SET_EDITING", item)
+      window.UserForm.$emit("SET_EDITING", item)
     }
   },
-  <% if (blocks.indexOf('template') === -1) {
-  %>render(h) {
-    return <div/>
-  }<% } %>
+  
 }
 </script>
-<%
-}
 
-if (blocks.indexOf('template') !== -1) {
-%>
 <template>
   <v-card>
     <v-card-title>
-      <%= modelTableName %>
+      UserTable
     </v-card-title>
     <v-responsive>
       <v-data-table
@@ -99,17 +83,11 @@ if (blocks.indexOf('template') !== -1) {
 
     </v-responsive>
     <v-responsive>
-      <%= modelFormName%>
+      UserForm
     </v-responsive>
   </v-card>
 </template>
-<%
-}
 
-if (blocks.indexOf('style') !== -1) {
-%>
 <style lang="scss" module>
 @import '@design';
-</style><%
-}
-%>
+</style>

@@ -32,3 +32,11 @@ export const actions = {
   # ...lowdbActions,
   # ...ormActions,
 }
+
+export default {
+  namespace: "true",
+  state,
+  actions,
+  mutations,
+  getters
+}
