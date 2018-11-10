@@ -11,7 +11,7 @@ const requireComponent = require.context(
   // Look for files in the current directory
   ".",
   // Do not look in subdirectories
-  false,
+  true,
   // Only include "_base-" prefixed .vue files
   /_base-[\w-]+\.vue$/,
 );
