@@ -8,6 +8,7 @@ to: src/api/models/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 
 describe('@/api/models/<%= fileName %>', () => {
   it('exports a valid Vuex ORM Model', () => {
-    expect(<%= importName %>).toBeAVuexORMModel()
+    let model = new <%= importName %>
+    expect(model).toBeAModel()
   })
 })

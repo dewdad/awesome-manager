@@ -1,6 +1,25 @@
 const _ = require("lodash");
 const customMatchers: jest.ExpectExtendMap = {};
 
+customMatchers.toBeAModel = function(options) {
+  if (isAModel()) {
+    return {
+      message: () =>
+        `expected ${this.utils.printReceived(options)} not to be a plain object as a model`,
+      pass: true,
+    };
+  } else {
+    return {
+      message: () => `expected ${this.utils.printReceived(options)} to be a valid Model`,
+      pass: false,
+    };
+  }
+
+  function isAModel() {
+    return _.isPlainObject(options);
+  }
+};
+
 customMatchers.toBeAComponent = function(options) {
   if (isAComponent()) {
     return {

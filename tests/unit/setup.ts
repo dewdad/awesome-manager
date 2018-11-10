@@ -17,10 +17,7 @@ import vueTestUtils, { createLocalVue } from "@vue/test-utils";
 // https://lodash.com/
 import _, { cloneDeep } from "lodash";
 _.mixin({
-  pascalCase: _.flow(
-    _.camelCase,
-    _.upperFirst,
-  ),
+  pascalCase: _.flow(_.camelCase, _.upperFirst),
 });
 
 // ===
@@ -89,6 +86,21 @@ global.mount = vueTestUtils.mount;
 
 // https://vue-test-utils.vuejs.org/api/#shallowmount
 global.shallowMount = vueTestUtils.shallowMount;
+
+global.shallowMountView = (Component, options = {}) => {
+  return global.shallowMount(Component, {
+    ...options,
+    stubs: {
+      Layout: {
+        functional: true,
+        render(h, { slots }) {
+          return `<div>{slots().default}</div>`;
+        },
+      },
+      ...(options.stubs || {}),
+    },
+  });
+};
 
 global.createComponentMocks = ({ store, router, style, mocks, stubs }) => {
   // Use a local version of Vue, to avoid polluting the global

@@ -7,6 +7,10 @@ export default class <%= h.capitalize(h.inflection.singularize(model)) %> extend
 
   static primaryKey = "_id";
 
+  static fieldsList() {
+    return Object.keys(this.fields());
+  }
+
   static fields() {
     return {
       _id: Model.increment(),
