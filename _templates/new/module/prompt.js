@@ -5,7 +5,10 @@ module.exports = [
     message: 'Name:',
     validate(value) {
       if (!value.length) {
-        return 'Vuex modules must have a name.'
+        return 'Vuex ORM models must have a name, better capitalized.'
+      }
+      if (value.indexOf('-') !== -1) {
+        return 'Component names should contain one word, better capitalized.'
       }
       return true
     },

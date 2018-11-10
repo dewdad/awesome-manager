@@ -1,5 +1,3 @@
-const _ = require('lodash')
-
 module.exports = [
   {
     type: 'input',
@@ -9,8 +7,7 @@ module.exports = [
       if (!value.length) {
         return 'Components must have a name.'
       }
-      const modelName = _.kebabCase(value)
-      if (modelName.indexOf('-') !== -1) {
+      if (value.indexOf('-') !== -1) {
         return 'Model names should contain only one words, avoid using - or _.'
       }
       return true

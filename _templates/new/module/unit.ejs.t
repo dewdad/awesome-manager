@@ -1,5 +1,5 @@
 ---
-to: src/state/modules/<%= h.inflection.dasherize(name) %>.unit.js
+to: src/state/modules/<%= h.inflection.dasherize(name) %>.unit.ts
 ---
 <%
   const fileName = h.inflection.dasherize(name)

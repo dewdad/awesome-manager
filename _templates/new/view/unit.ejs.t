@@ -1,5 +1,5 @@
 ---
-to: "src/router/views/<%= h.inflection.dasherize(name) %>.unit.js"
+to: "src/pages/<%= h.inflection.dasherize(name) %>.unit.js"
 ---
 <%
   const fileName = h.inflection.dasherize(name)
