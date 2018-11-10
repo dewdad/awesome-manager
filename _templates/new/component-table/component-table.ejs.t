@@ -98,7 +98,6 @@ if (blocks.indexOf('template') !== -1) {
 
     </v-responsive>
     <v-responsive>
-      <%= modelFormName%>
     </v-responsive>
   </v-card>
 </template>

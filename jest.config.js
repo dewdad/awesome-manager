@@ -8,7 +8,7 @@ module.exports = {
   setupFiles: ["<rootDir>/tests/unit/setup.ts"],
   globalSetup: "<rootDir>/tests/unit/global-setup.ts",
   globalTeardown: "<rootDir>/tests/unit/global-teardown.ts",
-  setupTestFrameworkScriptFile: "<rootDir>/tests/unit/matchers",
+  setupTestFrameworkScriptFile: "<rootDir>/tests/unit/matchers.ts",
   moduleFileExtensions: ["js", "jsx", "json", "vue", "ts", "tsx"],
   transform: {
     "^.+\\.vue$": "vue-jest",

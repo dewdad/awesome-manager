@@ -10,8 +10,4 @@ declare global {
       [elem: string]: any;
     }
   }
-
-  namespace jest {
-
-  }
 }

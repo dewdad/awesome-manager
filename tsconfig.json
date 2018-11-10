@@ -40,7 +40,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", "src/store/plugins/ormPlugin.js", "src/store/plugins/lowdbPlugin.js",
+    "tests/**/*.tsx",
   ],
   "exclude": [
     "node_modules"

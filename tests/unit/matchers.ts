@@ -91,4 +91,4 @@ customMatchers.toBeAVuexModule = function(options) {
 };
 
 // https://facebook.github.io/jest/docs/en/expect.html#expectextendmatchers
-expect.extend(customMatchers);
+global.expect.extend(customMatchers);

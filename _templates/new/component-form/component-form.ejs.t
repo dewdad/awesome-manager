@@ -46,7 +46,6 @@ export default {
       console.log(<%= modelName %>.all())
     }
   }
-}
   <% if (blocks.indexOf('template') === -1) {
   %>render(h) {
     return <div/>

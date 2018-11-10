@@ -1,4 +1,3 @@
-
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
@@ -26,7 +25,6 @@ export default {
       window.UserForm.$emit("SET_EDITING", item)
     }
   },
-  
 }
 </script>
 
@@ -83,7 +81,7 @@ export default {
 
     </v-responsive>
     <v-responsive>
-      UserForm
+      <UserForm></UserForm>
     </v-responsive>
   </v-card>
 </template>
