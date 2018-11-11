@@ -24,3 +24,10 @@ export const createApp = (): IApp => {
 
   return { app, router, store, i18n };
 };
+
+// USAGE: from main.ts
+// import { createApp, IApp } from './entry/App';
+// const { app, router, store, i18n }: IApp = createApp();
+// router.onReady(() => {
+//   app.$mount('#app');
+// });

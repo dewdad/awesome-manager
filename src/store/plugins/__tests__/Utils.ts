@@ -1,37 +1,37 @@
-export type Iteratee = (value: any, key: string, collection: any) => any
+export type Iteratee = (value: any, key: string, collection: any) => any;
 
-export type Predicate<T> = (value: T, key: string) => boolean
+export type Predicate<T> = (value: T, key: string) => boolean;
 
 export interface Dictionary<T> {
-  [key: string]: T
+  [key: string]: T;
 }
 
 /**
  * Check if the given array or object is empty.
  */
-export function isEmpty (data: any[] | object): boolean {
+export function isEmpty(data: any[] | object): boolean {
   if (Array.isArray(data)) {
-    return data.length === 0
+    return data.length === 0;
   }
 
-  return Object.keys(data).length === 0
+  return Object.keys(data).length === 0;
 }
 
 /**
  * Iterates over own enumerable string keyed properties of an object and
  * invokes `iteratee` for each property.
  */
-export function forOwn (object: any, iteratee: Iteratee): void {
-  Object.keys(object).forEach(key => iteratee(object[key], key, object))
+export function forOwn(object: any, iteratee: Iteratee): void {
+  Object.keys(object).forEach(key => iteratee(object[key], key, object));
 }
 
 /**
  * Create an array from the object.
  */
-export function map (object: any, iteratee: Iteratee): any[] {
-  return Object.keys(object).map((key) => {
-    return iteratee(object[key], key, object)
-  })
+export function map(object: any, iteratee: Iteratee): any[] {
+  return Object.keys(object).map(key => {
+    return iteratee(object[key], key, object);
+  });
 }
 
 /**
@@ -40,66 +40,72 @@ export function map (object: any, iteratee: Iteratee): any[] {
  * iteratee. The iteratee is invoked with three arguments:
  * (value, key, object).
  */
-export function mapValues (object: any, iteratee: Iteratee): any {
-  const newObject = Object.assign({}, object)
+export function mapValues(object: any, iteratee: Iteratee): any {
+  const newObject = Object.assign({}, object);
 
   return Object.keys(object).reduce((records, key) => {
-    records[key] = iteratee(object[key], key, object)
+    records[key] = iteratee(object[key], key, object);
 
-    return records
-  }, newObject)
+    return records;
+  }, newObject);
 }
 
 /**
  * Creates an object composed of the object properties predicate returns
  * truthy for. The predicate is invoked with two arguments: (value, key).
  */
-export function pickBy<T> (object: Dictionary<T>, predicate: Predicate<T>): Dictionary<T> {
-  return Object.keys(object).reduce((records, key) => {
-    const value = object[key]
+export function pickBy<T>(object: Dictionary<T>, predicate: Predicate<T>): Dictionary<T> {
+  return Object.keys(object).reduce(
+    (records, key) => {
+      const value = object[key];
 
-    if (predicate(value, key)) {
-      records[key] = value
-    }
+      if (predicate(value, key)) {
+        records[key] = value;
+      }
 
-    return records
-  }, {} as Dictionary<T>)
+      return records;
+    },
+    {} as Dictionary<T>,
+  );
 }
 
 /**
  * Creates an array of elements, sorted in specified order by the results
  * of running each element in a collection thru each iteratee.
  */
-export function orderBy<T> (collection: T[], keys: string[], directions: string[]): any {
-  let index = -1
+export function orderBy<T>(collection: T[], keys: string[], directions: string[]): any {
+  let index = -1;
 
-  const result = collection.map((value) => {
-    const criteria = keys.map(key => value[key])
+  const result = collection.map(value => {
+    const criteria = keys.map(key => value[key]);
 
-    return { criteria: criteria, index: ++index, value: value }
-  })
+    return { criteria: criteria, index: ++index, value: value };
+  });
 
   return baseSortBy(result, (object: any, other: any) => {
-    return compareMultiple(object, other, directions)
-  })
+    return compareMultiple(object, other, directions);
+  });
 }
 
 /**
  * Creates an object composed of keys generated from the results of running
  * each element of collection thru iteratee.
  */
-export function groupBy (collection: any[], iteratee: (record: any) => any): any {
-  return collection.reduce((records, record) => {
-    const key = iteratee(record)
+export function groupBy(collection: any[], iteratee: (record: any) => any): any {
+  return collection.reduce(
+    (records, record) => {
+      const key = iteratee(record);
 
-    if (records[key] === undefined) {
-      records[key] = []
-    }
+      if (records[key] === undefined) {
+        records[key] = [];
+      }
 
-    records[key].push(record)
+      records[key].push(record);
 
-    return records
-  }, {} as any)
+      return records;
+    },
+    {} as any,
+  );
 }
 
 /**
@@ -107,16 +113,16 @@ export function groupBy (collection: any[], iteratee: (record: any) => any): any
  * sort order of `array` and replaces criteria objects with their
  * corresponding values.
  */
-function baseSortBy (array: any[], comparer: any): any[] {
-  let length = array.length
+function baseSortBy(array: any[], comparer: any): any[] {
+  let length = array.length;
 
-  array.sort(comparer)
+  array.sort(comparer);
 
   while (length--) {
-    array[length] = array[length].value
+    array[length] = array[length].value;
   }
 
-  return array
+  return array;
 }
 
 /**
@@ -127,46 +133,46 @@ function baseSortBy (array: any[], comparer: any): any[] {
  * Otherwise, specify an order of "desc" for descending or "asc" for
  * ascending sort order of corresponding values.
  */
-function compareMultiple (object: any, other: any, orders: string[]): number {
-  const objCriteria = object.criteria
-  const othCriteria = other.criteria
-  const length = objCriteria.length
-  const ordersLength = orders.length
+function compareMultiple(object: any, other: any, orders: string[]): number {
+  const objCriteria = object.criteria;
+  const othCriteria = other.criteria;
+  const length = objCriteria.length;
+  const ordersLength = orders.length;
 
-  let index = -1
+  let index = -1;
 
   while (++index < length) {
-    const result = compareAscending(objCriteria[index], othCriteria[index])
+    const result = compareAscending(objCriteria[index], othCriteria[index]);
 
     if (result) {
       if (index >= ordersLength) {
-        return result
+        return result;
       }
 
-      const order = orders[index]
+      const order = orders[index];
 
-      return result * (order === 'desc' ? -1 : 1)
+      return result * (order === "desc" ? -1 : 1);
     }
   }
 
-  return object.index - other.index
+  return object.index - other.index;
 }
 
 /**
  * Compares values to sort them in ascending order.
  */
-function compareAscending (value: any, other: any): number {
+function compareAscending(value: any, other: any): number {
   if (value !== other) {
     if (value > other) {
-      return 1
+      return 1;
     }
 
     if (value < other) {
-      return -1
+      return -1;
     }
   }
 
-  return 0
+  return 0;
 }
 
 export default {
@@ -176,5 +182,5 @@ export default {
   map,
   mapValues,
   orderBy,
-  pickBy
-}
+  pickBy,
+};

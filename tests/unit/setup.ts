@@ -182,7 +182,7 @@ export const createVuetifyComponent = () => {
 };
 global.createVuetifyComponent = createVuetifyComponent;
 
-export const createVueRouter = (path = []) => {
+export const createVueRouter = (path: RouteConfig[]) => {
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter({ routes: path as RouteConfig[] });
@@ -192,7 +192,7 @@ global.createVueRouter = createVueRouter;
 
 export const createFullComponent = (
   vuexModule = {},
-  path = [],
+  path: RouteConfig[],
   vuexOptions = {},
   routerOptions = {},
 ) => {

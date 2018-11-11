@@ -54,11 +54,11 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: require("@/assets/sidebar-2.jpg"),
+      default: require("/assets/sidebar-2.jpg"),
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/vue-logo.png"),
+      default: require("/assets/vue-logo.png"),
     },
     activeColor: {
       type: String,

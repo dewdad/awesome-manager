@@ -5,39 +5,39 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new User()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new User();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.UserForm = this;
   },
   computed: {
-    fields: () => User.fieldsList()
+    fields: () => User.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new User()
+      this.editing = false;
+      this.model = new User();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         User.insert({
-          data: this.model
-        })
-        this.model = new User()
+          data: this.model,
+        });
+        this.model = new User();
       } else {
-        User.update(this.model)
-        this.editing = false
-        this.model = new User()
+        User.update(this.model);
+        this.editing = false;
+        this.model = new User();
       }
-      console.log(User.all())
-    }
-  }
-}
+      console.log(User.all());
+    },
+  },
+};
 </script>
 
 <template>

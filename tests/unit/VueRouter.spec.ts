@@ -6,7 +6,7 @@ const localVue = createLocalVue();
 localVue.use(VueRouter);
 localVue.use(Vuetify);
 
-import App from "@/App.vue";
+import App from "@/entry/App.simple.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import HelloButton from "@/components/HelloButton.vue";
 

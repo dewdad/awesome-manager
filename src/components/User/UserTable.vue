@@ -3,29 +3,29 @@ import User from "@/api/models/User";
 import UserForm from "./UserForm";
 export default {
   components: {
-    UserForm
+    UserForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>User.all(),
-    headers: ()=>User.fieldsList(),
+    all: () => User.all(),
+    headers: () => User.fieldsList(),
   },
   created() {
     window.UserApp = this;
   },
   methods: {
     deleteItem(item) {
-      User.delete(item._id)
+      User.delete(item._id);
     },
     editItem(item) {
-      window.UserForm.$emit("SET_EDITING", item)
-    }
+      window.UserForm.$emit("SET_EDITING", item);
+    },
   },
-}
+};
 </script>
 
 <template>
@@ -87,5 +87,5 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+@import "@design";
 </style>

@@ -3,29 +3,29 @@ import Test from "@/api/models/Test";
 import TestForm from "./TestForm";
 export default {
   components: {
-    TestForm
+    TestForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>Test.all(),
-    headers: ()=>Test.fieldsList(),
+    all: () => Test.all(),
+    headers: () => Test.fieldsList(),
   },
   created() {
     window.TestApp = this;
   },
   methods: {
     deleteItem(item) {
-      Test.delete(item._id)
+      Test.delete(item._id);
     },
     editItem(item) {
-      window.TestForm.$emit("SET_EDITING", item)
-    }
+      window.TestForm.$emit("SET_EDITING", item);
+    },
   },
-}
+};
 </script>
 
 <template>
@@ -86,5 +86,5 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+@import "@design";
 </style>

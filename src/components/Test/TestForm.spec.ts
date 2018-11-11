@@ -1,7 +1,7 @@
-import TestForm from './TestForm.vue'
+import TestForm from "./TestForm.vue";
 
-describe('@/components/Test/TestForm', () => {
-  it('exports a valid component', () => {
-    expect(TestForm).toBeAComponent()
-  })
-})
+describe("@/components/Test/TestForm", () => {
+  it("exports a valid component", () => {
+    expect(TestForm).toBeAComponent();
+  });
+});

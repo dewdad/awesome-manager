@@ -1,12 +1,22 @@
 <template>
   <v-container grid-list-md>
     <v-layout wrap>
-      <v-flex @click="reset" xs12 md12 sm12>
+      <v-flex
+          @click="reset"
+          xs12
+          md12
+          sm12>
         <h2>{{ editing ? "你在进行编辑更新" : "你在添加模式" }}</h2>
       </v-flex>
-      <v-text-field v-for="field in fields" v-model="model[field]" :key="field" :label="$t(field)">
+      <v-text-field
+          v-for="field in fields"
+          v-model="model[field]"
+          :key="field"
+          :label="$t(field)">
       </v-text-field>
-      <v-btn color="primary" @click="saveItem">{{ editing ? "更新" : "添加" }}</v-btn>
+      <v-btn
+          color="primary"
+          @click="saveItem">{{ editing ? "更新" : "添加" }}</v-btn>
     </v-layout>
   </v-container>
 </template>
