@@ -10,7 +10,7 @@ import App from "./App.awesome.vue";
 export interface IApp {
   app: Vue;
   router: VueRouter;
-  store: Store<IState>;
+  store: Store<any>;
   i18n: VueI18n;
 }
 
@@ -24,10 +24,3 @@ export const createApp = (): IApp => {
 
   return { app, router, store, i18n };
 };
-
-// USAGE: from main.ts
-// import { createApp, IApp } from './entry/App';
-// const { app, router, store, i18n }: IApp = createApp();
-// router.onReady(() => {
-//   app.$mount('#app');
-// });
