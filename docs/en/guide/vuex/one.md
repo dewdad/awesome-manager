@@ -1,3 +1,6 @@
+---
+title: "Vuex Entry"
+---
 # Store
 
 ## Index

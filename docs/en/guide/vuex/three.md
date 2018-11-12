@@ -1,3 +1,7 @@
+---
+title: "Vuex component"
+---
+
 # Vue call
 
 ## `components/user/UserTable.vue`
