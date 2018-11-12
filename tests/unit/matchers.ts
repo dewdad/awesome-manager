@@ -110,4 +110,4 @@ customMatchers.toBeAVuexModule = function(options) {
 };
 
 // https://facebook.github.io/jest/docs/en/expect.html#expectextendmatchers
-global.expect.extend(customMatchers);
+(global as any).expect.extend(customMatchers);

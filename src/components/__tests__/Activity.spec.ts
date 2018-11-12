@@ -4,8 +4,6 @@ const localVue = createLocalVue();
 
 localVue.use(Vuetify);
 
-const $store = {};
-
 describe("Vue Component Testing", () => {
   describe("Activity Table Test", () => {
     it("should render Activity Info component", () => {

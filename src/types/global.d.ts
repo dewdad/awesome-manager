@@ -13,19 +13,19 @@ declare namespace NodeJS {
     // createFullComponent: any;
     // createVuetifyComponent: any;
     // createComponentMocks: any;
-    mount(component: any, options: any): any;
-    shallowMount(component: any, options: any): any;
-    shallowMountView(component: any, options: any): any;
-    createVuexModule(vuexModule: any, options: any): any;
-    createVueRouter(path: any[]): any;
-    createVuetifyComponent(): any;
-    createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
-    createVuetifyComponent(): any;
-    createComponentMocks(component: any, options: any): any;
+    // mount(component: any, options: any): any;
+    // shallowMount(component: any, options: any): any;
+    // shallowMountView(component: any, options: any): any;
+    // createVuexModule(vuexModule: any, options: any): any;
+    // createVueRouter(path: any[]): any;
+    // createVuetifyComponent(): any;
+    // createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
+    // createVuetifyComponent(): any;
+    // createComponentMocks(component: any): any;
     /**
      * expect is property expose to global
      */
-    expect: jest.Expect;
+    // expect: jest.Expect;
   }
 }
 
