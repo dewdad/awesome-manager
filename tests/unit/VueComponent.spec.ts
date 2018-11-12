@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuetify from "vuetify";
-import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from "@/components/Layout/HelloWorld.vue";
 import HelloButton from "@/components/HelloButton.vue";
 
 const localVue = createLocalVue();

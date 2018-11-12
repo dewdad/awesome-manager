@@ -7,8 +7,7 @@ localVue.use(VueRouter);
 localVue.use(Vuetify);
 
 import App from "@/entry/App.simple.vue";
-import HelloWorld from "@/components/HelloWorld.vue";
-import HelloButton from "@/components/HelloButton.vue";
+import HelloWorld from "@/components/Layout/HelloWorld.vue";
 
 describe("VueRouter Testing", () => {
   let router;
@@ -19,11 +18,6 @@ describe("VueRouter Testing", () => {
           name: "HelloWorld",
           path: "/helloworld",
           component: HelloWorld,
-        },
-        {
-          name: "HelloButton",
-          path: "/hellobutton",
-          component: HelloButton,
         },
       ],
     });
