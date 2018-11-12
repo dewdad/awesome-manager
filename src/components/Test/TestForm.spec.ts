@@ -6,7 +6,7 @@ describe("@/components/Test/TestForm", () => {
     expect(TestForm).toBeAComponent();
   });
   it("exports a valid component", () => {
-    const wrapper = createComponentMocks({});
+    // const wrapper = createComponentMocks({});
     expect(TestInfo).toBeAComponent();
   });
 });
