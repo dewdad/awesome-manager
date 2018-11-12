@@ -1,16 +1,36 @@
-module.exports = [
-  {
-    type: 'input',
-    name: 'model',
-    message: 'Model Name:(i.e. User)',
+module.exports = [{
+    type: "input",
+    name: "model",
+    message: "Model Name:(i.e. User)",
     validate(value) {
       if (!value.length) {
-        return 'Vuex ORM models must have a name, better capitalized.'
+        return "Vuex ORM models must have a name, better capitalized.";
       }
-      if (value.indexOf('-') !== -1) {
-        return 'Component names should contain one word, better capitalized.'
+      if (value.indexOf("-") !== -1) {
+        return "Component names should contain one word, better capitalized.";
       }
-      return true
+      return true;
     },
   },
-]
+  {
+    type: "checkbox",
+    name: "fields",
+    message: "Fields Name and value:(i.e. name:string)",
+    choices: [{
+        name: "name",
+        value: "name",
+        default: true,
+      },
+      {
+        name: "type",
+        value: "string",
+        default: true,
+      },
+      {
+        name: "value",
+        value: "xingwenju",
+        default: true,
+      }
+    ],
+  },
+];

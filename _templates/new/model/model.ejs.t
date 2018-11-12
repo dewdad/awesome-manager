@@ -14,7 +14,9 @@ export default class <%= h.capitalize(h.inflection.singularize(model)) %> extend
   static fields() {
     return {
       _id: Model.increment(),
-      name: Model.string(""),
+      <% 
+      if(fields.indexOf("name") !== -1) fields[0]
+      %>name: Model.string("xingwenju")
     };
   }
 }

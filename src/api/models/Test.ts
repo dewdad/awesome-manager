@@ -11,7 +11,7 @@ export default class Test extends Model {
   static fields() {
     return {
       _id: Model.increment(),
-      name: Model.string(""),
+      name: Model.string("xingwenju"),
     };
   }
 }
