@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 import path from "path";

@@ -39,6 +39,8 @@ declare namespace jest {
   }
 }
 
+declare var CLIENT: boolean;
+declare var SERVER: boolean;
 declare var TEST: boolean;
 declare var DEVELOPMENT: boolean;
 declare var PRODUCTION: boolean;
