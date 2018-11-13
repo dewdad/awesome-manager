@@ -4,10 +4,10 @@ module.exports = {
       // Disable CSS compilation until it's more stable
       experimentalCSSCompile: false,
     },
-    "window": true,
-    "app": true
+    window: true,
+    app: true,
   },
-  setupFiles: ["<rootDir>/tests/unit/setup.ts"],
+  setupFiles: ["<rootDir>/tests/unit/setup.ts", "<rootDir>/tests/unit/store-setup.ts"],
   globalSetup: "<rootDir>/tests/unit/global-setup.ts",
   globalTeardown: "<rootDir>/tests/unit/global-teardown.ts",
   setupTestFrameworkScriptFile: "<rootDir>/tests/unit/matchers.ts",

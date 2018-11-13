@@ -9,10 +9,9 @@ describe("Unit – Model", () => {
       content: "test",
     });
     expect(activity).toBeInstanceOf(Activity);
-    console.log(activity.$toJson);
 
     // use object in store
-    const store = createStore([{ model: Activity }], "entities");
+    const store = (global as any).createORMStore([{ model: Activity }], "entities");
     store.dispatch("entities/activity/create", {
       data: activity,
     });
@@ -21,15 +20,12 @@ describe("Unit – Model", () => {
       data: activity,
     });
 
-    const a1 = store.getters["entities/activity/find"](1);
-    console.log(a1);
+    const newActivity = store.getters["entities/activity/find"](1);
 
-    const a2 = activity.$find(1);
-    console.log(a2);
-    expect(a2).toEqual(a1);
+    const instanceFindActivity = activity.$find(1);
+    expect(instanceFindActivity).toEqual(newActivity);
 
-    const a3 = Activity.find(1);
-    console.log(a3);
-    expect(a2).toEqual(a3);
+    const classFindActivity = Activity.find(1);
+    expect(classFindActivity).toEqual(newActivity);
   });
 });

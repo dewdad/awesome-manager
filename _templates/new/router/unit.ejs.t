@@ -10,8 +10,6 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 const Component = (global as any).mockComponent;
 const App = (global as any).mockApp;
 
-<%= modelName%>.name = "test";
-<%= modelName%>.path = "/test";
 (<%= modelName%>.component as any) = Component;
 
 describe('@/router/<%= modelName %>', () => {
@@ -23,7 +21,7 @@ describe('@/router/<%= modelName %>', () => {
   })
   it('exports a valid Vue Router', () => {
         const wrapper = (global as any).mount(App, app);
-        app.router.push("/test");
+        app.router.push({ name: <%= modelName %>.name});
         expect(wrapper.find(Component).exists()).toBe(true);
   })
 })

@@ -12,5 +12,5 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/<%= modelName %>/<%= componentName %>`),
+    `@/components/<%= modelName %>/<%= componentName %>`).then(m => m.default),
 };
