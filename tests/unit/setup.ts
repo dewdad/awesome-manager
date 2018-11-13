@@ -215,3 +215,15 @@ Object.defineProperty(window, "localStorage", {
   });
   return { store, router, localVue };
 };
+
+const mockApp = {
+  template: `<div>
+    <router-view></router-view>
+  </div>`,
+};
+(global as any).mockApp = mockApp;
+
+const mockComponent = {
+  template: `<div>Component</div>`,
+};
+(global as any).mockComponent = mockComponent;

@@ -2,27 +2,28 @@
 to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 ---
 <%
-  const fileName = h.capitalize(h.inflection.singularize(model))
-  const importName = fileName + "Router"
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const componentName = h.capitalize(h.inflection.singularize(model)) + "Table.vue"
   const pathName = h.inflection.camelize(h.inflection.singularize(model))
-  const componentName = fileName + "Table"
-  const componentPath = "@/components/" + fileName +  "/" + componentName + ".vue"
-%>import <%= importName %> from "./<%= fileName %>"
-import Vuetify from "vuetify";
-import App from "@/App.vue";
-import <%= componentName %> from "<%= componentPath %>";
+%>import <%= modelName %> from './<%= modelName %>'
 
-describe("@/router/<%= fileName %>", () => {
-  let router
-  let localVue
+const Component = (global as any).mockComponent;
+const App = (global as any).mockApp;
+
+<%= modelName%>.name = "test";
+<%= modelName%>.path = "/test";
+(<%= modelName%>.component as any) = Component;
+
+describe('@/router/<%= modelName %>', () => {
+  let app
+  let mockRoute
   beforeEach(() => {
-    router = createVueRouter([<%= importName %>]).router;
-    localVue = createVueRouter([<%= importName %>]).localVue;
-    localVue.use(Vuetify);
+    mockRoute = <%= modelName %>,
+    app = (global as any).createVueRouter([mockRoute])
   })
-  it("exports a valid Vue Router Route", () => {
-    const wrapper = mount(App, { router, localVue });
-    router.push("/<%= pathName %>");
-    expect(wrapper.find("<%= componentName %>").exists()).toBe(true);
+  it('exports a valid Vue Router', () => {
+        const wrapper = (global as any).mount(App, app);
+        app.router.push("/test");
+        expect(wrapper.find(Component).exists()).toBe(true);
   })
 })
