@@ -6,7 +6,7 @@ import Vue from "vue";
 import fs from "fs";
 import path from "path";
 // NOTE add plugins in test
-// import plugins from "@state/plugins";
+// import plugins from "@/store/plugins";
 
 // ===
 // Utility functions
