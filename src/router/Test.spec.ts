@@ -20,4 +20,3 @@ describe('@/router/Test', () => {
         expect(wrapper.find(Component).exists()).toBe(true);
   })
 })
-

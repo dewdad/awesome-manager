@@ -4,5 +4,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Account/AccountProfile.vue`),
+    `@/components/Account/AccountProfile.vue`).then(m => m.default),
 };

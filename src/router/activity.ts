@@ -4,5 +4,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Activity/ActivityTable.vue`),
+    `@/components/Activity/ActivityTable.vue`).then(m => m.default),
 };

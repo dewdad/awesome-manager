@@ -4,7 +4,7 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
   const componentName = h.capitalize(h.inflection.singularize(model)) + "Table.vue"
-  const pathName = h.inflection.camelize(h.inflection.singularize(model))
+  const pathName = (h.inflection.singularize(model)).toLowerCase() + "-table"
 %>import <%= modelName %> from './<%= modelName %>'
 
 const Component = (global as any).mockComponent;
