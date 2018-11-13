@@ -21,9 +21,8 @@ export const getTranslationObject = (matches: string[] = ["matches"]): any => {
   const translations: any = {};
 
   matches.forEach((translation: string) => {
-    if (translation === null) return;
-    const id: string = translation.match(/'\S*'/)[0].replace(/[\\']/g, "");
-    const defaultMessage: string = translation.match(/\/\*[\S\s]*\*\//)[0];
+    const id: string = translation!.match(/'\S*'/)[0].replace(/[\\']/g, "");
+    const defaultMessage: string = translation!.match(/\/\*[\S\s]*\*\//)[0];
 
     translations[id] = sanitizeMessage(defaultMessage);
   });

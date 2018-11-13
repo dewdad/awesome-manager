@@ -17,10 +17,7 @@ import vueTestUtils, { createLocalVue } from "@vue/test-utils";
 // https://lodash.com/
 import _, { cloneDeep } from "lodash";
 _.mixin({
-  pascalCase: _.flow(
-    _.camelCase,
-    _.upperFirst,
-  ),
+  pascalCase: _.flow(_.camelCase, _.upperFirst),
 });
 
 // ===
@@ -40,13 +37,13 @@ const globalComponentFiles = fs
   .readdirSync(path.join(__dirname, "../../src/components"))
   .filter(fileName => /^_base-.+\.vue$/.test(fileName));
 
-// for (let fileName of globalComponentFiles) {
-//   if (fileName !== null) {
-//     const componentName = (_ as any).pascalCase((fileName as string).match(/^_(base-.+)\.vue$/)[1]);
-//     const componentConfig = require("../../src/components/" + fileName);
-//     Vue.component(componentName, componentConfig.default || componentConfig);
-//   }
-// }
+for (let fileName of globalComponentFiles) {
+  if (fileName !== null) {
+    const componentName = (_ as any).pascalCase((fileName as string).match(/^_(base-.+)\.vue$/)[1]);
+    const componentConfig = require("../../src/components/" + fileName);
+    Vue.component(componentName, componentConfig.default || componentConfig);
+  }
+}
 
 // ===
 // Patch all components with a global mixin

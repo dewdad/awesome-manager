@@ -1,7 +1,16 @@
+import Vue from "vue";
 import { createApp, IApp } from "./App.simple";
 
-const app = createApp();
+const { app, router, store, i18n } = createApp();
 
-app.router.onReady(() => {
-  (app as any).$mount("#app");
+Vue.config.errorHandler = (error: Error) => {
+  console.error(error); // tslint:disable-line
+};
+router.onReady(() => {
+  router.beforeResolve((to: Route, from: Route, next: any) => {
+    console.log(from); // tslint:disable-line
+    console.log(to); // tslint:disable-line
+    console.log(next); // tslint:disable-line
+  });
+  app.$mount("#app");
 });
