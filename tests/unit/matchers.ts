@@ -1,4 +1,4 @@
-const _ = require("lodash");
+const isPlainObject = require("lodash/isPlainObject");
 const customMatchers: jest.ExpectExtendMap = {};
 
 customMatchers.toBeAModel = function(options) {
@@ -16,7 +16,7 @@ customMatchers.toBeAModel = function(options) {
   }
 
   function isAModel() {
-    return _.isPlainObject(options);
+    return isPlainObject(options);
   }
 };
 
@@ -37,7 +37,7 @@ customMatchers.toBeAComponent = function(options) {
   }
 
   function isAComponent() {
-    return _.isPlainObject(options) && typeof options.render === "function";
+    return isPlainObject(options) && typeof options.render === "function";
   }
 };
 
@@ -100,11 +100,11 @@ customMatchers.toBeAVuexModule = function(options) {
 
   function isAVuexModule() {
     return (
-      _.isPlainObject(options) &&
-      _.isPlainObject(options.state) &&
-      _.isPlainObject(options.getters) &&
-      _.isPlainObject(options.mutations) &&
-      _.isPlainObject(options.actions)
+      isPlainObject(options) &&
+      isPlainObject(options.state) &&
+      isPlainObject(options.getters) &&
+      isPlainObject(options.mutations) &&
+      isPlainObject(options.actions)
     );
   }
 };

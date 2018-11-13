@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { Route } from "vue-router";
 import { createApp, IApp } from "./App.simple";
 
 const { app, router, store, i18n } = createApp();

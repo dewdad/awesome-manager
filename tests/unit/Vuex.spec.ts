@@ -1,6 +1,5 @@
 import { shallowMount, config } from "@vue/test-utils";
 import mutations from "@/store/shared/mutations";
-import { createVuexModule } from "./setup";
 
 const ActivityComponent = {
   template: `<button @click="$store.commit('CREATE_ITEM', {})"></button>`,
@@ -11,7 +10,7 @@ const mockMutations = {
   UPDATE_ITEM: jest.fn((state, payload) => mutations.UPDATE_ITEM(state, payload)),
 };
 
-const { store, localVue } = createVuexModule(
+const { store, localVue } = (global as any).createVuexModule(
   {
     state: {
       currentItem: {},

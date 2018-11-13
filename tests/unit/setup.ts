@@ -17,7 +17,10 @@ import vueTestUtils, { createLocalVue } from "@vue/test-utils";
 // https://lodash.com/
 import _, { cloneDeep } from "lodash";
 _.mixin({
-  pascalCase: _.flow(_.camelCase, _.upperFirst),
+  pascalCase: _.flow(
+    _.camelCase,
+    _.upperFirst,
+  ),
 });
 
 // ===
@@ -39,7 +42,7 @@ const globalComponentFiles = fs
 
 for (let fileName of globalComponentFiles) {
   if (fileName !== null) {
-    const componentName = (_ as any).pascalCase((fileName as string).match(/^_(base-.+)\.vue$/)[1]);
+    const componentName = (_ as any).pascalCase(fileName.match(/^_(base-.+)\.vue$/)[1]);
     const componentConfig = require("../../src/components/" + fileName);
     Vue.component(componentName, componentConfig.default || componentConfig);
   }
@@ -104,7 +107,7 @@ Object.defineProperty(window, "localStorage", {
   });
 };
 
-((global as any) as any).createComponentMocks = ({ store, router, style, mocks, stubs }) => {
+(global as any).createComponentMocks = ({ store, router, style, mocks, stubs }) => {
   // Use a local version of Vue, to avoid polluting the (global as any)
   // Vue and thereby affecting other tests.
   // https://vue-test-utils.vuejs.org/api/#createlocalvue
@@ -166,7 +169,7 @@ Object.defineProperty(window, "localStorage", {
   return returnOptions;
 };
 
-export const createVuexModule = (vuexModule: Module<{}, {}>, options = {}) => {
+(global as any).createVuexModule = (vuexModule: Module<{}, {}>, options = {}) => {
   const localVue = createLocalVue();
   localVue.use(Vuex);
   const store: Store<{}> = new Vuex.Store({
@@ -175,24 +178,21 @@ export const createVuexModule = (vuexModule: Module<{}, {}>, options = {}) => {
   });
   return { store, localVue };
 };
-(global as any).createVuexModule = createVuexModule;
 
-export const createVuetifyComponent = () => {
+(global as any).createVuetifyComponent = () => {
   const localVue = createLocalVue();
   localVue.use(Vuetify);
   return localVue;
 };
-(global as any).createVuetifyComponent = createVuetifyComponent;
 
-export const createVueRouter = (path: RouteConfig[]) => {
+(global as any).createVueRouter = (path: RouteConfig[]) => {
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter({ routes: path as RouteConfig[] });
   return { router, localVue };
 };
-(global as any).createVueRouter = createVueRouter;
 
-export const createFullComponent = (
+(global as any).createFullComponent = (
   vuexModule: Module<{}, {}>,
   path: RouteConfig[],
   vuexOptions = {},
@@ -215,4 +215,3 @@ export const createFullComponent = (
   });
   return { store, router, localVue };
 };
-(global as any).createFullComponent = createFullComponent;
