@@ -1,6 +1,6 @@
-import { createStore } from "../Helpers";
-import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
+import { Query, Model } from "@vuex-orm/core";
 
+const createStore = (global as any).createORMStore;
 describe("Unit – Query", () => {
   class User extends Model {
     static entity = "users";

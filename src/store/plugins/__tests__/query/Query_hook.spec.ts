@@ -1,7 +1,7 @@
-import { createStore } from "../Helpers";
 import Activity from "@/api/models/Activity";
-import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
+import { Query } from "@vuex-orm/core";
 
+const createStore = (global as any).createORMStore;
 describe("Unit – Query", () => {
   it("retrieves the module as null if not defined", () => {
     createStore([{ model: Activity }]);

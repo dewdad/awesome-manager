@@ -1,6 +1,6 @@
 import Activity from "@/api/models/Activity";
-import { createStore } from "../Helpers";
 
+const createStore = (global as any).createORMStore;
 describe("Unit – Model", () => {
   it("can create from store", () => {
     // only create object, not yet to store

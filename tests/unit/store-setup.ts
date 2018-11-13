@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 import VuexORM, { Database } from "@vuex-orm/core";
 
 Vue.use(Vuex);
@@ -7,7 +7,7 @@ Vue.use(Vuex);
 /**
  * Create a new Vuex Store.
  */
-(global as any).createORMStore = (entities, namespace = "entities") => {
+(global as any).createORMStore = (entities = [], namespace = "entities"): Store<any> => {
   const database = new Database();
 
   entities.forEach(entity => {
