@@ -15,11 +15,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style lang="scss" module>
-
-.error {
-  padding-top: $nav-bar-height;
-  text-align: center;
-}
-</style>

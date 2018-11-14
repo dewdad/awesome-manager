@@ -56,14 +56,13 @@ export function selectedDeepClone<T extends object, S extends string>(
   }, Object.create(null));
 }
 
-export function selectedDeepMining<T extends object, S extends string>(
-  o: T,
-  f: S,
-): { [K in keyof T]: any } {
+export function selectedDeepMining<T extends object, S extends string>(o: T, f: S): S[] {
   return Object.keys(o).reduce((res, key) => {
-    if (typeof o[key] === "object") {
-      res[key] = selectedDeepMining(o[key], "object");
+    if (typeof o[key] !== "object") {
+      res.push(key);
+    } else {
+      res.push(selectedDeepMining(o[key], "object"));
     }
     return res;
-  }, Object.create(null));
+  }, []);
 }

@@ -68,6 +68,6 @@ describe("create object from selected type of given object", () => {
     expect(y).toEqual(z);
 
     const m = selectedDeepMining(model, "object");
-    expect(m).not.toEqual(x);
+    expect(m.length).toBe(3);
   });
 });

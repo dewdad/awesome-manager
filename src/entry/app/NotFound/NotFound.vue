@@ -16,10 +16,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style lang="scss" module>
-.notFound {
-  padding-top: $nav-bar-height;
-  text-align: center;
-}
-</style>
