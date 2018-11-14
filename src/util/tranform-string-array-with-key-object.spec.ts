@@ -2,6 +2,8 @@ import {
   stringArrayFromClassKeys,
   objectArrayFromClassKeys,
   classFromStringArray,
+  selectedDeepClone,
+  selectedDeepMining,
 } from "./tranform-string-array-with-key-object";
 
 class Model {
@@ -42,5 +44,30 @@ describe("create class from string enumerations", () => {
     let sample: Direction;
     sample = Direction.type; // Okay
     expect(sample).toBe("type");
+  });
+});
+
+describe("create object from selected type of given object", () => {
+  it("", () => {
+    /** Create a K:V */
+    const model = {
+      name: "xingwenju",
+      address: {
+        home: "here",
+        house: {
+          no: "1",
+        },
+      },
+    };
+    const o = selectedDeepClone(model, "object");
+    const x = selectedDeepClone(o, "object");
+    const y = selectedDeepClone(x, "object");
+    const z = selectedDeepClone(y, "object");
+    expect(x).toEqual(y);
+    expect(x).toEqual(z);
+    expect(y).toEqual(z);
+
+    const m = selectedDeepMining(model, "object");
+    expect(m).not.toEqual(x);
   });
 });

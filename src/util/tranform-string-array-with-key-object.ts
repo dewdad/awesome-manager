@@ -24,6 +24,9 @@ export function objectFromClassKeys<T extends object>(o: T): T {
 /**
  * Utility function to create a K:V from a list of strings
  * @param o Array of string
+ *
+ * Usage:
+ * classFromStringArray({name: "xxx"})  -> {name: name}
  */
 export function classFromStringArray<T extends string>(o: Array<T>): { [K in T]: K } {
   return o.reduce((res, key) => {
@@ -37,16 +40,30 @@ export function classFromStringArray<T extends string>(o: Array<T>): { [K in T]:
  * @param o Array of string
  *
  * Usage:
- * const result = selectedDeepClone({}, "string")
- * const result = selectedDeepClone({}, "object")
- * const result = selectedDeepClone({}, "undefined")
+ * selectedDeepClone({}, "string") -> {name: ""}
+ * selectedDeepClone({}, "object") -> {name: {...}}
+ * selectedDeepClone({}, "undefined") -> {name: undefined}
  */
 export function selectedDeepClone<T extends object, S extends string>(
   o: T,
   f: S,
 ): { [K in keyof T]: any } {
   return Object.keys(o).reduce((res, key) => {
-    if (typeof o[key] === f) res[key] = o[key];
+    if (typeof o[key] === f) {
+      res[key] = o[key];
+    }
+    return res;
+  }, Object.create(null));
+}
+
+export function selectedDeepMining<T extends object, S extends string>(
+  o: T,
+  f: S,
+): { [K in keyof T]: any } {
+  return Object.keys(o).reduce((res, key) => {
+    if (typeof o[key] === "object") {
+      res[key] = selectedDeepMining(o[key], "object");
+    }
     return res;
   }, Object.create(null));
 }
