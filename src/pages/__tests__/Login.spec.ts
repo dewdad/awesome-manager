@@ -72,4 +72,45 @@ describe("Login Vue Component Testing", () => {
       expect(wrapper.emitted("APP_LOGIN_FAILED").length).toBeGreaterThan(0);
     });
   });
+
+    it("is a valid view", () => {
+      expect(Login).toBeAViewComponent();
+    });
+
+    it("will trigger login from createComponentMocks", async () => {
+      const { vm } = mountLogin();
+
+      vm.username = model.name;
+      vm.password = model.password;
+
+      const routerPush = jest.fn();
+      vm.$router = { push: routerPush };
+      vm.$route = { query: {} };
+
+      expect.assertions(2);
+      await wrapper.vm.login();
+      // will call signup, which is mocked and set loading as true
+      expect(wrapper.vm.$data.loading).toEqual(true);
+    });
 });
+
+
+function mountLogin() {
+  return (global as any).shallowMountView(Login, {
+    ...(global as any).createComponentMocks({
+      store: {
+        auth: {
+          actions: {
+            logIn(_, { username, password }) {
+              if (username === "embajadachina" && password === "embajadachina") {
+                return Promise.resolve("testToken");
+              } else {
+                return Promise.reject(new Error("testError"));
+              }
+            },
+          },
+        },
+      },
+    }),
+  });
+}

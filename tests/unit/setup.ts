@@ -112,6 +112,9 @@ Object.defineProperty(window, "localStorage", {
   // Vue and thereby affecting other tests.
   // https://vue-test-utils.vuejs.org/api/#createlocalvue
   const localVue = vueTestUtils.createLocalVue();
+  localVue.use(Vuetify);
+
+  // return the localVue with Vuetify
   const returnOptions = { localVue };
 
   // https://vue-test-utils.vuejs.org/api/options.html#stubs
@@ -172,24 +175,29 @@ Object.defineProperty(window, "localStorage", {
 (global as any).createVuexModule = (vuexModule: Module<{}, {}>, options = {}) => {
   const localVue = createLocalVue();
   localVue.use(Vuex);
+  const returnOptions = { localVue };
   const store: Store<{}> = new Vuex.Store({
     ...cloneDeep(vuexModule),
     ...options,
   });
-  return { store, localVue };
+  returnOptions["store"] =  store;
+  return returnOptions;
 };
 
 (global as any).createVuetifyComponent = () => {
   const localVue = createLocalVue();
   localVue.use(Vuetify);
-  return localVue;
+  const returnOptions = { localVue };
+  return returnOptions;
 };
 
 (global as any).createVueRouter = (path: RouteConfig[]) => {
   const localVue = createLocalVue();
   localVue.use(VueRouter);
+  const returnOptions = { localVue };
   const router = new VueRouter({ routes: path as RouteConfig[] });
-  return { router, localVue };
+  returnOptions["router"] =  router;
+  return returnOptions;
 };
 
 (global as any).createFullComponent = (
@@ -203,6 +211,7 @@ Object.defineProperty(window, "localStorage", {
   localVue.use(Vuetify);
   localVue.use(Vuex);
   localVue.use(VueRouter);
+  const returnOptions = { localVue };
   // inject store
   const store: Store<{}> = new Store({
     ...cloneDeep(vuexModule),
@@ -213,7 +222,9 @@ Object.defineProperty(window, "localStorage", {
     routes: path as RouteConfig[],
     ...routerOptions,
   });
-  return { store, router, localVue };
+  returnOptions["router"] =  router;
+  returnOptions["store"] =  store;
+  return returnOptions;
 };
 
 const mockApp = {
