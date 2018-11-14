@@ -1,4 +1,4 @@
-import Test from "./Test";
+import Test from "../Test";
 
 const Component = (global as any).mockComponent;
 const App = (global as any).mockApp;

@@ -1,5 +1,5 @@
 ---
-to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
+to: src/router/__tests__/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
