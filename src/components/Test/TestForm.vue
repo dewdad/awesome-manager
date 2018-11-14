@@ -64,5 +64,4 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import "@design";
 </style>

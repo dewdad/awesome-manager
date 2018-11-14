@@ -3,30 +3,29 @@ import Document from "@/api/models/Document";
 import DocumentForm from "./DocumentForm";
 export default {
   components: {
-    DocumentForm
+    DocumentForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>Document.all(),
-    headers: ()=>Document.fieldsList(),
+    all: () => Document.all(),
+    headers: () => Document.fieldsList(),
   },
   created() {
     window.DocumentApp = this;
   },
   methods: {
     deleteItem(item) {
-      Document.delete(item._id)
+      Document.delete(item._id);
     },
     editItem(item) {
-      window.DocumentForm.$emit("SET_EDITING", item)
-    }
+      window.DocumentForm.$emit("SET_EDITING", item);
+    },
   },
-  
-}
+};
 </script>
 
 <template>
@@ -87,5 +86,4 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
 </style>

@@ -5,40 +5,39 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new Document()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new Document();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.DocumentForm = this;
   },
   computed: {
-    fields: () => Document.fieldsList()
+    fields: () => Document.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new Document()
+      this.editing = false;
+      this.model = new Document();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         Document.insert({
-          data: this.model
-        })
-        this.model = new Document()
+          data: this.model,
+        });
+        this.model = new Document();
       } else {
-        Document.update(this.model)
-        this.editing = false
-        this.model = new Document()
+        Document.update(this.model);
+        this.editing = false;
+        this.model = new Document();
       }
-      console.log(Document.all())
-    }
-  }
-  
-}
+      console.log(Document.all());
+    },
+  },
+};
 </script>
 
 <template>
@@ -65,5 +64,5 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+//
 </style>

@@ -186,14 +186,14 @@ This makes all our design variables available in your component or SCSS file.
 As mentioned earlier, every Vue component should be a CSS module. That means the classes you define are not _actually_ classes. When you write:
 
 ```html
-<style lang='scss' module>
-.inputLabel {
-  /* ... */
-}
+<style lang="scss" module>
+  .inputLabel {
+    /* ... */
+  }
 
-.input {
-  /* ... */
-}
+  .input {
+    /* ... */
+  }
 </style>
 ```
 
@@ -236,9 +236,7 @@ In these cases, you can use an [attribute selector](https://developer.mozilla.or
 
 ```vue
 <template>
-  <div :class="$style.container">
-    <SomeOtherComponentContainingAnInput/>
-  </div>
+  <div :class="$style.container"><SomeOtherComponentContainingAnInput /></div>
 </template>
 
 <style lang="scss" module>
@@ -262,11 +260,9 @@ You could import our design tooling, then use CSS modules' `:export` it:
 
 ```html
 <style lang="scss" module>
-@import '@design';
-
-:export {
-  grid-padding: $size-grid-padding;
-}
+  :export {
+    grid-padding: $size-grid-padding;
+  }
 </style>
 ```
 
@@ -297,4 +293,3 @@ While a little more complex to begin with, CSS modules offer:
 - True protection from collisions. Using the `scoped` attribute, vendor CSS could still affect your own classes, if you both use the same names.
 - Improved performance. Generated class selectors like `.base-input_inputLabel__3EAebB_0` are faster than attribute selectors, especially on an element selector like `input[data-v-3EAebB]`.
 - Increased versatility. There are cases the `scoped` attribute just can't handle, such as passing a scoped class to a child component that does _not_ render HTML directly. This is fairly common for component wrappers of views driven by WebGL or Canvas, that often inject HTML overlays such as tooltips at the root of the `<body>`.
-
