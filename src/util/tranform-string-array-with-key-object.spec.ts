@@ -36,12 +36,12 @@ describe("create class from string enumerations", () => {
     const Direction = classFromStringArray(["name", "type", "address"]);
     expect(Direction.name).toBe("name");
     /** Create a Type */
-    type Direction = keyof typeof Direction;
+    type TDirection = keyof typeof Direction;
 
     /**
      * Sample using a string enum
      */
-    let sample: Direction;
+    let sample: TDirection;
     sample = Direction.type; // Okay
     expect(sample).toBe("type");
   });
@@ -68,6 +68,6 @@ describe("create object from selected type of given object", () => {
     expect(y).toEqual(z);
 
     const m = selectedDeepMining(model, "object");
-    expect(m.length).toBe(3);
+    expect(m.length).toBe(2);
   });
 });

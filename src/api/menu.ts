@@ -1,11 +1,11 @@
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const mainMenu = [
-{
+  {
     title: "Test",
     name: "Test",
     group: "apps",
-    icon: "fas fa-tasks"
+    icon: "fas fa-tasks",
   },
 
   { header: "常用功能" },
