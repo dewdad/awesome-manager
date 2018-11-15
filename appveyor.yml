@@ -7,6 +7,7 @@ platform:
   - x86
 
 environment:
+  APPVEYOR_REPO_TAG: true
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   access_token:
