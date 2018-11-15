@@ -6,13 +6,14 @@ environment:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   access_token:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  APPVEYOR_REPO_TAG: true
+  APPVEYOR_SSH_KEY: AAAAB3NzaC1yc2EAAAADAQABAAABAQDb4cZ5qhWjV8GOeRJ24nVBWuwrRVXQ8P8kMJS3LWgNS9apAhhWtlOXoLvOCevOsZMWHdS2nRATu8GSvp7QDAREr4ynhZfjICRwzD7CRLKbdfwKKOAyUGMleoAssa7CQkguOgU8XjdiP5GAtXl3h9OjKBx8PLLjWxDPnw5xi5vLEA
+  APPVEYOR_SSH_BLOCK: false
+  APPVEYOR_RDP_PASSWORD: 20090909
 
 cache:
   - node_modules
   - "%LOCALAPPDATA%\\Yarn"
   - '%USERPROFILE%\.electron'
-  - lib\vue-cli-plugins\vue-cli-plugin-vuex-nedb-module-generator\node_modules
   # - '%APPDATA%\npm-cache'
 
 install:
@@ -26,19 +27,32 @@ artifacts:
   - path: dist_electron\*.exe
     name: bin
 
-# deploy:
-#   - provider: GitHub
-#     release: awesome-manager-v$(appveyor_build_version)
-#     description: "A awesome dashbaord manager powered by vue and electron"
-#     artifacts: bin
-#     auth_token:
-#       secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-#     on:
-#       branch: master
-#       appveyor_repo_tag: true
+deploy:
+  - provider: GitHub
+    release: awesome-manager-v$(appveyor_build_version)
+    description: "A awesome dashbaord manager powered by vue and electron"
+    artifacts: bin
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    force_update: true
+    prerelease: false
+    draft: true
+    auth_token:
+      secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+    on:
+      branch: master
+      appveyor_repo_tag: true
 
 test: off
 
 branches:
   only:
     - master
+
+init:
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+on_finish:
+  - sh: export APPVEYOR_SSH_BLOCK=true
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
