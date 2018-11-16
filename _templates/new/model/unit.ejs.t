@@ -1,5 +1,5 @@
 ---
-to: src/api/models/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
+to: src/api/models/__tests__/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts
 ---
 <%
   const fileName = h.capitalize(h.inflection.singularize(model))

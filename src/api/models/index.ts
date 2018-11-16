@@ -6,7 +6,7 @@
  */
 import { toLower } from "lodash";
 
-let files = require["context"](".", false, /\.ts$/);
+let files = require.context(".", false, /\.ts$/);
 let models = {};
 
 files.keys().forEach(key => {
