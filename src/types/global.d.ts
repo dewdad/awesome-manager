@@ -1,33 +1,31 @@
+/**
+ * Global definition for type check
+ * should not include any module, in order to keep it global
+ */
 declare namespace NodeJS {
   interface Global {
     /**
-     * index Signiture to skip type check
+     * index Signiture to allow any property 
      */
     [propName: string]: any;
-    (mainArg: any, ...args: any): any;
+    (...args: any): any;
+    (): any;
     /**
      * All properties and methods are exposed to global
      */
     // https://vue-test-utils.vuejs.org/api/#mount
-    mount: any;
     mount(component: any, options: any): any;
     // https://vue-test-utils.vuejs.org/api/#shallowmount
-    shallowMount: any;
     shallowMount(component: any, options: any): any;
 
-    shallowMountView: any;
     shallowMountView(component: any, options: any): any;
 
-    createVuexModule: any;
     createVuexModule(vuexModule: any, options: any): any;
 
-    createVueRouter: any;
     createVueRouter(path: any[]): any;
 
-    createFullComponent: any;
     createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
 
-    createVuetifyComponent: any;
     createVuetifyComponent(): any;
 
     /**
@@ -54,7 +52,6 @@ declare namespace NodeJS {
      * If using `router: true`, we'll automatically stub out
      * components from Vue Router.
      */
-    createComponentMocks: any;
     createComponentMocks(mountOptions: any): any;
 
     /**
@@ -62,7 +59,7 @@ declare namespace NodeJS {
      * @param {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
      * @param {String} namespace, normally is `entities` to use `state.entities`
      */
-    createORMStore(entities: any[], namespace: S): any;
+    createORMStore(entities: any[], namespace: string): any;
     /**
      * expect is property exposed to global
      */
@@ -80,6 +77,11 @@ declare namespace jest {
   }
 }
 
+declare module "marked" {
+  const marked: any;
+  export = marked;
+}
+declare var nodeRequire: any;
 declare var CLIENT: boolean;
 declare var SERVER: boolean;
 declare var TEST: boolean;
@@ -91,9 +93,3 @@ interface Window {
   __INITIAL_STATE__: any;
 }
 
-declare var nodeRequire: any;
-
-declare module "marked" {
-  const marked: any;
-  export = marked;
-}
