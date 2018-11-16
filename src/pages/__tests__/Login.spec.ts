@@ -4,12 +4,28 @@ import Vuex from "vuex";
 
 import Login from "@/pages/Login.vue";
 import AccountModel from "@/api/models/Account";
-import AccountModule from "@/store/modules/Account";
+import AccountModule from "@//store/modules/Account";
 
 const store = (global as any).createORMStore(
   [{ model: AccountModel, module: AccountModule }],
   "entities",
 );
+
+const localVue = createLocalVue();
+
+const $route = {
+  meta: {
+    public: false,
+  },
+};
+
+const model = {
+  name: "embajadachina",
+  password: "embajadachina",
+  email: "embajachina@gmail.com",
+  hash: "",
+  role: "manager",
+};
 
 function mountLogin() {
   return (global as any).shallowMountView(Login, {
@@ -31,22 +47,6 @@ function mountLogin() {
     }),
   });
 }
-
-const localVue = createLocalVue();
-
-const $route = {
-  meta: {
-    public: false,
-  },
-};
-
-const model = {
-  name: "embajadachina",
-  password: "embajadachina",
-  email: "embajachina@gmail.com",
-  hash: "",
-  role: "manager",
-};
 
 localVue.use(Vuex);
 localVue.use(Vuetify);

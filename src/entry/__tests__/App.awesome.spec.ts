@@ -26,6 +26,10 @@ describe("App Vue Component Testing", () => {
       mocks: {
         $route,
       },
+      stubs: {
+        "router-view": true,
+        "router-link": true,
+      },
     });
   });
 
