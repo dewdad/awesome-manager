@@ -1,3 +1,4 @@
+process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || _.random(9000, 9999)
 module.exports = {
   globals: {
     "vue-jest": {
@@ -24,7 +25,10 @@ module.exports = {
   testMatch: [
     "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.spec.(js|jsx|ts|tsx)|**/**/*.spec.(js|jsx|ts|tsx)|**/**/*.unit.(js|jsx|ts|tsx)",
   ],
-  testURL: process.env.API_BASE_URL || `http://localhost/`,
+  testURL:
+    process.env.API_BASE_URL ||
+    `http://localhost/` ||
+    `http://localhost:${process.env.MOCK_API_PORT}`,
   collectCoverage: false,
   collectCoverageFrom: ["src/**/*.{js,ts,vue}", "!**/node_modules/**", "!src/stories/*.{js,ts}"],
   coverageReporters: ["html", "text-summary"],
