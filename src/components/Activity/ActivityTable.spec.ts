@@ -1,8 +1,8 @@
 import ActivityTable from "./ActivityTable.vue";
-import { createStore } from "@/store/plugins/__tests__/Helpers";
+// import { createStore } from "@/store/plugins/__tests__/Helpers";
 import Activity from "@/api/models/Activity";
 
-const store = createStore([{ model: Activity }], "entities");
+const store = (global as any).createORMStore([{ model: Activity }], "entities");
 function mountLogin() {
   return (global as any).shallowMountView(ActivityTable, {
     ...(global as any).createComponentMocks({
@@ -11,10 +11,10 @@ function mountLogin() {
   });
 }
 
-describe("@/copmponents/Activity/ActivityTable.vue", () => {
+describe("@/components/Activity/ActivityTable.vue", () => {
   beforeEach(() => {});
   describe("Activity Table Test", () => {
-    it("should render Activity Table component", () => {
+    it("should render Activity Table", () => {
       expect(ActivityTable).toBeAComponent();
     });
     it("should render Activity Table with store", () => {
