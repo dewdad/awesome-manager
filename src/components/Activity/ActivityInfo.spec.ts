@@ -3,7 +3,7 @@ import ActivityInfo from "./ActivityInfo.vue";
 import Activity from "@/api/models/Activity";
 
 const store = (global as any).createORMStore([{ model: Activity }], "entities");
-function mountLogin() {
+function mountActivityInfo() {
   return (global as any).shallowMountView(ActivityInfo, {
     ...(global as any).createComponentMocks({
       store,
@@ -12,7 +12,7 @@ function mountLogin() {
       $t: jest.fn(),
     },
   });
-}
+};
 
 describe("@/components/Activity/ActivityInfo.vue", () => {
   beforeEach(() => {});
@@ -21,7 +21,7 @@ describe("@/components/Activity/ActivityInfo.vue", () => {
       expect(ActivityInfo).toBeAComponent();
     });
     it("should render Activity Info with store", () => {
-      const { vm } = mountLogin();
+      const { vm } = mountActivityInfo();
       expect(vm.fields).not.toBeUndefined();
       expect(vm.editing).toBe(false);
     });

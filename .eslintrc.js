@@ -13,7 +13,7 @@ module.exports = {
     "no-empty": process.env.NODE_ENV === "production" ? "off" : "error",
     "no-trailing-spaces": process.env.NODE_ENV === "production" ? "error" : "error",
     "vue/html-indent": [
-      "error",
+      "warn",
       2,
       {
         attribute: 2,
@@ -23,7 +23,7 @@ module.exports = {
       },
     ],
     "vue/max-attributes-per-line": [
-      "error",
+      "warn",
       2,
       {
         singleline: 1,
@@ -34,7 +34,7 @@ module.exports = {
       },
     ],
     "vue/no-side-effects-in-computed-properties":
-      process.env.NODE_ENV === "production" ? "warn" : "off",
+      process.env.NODE_ENV === "production" ? "off" : "off",
   },
   parserOptions: {
     parser: "typescript-eslint-parser",

@@ -1,4 +1,5 @@
-process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || _.random(9000, 9999)
+const random = require("lodash.random");
+process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || random(9000, 9999)
 module.exports = {
   globals: {
     "vue-jest": {
@@ -9,8 +10,8 @@ module.exports = {
     app: true,
   },
   setupFiles: ["<rootDir>/tests/unit/setup.ts", "<rootDir>/tests/unit/store-setup.ts"],
-  globalSetup: "<rootDir>/tests/unit/global-setup.ts",
-  globalTeardown: "<rootDir>/tests/unit/global-teardown.ts",
+  // globalSetup: "<rootDir>/tests/unit/global-setup.ts",
+  // globalTeardown: "<rootDir>/tests/unit/global-teardown.ts",
   setupTestFrameworkScriptFile: "<rootDir>/tests/unit/matchers.ts",
   moduleFileExtensions: ["js", "jsx", "json", "vue", "ts", "tsx"],
   transform: {

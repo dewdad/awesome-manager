@@ -5,6 +5,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Vue from "vue";
 import fs from "fs";
 import path from "path";
+
 // NOTE add plugins in test
 // import plugins from "@/store/plugins";
 
@@ -227,14 +228,8 @@ Object.defineProperty(window, "localStorage", {
   return returnOptions;
 };
 
-const mockApp = {
-  template: `<div>
-    <router-view></router-view>
-  </div>`,
-};
-(global as any).mockApp = mockApp;
-
-const mockComponent = {
-  template: `<div>Component</div>`,
-};
-(global as any).mockComponent = mockComponent;
+/**
+ * Gobal mocks
+ */
+(global as any).mockApp = require("./__mocks__/app");
+(global as any).mockComponent = require("./__mocks__/component");
