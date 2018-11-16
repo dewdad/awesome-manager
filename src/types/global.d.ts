@@ -1,31 +1,72 @@
 declare namespace NodeJS {
   interface Global {
     /**
-     * All methods are exposed to global
+     * index Signiture to skip type check
      */
-    // createComponentMocks: any;
-    // mount: any;
-    // shallowMount: any;
-    // shallowMountView: any;
-    // createVuexModule: any;
-    // createVueRouter: any;
-    // createVuetifyComponent(): any;
-    // createFullComponent: any;
-    // createVuetifyComponent: any;
-    // createComponentMocks: any;
-    // mount(component: any, options: any): any;
-    // shallowMount(component: any, options: any): any;
-    // shallowMountView(component: any, options: any): any;
-    // createVuexModule(vuexModule: any, options: any): any;
-    // createVueRouter(path: any[]): any;
-    // createVuetifyComponent(): any;
-    // createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
-    // createVuetifyComponent(): any;
-    // createComponentMocks(component: any): any;
+    [propName: string]: any;
+    (mainArg: any, ...args: any): any;
     /**
-     * expect is property expose to global
+     * All properties and methods are exposed to global
      */
-    // expect: jest.Expect;
+    // https://vue-test-utils.vuejs.org/api/#mount
+    mount: any;
+    mount(component: any, options: any): any;
+    // https://vue-test-utils.vuejs.org/api/#shallowmount
+    shallowMount: any;
+    shallowMount(component: any, options: any): any;
+
+    shallowMountView: any;
+    shallowMountView(component: any, options: any): any;
+
+    createVuexModule: any;
+    createVuexModule(vuexModule: any, options: any): any;
+
+    createVueRouter: any;
+    createVueRouter(path: any[]): any;
+
+    createFullComponent: any;
+    createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
+
+    createVuetifyComponent: any;
+    createVuetifyComponent(): any;
+
+    /**
+     * Create a options while mocking component
+     * can be used with `mount` and `shalloMount`
+     *
+     * @param {Object} mountOptions as {store, router, style, mocks, stubs}
+     *
+     * 1. Store
+     * Converts a `store` option shaped like:
+     * store: {
+     *   someModuleName: {
+     *     state: { ... },
+     *     getters: { ... },
+     *     actions: { ... },
+     *   },
+     *   anotherModuleName: {
+     *     getters: { ... },
+     *   },
+     * },
+     * to a store instance, with each module namespaced by
+     * default, just like in our app.
+     * 2. Router
+     * If using `router: true`, we'll automatically stub out
+     * components from Vue Router.
+     */
+    createComponentMocks: any;
+    createComponentMocks(mountOptions: any): any;
+
+    /**
+     * Create a new Vuex Store with ORM plugin.
+     * @param {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
+     * @param {String} namespace, normally is `entities` to use `state.entities`
+     */
+    createORMStore(entities: any[], namespace: S): any;
+    /**
+     * expect is property exposed to global
+     */
+    expect: jest.Expect;
   }
 }
 

@@ -5,7 +5,9 @@ import VuexORM, { Database } from "@vuex-orm/core";
 Vue.use(Vuex);
 
 /**
- * Create a new Vuex Store.
+ * Create a new Vuex Store with ORM plugin.
+ * {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
+ * {String} namespace, normally is `entities` to use `state.entities`
  */
 (global as any).createORMStore = (entities = [], namespace = "entities"): Store<any> => {
   const database = new Database();
