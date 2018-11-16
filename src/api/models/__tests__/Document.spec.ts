@@ -1,4 +1,4 @@
-import DocumentModel from "./Document";
+import DocumentModel from "../Document";
 
 describe("@/api/models/Document", () => {
   it("exports a valid Vuex ORM Model", () => {

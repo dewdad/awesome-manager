@@ -1,4 +1,4 @@
-import EntityModel from "./Entity";
+import EntityModel from "../Entity";
 
 describe("@/api/models/Entity", () => {
   it("exports a valid Vuex ORM Model", () => {
