@@ -8,7 +8,7 @@ Vue.use(Vuex);
 /**
  * Create default fields in lowdb files
  */
-defaultDB.dbInit(["account", "activity", "document"]);
+defaultDB.dbInit(["account", "user", "activity", "document"]);
 
 export default new Vuex.Store({
   plugins,

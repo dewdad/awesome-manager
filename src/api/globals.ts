@@ -20,4 +20,4 @@ export const modules = [
   "vacation", // 本馆人员休假
   "writer", // 写作
   "trello", // 任务管理
-]
+];
