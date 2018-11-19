@@ -264,6 +264,8 @@ import ChatWindow from "@/components/chat/ChatWindow";
 import CircleStatistic from "@/components/widgets/statistic/CircleStatistic";
 import LinearStatistic from "@/components/widgets/statistic/LinearStatistic";
 
+import Trending from "@/api/models/Trending";
+
 export default {
   components: {
     VWidget,
@@ -281,95 +283,99 @@ export default {
   data: () => ({
     color: Material,
     selectedTab: "tab-1",
-    linearTrending: [
-      {
-        subheading: "Sales",
-        headline: "2,55",
-        caption: "increase",
-        percent: 15,
-        icon: {
-          label: "trending_up",
-          color: "success",
-        },
-        linear: {
-          value: 15,
-          color: "success",
-        },
-      },
-      {
-        subheading: "Revenue",
-        headline: "6,553",
-        caption: "increase",
-        percent: 10,
-        icon: {
-          label: "trending_down",
-          color: "error",
-        },
-        linear: {
-          value: 15,
-          color: "error",
-        },
-      },
-      {
-        subheading: "Orders",
-        headline: "5,00",
-        caption: "increase",
-        percent: 50,
-        icon: {
-          label: "arrow_upward",
-          color: "info",
-        },
-        linear: {
-          value: 50,
-          color: "info",
-        },
-      },
-    ],
-    trending: [
-      {
-        subheading: "文件收发",
-        headline: "15+",
-        caption: "文件",
-        percent: 15,
-        icon: {
-          label: "email",
-          color: "info",
-        },
-        linear: {
-          value: 15,
-          color: "info",
-        },
-      },
-      {
-        subheading: "项目任务",
-        headline: "90%",
-        caption: "项目任务完成",
-        percent: 90,
-        icon: {
-          label: "list",
-          color: "primary",
-        },
-        linear: {
-          value: 90,
-          color: "success",
-        },
-      },
-      {
-        subheading: "存在问题",
-        headline: "100%",
-        caption: "已解决",
-        percent: 100,
-        icon: {
-          label: "bug_report",
-          color: "primary",
-        },
-        linear: {
-          value: 100,
-          color: "error",
-        },
-      },
-    ],
+    // linearTrending: [
+    //   {
+    //     subheading: "Sales",
+    //     headline: "2,55",
+    //     caption: "increase",
+    //     percent: 15,
+    //     icon: {
+    //       label: "trending_up",
+    //       color: "success",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "success",
+    //     },
+    //   },
+    //   {
+    //     subheading: "Revenue",
+    //     headline: "6,553",
+    //     caption: "increase",
+    //     percent: 10,
+    //     icon: {
+    //       label: "trending_down",
+    //       color: "error",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "error",
+    //     },
+    //   },
+    //   {
+    //     subheading: "Orders",
+    //     headline: "5,00",
+    //     caption: "increase",
+    //     percent: 50,
+    //     icon: {
+    //       label: "arrow_upward",
+    //       color: "info",
+    //     },
+    //     linear: {
+    //       value: 50,
+    //       color: "info",
+    //     },
+    //   },
+    // ],
+    // trending: [
+    //   {
+    //     subheading: "文件收发",
+    //     headline: "15+",
+    //     caption: "文件",
+    //     percent: 15,
+    //     icon: {
+    //       label: "email",
+    //       color: "info",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "info",
+    //     },
+    //   },
+    //   {
+    //     subheading: "项目任务",
+    //     headline: "90%",
+    //     caption: "项目任务完成",
+    //     percent: 90,
+    //     icon: {
+    //       label: "list",
+    //       color: "primary",
+    //     },
+    //     linear: {
+    //       value: 90,
+    //       color: "success",
+    //     },
+    //   },
+    //   {
+    //     subheading: "存在问题",
+    //     headline: "100%",
+    //     caption: "已解决",
+    //     percent: 100,
+    //     icon: {
+    //       label: "bug_report",
+    //       color: "primary",
+    //     },
+    //     linear: {
+    //       value: 100,
+    //       color: "error",
+    //     },
+    //   },
+    // ],
   }),
+  created() {
+    Trending.new();
+    Trending.new();
+  },
   computed: {
     activity() {
       return API.getActivity();
@@ -383,6 +389,12 @@ export default {
     locationData() {
       return API.getLocation;
     },
+    trending() {
+      return Trending.all();
+    },
+    linearTrending() {
+      return Trending.all();
+    }
   },
 };
 </script>

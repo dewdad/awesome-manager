@@ -4,7 +4,7 @@ to: src/api/models/__tests__/<%= h.capitalize(h.inflection.singularize(model)) %
 <%
   const fileName = h.capitalize(h.inflection.singularize(model))
   const importName = h.capitalize(h.inflection.singularize(model)) + 'Model'
-%>import <%= importName %> from './<%= fileName %>'
+%>import <%= importName %> from '../<%= fileName %>'
 
 describe('@/api/models/<%= fileName %>', () => {
   it('exports a valid Vuex ORM Model', () => {

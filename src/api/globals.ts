@@ -1,4 +1,5 @@
 export const collections = [
+  "trending",
   "account", // 当前验证人员账户
   "activity", // 对外活动，包括各种会议会见
   "database", // 存储所有collection的名称和地址的数据库, 持久化存储
