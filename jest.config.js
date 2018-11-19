@@ -2,8 +2,7 @@
  * Jest Configuration
  * https://jest.org
  */
-const random = require("lodash.random");
-process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || random(9000, 9999);
+process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || 9999;
 module.exports = {
   globals: {
     "vue-jest": {

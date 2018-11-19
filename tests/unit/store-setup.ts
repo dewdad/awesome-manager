@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 /**
  * Create a new Vuex Store with ORM plugin.
- * {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
+ * {Array<entity>} entities to pull, in format [{ model:..., module?:... }]
  * {String} namespace, normally is `entities` to use `state.entities`
  */
 (global as any).createORMStore = (entities = [], namespace = "entities"): Store<any> => {

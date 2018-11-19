@@ -1,5 +1,5 @@
 ---
-to: "src/router/layouts/<%= h.inflection.dasherize(name) %>.vue"
+to: "src/router/layouts/<%= h.inflection.singularize(name).toUpperCase() %>.vue"
 ---
 <template>
   <div :class="$style.container">
@@ -8,8 +8,6 @@ to: "src/router/layouts/<%= h.inflection.dasherize(name) %>.vue"
 </template>
 
 <style lang="scss" module>
-
-
 .container {
   min-width: $size-content-width-min;
   max-width: $size-content-width-max;
