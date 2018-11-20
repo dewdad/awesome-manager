@@ -15,14 +15,18 @@ export default class Trending extends Model {
       headline: this.string("2018-12-31"),
       caption: this.string("Tasks completed"),
       percent: this.number(90),
-      icon: {
-        label: this.string("list"),
-        color: this.string("primary"),
-      },
-      linear: {
-        value: this.number(90),
-        clor: this.string("success"),
-      },
+      icon: this.attr({
+        value: {
+          label: this.string("list"),
+          color: this.string("primary"),
+        },
+      }),
+      linear: this.attr({
+        value: {
+          value: this.number(90),
+          clor: this.string("success"),
+        },
+      }),
     };
   }
 }
