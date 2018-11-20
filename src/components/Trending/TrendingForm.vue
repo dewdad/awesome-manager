@@ -5,40 +5,39 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new Trending()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new Trending();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.TrendingForm = this;
   },
   computed: {
-    fields: () => Trending.fieldsList()
+    fields: () => Trending.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new Trending()
+      this.editing = false;
+      this.model = new Trending();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         Trending.insert({
-          data: this.model
-        })
-        this.model = new Trending()
+          data: this.model,
+        });
+        this.model = new Trending();
       } else {
-        Trending.update(this.model)
-        this.editing = false
-        this.model = new Trending()
+        Trending.update(this.model);
+        this.editing = false;
+        this.model = new Trending();
       }
-      console.log(Trending.all())
-    }
-  }
-  
-}
+      console.log(Trending.all());
+    },
+  },
+};
 </script>
 
 <template>
@@ -65,5 +64,4 @@ export default {
 </template>
 
 <style lang="scss" module>
-
 </style>

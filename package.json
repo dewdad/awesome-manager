@@ -23,7 +23,7 @@
     "prisma:generate": "cd lib/prisma && prisma generate",
     "prisma:now": "cd lib/prisma && sh config-now.sh && now",
     "new": "hygen new",
-    "g": "hygen new model && hygen new component-table && hygen new component-form",
+    "new:all": "hygen new model && hygen new router && hygen new component-table && hygen new component-form",
     "db:add": "yarn add -D file:lib/vue-cli-plugins/vue-cli-plugin-vuex-nedb-module-generator",
     "db:invoke": "vue invoke vuex-nedb-module-generator",
     "serve:storybook": "vue-cli-service serve:storybook -p 6006 -c config/storybook",

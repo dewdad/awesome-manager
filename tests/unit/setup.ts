@@ -18,10 +18,7 @@ import vueTestUtils, { createLocalVue } from "@vue/test-utils";
 // https://lodash.com/
 import _, { cloneDeep } from "lodash";
 _.mixin({
-  pascalCase: _.flow(
-    _.camelCase,
-    _.upperFirst,
-  ),
+  pascalCase: _.flow(_.camelCase, _.upperFirst),
 });
 
 // ===
@@ -94,7 +91,22 @@ Object.defineProperty(window, "localStorage", {
 (global as any).shallowMount = vueTestUtils.shallowMount;
 
 (global as any).shallowMountView = (Component, options) => {
-  return (global as any).shallowMount(Component, {
+  return vueTestUtils.shallowMount(Component, {
+    ...options,
+    stubs: {
+      Layout: {
+        functional: true,
+        render(h, { slots }) {
+          return `<div>{slots().default}</div>`;
+        },
+      },
+      ...(options.stubs || {}),
+    },
+  });
+};
+
+(global as any).mountView = (Component, options) => {
+  return vueTestUtils.mount(Component, {
     ...options,
     stubs: {
       Layout: {
@@ -181,7 +193,7 @@ Object.defineProperty(window, "localStorage", {
     ...cloneDeep(vuexModule),
     ...options,
   });
-  returnOptions["store"] =  store;
+  returnOptions["store"] = store;
   return returnOptions;
 };
 
@@ -197,7 +209,7 @@ Object.defineProperty(window, "localStorage", {
   localVue.use(VueRouter);
   const returnOptions = { localVue };
   const router = new VueRouter({ routes: path as RouteConfig[] });
-  returnOptions["router"] =  router;
+  returnOptions["router"] = router;
   return returnOptions;
 };
 
@@ -223,8 +235,8 @@ Object.defineProperty(window, "localStorage", {
     routes: path as RouteConfig[],
     ...routerOptions,
   });
-  returnOptions["router"] =  router;
-  returnOptions["store"] =  store;
+  returnOptions["router"] = router;
+  returnOptions["store"] = store;
   return returnOptions;
 };
 
