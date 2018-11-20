@@ -53,6 +53,8 @@ describe("Tesint CircleStatistic Component", () => {
   });
   it("Testing Trending Component contains CircleStatistic", () => {
     expect(wrapper.contains(CircleStatistic)).toBe(true);
+    expect(wrapper.find(CircleStatistic).text()).toBe("");
+    expect(wrapper.find(CircleStatistic).attributes("title")).toBe("Sales");
   });
   it("Testing Trending Component contains two CircleStatistic", () => {
     let statisticWrappers = wrapper.findAll(CircleStatistic);
