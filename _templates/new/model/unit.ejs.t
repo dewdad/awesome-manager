@@ -11,15 +11,12 @@ describe('@/api/models/<%= fileName %>', () => {
 
     const model = new <%= importName%>();
 
-    expect(model.name).toBe("xingwenju");
+    expect(model.<%= fieldName %>).toBe("<%= fieldValue %>");
   })
 
   it('expect string field', ()=> {
-    expect(new <%= importName%>({}).name).toBe("xingwenju");
-    expect(new <%= importName%>({ name: "xingwenju" }).name).toBe("xingwenju");
-    expect(new <%= importName%>({ name: 1 }).name).toBe("1");
-    expect(new <%= importName%>({ name: true }).name).toBe("true");
-    expect(new <%= importName%>({ name: null }).name).toBe("null");
+    expect(new <%= importName%>({}).<%= fieldName %>).toBe("<%= fieldValue %>");
+    expect(new <%= importName%>({ <%= fieldName %>: "<%= fieldValue %>" }).<%= fieldName %>).toBe("<%= fieldValue %>");
   })
 
   it('expect to json', ()=> {
@@ -28,11 +25,11 @@ describe('@/api/models/<%= fileName %>', () => {
 
     const expected = {
       _id: 1,
-      name: "xingwenju"
+      <%= fieldName %>: "<%= fieldValue %>"
     };
 
     expect(json).not.toBeInstanceOf(<%= importName%>);
-    expect(json).toEqual(expected);
+    expect(json.<%= fieldName %>).toEqual(expected.<%= fieldName %>);
   })
 })
 

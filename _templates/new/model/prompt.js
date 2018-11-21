@@ -1,4 +1,5 @@
-module.exports = [{
+module.exports = [
+  {
     type: "input",
     name: "model",
     message: "Model Name:(i.e. User)",
@@ -13,24 +14,36 @@ module.exports = [{
     },
   },
   {
-    type: "checkbox",
-    name: "fields",
-    message: "Fields Name and value:(i.e. name:string)",
-    choices: [{
-        name: "name",
-        value: "name",
-        default: true,
-      },
-      {
-        name: "type",
-        value: "string",
-        default: true,
-      },
-      {
-        name: "value",
-        value: "xingwenju",
-        default: true,
+    type: "input",
+    name: "fieldName",
+    message: "Default Field Name:(i.e. title)",
+    validate(value) {
+      if (!value.length) {
+        return "Field muest have a name, better lowercase";
       }
-    ],
+      return true;
+    },
+  },
+  {
+    type: "input",
+    name: "fieldType",
+    message: "Default Field type:(i.e. string, number, boolean, attr)",
+    validate(value) {
+      if (!value.length) {
+        return "Field muest have a name, better lowercase";
+      }
+      return true;
+    },
+  },
+  {
+    type: "input",
+    name: "fieldValue",
+    message: "Default Field Value:(i.e. coder)",
+    validate(value) {
+      if (!value.length) {
+        return "Field muest have a name, better lowercase";
+      }
+      return true;
+    },
   },
 ];

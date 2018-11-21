@@ -1,4 +1,8 @@
 export const collections = [
+  "user",
+  "address",
+  "mail",
+  "file",
   "trending",
   "account", // 当前验证人员账户
   "activity", // 对外活动，包括各种会议会见

@@ -13,10 +13,8 @@ export default class <%= h.capitalize(h.inflection.singularize(model)) %> extend
 
   static fields() {
     return {
-      _id: Model.increment(),
-      <%
-      if(fields.indexOf("name") !== -1) fields[0]
-      %>name: Model.string("xingwenju")
+      _id: this.increment(),
+      <%= fieldName %>: this.<%= fieldType %>("<%= fieldValue %>")
     };
   }
 }
