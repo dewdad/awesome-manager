@@ -22,7 +22,7 @@ const TrendingComponent = {
     CircleStatistic,
   },
   template: TrendingTemplate,
-  computed: {
+    computed:; {
     trending: () => Trending.all(),
   },
   created() {

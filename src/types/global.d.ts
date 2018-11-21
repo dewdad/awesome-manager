@@ -20,6 +20,8 @@ declare namespace NodeJS {
 
     shallowMountView(component: any, options: any): any;
 
+    mountView(component: any, options: any): any;
+
     createVuexModule(vuexModule: any, options: any): any;
 
     createVueRouter(path: any[]): any;
