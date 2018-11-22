@@ -6,7 +6,7 @@ module.exports = {
     const questions = [{
         type: "input",
         name: "model",
-        message: "Name of model? (ex: Test)",
+        message: "Name of model (ex: Test)",
         validate(value) {
           if (!value.length) {
             return "Vuex ORM models must have a name, better capitalized.";
@@ -20,10 +20,10 @@ module.exports = {
       {
         type: "input",
         name: "fieldName",
-        message: "Default Field Name:(i.e. title)",
+        message: "Default Field Name (ex: title)",
         validate(value) {
           if (!value.length) {
-            return "Field muest have a name, better lowercase";
+            return "Field must have a name, better lowercase";
           }
           return true;
         },
@@ -31,10 +31,10 @@ module.exports = {
       {
         type: "input",
         name: "fieldType",
-        message: "Default Field type:(i.e. string, number, boolean, attr)",
+        message: "Default Field Type(ex: string, number, boolean, attr)",
         validate(value) {
           if (!value.length) {
-            return "Field muest have a name, better lowercase";
+            return "Field must have a name, better lowercase";
           }
           return true;
         },
@@ -42,23 +42,18 @@ module.exports = {
       {
         type: "input",
         name: "fieldValue",
-        message: "Default Field Value:(i.e. coder)",
+        message: "Default Field Value(ex: coder)",
         validate(value) {
           if (!value.length) {
-            return "Field muest have a name, better lowercase";
+            return "Field must have a name, better lowercase";
           }
           return true;
         },
       },
       {
-        type: "confirm",
-        name: "toInputMoreFields",
-        message: "Do you need to input more fields",
-      },
-      {
         type: "input",
         name: "fieldNames",
-        message: 'Field names? (separate by comma: "field1, field2,field3")',
+        message: 'Need More Fields?(just input names separate by comma: "field1,field2,field3")',
       },
     ];
 

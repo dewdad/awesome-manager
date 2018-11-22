@@ -2,7 +2,7 @@ import { Model } from "@vuex-orm/core";
 import User from "./User";
 import Entity from "./Entity";
 export default class Document extends Model {
-  static entity = "Document";
+  static entity = "document";
 
   static primaryKey = "_id";
 
