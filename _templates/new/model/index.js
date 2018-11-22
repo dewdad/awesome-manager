@@ -64,6 +64,7 @@ module.exports = {
 
     return inquirer.prompt(questions).then(answers => {
       console.log(answers);
+      return answers;
     });
   },
 };
