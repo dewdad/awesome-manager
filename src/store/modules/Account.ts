@@ -34,7 +34,7 @@ const AccountActions = {
     // if exists, return
     let authedAccount = await db
       .read()
-      .get(`${ctx.state.name}.data`)
+      .get(`${ctx.state.name}`)
       .find({ name: signupData.name })
       .value();
     if (authedAccount === undefined) {
@@ -45,7 +45,7 @@ const AccountActions = {
         // 2
         let createdAccount = db
           .read()
-          .get(`${ctx.state.name}.data`)
+          .get(`${ctx.state.name}`)
           .insert(signupData)
           .write();
         // 3

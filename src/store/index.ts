@@ -9,6 +9,10 @@ Vue.use(Vuex);
  * Create default fields in lowdb files
  */
 defaultDB.dbInit([
+  "generic",
+  "monthvisit",
+  "location",
+  "social",
   "account", 
   "activity", 
   "address", 

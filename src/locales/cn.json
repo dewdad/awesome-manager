@@ -1,8 +1,10 @@
 {
   "me": "邢文聚",
   "message": "你好, i18n !!",
+  "value": "值",
   "id": "编号",
   "$id": "索引编号",
+  "_id": "备用编号",
   "protocolId": "序号",
   "password": "密码",
   "hash": "加密密码",

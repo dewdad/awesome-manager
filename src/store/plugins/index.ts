@@ -7,6 +7,9 @@ export default [
   // orm plugins stuff
   ormPlugin,
   // lowdb plugins stuff
+  lowdbPlugin({ namespace: "generic" }),
+  lowdbPlugin({ namespace: "monthvisit" }),
+  lowdbPlugin({ namespace: "social" }),
   lowdbPlugin({ namespace: "item" }),
   lowdbPlugin({ namespace: "location" }),
   lowdbPlugin({ namespace: "vacation" }),

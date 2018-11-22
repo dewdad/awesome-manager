@@ -73,23 +73,20 @@ VuexORM.use(testPlugin);
  */
 
 Query.on("afterCreate", model => {
-  console.log("Hooking ORM after create");
-  console.log(model);
   const entity = model.$self().entity;
+  console.log("Create Hook in " + entity);
   defaultDB.insert(entity, model);
 });
 
 Query.on("afterDelete", model => {
-  console.log("Hooking ORM after delete");
-  console.log(model);
   const entity = model.$self().entity;
+  console.log("Delete Hook in " + entity);
   defaultDB.delete(entity, { _id: model._id });
 });
 
 Query.on("afterUpdate", model => {
-  console.log("Hooking ORM after update");
-  console.log(model);
   const entity = model.$self().entity;
+  console.log("Update Hook in " + entity);
   defaultDB.update(entity, { _id: model._id }, model);
 });
 
@@ -100,7 +97,7 @@ const database = new Database();
 
 Object.keys(models).map(key => {
   console.log(key);
-  database.register(models[key], modules[key]);
+  database.register(models[key], modules[key]||{});
 });
 
 /**

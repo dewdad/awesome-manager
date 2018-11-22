@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import { remote, app } from "electron";
 import Datastore from "lowdb";
 import LodashId from "lodash-id";
+import { lowerFirst } from 'lodash';
 import FileSync from "lowdb/adapters/FileSync";
 import Memory from "lowdb/adapters/Memory";
 
@@ -102,12 +103,12 @@ export class LowdbForElectron {
    * @param {Object} data data without id, since lodash-id will use unique id
    */
   insert(entity, data) {
-    console.log("Inserting in lowdb...");
+    console.log("Inserting in " + entity);
     try {
       data.id && delete data.id;
       this.db
         .read()
-        .get(`${entity}`)
+        .get(`${lowerFirst(entity)}`)
         .insert(data)
         .write();
     } catch (e) {
@@ -122,11 +123,11 @@ export class LowdbForElectron {
    * @param {Object} data data
    */
   update(entity, query, data) {
-    console.log("Updating in lowdb...");
+    console.log("Updating in " + entity);
     try {
       this.db
         .read()
-        .get(`${entity}`)
+        .get(`${lowerFirst(entity)}`)
         .find(query)
         .assign(data)
         .write();
@@ -141,11 +142,11 @@ export class LowdbForElectron {
    * @param {Object} query query statement
    */
   delete(entity, query) {
-    console.log("Deleting in lowdb...");
+    console.log("Deleting in " + entity);
     try {
       this.db
         .read()
-        .get(`${entity}`)
+        .get(`${lowerFirst(entity)}`)
         .remove(query)
         .write();
     } catch (e) {
@@ -159,10 +160,10 @@ export class LowdbForElectron {
    * @param {Object} query query statement
    */
   find(entity, query) {
-    console.log("Querying in lowdb...");
+    console.log("Querying in " + entity);
     return this.db
       .read()
-      .get(`${entity}`)
+      .get(`${lowerFirst(entity)}`)
       .filter(query)
       .value();
   }
@@ -171,10 +172,10 @@ export class LowdbForElectron {
    * @param {String} entity key or entity namespace
    */
   all(entity) {
-    console.log("Querying in lowdb...");
+    console.log("Querying in " + entity);
     return this.db
       .read()
-      .get(`${entity}`)
+      .get(`${lowerFirst(entity)}`)
       .value();
   }
 
@@ -183,10 +184,10 @@ export class LowdbForElectron {
    * @param {String} entity key or entity namespace
    */
   clear(entity) {
-    console.log("Querying in lowdb...");
+    console.log("Clearing in " + entity);
     this.db
       .read()
-      .unset(`${entity}`)
+      .unset(`${lowerFirst(entity)}`)
       .write();
   }
 }

@@ -2,6 +2,12 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 
 const mainMenu = [
   {
+    title: "Generic",
+    name: "Generic",
+    group: "apps",
+    icon: "fas fa-tasks"
+  },
+  {
     title: "Test",
     name: "Test",
     group: "apps",

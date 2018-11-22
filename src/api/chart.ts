@@ -18,8 +18,8 @@ export const shortMonth = [
 export const monthVisitData = shortMonth.map(m => {
   return {
     month: m,
-    对外: Math.floor(Math.random() * 1000) + 200,
-    对内: Math.floor(Math.random() * 1000) + 250,
+    inner: Math.floor(Math.random() * 1000) + 200,
+    outer: Math.floor(Math.random() * 1000) + 250,
   };
 });
 

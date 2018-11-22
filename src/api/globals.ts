@@ -1,4 +1,7 @@
 export const collections = [
+  "generic",
+  "monthvisit",
+  "social",
   "item",
   "location",
   "vacation",

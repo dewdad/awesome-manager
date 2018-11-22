@@ -8,8 +8,6 @@
           wrap>
         <!-- mini statistic start -->
         <v-flex
-            v-for="(value, index) in  [1,2,3,4]"
-            :key="index"
             lg3
             sm6
             xs12>
@@ -18,6 +16,42 @@
               title="100+"
               sub-title="Likes"
               color="indigo"
+            >
+          </mini-statistic>
+        </v-flex>
+        <v-flex
+            lg3
+            sm6
+            xs12>
+          <mini-statistic
+              icon="fab fa-google"
+              title="150+"
+              sub-title="Connections"
+              color="red"
+            >
+          </mini-statistic>
+        </v-flex>
+        <v-flex
+            lg3
+            sm6
+            xs12>
+          <mini-statistic
+              icon="fab fa-twitter"
+              title="200+"
+              sub-title="Followers"
+              color="light-blue"
+            >
+          </mini-statistic>
+        </v-flex>
+        <v-flex
+            lg3
+            sm6
+            xs12>
+          <mini-statistic
+              icon="fab fa-instagram"
+              title="50+"
+              sub-title="Shots"
+              color="purple"
             >
           </mini-statistic>
         </v-flex>
@@ -116,17 +150,42 @@
         </v-flex>
         <!-- statistic section -->
         <v-flex
-            v-for="(item, index) in socialData"
-            :key="index"
             lg4
             sm12
             xs12>
           <linear-statistic
-              :title="item.title"
-              :sub-title="item['sub-title']"
+              title="发文"
+              sub-title="发文数量增长"
               icon="trending_up"
-              :color="item.color"
+              color="success"
               :value="15"
+            >
+          </linear-statistic>
+          <linear-statistic
+              class="my-4"
+              title="收文"
+              sub-title="收文数量增长"
+              icon="trending_up"
+              color="pink"
+              :value="30"
+            >
+          </linear-statistic>
+          <linear-statistic
+              class="my-4"
+              title="工资"
+              sub-title="工资增长"
+              icon="trending_up"
+              color="primary"
+              :value="50"
+            >
+          </linear-statistic>
+          <linear-statistic
+              class="mt-4"
+              title="开支"
+              sub-title="开支缩减"
+              icon="trending_down"
+              color="orange"
+              :value="25"
             >
           </linear-statistic>
         </v-flex>
@@ -136,7 +195,7 @@
             lg4
             sm12
             xs12
-            v-for="(item,index) in socialData"
+            v-for="(item,index) in trending"
             :key="'c-trending'+index">
           <circle-statistic
               :title="item.subheading"
@@ -162,21 +221,21 @@
               <ol class="timeline timeline-activity timeline-point-sm timeline-content-right">
                 <li
                     class="timeline-block"
-                    v-for="(item, index) in activityData"
+                    v-for="(item, index) in activity"
                     :key="index">
                   <div class="timeline-point">
                     <v-circle
                         dot
                         large
-                        color="red"></v-circle>
+                        :color="item.color"></v-circle>
                   </div>
                   <div class="timeline-content">
                     <time
                         datetime="2018"
-                        class="subheading">{{item.applicant}}</time>
+                        class="subheading">{{item.timeString}}</time>
                     <div
                         class="py-2 text--secondary"
-                        >{{item.ocurrenceDate}}</div>
+                        v-html="item.text"></div>
                   </div>
                 </li>
               </ol>
@@ -190,9 +249,11 @@
 </template>
 
 <script>
-// General Components
+import API from "@/api";
 import EChart from "@/components/chart/echart";
 import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
+import PostListCard from "@/components/widgets/card/PostListCard";
+import PostSingleCard from "@/components/widgets/card/PostSingleCard";
 import WeatherCard from "@/components/widgets/card/WeatherCard";
 import VWidget from "@/components/VWidget";
 import Material from "vuetify/es5/util/colors";
@@ -200,16 +261,10 @@ import VCircle from "@/components/circle/VCircle";
 import BoxChart from "@/components/widgets/chart/BoxChart";
 import ChatWindow from "@/components/chat/ChatWindow";
 
-// Statistic Components
 import CircleStatistic from "@/components/widgets/statistic/CircleStatistic";
 import LinearStatistic from "@/components/widgets/statistic/LinearStatistic";
 
-// ORM Models
-import Activity from "@/api/models/Activity";
 import Trending from "@/api/models/Trending";
-import MonthVisit from "@/api/models/MonthVisit";
-import Generic from "@/api/models/Generic";
-import Social from "@/api/models/Social";
 
 export default {
   components: {
@@ -218,6 +273,8 @@ export default {
     ChatWindow,
     VCircle,
     WeatherCard,
+    PostSingleCard,
+    PostListCard,
     EChart,
     BoxChart,
     CircleStatistic,
@@ -226,21 +283,117 @@ export default {
   data: () => ({
     color: Material,
     selectedTab: "tab-1",
+    // linearTrending: [
+    //   {
+    //     subheading: "Sales",
+    //     headline: "2,55",
+    //     caption: "increase",
+    //     percent: 15,
+    //     icon: {
+    //       label: "trending_up",
+    //       color: "success",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "success",
+    //     },
+    //   },
+    //   {
+    //     subheading: "Revenue",
+    //     headline: "6,553",
+    //     caption: "increase",
+    //     percent: 10,
+    //     icon: {
+    //       label: "trending_down",
+    //       color: "error",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "error",
+    //     },
+    //   },
+    //   {
+    //     subheading: "Orders",
+    //     headline: "5,00",
+    //     caption: "increase",
+    //     percent: 50,
+    //     icon: {
+    //       label: "arrow_upward",
+    //       color: "info",
+    //     },
+    //     linear: {
+    //       value: 50,
+    //       color: "info",
+    //     },
+    //   },
+    // ],
+    // trending: [
+    //   {
+    //     subheading: "文件收发",
+    //     headline: "15+",
+    //     caption: "文件",
+    //     percent: 15,
+    //     icon: {
+    //       label: "email",
+    //       color: "info",
+    //     },
+    //     linear: {
+    //       value: 15,
+    //       color: "info",
+    //     },
+    //   },
+    //   {
+    //     subheading: "项目任务",
+    //     headline: "90%",
+    //     caption: "项目任务完成",
+    //     percent: 90,
+    //     icon: {
+    //       label: "list",
+    //       color: "primary",
+    //     },
+    //     linear: {
+    //       value: 90,
+    //       color: "success",
+    //     },
+    //   },
+    //   {
+    //     subheading: "存在问题",
+    //     headline: "100%",
+    //     caption: "已解决",
+    //     percent: 100,
+    //     icon: {
+    //       label: "bug_report",
+    //       color: "primary",
+    //     },
+    //     linear: {
+    //       value: 100,
+    //       color: "error",
+    //     },
+    //   },
+    // ],
   }),
   created() {
     Trending.new();
-    MonthVisit.new();
-    Generic.new();
-    Activity.new();
-    Social.new();
   },
   computed: {
-    activityData: ()=> Activity.all(),
-    siteTrafficData: ()=> MonthVisit.all(),
-    locationData: ()=> Generic.all(),
-    trendingData: ()=> Trending.all(),
-    socialData: ()=> Social.all(),
-    linearTrendingData: ()=> Trending.all()
+    activity() {
+      return API.getActivity();
+    },
+    posts() {
+      return API.getPost(3);
+    },
+    siteTrafficData() {
+      return API.getMonthVisit;
+    },
+    locationData() {
+      return API.getLocation;
+    },
+    trending() {
+      return Trending.all();
+    },
+    linearTrending() {
+      return Trending.all();
+    }
   },
 };
 </script>
