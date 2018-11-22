@@ -1,4 +1,8 @@
 export const collections = [
+  "item",
+  "location",
+  "vacation",
+  "contact",
   "user",
   "address",
   "mail",

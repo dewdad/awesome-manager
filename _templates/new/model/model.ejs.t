@@ -14,7 +14,9 @@ export default class <%= h.capitalize(h.inflection.singularize(model)) %> extend
   static fields() {
     return {
       _id: this.increment(),
-      <%= fieldName %>: this.<%= fieldType %>("<%= fieldValue %>")
+      <%= fieldName %>: this.<%= fieldType %>("<%= fieldValue %>"),
+      <% fieldNames.split(",").map(f => { %><%= f %>: this.string("<%= f %>"),
+      <% }) %>
     };
   }
 }

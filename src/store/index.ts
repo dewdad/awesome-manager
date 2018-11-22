@@ -10,12 +10,19 @@ Vue.use(Vuex);
  */
 defaultDB.dbInit([
   "account", 
-  "user", 
   "activity", 
+  "address", 
+  "contact", 
   "document", 
-  "trending",
   "entity",
-  "address"
+  "file",
+  "item", 
+  "location", 
+  "mail", 
+  "test", 
+  "trending",
+  "user", 
+  "vacation", 
 ]);
 
 export default new Vuex.Store({

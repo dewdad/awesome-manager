@@ -1,10 +1,10 @@
+import { join } from "path";
+import fs from "fs-extra";
+import { remote, app } from "electron";
 import Datastore from "lowdb";
 import LodashId from "lodash-id";
 import FileSync from "lowdb/adapters/FileSync";
 import Memory from "lowdb/adapters/Memory";
-import { join } from "path";
-import fs from "fs-extra";
-import { remote, app } from "electron";
 
 export class LowdbForElectron {
   electronApp;
@@ -18,6 +18,10 @@ export class LowdbForElectron {
     this.createPersistence(dbName);
   }
 
+  /**
+   * Ensure the path of db file exists
+   * @param {String} subDir subDirectory where data file stored
+   */
   enSuredbPath(subDir) {
     let path;
     if (this.electronApp !== undefined) {
@@ -32,6 +36,10 @@ export class LowdbForElectron {
     return path;
   }
 
+  /**
+   * Create lowdb store persisted in disk
+   * @param {String} dbName Name of the store file
+   */
   createPersistence(dbName) {
     if (this.dbPath !== undefined) {
       this.adapter = new FileSync(join(this.dbPath, `${dbName}.json`));
@@ -47,36 +55,41 @@ export class LowdbForElectron {
    */
 
   dbOpen(node) {
-    return this.db.get(node).value();
+    return this.db.read().get(node).value();
   }
   /**
    * Init a set of default values
    */
   dbInit(nodes) {
     // Create user-level nodes like user.json
-    this.dbCreateUserLevelnode(nodes);
+    nodes && this.dbCreateUserLevelnode(nodes);
   }
 
   /**
    * Create nodes from a array
    */
   dbCreateUserLevelnode(nodes) {
-    nodes.forEach(node => {
+    nodes && nodes.forEach(node => {
       this.dbCreate(node);
     });
   }
   /**
-   * Write a array to a key
+   * Set a array as fefault value of a key or key or entity
    * { entity: []}
-   * @param node key/entity as string, i.e. activity
+   * @param {String} node key or key or entity name, i.e. activity
    */
   dbCreate(node) {
+    console.log("creating default value in lowdb...");
     if (!this.db.has(node).value()) {
       this.db.set(node, []).write();
+    } else {
+      console.log("data exists, loading...");
+      this.db.read().get(node).value();
     }
   }
   /**
    * Remove a key
+   * @param {String} node key or key or entity name, i.e. activity
    */
   dbRemove(node) {
     if (!this.db.has(node).value()) {
@@ -84,14 +97,14 @@ export class LowdbForElectron {
     }
   }
   /**
-   * Inserta data in a specific key with orm entity namespace
-   * @param entity orm entity namespace like activity
-   * @param data data without id, since lodash-id will use unique id
+   * Inserta data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace like activity
+   * @param {Object} data data without id, since lodash-id will use unique id
    */
   insert(entity, data) {
     console.log("Inserting in lowdb...");
     try {
-      delete data.id;
+      data.id && delete data.id;
       this.db
         .read()
         .get(`${entity}`)
@@ -103,10 +116,10 @@ export class LowdbForElectron {
   }
 
   /**
-   * Update data in a specific key with orm entity namespace
-   * @param entity orm entity namespace
-   * @param query query statements
-   * @param data data
+   * Update data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace
+   * @param {Object} query query statements
+   * @param {Object} data data
    */
   update(entity, query, data) {
     console.log("Updating in lowdb...");
@@ -123,9 +136,9 @@ export class LowdbForElectron {
   }
 
   /**
-   * Delete data in a specific key with orm entity namespace
-   * @param entity orm entity namespace
-   * @param query query statement
+   * Delete data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace
+   * @param {Object} query query statement
    */
   delete(entity, query) {
     console.log("Deleting in lowdb...");
@@ -141,9 +154,9 @@ export class LowdbForElectron {
   }
 
   /**
-   * Find and Query data in a specific key with orm entity namespace
-   * @param entity e
-   * @param type
+   * Find and Query data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace
+   * @param {Object} query query statement
    */
   find(entity, query) {
     console.log("Querying in lowdb...");
@@ -154,9 +167,8 @@ export class LowdbForElectron {
       .value();
   }
   /**
-   * Find and Query data in a specific key with orm entity namespace
-   * @param entity e
-   * @param type
+   * Find and Query data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace
    */
   all(entity) {
     console.log("Querying in lowdb...");
@@ -167,9 +179,8 @@ export class LowdbForElectron {
   }
 
   /**
-   * Find and Query data in a specific key with orm entity namespace
-   * @param entity e
-   * @param type
+   * Find and Query data in a specific key with key or entity namespace
+   * @param {String} entity key or entity namespace
    */
   clear(entity) {
     console.log("Querying in lowdb...");

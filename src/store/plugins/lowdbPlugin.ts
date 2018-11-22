@@ -1,14 +1,5 @@
-import { defaultDB } from "@/api/lowdb";
-import models from "@/api/models";
 export default options => {
   return store => {
-    /**
-     * Get data from lowdb and use Model to load data
-     * Use create to set all file
-     */
-    const Model = models[options.namespace];
-    const data = defaultDB.all(options.namespace);
-    Model.create({ data });
     /**
      * Subscription to actions for logging each entity mutation
      * payload before persiste to state

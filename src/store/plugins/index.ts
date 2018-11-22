@@ -7,6 +7,10 @@ export default [
   // orm plugins stuff
   ormPlugin,
   // lowdb plugins stuff
+  lowdbPlugin({ namespace: "item" }),
+  lowdbPlugin({ namespace: "location" }),
+  lowdbPlugin({ namespace: "vacation" }),
+  lowdbPlugin({ namespace: "contact" }),
   lowdbPlugin({ namespace: "user" }),
   lowdbPlugin({ namespace: "address" }),
   lowdbPlugin({ namespace: "mail" }),
