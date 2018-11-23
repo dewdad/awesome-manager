@@ -1,34 +1,41 @@
-import { defaultDB } from "@/api/lowdb";
+import { LowdbForElectron } from "@/api/lowdb";
+import { stateObjectFromArray } from "@/util/transformer";
+import { Model } from "@vuex-orm/core";
 import models from "@/api/models";
 export default options => {
+  const entity = options.namespace || "data";
   return store => {
     /**
      * Load the data from lowdb and commit to initial State
     */
-    const data = defaultDB.all(options.namespace);
-    const NSModel = models[options.namespace];
+    const DB: LowdbForElectron = new LowdbForElectron(entity);
+    const entityArray: any[] = DB.all(entity);
+    const NSModel: Model = models[entity];
     // NOTE https://vuex-orm.github.io/vuex-orm/guide/advanced/interact-with-store-from-model.html#interacting-with-state
-    NSModel.commit(state => state.data = data );
+    if (Array.isArray(entityArray)) {
+      NSModel.commit(state => state.data = stateObjectFromArray(entityArray));
+      // entityArray.map(item => NSModel.insert({data: item}))
+    }
     /**
      * Subscription to actions for logging each entity mutation
      * payload before persiste to state
      */
     store.subscribeAction((action, state) => {
       let { entity } = action.payload;
-      if (entity !== options.namespace) return;
+      if (entity !== entity) return;
 
       if (action.type === "entities/insert") {
-        console.log(`Insert ${options.namespace} entity`);
+        console.log(`Insert ${entity} entity`);
         console.log(action.type);
         console.log(action.payload);
       }
       if (action.type === "entities/delete") {
-        console.log(`Delete ${options.namespace} entity`);
+        console.log(`Delete ${entity} entity`);
         console.log(action.type);
         console.log(action.payload);
       }
       if (action.type === "entities/update") {
-        console.log(`Update ${options.namespace} entity`);
+        console.log(`Update ${entity} entity`);
         console.log(action.type);
         console.log(action.payload);
       }

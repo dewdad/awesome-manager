@@ -1,6 +1,15 @@
 import { LowdbForElectron } from "../index";
+import Datastore from "lowdb";
 
 const testDB = new LowdbForElectron("test");
+
+const entities = ["user", "document"];
+const pool = entities.reduce((entitiesDb, entity) => {
+  const DB = new LowdbForElectron(entity);
+  DB.dbCreate(entity);
+  entitiesDb[entity] = DB;
+  return entitiesDb
+}, Object.create(null))
 
 describe("testing lowdb class", () => {
   beforeEach(() => {
@@ -52,5 +61,18 @@ describe("testing lowdb class", () => {
     testDB.delete("activity", { name: "wanglulu" });
     activities = testDB.find("activity", { name: "wanglulu" });
     expect(activities.length).toBe(0);
+  });
+});
+
+describe("testing lowdb pool", () => {
+  it("should create pool with file", () => {
+      const DB = pool["user"];
+      expect(DB).not.toBeNull();
+      expect(DB.db).not.toBeNull();
+  });
+  it("should set default value of entity", () => {
+      const DB = pool["user"];
+      const defaultValue = DB.db.get("user").value();
+      expect(defaultValue).toEqual([]);
   });
 });

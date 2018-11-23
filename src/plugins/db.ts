@@ -1,10 +1,5 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
-import plugins from "./plugins";
-
-Vue.use(Vuex);
 
 /**
  * Create lowdb files and set default fields
@@ -13,11 +8,12 @@ Vue.use(Vuex);
 const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
-  entitiesDb[entity] = DB;
+  entitiesDb[entity] = db;
   return entitiesDb
-}, Object.create(null))
+}, {})
 
-export default new Vuex.Store({
-  state: { pool, entities },
-  plugins
-});
+export default {
+  install(Vue, options) {
+    Vue.prototype.$pool = pool;
+  },
+};

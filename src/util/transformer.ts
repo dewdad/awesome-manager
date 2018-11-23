@@ -80,3 +80,19 @@ export function selectedDeepMining<T extends object, S extends string>(o: T, f: 
     return res;
   }, []);
 }
+
+/**
+ * Utility function to create a object from a array, get the _id of each item
+ * as the key, while item itself as value
+ * @param {Array} [array] The array of object, each item has a _id key
+ * @returns {Object} Returns the object as accumulated value
+ *
+ * Usage:
+ * stateObjectFromArray([{"_id": "1", "name": "joe"}]) -> {"1": {...}}
+ */
+export function stateObjectFromArray<T extends any, K extends string>(a: Array<T>): { K : T } {
+  return a.reduce((res, item) => {
+    res[item["_id"]] = item;
+    return res;
+  }, Object.create(null));
+}
