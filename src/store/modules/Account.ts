@@ -1,8 +1,5 @@
 import { ActionContext } from "vuex";
 import { make } from "vuex-pathify";
-import lowdbActions from "@/store/shared/actions.lowdb";
-import sharedMutations from "@/store/shared/mutations";
-import sharedGetters from "@/store/shared/getters";
 import bcrypt from "bcryptjs";
 
 import { LowdbForElectron } from "@/api/lowdb";
@@ -11,6 +8,7 @@ const DB: LowdbForElectron = new LowdbForElectron("account");
 const state = {
   name: "account",
   items: [],
+  cached: [],
   currentItem: {},
   status: false,
   filter: {
@@ -27,7 +25,9 @@ const state = {
 
 const mutations: any = {
   ...make.mutations(state),
-  ...sharedMutations,
+  CACHE_ACCOUNT(state, newAccount) {
+    state.cached.push(newAccount);
+  },
 };
 
 const AccountActions = {
@@ -84,15 +84,18 @@ const AccountActions = {
       },
     });
   },
+  // Logs out the current user.
+  logout({ commit }) {
+    commit("SET_CURRENT_ITEM", null);
+  },
 };
 
 const actions: any = {
   ...make.actions(state),
-  ...lowdbActions,
   ...AccountActions,
 };
 
-const getters: any = { ...make.getters(state), ...sharedGetters };
+const getters: any = { ...make.getters(state) };
 
 export default {
   namespaced: true,

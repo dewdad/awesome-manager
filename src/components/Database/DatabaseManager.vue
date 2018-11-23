@@ -2,7 +2,6 @@
   <v-layout
       wrap
       row>
-
     <v-flex
         xs12
         sm12>
@@ -114,7 +113,7 @@ import path from "path";
 import fs from "fs";
 
 import db from "@/api/lowdb";
-import { collections } from "@/api/globals";
+import { entities } from "@/api/globals";
 
 import { join } from "path";
 
@@ -161,7 +160,7 @@ export default {
     findCollections() {
       // Initialize the userData path and check db files
       this.userDataPath = userDataPath;
-      this.collections = collections;
+      this.collections = entities;
     },
     findDocuments() {
       this.userTemplatePath = path.join(remote.app.getPath("home"), "/Documents/template");
