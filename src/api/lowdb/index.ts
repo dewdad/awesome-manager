@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import { remote, app } from "electron";
 import Datastore from "lowdb";
 import LodashId from "lodash-id";
-import { lowerFirst } from 'lodash';
+import { lowerFirst } from "lodash";
 import FileSync from "lowdb/adapters/FileSync";
 import Memory from "lowdb/adapters/Memory";
 
@@ -56,7 +56,10 @@ export class LowdbForElectron {
    */
 
   dbOpen(node) {
-    return this.db.read().get(node).value();
+    return this.db
+      .read()
+      .get(node)
+      .value();
   }
   /**
    * Init a set of default values
@@ -70,9 +73,10 @@ export class LowdbForElectron {
    * Create nodes from a array
    */
   dbCreateUserLevelnode(nodes) {
-    nodes && nodes.forEach(node => {
-      this.dbCreate(node);
-    });
+    nodes &&
+      nodes.forEach(node => {
+        this.dbCreate(node);
+      });
   }
   /**
    * Set a array as fefault value of a key or key or entity
@@ -184,9 +188,7 @@ export class LowdbForElectron {
    */
   clear(entity) {
     console.log("Clearing in " + entity);
-    this.db
-      .set(`${lowerFirst(entity)}`, [])
-      .write();
+    this.db.set(`${lowerFirst(entity)}`, []).write();
   }
 }
 

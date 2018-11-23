@@ -393,7 +393,7 @@ export default {
     },
     linearTrending() {
       return Trending.all();
-    }
+    },
   },
 };
 </script>

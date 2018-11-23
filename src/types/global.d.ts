@@ -5,7 +5,7 @@
 declare namespace NodeJS {
   interface Global {
     /**
-     * index Signiture to allow any property 
+     * index Signiture to allow any property
      */
     [propName: string]: any;
     (...args: any): any;
@@ -94,4 +94,3 @@ interface Window {
   store: any;
   __INITIAL_STATE__: any;
 }
-

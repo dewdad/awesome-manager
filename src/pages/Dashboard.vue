@@ -176,7 +176,7 @@
                         class="subheading">{{item.applicant}}</time>
                     <div
                         class="py-2 text--secondary"
-                        >{{item.ocurrenceDate}}</div>
+                    >{{item.ocurrenceDate}}</div>
                   </div>
                 </li>
               </ol>
@@ -235,12 +235,12 @@ export default {
     Social.new();
   },
   computed: {
-    activityData: ()=> Activity.all(),
-    siteTrafficData: ()=> MonthVisit.all(),
-    locationData: ()=> Generic.all(),
-    trendingData: ()=> Trending.all(),
-    socialData: ()=> Social.all(),
-    linearTrendingData: ()=> Trending.all()
+    activityData: () => Activity.all(),
+    siteTrafficData: () => MonthVisit.all(),
+    locationData: () => Generic.all(),
+    trendingData: () => Trending.all(),
+    socialData: () => Social.all(),
+    linearTrendingData: () => Trending.all(),
   },
 };
 </script>

@@ -4,7 +4,7 @@ import {
   classFromStringArray,
   selectedDeepClone,
   selectedDeepMining,
-  stateObjectFromArray
+  stateObjectFromArray,
 } from "./transformer";
 
 class Model {
@@ -80,7 +80,7 @@ describe("create object from given array with _id", () => {
       _id: "1",
       name: "entity",
     };
-    const array = [model]
+    const array = [model];
     const m = stateObjectFromArray(array);
     expect(m["1"]).toEqual(model);
   });

@@ -5,40 +5,39 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new Generic()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new Generic();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.GenericForm = this;
   },
   computed: {
-    fields: () => Generic.fieldsList()
+    fields: () => Generic.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new Generic()
+      this.editing = false;
+      this.model = new Generic();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         Generic.insert({
-          data: this.model
-        })
-        this.model = new Generic()
+          data: this.model,
+        });
+        this.model = new Generic();
       } else {
-        Generic.update(this.model)
-        this.editing = false
-        this.model = new Generic()
+        Generic.update(this.model);
+        this.editing = false;
+        this.model = new Generic();
       }
-      console.log(Generic.all())
-    }
-  }
-  
-}
+      console.log(Generic.all());
+    },
+  },
+};
 </script>
 
 <template>
@@ -65,5 +64,4 @@ export default {
 </template>
 
 <style lang="scss" module>
-
 </style>

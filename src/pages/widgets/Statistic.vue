@@ -114,9 +114,9 @@ export default {
     MiniStatistic,
     LinearStatistic,
   },
-  computed:{
+  computed: {
     trending: () => Trending.all,
-    trending2: () => Trending.all
+    trending2: () => Trending.all,
   },
 };
 </script>

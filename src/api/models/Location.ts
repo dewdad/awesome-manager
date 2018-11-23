@@ -12,7 +12,7 @@ export default class Location extends Model {
     return {
       _id: this.increment(),
       latitude: this.string("none"),
-      longitude: this.string("longitude")
+      longitude: this.string("longitude"),
     };
   }
 }

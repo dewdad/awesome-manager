@@ -14,7 +14,6 @@ export default class MonthVisit extends Model {
       month: this.string("Jan"),
       inner: this.string("inner"),
       outer: this.string("outer"),
-      
     };
   }
 }

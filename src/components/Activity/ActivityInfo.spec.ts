@@ -12,7 +12,7 @@ function mountActivityInfo() {
       $t: jest.fn(),
     },
   });
-};
+}
 
 describe("@/components/Activity/ActivityInfo.vue", () => {
   beforeEach(() => {});

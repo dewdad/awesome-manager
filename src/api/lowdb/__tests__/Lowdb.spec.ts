@@ -8,8 +8,8 @@ const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
   entitiesDb[entity] = DB;
-  return entitiesDb
-}, Object.create(null))
+  return entitiesDb;
+}, Object.create(null));
 
 describe("testing lowdb class", () => {
   beforeEach(() => {
@@ -66,13 +66,13 @@ describe("testing lowdb class", () => {
 
 describe("testing lowdb pool", () => {
   it("should create pool with file", () => {
-      const DB = pool["user"];
-      expect(DB).not.toBeNull();
-      expect(DB.db).not.toBeNull();
+    const DB = pool["user"];
+    expect(DB).not.toBeNull();
+    expect(DB.db).not.toBeNull();
   });
   it("should set default value of entity", () => {
-      const DB = pool["user"];
-      const defaultValue = DB.db.get("user").value();
-      expect(defaultValue).toEqual([]);
+    const DB = pool["user"];
+    const defaultValue = DB.db.get("user").value();
+    expect(defaultValue).toEqual([]);
   });
 });

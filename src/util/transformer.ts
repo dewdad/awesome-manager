@@ -90,7 +90,7 @@ export function selectedDeepMining<T extends object, S extends string>(o: T, f: 
  * Usage:
  * stateObjectFromArray([{"_id": "1", "name": "joe"}]) -> {"1": {...}}
  */
-export function stateObjectFromArray<T extends any, K extends string>(a: Array<T>): { K : T } {
+export function stateObjectFromArray<T extends any, K extends string>(a: Array<T>): { K: T } {
   return a.reduce((res, item) => {
     res[item["_id"]] = item;
     return res;

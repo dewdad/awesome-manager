@@ -9,8 +9,8 @@ const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
   entitiesDb[entity] = DB;
-  return entitiesDb
-}, {})
+  return entitiesDb;
+}, {});
 
 export default {
   install(Vue, options) {

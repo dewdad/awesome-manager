@@ -18,7 +18,7 @@ export default class Vacation extends Model {
       type: this.string("type"),
       flightTicket: this.string("flightTicket"),
       hotelRoom: this.string("hotelRoom"),
-      transport: this.string("transport")
+      transport: this.string("transport"),
     };
   }
 }

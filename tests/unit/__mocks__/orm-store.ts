@@ -9,7 +9,7 @@ Vue.use(Vuex);
  * {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
  * {String} namespace, normally is `entities` to use `state.entities`
  */
-module.exports = function (entities = [], namespace = "entities"): Store<any> {
+module.exports = function(entities = [], namespace = "entities"): Store<any> {
   const database = new Database();
 
   entities.forEach(entity => {

@@ -3,30 +3,29 @@ import Generic from "@/api/models/Generic";
 import GenericForm from "./GenericForm";
 export default {
   components: {
-    GenericForm
+    GenericForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>Generic.all(),
-    headers: ()=>Generic.fieldsList(),
+    all: () => Generic.all(),
+    headers: () => Generic.fieldsList(),
   },
   created() {
     window.GenericApp = this;
   },
   methods: {
     deleteItem(item) {
-      Generic.delete(item._id)
+      Generic.delete(item._id);
     },
     editItem(item) {
-      window.GenericForm.$emit("SET_EDITING", item)
-    }
+      window.GenericForm.$emit("SET_EDITING", item);
+    },
   },
-  
-}
+};
 </script>
 
 <template>
@@ -88,5 +87,4 @@ export default {
 </template>
 
 <style lang="scss" module>
-
 </style>

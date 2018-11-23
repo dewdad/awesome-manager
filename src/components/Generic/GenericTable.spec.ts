@@ -1,7 +1,7 @@
-import GenericTable from './GenericTable.vue'
+import GenericTable from "./GenericTable.vue";
 
-describe('@/components/Generic/GenericTable', () => {
-  it('exports a valid component', () => {
-    expect(GenericTable).toBeAComponent()
-  })
-})
+describe("@/components/Generic/GenericTable", () => {
+  it("exports a valid component", () => {
+    expect(GenericTable).toBeAComponent();
+  });
+});

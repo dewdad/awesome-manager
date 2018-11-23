@@ -16,12 +16,12 @@ export default class Trending extends Model {
       caption: this.string("Tasks completed"),
       percent: this.number(90),
       icon: this.attr({
-          label: "list",
-          color: "primary",
+        label: "list",
+        color: "primary",
       }),
       linear: this.attr({
-          value: 90,
-          clor: "success",
+        value: 90,
+        clor: "success",
       }),
     };
   }

@@ -8,24 +8,24 @@ export const state = {
     search: "",
     sort: "",
   },
-}
+};
 
 export const getters = {
   ...make.getters(state),
-}
+};
 
 export const mutations = {
   ...make.mutations(state),
-}
+};
 
 export const actions = {
   ...make.actions(state),
-}
+};
 
 export default {
   namespaced: true,
   state,
   actions,
   mutations,
-  getters
-}
+  getters,
+};

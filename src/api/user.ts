@@ -1,4 +1,4 @@
-import { UserNode } from "./prisma"
+import { UserNode } from "./prisma";
 
 type KeysOfUserNode = keyof UserNode;
 

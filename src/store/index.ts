@@ -14,10 +14,10 @@ const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
   entitiesDb[entity] = DB;
-  return entitiesDb
-}, Object.create(null))
+  return entitiesDb;
+}, Object.create(null));
 
 export default new Vuex.Store({
   state: { pool, entities },
-  plugins
+  plugins,
 });

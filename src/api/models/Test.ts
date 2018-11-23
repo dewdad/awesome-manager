@@ -11,7 +11,7 @@ export default class Test extends Model {
   static fields() {
     return {
       _id: this.increment(),
-      title: this.string("coder")
+      title: this.string("coder"),
     };
   }
 }

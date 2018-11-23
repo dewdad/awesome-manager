@@ -18,7 +18,10 @@ import vueTestUtils, { createLocalVue } from "@vue/test-utils";
 // https://lodash.com/
 import _, { cloneDeep } from "lodash";
 _.mixin({
-  pascalCase: _.flow(_.camelCase, _.upperFirst),
+  pascalCase: _.flow(
+    _.camelCase,
+    _.upperFirst,
+  ),
 });
 
 // ===
