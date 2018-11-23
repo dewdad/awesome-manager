@@ -31,7 +31,7 @@ const mutations: any = { ...make.mutations(state), ...Base.mutations };
 const actions: any = { ...make.actions(state), ...Base.actions };
 
 /**
- * Awesome store created here!
+ * Aweeome store created here!
  * modules are all namespaced
  * plugins are automatically triggered
  */
