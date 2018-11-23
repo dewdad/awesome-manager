@@ -33,7 +33,7 @@ const mutations: any = {
 const AccountActions = {
   async signup(ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = await DB.db
+    let authedAccount = DB.db
       .read()
       .get(`${ctx.state.name}`)
       .find({ name: signupData.name })
@@ -41,15 +41,15 @@ const AccountActions = {
     if (authedAccount === undefined) {
       try {
         console.log("Account Does not Exists, creating!");
-        // 1
+        // 1 hash the password
         signupData.hash = await bcrypt.hash(signupData.password, 10);
-        // 2
+        // 2 save the password and hash
         let createdAccount = DB.db
           .read()
           .get(`${ctx.state.name}`)
-          .insert(signupData)
+          .push(signupData)
           .write();
-        // 3
+        // 3 check the password and hash
         let valid = await bcrypt.compare(signupData.password, createdAccount.hash);
         if (valid) {
           console.log("Valid password");
@@ -64,7 +64,8 @@ const AccountActions = {
       }
     } else {
       console.log("Account Exists, go ahead to login!");
-      let valid = await bcrypt.compare(signupData.password, authedAccount.hash);
+      let authHash = (authedAccount as any).hash;
+      let valid = await bcrypt.compare(signupData.password, authHash);
       if (valid) {
         console.log("Valid password");
         ctx.dispatch("signin", authedAccount);

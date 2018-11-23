@@ -513,4 +513,13 @@ export default [
       /* webpackMode: "lazy" */
       `@/pages/widgets/List.vue`),
   },
+  {
+    path: "/widgets/rx",
+    meta: { breadcrumb: true },
+    name: "components/rx",
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      `@/components/widgets/RxCounter.vue`),
+  },
 ];

@@ -3,7 +3,7 @@ import Datastore from "lowdb";
 
 const testDB = new LowdbForElectron("test");
 
-const entities = ["user", "document"];
+const entities = ["user", "document", "account"];
 const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
@@ -72,7 +72,17 @@ describe("testing lowdb pool", () => {
   });
   it("should set default value of entity", () => {
     const DB = pool["user"];
+    DB.clear("user");
     const defaultValue = DB.db.get("user").value();
     expect(defaultValue).toEqual([]);
+  });
+  it("should set new value of entity", () => {
+    const DB = pool["user"];
+    DB.clear("user");
+    DB.insert("user", {
+      name: "xingwenju",
+    });
+    const newValue = DB.db.get("user").value();
+    expect(newValue).toEqual([{ name: "xingwenju" }]);
   });
 });

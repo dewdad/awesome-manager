@@ -6,5 +6,8 @@ module.exports = {
       localeDir: "locales",
       enableInSFC: true,
     },
+    storybook: {
+      allowedPlugins: ["define"],
+    },
   },
 };

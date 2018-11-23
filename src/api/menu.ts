@@ -8,8 +8,8 @@ const mainMenu = [
     icon: "fas fa-tasks",
   },
   {
-    title: "Test",
-    name: "Test",
+    title: "Test rxjs",
+    name: "components/rx",
     group: "apps",
     icon: "fas fa-tasks",
   },

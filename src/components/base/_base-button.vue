@@ -1,7 +1,7 @@
 <template>
   <button
-    v-on="$listeners"
-  >
+      v-on="$listeners"
+    >
     <slot />
   </button>
 </template>

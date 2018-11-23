@@ -1,21 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { configure } from '@storybook/vue'
 
-import Vue from "vue";
-import Vuetify from "vuetify";
-import router from "../../src/router";
-import store from "../../src/store";
-import "vuetify/src/stylus/app.styl";
-Vue.use(Vuetify, {
-  iconfont: "fa",
-});
-import "../../src/plugins/styles";
-
-import { configure } from "@storybook/vue";
-
-const req = require.context("../../src/stories", true, /.stories.(j|t)s$/);
+const req = require.context('../../src/stories', true, /.stories.js$/)
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  req.keys().forEach(filename => req(filename))
 }
 
-configure(loadStories, module);
+configure(loadStories, module)

@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import { remote, app, Remote, App } from "electron";
 import LodashId from "lodash-id";
 import { lowerFirst } from "lodash";
-import Datastore, { AdapterSync, LowdbSync} from "lowdb";
+import Datastore, { AdapterSync, LowdbSync } from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 import Memory from "lowdb/adapters/Memory";
 
@@ -23,18 +23,10 @@ export class LowdbForElectron {
   }
 
   ensureElectronEnv() {
-    if (remote !== undefined || app !== undefined) {
-      console.log("Electron environment detected!");
-      this.electronApp = process.type === "renderer" ? remote.app : app;
-      console.log(`The app path is ${this.electronApp.getAppPath()}`);
-      // add to window/global object
-      (window as any).electronApp = process.type === "renderer" ? remote.app : app;
-      return true;
-    } else {
-      console.log("Electron remote not detected!");
-      this.electronApp = null; 
-      return false;
-    }
+    this.electronApp = process.type === "renderer" ? remote.app : app;
+    // add to window/global object
+    (window as any).electronApp = process.type === "renderer" ? remote.app : app;
+    return true;
   }
 
   /**
@@ -66,7 +58,7 @@ export class LowdbForElectron {
     }
     this.db = Datastore(this.adapter);
     this.db._.mixin(LodashId);
-    return this.db === undefined? false : true;
+    return this.db === undefined ? false : true;
   }
 
   /**
