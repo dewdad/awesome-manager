@@ -4,12 +4,12 @@ describe("@/api/models/Vacation", () => {
   it("exports a valid Vuex ORM Model", () => {
     const model = new VacationModel();
 
-    expect(model.applicant).toBe("nobody");
+    expect(model.applicant).toBe("applicant");
   });
 
   it("expect string field", () => {
-    expect(new VacationModel({}).applicant).toBe("nobody");
-    expect(new VacationModel({ applicant: "nobody" }).applicant).toBe("nobody");
+    expect(new VacationModel({}).applicant).toBe("applicant");
+    expect(new VacationModel({ applicant: "applicant" }).applicant).toBe("applicant");
   });
 
   it("expect to json", () => {
@@ -18,7 +18,7 @@ describe("@/api/models/Vacation", () => {
 
     const expected = {
       _id: 1,
-      applicant: "nobody",
+      applicant: "applicant",
     };
 
     expect(json).not.toBeInstanceOf(VacationModel);

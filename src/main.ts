@@ -9,9 +9,11 @@ import "./components/_globals";
 import "./components/_widgets";
 // Register internationalization
 import i18n from "./plugins/i18n";
+import "/plugins/rx";
 // Register styles
 import "./plugins/vuetify";
 import "./plugins/styles";
+// Register styles
 
 Vue.config.productionTip = false;
 
