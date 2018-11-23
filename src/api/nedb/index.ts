@@ -4,7 +4,7 @@ import * as _ from "lodash";
 
 // import datastore from "nedb";
 import datastore from "nedb-promise";
-import { collections } from "@/api/globals";
+import { entities } from "@/api/globals";
 import { log } from "@/util";
 
 import { remote, app } from "electron";
@@ -28,68 +28,68 @@ let pool: any = {};
  * Database persistence Module
  */
 
-export function dbOpen(collection: string): any {
-  return pool[collection];
+export function dbOpen(entity: string): any {
+  return pool[entity];
 }
 
 /**
  * Init persistence database pool
  */
 export function dbInit() {
-  // Create user-level collections like user.json
-  dbCreateUserLevelCollection(collections);
+  // Create user-level entities like user.json
+  dbCreateUserLevelEntity(entities);
 }
 
 /**
  * Init persistence database pool
  */
 export function dbResetAll() {
-  // Create user-level collections like user.json
-  collections.map(item => dbRemove(item));
+  // Create user-level entities like user.json
+  entities.map(item => dbRemove(item));
 }
 
 /**
- * Creating a collection with real path and add to pool
- * @param collection Name of the db collection
+ * Creating a entity with real path and add to pool
+ * @param entity Name of the db entity
  */
-export function dbCreate(collection: string) {
-  let fileName = `${collection}.json`;
+export function dbCreate(entity: string) {
+  let fileName = `${entity}.json`;
   let filePath = join(userPath, fileName);
-  // Create collections instance and add to pool
+  // Create entities instance and add to pool
   let DB = datastore({
     autoload: true,
     filename: filePath,
   });
-  pool[collection] = DB;
-  // add collection information to collections
+  pool[entity] = DB;
+  // add entity information to entities
   let systemDB = dbOpen("database");
-  systemDB.find({ collection: collection }).then((docs: any[]) => {
-    if (docs.length === 0) systemDB.insert({ collection, fileName, filePath });
+  systemDB.find({ entity: entity }).then((docs: any[]) => {
+    if (docs.length === 0) systemDB.insert({ entity, fileName, filePath });
   });
 }
 
 /**
- * Create Default Collections if not exist
+ * Create Default Entities if not exist
  *
  * Check the UserData Folder if user.json and other files exist
- * If not, call defaultCollections as array
+ * If not, call defaultEntities as array
  * Loop through and create databases files
  * Load into pool
  */
-export function dbCreateUserLevelCollection(collections: string[]) {
-  for (let collection of collections) {
-    // check if other user-level collection exists
-    dbCreate(collection);
-    log.suc("Created " + collection + ".json in you UserData directory!");
+export function dbCreateUserLevelEntity(entities: string[]) {
+  for (let entity of entities) {
+    // check if other user-level entity exists
+    dbCreate(entity);
+    log.suc("Created " + entity + ".json in you UserData directory!");
   }
 }
 
 /**
- * Remove the collections.json files from hard disk
+ * Remove the entities.json files from hard disk
  */
 
-export function dbRemove(collection: string) {
-  let fileName = `${collection}.json`;
+export function dbRemove(entity: string) {
+  let fileName = `${entity}.json`;
   let filePath = join(userPath, fileName);
   if (fs.existsSync(filePath)) {
     log.err("Removing...");
