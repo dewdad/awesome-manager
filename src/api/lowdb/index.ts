@@ -80,12 +80,11 @@ export class LowdbForElectron {
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbCreate(node) {
-    console.log("creating default value in lowdb...");
+    console.log(`creating default value in ${node} lowdb`);
     if (!this.db.has(node).value()) {
       this.db.set(node, []).write();
     } else {
-      console.log("data exists, loading...");
-      this.db.read().get(node).value();
+      console.log(`${node} default value exists`);
     }
   }
   /**
@@ -186,8 +185,7 @@ export class LowdbForElectron {
   clear(entity) {
     console.log("Clearing in " + entity);
     this.db
-      .read()
-      .unset(`${lowerFirst(entity)}`)
+      .set(`${lowerFirst(entity)}`, [])
       .write();
   }
 }
