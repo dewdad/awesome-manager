@@ -4,11 +4,11 @@ import camelCase from "lodash/camelCase";
 
 const requireComponent = require["context"](
   // 其组件目录的相对路径
-  "./Layout",
+  "./widgets",
   // 是否查询其子目录
-  false,
+  true,
   // 匹配基础组件文件名的正则表达式
-  /[A-Z]\w+\.(vue|js)$/,
+  /[A-Z]\w+\.(vue|js|ts)$/,
 );
 
 requireComponent.keys().forEach(fileName => {
