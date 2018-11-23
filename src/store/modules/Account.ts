@@ -3,14 +3,15 @@ import { make } from "vuex-pathify";
 import lowdbActions from "@/store/shared/actions.lowdb";
 import sharedMutations from "@/store/shared/mutations";
 import sharedGetters from "@/store/shared/getters";
-import defaultAccount from "@/api/models/Account";
-import db from "@/api/lowdb";
 import bcrypt from "bcryptjs";
+
+import { LowdbForElectron } from "@/api/lowdb";
+const DB: LowdbForElectron = new LowdbForElectron("account");
 
 const state = {
   name: "account",
   items: [],
-  currentItem: defaultAccount,
+  currentItem: {},
   status: false,
   filter: {
     search: "",
@@ -32,7 +33,7 @@ const mutations: any = {
 const AccountActions = {
   async signup(ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = await db
+    let authedAccount = await DB.db
       .read()
       .get(`${ctx.state.name}`)
       .find({ name: signupData.name })
@@ -43,7 +44,7 @@ const AccountActions = {
         // 1
         signupData.hash = await bcrypt.hash(signupData.password, 10);
         // 2
-        let createdAccount = db
+        let createdAccount = DB.db
           .read()
           .get(`${ctx.state.name}`)
           .insert(signupData)

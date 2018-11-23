@@ -8,7 +8,7 @@ import { entities } from "@/api/globals";
 const pool = entities.reduce((entitiesDb, entity) => {
   const DB = new LowdbForElectron(entity);
   DB.dbCreate(entity);
-  entitiesDb[entity] = db;
+  entitiesDb[entity] = DB;
   return entitiesDb
 }, {})
 

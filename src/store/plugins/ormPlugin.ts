@@ -1,8 +1,8 @@
 import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
-import { defaultDB } from "@/api/lowdb";
 import models from "@/api/models";
 import modules from "@/store/modules";
 
+import { LowdbForElectron } from "@/api/lowdb";
 /**
  * Query hooks
  */
@@ -12,19 +12,22 @@ Query.on("afterCreate", model => {
   // Get class static property with instance method $self
   const entity = model.$self().entity;
   console.log("Create Hook in " + entity);
-  defaultDB.insert(entity, model);
+  const DB: LowdbForElectron = new LowdbForElectron(entity);
+  DB.insert(entity, model);
 });
 
 Query.on("afterDelete", model => {
   const entity = model.$self().entity;
   console.log("Delete Hook in " + entity);
-  defaultDB.delete(entity, { _id: model._id });
+  const DB: LowdbForElectron = new LowdbForElectron(entity);
+  DB.delete(entity, { _id: model._id });
 });
 
 Query.on("afterUpdate", model => {
   const entity = model.$self().entity;
   console.log("Update Hook in " + entity);
-  defaultDB.update(entity, { _id: model._id }, model);
+  const DB: LowdbForElectron = new LowdbForElectron(entity);
+  DB.update(entity, { _id: model._id }, model);
 });
 
 /**
