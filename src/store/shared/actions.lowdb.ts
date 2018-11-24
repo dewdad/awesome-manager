@@ -4,7 +4,7 @@ export default {
     try {
       db.read()
         .get(`${ctx.state.name}`)
-        .insert(data)
+        .push(data)
         .write();
     } catch (e) {
       throw new Error("添加数据失败!");
