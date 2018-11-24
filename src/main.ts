@@ -5,7 +5,7 @@ import App from "./entry/App.awesome.vue";
 // Register service worker
 import "./registerServiceWorker";
 // Register global components
-import "./components/_globals";
+import "./components/_global";
 import "./components/_widgets";
 // Register internationalization
 import i18n from "./plugins/i18n";
