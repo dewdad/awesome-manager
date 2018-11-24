@@ -1,37 +1,38 @@
 <script>
-import Document from "@/api/models/Document";
-import DocumentForm from "./DocumentForm";
+import Entity from "@/api/models/Entity";
+import EntityForm from "./EntityForm";
 export default {
   components: {
-    DocumentForm,
+    EntityForm
   },
   data() {
     return {
       editing: false,
-    };
+    }
   },
   computed: {
-    all: () => Document.all(),
-    headers: () => Document.fieldsList(),
+    all: ()=>Entity.all(),
+    headers: ()=>Entity.fieldsList(),
   },
   created() {
-    window.DocumentApp = this;
+    window.EntityApp = this;
   },
   methods: {
     deleteItem(item) {
-      Document.delete(item._id);
+      Entity.delete(item._id)
     },
     editItem(item) {
-      window.DocumentForm.$emit("SET_EDITING", item);
-    },
+      window.EntityForm.$emit("SET_EDITING", item)
+    }
   },
-};
+
+}
 </script>
 
 <template>
   <v-card>
     <v-card-title>
-      DocumentTable
+      EntityTable
     </v-card-title>
     <v-responsive>
       <v-data-table
@@ -81,10 +82,11 @@ export default {
 
     </v-responsive>
     <v-responsive>
-        <DocumentForm></DocumentForm>
+        <EntityForm></EntityForm>
     </v-responsive>
   </v-card>
 </template>
 
 <style lang="scss" module>
+
 </style>

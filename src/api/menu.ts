@@ -1,6 +1,13 @@
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const mainMenu = [
+  { header: "常用功能" },
+  {
+    title: "Entity",
+    name: "Entity",
+    group: "apps",
+    icon: "fas fa-tasks"
+  },
   {
     title: "Generic",
     name: "Generic",
@@ -13,11 +20,9 @@ const mainMenu = [
     group: "apps",
     icon: "fas fa-tasks",
   },
-
-  { header: "常用功能" },
   {
     title: "项目任务",
-    name: "Projects",
+    name: "Project",
     group: "apps",
     icon: "fas fa-tasks",
   },
@@ -29,25 +34,25 @@ const mainMenu = [
   },
   {
     title: "本馆人员",
-    name: "Users",
+    name: "User",
     group: "apps",
     icon: "fas fa-user",
   },
   {
     title: "外部联系人",
-    name: "Contacts",
+    name: "Contact",
     group: "apps",
     icon: "fas fa-user-friends",
   },
   {
     title: "内部文件收发",
-    name: "Documents",
+    name: "Document",
     group: "apps",
     icon: "fas fa-file-export",
   },
   {
     title: "礼宾收文登记",
-    name: "Letters",
+    name: "Letter",
     group: "apps",
     icon: "fas fa-file-import",
   },

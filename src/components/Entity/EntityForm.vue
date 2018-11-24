@@ -1,50 +1,44 @@
 <script>
-import User from "@/api/models/User";
+import Entity from "@/api/models/Entity";
 export default {
   data() {
     return {
       editing: false,
       model: {},
-    };
+    }
   },
   created() {
-    this.model = new User();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
-    window.UserForm = this;
+    this.model = new Entity()
+    this.$on("SET_EDITING", (item) => {
+      this.editing = true
+      this.model = item
+    })
+    window.EntityForm = this;
   },
   computed: {
-    fields: () => {
-        return User.fieldsList().reduce((arr, field) => {
-          if(!field.match(/.*(E|e)ntity/)) {
-            arr.push(field);
-          };
-          return arr;
-        }, [])
-    },
+    fields: () => Entity.fieldsList()
   },
   methods: {
     reset() {
-      this.editing = false;
-      this.model = new User();
+      this.editing = false
+      this.model = new Entity()
     },
     saveItem() {
-      if (!this.editing) {
-        User.insert({
-          data: this.model,
-        });
-        this.model = new User();
+      if(!this.editing) {
+        Entity.insert({
+          data: this.model
+        })
+        this.model = new Entity()
       } else {
-        User.update(this.model);
-        this.editing = false;
-        this.model = new User();
+        Entity.update(this.model)
+        this.editing = false
+        this.model = new Entity()
       }
-      console.log(User.all());
-    },
-  },
-};
+      console.log(Entity.all())
+    }
+  }
+  
+}
 </script>
 
 <template>
@@ -71,4 +65,5 @@ export default {
 </template>
 
 <style lang="scss" module>
+
 </style>

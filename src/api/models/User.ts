@@ -1,4 +1,5 @@
 import { Model } from "@vuex-orm/core";
+import Entity from "@/api/models/Entity";
 export default class User extends Model {
   static entity = "user";
 
@@ -25,8 +26,10 @@ export default class User extends Model {
       outRole: this.string("Political Consellor"),
       innerRole: this.string("Member of CPC Committee"),
       chargeOf: this.string("Second"),
-      sendingEntity: this.string("MFA"),
-      fromEntity: this.string("MFA"),
+      sendingEntity_id: this.attr(1),
+      fromEntity_id: this.attr(1),
+      sendingEntity: this.belongsTo(Entity, "sendingEntity_id"),
+      fromEntity: this.belongsTo(Entity, "fromEntity_id"),
       arrivingDate: this.string("2016-4-9"),
       leavingDate: this.string("2020-4-9"),
       memo: this.string("No"),

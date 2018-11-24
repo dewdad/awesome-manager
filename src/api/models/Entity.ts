@@ -10,12 +10,12 @@ export default class Entity extends Model {
 
   static fields() {
     return {
-      _id: Model.increment(),
-      name: Model.string("CEVE"),
-      fullName: Model.string("Chinese Embassy in Venezuela"),
-      abbr: Model.string("CEVE"),
-      address: Model.string("Mercedez, Baruta"),
-      avatar: Model.string("mfa"),
+      _id: this.increment(),
+      name: this.string("CEVE"),
+      fullName: this.string("Chinese Embassy in Venezuela"),
+      abbr: this.string("CEVE"),
+      address: this.string("Mercedez, Baruta"),
+      avatar: this.string("mfa"),
     };
   }
 }
