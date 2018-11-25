@@ -15,7 +15,7 @@ export default {
     headers: ()=>Entity.fieldsList(),
   },
   created() {
-    window.EntityApp = this;
+    window.EntityTable = this;
   },
   methods: {
     deleteItem(item) {

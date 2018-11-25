@@ -24,7 +24,7 @@ export default {
     headers: ()=><%= modelName %>.fieldsList(),
   },
   created() {
-    window.<%= modelName %>App = this;
+    window.<%= modelName %>Table = this;
   },
   methods: {
     deleteItem(item) {

@@ -15,7 +15,7 @@ export default {
     headers: () => Document.fieldsList(),
   },
   created() {
-    window.DocumentApp = this;
+    window.DocumentTable = this;
   },
   methods: {
     deleteItem(item) {
@@ -30,7 +30,7 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-title v-show="false">
       DocumentTable
     </v-card-title>
     <v-responsive>

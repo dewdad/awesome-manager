@@ -47,17 +47,19 @@
         </template>
       </v-data-table>
     </v-responsive>
-    <v-responsive> <ActivityInfo></ActivityInfo> </v-responsive>
+    <v-responsive>
+        <ActivityForm></ActivityForm>
+    </v-responsive>
   </v-card>
 </template>
 <script lang="js">
 import { cloneDeep } from 'lodash';
 import Activity from "@/api/models/Activity";
-import ActivityInfo from "./ActivityInfo";
+import ActivityForm from "./ActivityForm";
 
 export default {
   components: {
-    ActivityInfo
+    ActivityForm
   },
   data() {
     return {

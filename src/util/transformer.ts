@@ -100,8 +100,8 @@ export function stateObjectFromArray<T extends any, K extends string>(a: Array<T
 }
 
 export function pullFromArray( array: any[], matched: any) {
-    return arrya.reduce((arr, item) => {
-        if(!field.match(matched)) {
+    return array.reduce((arr, item) => {
+        if(!item.match(matched)) {
             arr.push(item);
           };
           return arr;

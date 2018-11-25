@@ -21,12 +21,6 @@ const mainMenu = [
     icon: "fas fa-tasks",
   },
   {
-    title: "项目任务",
-    name: "Project",
-    group: "apps",
-    icon: "fas fa-tasks",
-  },
-  {
     title: "活动登记",
     name: "Activity",
     group: "apps",
@@ -39,22 +33,10 @@ const mainMenu = [
     icon: "fas fa-user",
   },
   {
-    title: "外部联系人",
-    name: "Contact",
-    group: "apps",
-    icon: "fas fa-user-friends",
-  },
-  {
     title: "内部文件收发",
     name: "Document",
     group: "apps",
     icon: "fas fa-file-export",
-  },
-  {
-    title: "礼宾收文登记",
-    name: "Letter",
-    group: "apps",
-    icon: "fas fa-file-import",
   },
   {
     title: "控制面板",
@@ -150,12 +132,6 @@ const extraMenu = [
     group: "extra",
     icon: "perm_media",
     name: "Media",
-  },
-  {
-    title: "书签管理",
-    group: "extra",
-    icon: "perm_media",
-    name: "Bookmarks",
   },
 ];
 

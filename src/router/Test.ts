@@ -5,5 +5,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Test/TestTable.vue`).then(m => m.default),
+    `@/components/Test/TestTable.vue`),
 };

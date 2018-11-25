@@ -3,9 +3,7 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
-  const routeName = modelName + "Table"
-  const componentName = h.capitalize(h.inflection.singularize(model)) + "Table.vue"
-  const pathName = (h.inflection.singularize(model)).toLowerCase() + "-table"
+  const pathName = (h.inflection.singularize(model)).toLowerCase()
 %>export default {
   path: "/<%= pathName %>",
   name: "<%= modelName %>",
@@ -13,5 +11,5 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/<%= modelName %>/<%= componentName %>`).then(m => m.default),
+    `@/components/<%= modelName %>/<%= modelName %>Table.vue`).then(m => m.default),
 };

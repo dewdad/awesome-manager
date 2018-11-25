@@ -31,9 +31,6 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title>
-      UserTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
@@ -86,8 +83,8 @@ export default {
       </v-data-table>
 
     </v-responsive>
-    <v-responsive>
       <UserForm></UserForm>
+    <v-responsive>
     </v-responsive>
   </v-card>
 </template>

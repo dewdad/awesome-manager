@@ -5,5 +5,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Generic/GenericTable.vue`).then(m => m.default),
+    `@/components/Generic/GenericTable.vue`),
 };

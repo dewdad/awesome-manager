@@ -1,5 +1,5 @@
 export default {
-  path: "/account-profile",
+  path: "/component/account-profile",
   name: "AccountProfile",
   component: () =>
     import(/* webpackChunkName: "routes" */

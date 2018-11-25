@@ -15,7 +15,7 @@ export default {
     headers: () => Generic.fieldsList(),
   },
   created() {
-    window.GenericApp = this;
+    window.GenericTable = this;
   },
   methods: {
     deleteItem(item) {

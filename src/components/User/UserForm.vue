@@ -1,6 +1,5 @@
 <script>
-import { map, pick } from "lodash/fp";
-import { pullAll } from "lodash";
+import { map, pick, pullAll } from "lodash/fp";
 import User from "@/api/models/User";
 import Entity from "@/api/models/Entity";
 export default {
@@ -21,7 +20,7 @@ export default {
   computed: {
       relationFields: ()=> User.relationFieldsList().filter(r => r.match(/.*_id/)),
       selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-      fields: () => pullAll(User.fieldsList(), User.relationFieldsList()),
+      fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
   },
   methods: {
     reset() {
@@ -53,35 +52,42 @@ export default {
           xs12
           md12
           sm12>
-        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+        <v-btn
+            :color="editing ? 'warning' : 'primary'"
+            @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+        <span class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</span>
       </v-flex>
-      <v-text-field
-          v-for="field in fields"
-          v-model="model[field]"
-          :key="field"
-          :label=" $t !== undefined ? $t(field) : field">
-      </v-text-field>
-      <v-btn
-          color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
-    </v-layout>
+      <v-flex
+          xs12
+          md4
+          sm6>
+        <v-text-field
+            v-for="field in fields"
+            v-model="model[field]"
+            :key="field"
+            :label=" $t !== undefined ? $t(field) : field">
+        </v-text-field>
+      </v-flex>
       <v-flex
           xs12
           md3
           sm3>
-      <v-select
-          v-for="relationField in relationFields"
-          v-model="model[relationField]"
-          :label=" $t(relationField) "
-          :items="selectEntities"
-          item-text="name"
-          item-value="_id">
-      </v-select>
+        <v-select
+            v-for="relationField in relationFields"
+            v-model="model[relationField]"
+            :key="relationField"
+            :label=" $t(relationField) "
+            :items="selectEntities"
+            item-text="name"
+            item-value="_id">
+        </v-select>
       </v-flex>
-    <v-layout>
     </v-layout>
   </v-container>
 </template>
 
 <style lang="scss" module>
+.headline {
+    padding: 20px;
+}
 </style>

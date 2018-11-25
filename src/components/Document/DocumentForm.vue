@@ -49,16 +49,21 @@ export default {
           md12
           sm12>
         {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+        <v-btn
+            :color=" editing? 'secondary': 'primary'"
+            @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
       </v-flex>
-      <v-text-field
-          v-for="field in fields"
-          v-model="model[field]"
-          :key="field"
-          :label=" $t !== undefined ? $t(field) : field">
+      <v-flex
+          xs12
+          md6
+          sm4>
+        <v-text-field
+            v-for="field in fields"
+            v-model="model[field]"
+            :key="field"
+            :label=" $t !== undefined ? $t(field) : field">
       </v-text-field>
-      <v-btn
-          color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>

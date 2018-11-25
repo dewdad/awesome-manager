@@ -5,5 +5,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Document/DocumentTable.vue`).then(m => m.default),
+    `@/components/Document/DocumentTable.vue`),
 };
