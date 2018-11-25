@@ -22,6 +22,13 @@ export default class <%= ModelName %> extends Model {
     return Object.keys(this.fields());
   }
 
+  static relationFieldsList() {
+    return this.fieldsList().reduce((list, field) => {
+      if (this.fields()[field] instanceof BelongsTo) list.push(`${field}_id`);
+      return list
+    },[])
+  }
+
   static fields() {
     return {
       _id: this.increment(),

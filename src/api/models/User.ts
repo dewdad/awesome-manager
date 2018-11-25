@@ -1,4 +1,5 @@
-import { Model } from "@vuex-orm/core";
+import { Model, BelongsTo } from "@vuex-orm/core";
+import { keys, values } from 'lodash';
 import Entity from "@/api/models/Entity";
 export default class User extends Model {
   static entity = "user";
@@ -6,7 +7,21 @@ export default class User extends Model {
   static primaryKey = "_id";
 
   static fieldsList() {
-    return Object.keys(this.fields());
+    return keys(this.fields());
+  }
+
+  static relationFieldsList() {
+      /**
+       * fields that has relations
+       * return {Array} fields which value are BelongsTo
+      */
+      return keys(this.fields()).reduce((list, field) => {
+          if (this.fields()[field] instanceof BelongsTo) {
+              list.push(`${field}_id`)
+              list.push(field)
+          };
+          return list
+      },[])
   }
 
   static fields() {

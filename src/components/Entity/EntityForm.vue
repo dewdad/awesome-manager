@@ -37,7 +37,6 @@ export default {
       console.log(Entity.all())
     }
   }
-  
 }
 </script>
 

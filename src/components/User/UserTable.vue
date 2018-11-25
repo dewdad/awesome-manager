@@ -1,6 +1,7 @@
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
+import { pullAll } from "lodash";
 export default {
   components: {
     UserForm,
@@ -11,8 +12,8 @@ export default {
     };
   },
   computed: {
-    all: () => User.all(),
-    headers: () => User.fieldsList(),
+    all: () => User.query().withAll().get(),
+    headers: () => pullAll(User.fieldsList(), User.relationFieldsList()),
   },
   created() {
     window.UserApp = this;
@@ -44,6 +45,11 @@ export default {
             slot="headers"
             slot-scope="props">
           <tr>
+            <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
             <th
                 v-for="header in props.headers"
                 class="text-xs-left"

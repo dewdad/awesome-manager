@@ -1,5 +1,8 @@
 <script>
+import { map, pick } from "lodash/fp";
+import { pullAll } from "lodash";
 import User from "@/api/models/User";
+import Entity from "@/api/models/Entity";
 export default {
   data() {
     return {
@@ -16,14 +19,9 @@ export default {
     window.UserForm = this;
   },
   computed: {
-    fields: () => {
-        return User.fieldsList().reduce((arr, field) => {
-          if(!field.match(/.*(E|e)ntity/)) {
-            arr.push(field);
-          };
-          return arr;
-        }, [])
-    },
+      relationFields: ()=> User.relationFieldsList().filter(r => r.match(/.*_id/)),
+      selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
+      fields: () => pullAll(User.fieldsList(), User.relationFieldsList()),
   },
   methods: {
     reset() {
@@ -66,6 +64,21 @@ export default {
       <v-btn
           color="primary"
           @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+    </v-layout>
+      <v-flex
+          xs12
+          md3
+          sm3>
+      <v-select
+          v-for="relationField in relationFields"
+          v-model="model[relationField]"
+          :label=" $t(relationField) "
+          :items="selectEntities"
+          item-text="name"
+          item-value="_id">
+      </v-select>
+      </v-flex>
+    <v-layout>
     </v-layout>
   </v-container>
 </template>

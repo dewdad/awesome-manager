@@ -1,3 +1,4 @@
+import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } from 'lodash';
 /**
  * Utility function to create a string array from keys of any object
  *
@@ -89,10 +90,20 @@ export function selectedDeepMining<T extends object, S extends string>(o: T, f: 
  *
  * Usage:
  * stateObjectFromArray([{"_id": "1", "name": "joe"}]) -> {"1": {...}}
+ * keyBy([o,...], (o)=> o["_id"])
  */
 export function stateObjectFromArray<T extends any, K extends string>(a: Array<T>): { K: T } {
   return a.reduce((res, item) => {
     res[item["_id"]] = item;
     return res;
   }, Object.create(null));
+}
+
+export function pullFromArray( array: any[], matched: any) {
+    return arrya.reduce((arr, item) => {
+        if(!field.match(matched)) {
+            arr.push(item);
+          };
+          return arr;
+    }, [])
 }
