@@ -9,6 +9,7 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
 %>export default {
   path: "/<%= pathName %>",
   name: "<%= modelName %>",
+  meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
