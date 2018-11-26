@@ -1,4 +1,4 @@
-import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } from 'lodash';
+import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } from "lodash";
 /**
  * Utility function to create a string array from keys of any object
  *
@@ -99,11 +99,11 @@ export function stateObjectFromArray<T extends any, K extends string>(a: Array<T
   }, Object.create(null));
 }
 
-export function pullFromArray( array: any[], matched: any) {
-    return array.reduce((arr, item) => {
-        if(!item.match(matched)) {
-            arr.push(item);
-          };
-          return arr;
-    }, [])
+export function pullFromArray(array: any[], matched: any) {
+  return array.reduce((arr, item) => {
+    if (!item.match(matched)) {
+      arr.push(item);
+    }
+    return arr;
+  }, []);
 }

@@ -6,15 +6,12 @@ export default {
     DocumentForm,
     DocumentTable,
   },
-  data() {
-  },
-  computed: {
-  },
+  data() {},
+  computed: {},
   created() {
     window.DocumentApp = this;
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

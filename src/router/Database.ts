@@ -4,5 +4,5 @@ export default {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Database/DatabaseManager.vue`)
+    `@/components/Database/DatabaseManager.vue`),
 };

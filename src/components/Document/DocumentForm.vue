@@ -62,7 +62,7 @@ export default {
             v-model="model[field]"
             :key="field"
             :label=" $t !== undefined ? $t(field) : field">
-      </v-text-field>
+        </v-text-field>
       </v-flex>
     </v-layout>
   </v-container>

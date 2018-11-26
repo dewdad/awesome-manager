@@ -81,7 +81,7 @@ export default {
 
     </v-responsive>
     <v-responsive>
-        <DocumentForm></DocumentForm>
+      <DocumentForm></DocumentForm>
     </v-responsive>
   </v-card>
 </template>

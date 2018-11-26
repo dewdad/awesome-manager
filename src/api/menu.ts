@@ -6,7 +6,7 @@ const mainMenu = [
     title: "Entity",
     name: "Entity",
     group: "apps",
-    icon: "fas fa-tasks"
+    icon: "fas fa-tasks",
   },
   {
     title: "Generic",

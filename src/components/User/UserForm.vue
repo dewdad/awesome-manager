@@ -18,9 +18,9 @@ export default {
     window.UserForm = this;
   },
   computed: {
-      relationFields: ()=> User.relationFieldsList().filter(r => r.match(/.*_id/)),
-      selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-      fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
+    relationFields: () => User.relationFieldsList().filter(r => r.match(/.*_id/)),
+    selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
+    fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
   },
   methods: {
     reset() {
@@ -88,6 +88,6 @@ export default {
 
 <style lang="scss" module>
 .headline {
-    padding: 20px;
+  padding: 20px;
 }
 </style>

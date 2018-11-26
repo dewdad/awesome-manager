@@ -12,7 +12,10 @@ export default {
     };
   },
   computed: {
-    all: () => User.query().withAll().get(),
+    all: () =>
+      User.query()
+        .withAll()
+        .get(),
     headers: () => pullAll(User.fieldsList(), User.relationFieldsList()),
   },
   created() {
@@ -83,7 +86,7 @@ export default {
       </v-data-table>
 
     </v-responsive>
-      <UserForm></UserForm>
+    <UserForm></UserForm>
     <v-responsive>
     </v-responsive>
   </v-card>

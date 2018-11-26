@@ -48,7 +48,7 @@
       </v-data-table>
     </v-responsive>
     <v-responsive>
-        <ActivityForm></ActivityForm>
+      <ActivityForm></ActivityForm>
     </v-responsive>
   </v-card>
 </template>

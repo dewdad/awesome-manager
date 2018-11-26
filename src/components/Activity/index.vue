@@ -6,15 +6,12 @@ export default {
     ActivityForm,
     ActivityTable,
   },
-  data() {
-  },
-  computed: {
-  },
+  data() {},
+  computed: {},
   created() {
     window.ActivityApp = this;
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

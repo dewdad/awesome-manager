@@ -1,11 +1,11 @@
 import { Model } from "@vuex-orm/core";
 
 export interface INotification {
-   _id: string;
-   title: string;
-   color: string;
-   icon: string;
-   timeLabel: string;
+  _id: string;
+  title: string;
+  color: string;
+  icon: string;
+  timeLabel: string;
 }
 
 export default class Notification extends Model {
@@ -20,8 +20,8 @@ export default class Notification extends Model {
   static relationFieldsList() {
     return this.fieldsList().reduce((list, field) => {
       if (this.fields()[field] instanceof BelongsTo) list.push(`${field}_id`);
-      return list
-    },[])
+      return list;
+    }, []);
   }
 
   static fields() {

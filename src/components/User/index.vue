@@ -6,15 +6,12 @@ export default {
     UserForm,
     UserTable,
   },
-  data() {
-  },
-  computed: {
-  },
+  data() {},
+  computed: {},
   created() {
     window.UserApp = this;
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

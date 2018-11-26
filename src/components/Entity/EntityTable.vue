@@ -3,30 +3,29 @@ import Entity from "@/api/models/Entity";
 import EntityForm from "./EntityForm";
 export default {
   components: {
-    EntityForm
+    EntityForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>Entity.all(),
-    headers: ()=>Entity.fieldsList(),
+    all: () => Entity.all(),
+    headers: () => Entity.fieldsList(),
   },
   created() {
     window.EntityTable = this;
   },
   methods: {
     deleteItem(item) {
-      Entity.delete(item._id)
+      Entity.delete(item._id);
     },
     editItem(item) {
-      window.EntityForm.$emit("SET_EDITING", item)
-    }
+      window.EntityForm.$emit("SET_EDITING", item);
+    },
   },
-
-}
+};
 </script>
 
 <template>
@@ -82,11 +81,10 @@ export default {
 
     </v-responsive>
     <v-responsive>
-        <EntityForm></EntityForm>
+      <EntityForm></EntityForm>
     </v-responsive>
   </v-card>
 </template>
 
 <style lang="scss" module>
-
 </style>
