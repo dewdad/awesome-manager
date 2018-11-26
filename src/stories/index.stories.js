@@ -3,6 +3,8 @@ import { storiesOf } from "@storybook/vue";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
+import { VBtn, VContainer, VFlex } from "vuetify/lib";
+
 import MyButton from "../components/base/MyButton.vue";
 import RxCounter from "../components/widgets/RxCounter.vue";
 

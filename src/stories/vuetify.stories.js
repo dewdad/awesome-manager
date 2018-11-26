@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 // vuetify
-import { VBtn, VIcon } from "vuetify";
+import { VBtn, VIcon } from "vuetify/lib";
 
 storiesOf("Vuetify", module)
   .add("Vuetify Button", () => ({
@@ -14,6 +14,6 @@ storiesOf("Vuetify", module)
   }))
   .add("Vuetify Icon", () => ({
     components: { VIcon },
-    template: '<v-icon @click="action">fab fa-github</v-icon>',
+    template: '<v-icon @click="action">fas fa-dashboard</v-icon>',
     methods: { action: action("clicked") },
   }));

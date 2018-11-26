@@ -54,7 +54,6 @@ if (blocks.indexOf('template') !== -1) {
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
           class="elevation-0"
         >
         <template

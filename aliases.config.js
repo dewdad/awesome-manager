@@ -1,5 +1,5 @@
 const aliases = {
-  "@design": "src/style/main.scss",
+  "@/design": "src/style/main.scss",
 };
 
 module.exports = {

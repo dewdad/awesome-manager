@@ -1,37 +1,52 @@
 <template>
-  <section>
-    <h1>Click on 'Count' button to count your clicks</h1>
-    <button v-stream:click="count$">Count clicks</button>
-    <button @click="clearCounter">Clear counter</button>
-    <p>{{result$}}</p>
-    <p>operators</p>
-    <p>filter</p>
-    <p>bufferWhen</p>
-    <p>debounceTime</p>
-    <p>map</p>
-    <p>startWith</p>
-  </section>
+  <v-container>
+      <div id="app">
+      <div>{{ count }}</div>
+
+      <!-- simple usage -->
+      <button v-stream:click="plus$">Add on Click</button>
+
+      <button v-stream:click="{ subject: plus$, data: minusDelta1, options:{once:true} }">Add on Click (Option once:true)</button>
+
+      <!-- you can also stream to the same subject with different events/data -->
+      <button
+        v-stream:click="{ subject: minus$, data: minusDelta1 }"
+        v-stream:mousemove="{ subject: minus$, data: minusDelta2 }">
+        Minus on Click &amp; Mousemove
+      </button>
+
+      <pre>{{ $data }}</pre>
+
+    </div>
+  </v-container>
 </template>
 
 <script>
-import { filter, bufferWhen, debounceTime, map, startWith } from "rxjs/operators";
+import { merge } from "rxjs";
+import { filter, bufferWhen, pluck, debounceTime, map, startWith, scan } from "rxjs/operators";
 export default {
   name: "rx-counter",
-  domStreams: ["count$"],
-  subscriptions() {
+  data() {
     return {
-      result$: this.count$.pipe(
-        filter(event => !!event),
-        bufferWhen(() => this.count$.pipe(debounceTime(400))),
-        map(clicks => clicks.length),
-        startWith(0),
-      ),
+      minusDelta1: -1,
+      minusDelta2: -1,
     };
   },
-  methods: {
-    clearCounter() {
-      this.count$.next(null);
-    },
+  created() {
+    //Speed up mousemove minus delta after 5s
+    setTimeout(() => {
+      this.minusDelta2 = -5;
+    }, 5000);
+  },
+  // declare dom stream Subjects
+  domStreams: ["plus$", "minus$"],
+  subscriptions() {
+    return {
+      count: merge(this.plus$.pipe(map(() => 1)), this.minus$.pipe(pluck("data"))).pipe(
+        startWith(0),
+        scan((total, change) => total + change),
+      ),
+    };
   },
 };
 </script>

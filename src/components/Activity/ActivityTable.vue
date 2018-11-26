@@ -5,7 +5,6 @@
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
           class="elevation-0">
         <template
             slot="headers"

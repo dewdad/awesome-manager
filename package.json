@@ -8,7 +8,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:storybook": "vue-cli-service build:storybook -c config/storybook",
     "db:add": "yarn add -D file:lib/vue-cli-plugins/vue-cli-plugin-vuex-nedb-module-generator",
     "db:invoke": "vue invoke vuex-nedb-module-generator",
     "dev": "yarn electron:serve",
@@ -27,7 +26,8 @@
     "release:major": "git add CHANGELOG.md && git commit -m 'chore: update changelog' && npm version major && git push origin && git push origin --tags",
     "release:minor": "git add CHANGELOG.md && git commit -m 'chore: update changelog' && npm version minor && git push origin && git push origin --tags",
     "release:patch": "git add CHANGELOG.md && git commit -m 'chore: update changelog' && npm version patch && git push origin && git push origin --tags",
-    "serve:storybook": "vue-cli-service serve:storybook -p 6006 -c config/storybook",
+    "storybook:serve": "vue-cli-service serve:storybook -p 6006 -c config/storybook",
+    "storybook:build": "vue-cli-service build:storybook -c config/storybook",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watch"

@@ -38,7 +38,6 @@ export default {
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
           class="elevation-0"
         >
         <template
