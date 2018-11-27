@@ -13,6 +13,10 @@
               @change="updateEntity"
               label="select"
               :items="entities"/>
+          <v-select
+              v-model="templateDocName"
+              label="select"
+              :items="templateDocs"/>
           <v-radio-group
               v-model="radioGroup"
               row>
@@ -163,7 +167,7 @@ export default {
           // FIXME: delete(item.id)
           try {
             this.entity.db.read()
-              .get(`${this.entity.dbPath}`)
+              .get(`${this.dbName}`)
               .push(item)
               .write();
           } catch (e) {
@@ -179,14 +183,14 @@ export default {
        * Export data to file with file dialog
        */
       log.info("Exporting...");
-      log.info("Template data file is: " + this.exportDataPath);
-      let filePath = path.join(this.userTemplatePath, `${this.exportDataPath}.csv`);
+      log.info("Template data file is: " + this.templateDocName);
+      let filePath = path.join(this.userTemplatePath, `${this.templateDocName}.csv`);
       log.suc(filePath);
       // Export CSV
       try {
         let data = this.entity.db
           .read()
-          .get(`${this.entity.dbPath}`)
+          .get(`${this.dbName}`)
           .value();
         GenerateCSV(data, filePath);
         // open template file
