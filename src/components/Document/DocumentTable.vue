@@ -1,6 +1,7 @@
 <script>
 import Document from "@/api/models/Document";
 import DocumentForm from "./DocumentForm";
+import { remote, shell } from "electron";
 export default {
   components: {
     DocumentForm,
@@ -23,6 +24,11 @@ export default {
     },
     editItem(item) {
       window.DocumentForm.$emit("SET_EDITING", item);
+    },
+    exportItem(item) {
+      let filePath = path.join(remote.app.getPath("home"), "/Documents/template/db.csv");
+      GenerateCSV([item], filePath);
+      shell.showItemInFolder(filePath);
     },
   },
 };
@@ -73,6 +79,12 @@ export default {
                 class="mx-0"
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
+            </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
           </td>
         </template>
