@@ -11,11 +11,11 @@
           <v-select
               v-model="dbName"
               @change="updateEntity"
-              label="select"
+              label="Select Database Name"
               :items="entities"/>
           <v-select
-              v-model="templateDocName"
-              label="select"
+              v-model="outputDocFile"
+              label="Select Document Name"
               :items="templateDocs"/>
           <v-radio-group
               v-model="radioGroup"
@@ -118,12 +118,16 @@ import { join } from "path";
 export default {
   data() {
     return {
+      // entity DB instance
       entity: null,
+      // entity name list
       entities: [],
+      // entity name
       dbName: "",
-      userTemplatePath: "",
+      // Template dir path
+      templateDir: "",
       outputJsonFile: "",
-      templateDocName: "",
+      outputDocFile: "",
       templateDocs: [],
       // Is for import, verseversa export
       bIsImport: true,
@@ -144,9 +148,9 @@ export default {
       this.entity = new LowdbForElectron(this.dbName);
     },
     findDocuments() {
-      this.userTemplatePath = path.join(remote.app.getPath("home"), "/Documents/template");
-      log.suc("Template Directory is: " + this.userTemplatePath);
-      this.templateDocs = getFilesByExtentionInDir(this.userTemplatePath, "doc");
+      this.templateDir = path.join(remote.app.getPath("home"), "/Documents/template");
+      log.suc("Template Directory is: " + this.templateDir);
+      this.templateDocs = getFilesByExtentionInDir(this.templateDir, "doc");
       log.suc(this.templateDocs);
     },
     async importEntities(e) {
@@ -154,17 +158,16 @@ export default {
        * Import collection from a local json file
        */
       // Get File Object from html input
-      let file = e.target.files[0];
+      let sourceFile = e.target.files[0];
       console.log(file);
       // Import csv file and return data of the papaparse results
-      let data = await ImportCSV(file);
+      let data = await ImportCSV(sourceFile);
       console.log(data);
       // Put array to nedb
       if (Array.isArray(data)) {
         log.info("Start to write to persistence ...");
         data.forEach(item => {
           console.log(item);
-          // FIXME: delete(item.id)
           try {
             this.entity.db.read()
               .get(`${this.dbName}`)
@@ -183,8 +186,7 @@ export default {
        * Export data to file with file dialog
        */
       log.info("Exporting...");
-      log.info("Template data file is: " + this.templateDocName);
-      let filePath = path.join(this.userTemplatePath, `${this.templateDocName}.csv`);
+      let csvFilePath = path.join(this.templateDir, `${this.dbName}.csv`);
       log.suc(filePath);
       // Export CSV
       try {
@@ -192,21 +194,18 @@ export default {
           .read()
           .get(`${this.dbName}`)
           .value();
-        GenerateCSV(data, filePath);
+        GenerateCSV(data, csvFilePath);
         // open template file
-        shell.showItemInFolder(filePath);
+        shell.showItemInFolder(csvFilePath);
+        // shell.showItemInFolder(outputDocFile);
       } catch (e) {
-        // Do something
         throw new Error("读取数据失败!");
       }
     },
     resetEntities() {
-      /**
-       * Reset and clear a collection | table | db
-       */
-      // Locate the collection json file
-      alert("请手动删除以下Json文件：" + this.exportDataPath);
-      shell.showItemInFolder(join(this.entity.dbPath, `${this.dbName}.json`));
+      let { source } = this.entity.adapter;
+      alert("请手动删除以下Json文件：" + source);
+      shell.showItemInFolder(source);
       // Delelet the file
       // shell.moveItemToTrash(collectionJsonFile);
     },
