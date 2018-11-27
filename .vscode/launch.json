@@ -1,12 +1,73 @@
 {
-  // 使用 IntelliSense 了解相关属性。 
-  // 悬停以查看现有属性的描述。
-  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [{
-    "type": "electron",
-    "request": "launch",
-    "name": "manager",
-    "appDir": "${workspaceFolder}/dist_electron/bundled"
-  }]
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome Play",
+      "url": "http://localhost:9229",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Play Program",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect-brk=9229",
+      ],
+      "program": "${workspaceFolder}/lib/util/play.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Electron Dev Server",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "dev"
+      ],
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "name": "vscode-jest-tests",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": [
+        "--runInBand"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "electron",
+      "request": "launch",
+      "name": "Launch Electron",
+      "appDir": "/dist_electron/bundled",
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch storybook",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "storybook:serve",
+      ],
+      "port": 9229
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "vuejs: chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    }
+  ]
 }

@@ -1,4 +1,7 @@
 module.exports = {
+  configureWebpack: {
+    devtool: "source-map",
+  },
   pluginOptions: {
     i18n: {
       locale: "cn",
