@@ -140,8 +140,8 @@ export default {
     };
   },
   created() {
-      this.entities = entities;
-      this.findDocuments();
+    this.entities = entities;
+    this.findDocuments();
   },
   methods: {
     updateEntity() {
@@ -169,7 +169,8 @@ export default {
         data.forEach(item => {
           console.log(item);
           try {
-            this.entity.db.read()
+            this.entity.db
+              .read()
               .get(`${this.dbName}`)
               .push(item)
               .write();

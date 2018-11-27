@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <div id="app">
+    <div id="app">
       <div>{{ count }}</div>
 
       <!-- simple usage -->
@@ -10,8 +10,8 @@
 
       <!-- you can also stream to the same subject with different events/data -->
       <button
-        v-stream:click="{ subject: minus$, data: minusDelta1 }"
-        v-stream:mousemove="{ subject: minus$, data: minusDelta2 }">
+          v-stream:click="{ subject: minus$, data: minusDelta1 }"
+          v-stream:mousemove="{ subject: minus$, data: minusDelta2 }">
         Minus on Click &amp; Mousemove
       </button>
 
