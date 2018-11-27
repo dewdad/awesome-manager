@@ -14,7 +14,7 @@ export class nedbForElectron {
 
   constructor(dbName: string) {
     this.isElectron = this.ensureElectronEnv();
-    this.hasdbPath = this.ensuredbPath("data");
+    this.hasdbPath = this.ensuredbPath("nedb");
     this.hasdb = this.createPersistence(dbName);
   }
 
@@ -48,12 +48,10 @@ export class nedbForElectron {
    */
   createPersistence(dbName: string) {
     if (this.dbPath !== undefined) {
-      this.db = new Database(join(this.dbPath, `${dbName}.csv`));
+      this.db = new Database(join(this.dbPath, `${dbName}`));
     } else {
-      this.adapter = new Memory(dbName);
+      this.db = new Database(`${dbName}`);
     }
-    this.db = Datastore(this.adapter);
-    this.db._.mixin(LodashId);
     return this.db === undefined ? false : true;
   }
 
@@ -61,12 +59,6 @@ export class nedbForElectron {
    * Database persistence Module
    */
 
-  dbOpen(node: string) {
-    return this.db
-      .read()
-      .get(node)
-      .value();
-  }
   /**
    * Init a set of default values
    */
@@ -91,33 +83,25 @@ export class nedbForElectron {
    */
   dbCreate(node: string) {
     console.log(`creating default value in ${node} lowdb`);
-    if (!this.db.has(node).value()) {
-      this.db.set(node, []).write();
-    } else {
-      console.log(`${node} default value exists`);
-    }
   }
   /**
    * Remove a key
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbRemove(node: string) {
-    if (!this.db.has(node).value()) {
-      this.db.unset(node).write();
-    }
   }
   /**
    * 通过查询语句，获取数据，返回一个Promise<数据[]>
    * @param db Nedb datastore
    * @param query MongoDB-style query
    */
-  find(entity: string, query: string) => {
+  find(entity: string, query: string): Promise<any>  => {
     return new Promise((resolve, reject) => {
-      this.db.find(query, (err: Error, document: any[]) => {
+      this.db.find(query, (err: Error, documents: any[]) => {
         if (err !== null) {
           reject(err);
         } else {
-          resolve(document);
+          resolve(documents);
         }
       });
     });
@@ -127,9 +111,9 @@ export class nedbForElectron {
    * 获取Vuex中传递的载荷，如果有就删除Id字段，创建并返回Promise<插入的新数据>
    * @param cleanPayload MongoDB-style query
    */
-  insert (entity, string, cleanPayload: any) => {
+  insert (entity, string, data: any): Promise<any>  => {
     return new Promise((resolve, reject) => {
-      this.db.insert(cleanPayload, (err: Error, insertedDoc: any) => {
+     this.db.insert(data, (err: Error, insertedDoc: any) => {
         if (err !== null) {
           reject(err);
         } else {
@@ -143,10 +127,9 @@ export class nedbForElectron {
    * @param query MongoDB-style query
    * @param cleanPayload MongoDB-style query
    */
-  update (entity: string, query: any, cleanPayload: any) => {
-    if (entity === undefined || cleanPayload === undefined || query === undefined) return;
+  update (entity: string, query: any, data: any): Promise<any>  => {
     return new Promise((resolve, reject) => {
-      this.db.update(query, cleanPayload, {}, (err: Error, numberOfUpdated: number) => {
+      this.db.update(query, data, {}, (err: Error, numberOfUpdated: number) => {
         if (err !== null) {
           reject(err);
         } else {
@@ -161,8 +144,7 @@ export class nedbForElectron {
    * @param db Nedb datastore
    * @param query MongoDB-style query
    */
-   delete (entity: string, query: any) => {
-    if (entity === undefined || query === undefined) return;
+  delete (entity: string, query: any): Promise<any> => {
     return new Promise((resolve, reject) => {
       this.db.remove(query, {}, (err: Error, numberOfDeleted: number) => {
         if (err !== null) {
@@ -175,6 +157,6 @@ export class nedbForElectron {
   };
 }
 
-export const defaultDB = new nedbForElectron("data");
+export const defaultDB = new nedbForElectron("nedb");
 
 export default defaultDB.db;

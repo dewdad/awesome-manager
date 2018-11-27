@@ -8,7 +8,11 @@
       <!-- Import Card -->
       <v-card>
         <v-card-title>
-          <DatabaseSelector :dataFiles="collections"/>
+          <v-select
+              v-model="dbName"
+              @change="updateEntity"
+              label="select"
+              :items="entities"/>
           <v-radio-group
               v-model="radioGroup"
               row>
@@ -93,12 +97,6 @@
 </template>
 
 <script>
-import { get, sync, call } from "vuex-pathify";
-import { Component, Prop, Watch, Vue } from "vue-property-decorator";
-
-import * as types from "@/store/types";
-const namespace = { namespace: types.nsDatabase };
-
 import {
   log,
   getFilesByExtentionInDir,
@@ -108,33 +106,21 @@ import {
   ArrayToNedb,
 } from "@/util";
 
-import { remote, shell } from "electron";
-import path from "path";
-import fs from "fs";
-
-import db from "@/api/lowdb";
+import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 
 import { join } from "path";
 
-const userDataPath = join(remote.app.getPath("userData"), "data");
-
-import DatabaseSelector from "./DatabaseSelector.vue";
-import DocumentSelector from "./DocumentSelector.vue";
-
 export default {
-  components: {
-    DocumentSelector,
-    DatabaseSelector,
-  },
   data() {
     return {
+      entity: null,
+      entities: [],
+      dbName: "",
       userTemplatePath: "",
-      userDataPath: "",
       outputJsonFile: "",
       templateDocName: "",
       templateDocs: [],
-      collections: [],
       // Is for import, verseversa export
       bIsImport: true,
       // Switch between import/export/reset
@@ -145,22 +131,13 @@ export default {
       isEditing: false,
     };
   },
-  computed: {
-    ...get("database/*"),
-    collectionName: get("database/currentItem@name"),
-    exportDocPath: get("database/export@docPath"),
-    exportDataPath: get("database/export@dataPath"),
-  },
-  mounted() {
-    this.findCollections();
-    this.findDocuments();
+  created() {
+      this.entities = entities;
+      this.findDocuments();
   },
   methods: {
-    ...call("database/*"),
-    findCollections() {
-      // Initialize the userData path and check db files
-      this.userDataPath = userDataPath;
-      this.collections = entities;
+    updateEntity() {
+      this.entity = new LowdbForElectron(this.dbName);
     },
     findDocuments() {
       this.userTemplatePath = path.join(remote.app.getPath("home"), "/Documents/template");
@@ -168,15 +145,7 @@ export default {
       this.templateDocs = getFilesByExtentionInDir(this.userTemplatePath, "doc");
       log.suc(this.templateDocs);
     },
-    chooseCollection() {
-      /**
-       * If you select a collection by name, open the db file and get all data
-       * into FilteredItems.
-       * Based on the first item, auto generate table headers
-       */
-      log.info("You have chosen " + this.exportDataPath);
-    },
-    async importCollection(e) {
+    async importEntities(e) {
       /**
        * Import collection from a local json file
        */
@@ -193,9 +162,9 @@ export default {
           console.log(item);
           // FIXME: delete(item.id)
           try {
-            db.read()
-              .get(`${this.exportDataPath}.data`)
-              .insert(item)
+            this.entity.db.read()
+              .get(`${this.entity.dbPath}`)
+              .push(item)
               .write();
           } catch (e) {
             throw new Error("添加数据失败!");
@@ -205,7 +174,7 @@ export default {
         log.err("You must pass a array to save!");
       }
     },
-    async exportCollection() {
+    async exportEntities() {
       /**
        * Export data to file with file dialog
        */
@@ -215,9 +184,9 @@ export default {
       log.suc(filePath);
       // Export CSV
       try {
-        let data = db
+        let data = this.entity.db
           .read()
-          .get(`${this.exportDataPath}.data`)
+          .get(`${this.entity.dbPath}`)
           .value();
         GenerateCSV(data, filePath);
         // open template file
@@ -227,14 +196,13 @@ export default {
         throw new Error("读取数据失败!");
       }
     },
-    resetCollection() {
+    resetEntities() {
       /**
        * Reset and clear a collection | table | db
        */
       // Locate the collection json file
       alert("请手动删除以下Json文件：" + this.exportDataPath);
-      let collectionJsonFile = path.join(this.userDataPath, "/" + this.collectionName + ".json");
-      shell.showItemInFolder(collectionJsonFile);
+      shell.showItemInFolder(join(this.entity.dbPath, `${this.dbName}.json`));
       // Delelet the file
       // shell.moveItemToTrash(collectionJsonFile);
     },
