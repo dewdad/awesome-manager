@@ -4,7 +4,7 @@ import Activity from "@/api/models/Activity";
 
 const store = (global as any).createORMStore([{ model: Activity }], "entities");
 function mountActivityForm() {
-  return (global as any).shallowMountView(ActivityInfo, {
+  return (global as any).shallowMountView(ActivityForm, {
     ...(global as any).createComponentMocks({
       store,
     }),

@@ -1,6 +1,6 @@
 import { join } from "path";
 import fs from "fs-extra";
-import { remote, app, Remote, App } from "electron";
+import { remote, app, App } from "electron";
 import LodashId from "lodash-id";
 import { lowerFirst } from "lodash";
 import Datastore, { AdapterSync, LowdbSync } from "lowdb";

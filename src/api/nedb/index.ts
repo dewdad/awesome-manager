@@ -1,10 +1,9 @@
 import { join } from "path";
 import fs from "fs-extra";
-import { remote, app, Remote, App } from "electron";
-import { lowerFirst } from "lodash";
-import Database, { DataStoreOptions } from "nedb";
+import { remote, app, App } from "electron";
+import Database from "nedb";
 
-export class nedbForElectron {
+export class NedbForElectron {
   isElectron: boolean;
   hasdbPath: boolean;
   hasdb: boolean;
@@ -43,14 +42,14 @@ export class nedbForElectron {
   }
 
   /**
-   * Create lowdb store persisted in disk
+   * Create nedb store persisted in disk
    * @param {String} dbName Name of the store file
    */
   createPersistence(dbName: string) {
     if (this.dbPath !== undefined) {
-      this.db = new Database(join(this.dbPath, `${dbName}`));
+      this.db = new Database({filename: join(this.dbPath, `${dbName}`), autoload: true});
     } else {
-      this.db = new Database(`${dbName}`);
+      this.db = new Database({filename: `${dbName}`, autoload: true});
     }
     return this.db === undefined ? false : true;
   }
@@ -82,20 +81,21 @@ export class nedbForElectron {
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbCreate(node: string) {
-    console.log(`creating default value in ${node} lowdb`);
+    console.log(`creating default value in ${node} neddb`);
   }
   /**
    * Remove a key
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbRemove(node: string) {
+    console.log(`removing default value in ${node} neddb`);
   }
   /**
    * 通过查询语句，获取数据，返回一个Promise<数据[]>
    * @param db Nedb datastore
    * @param query MongoDB-style query
    */
-  find(entity: string, query: string): Promise<any>  => {
+  find(entity: string, query: any): Promise<any>  {
     return new Promise((resolve, reject) => {
       this.db.find(query, (err: Error, documents: any[]) => {
         if (err !== null) {
@@ -111,7 +111,7 @@ export class nedbForElectron {
    * 获取Vuex中传递的载荷，如果有就删除Id字段，创建并返回Promise<插入的新数据>
    * @param cleanPayload MongoDB-style query
    */
-  insert (entity, string, data: any): Promise<any>  => {
+  insert (entity: string, data: any): Promise<any>  {
     return new Promise((resolve, reject) => {
      this.db.insert(data, (err: Error, insertedDoc: any) => {
         if (err !== null) {
@@ -127,7 +127,7 @@ export class nedbForElectron {
    * @param query MongoDB-style query
    * @param cleanPayload MongoDB-style query
    */
-  update (entity: string, query: any, data: any): Promise<any>  => {
+  update (entity: string, query: any, data: any): Promise<any>  {
     return new Promise((resolve, reject) => {
       this.db.update(query, data, {}, (err: Error, numberOfUpdated: number) => {
         if (err !== null) {
@@ -141,10 +141,10 @@ export class nedbForElectron {
 
   /**
    * 获取Vuex中传递的载荷，如果有就删除Id字段，删除并返回Promise<删除数据的数量>
-   * @param db Nedb datastore
+   * @param entity optional entity name
    * @param query MongoDB-style query
    */
-  delete (entity: string, query: any): Promise<any> => {
+  delete (entity: string, query: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db.remove(query, {}, (err: Error, numberOfDeleted: number) => {
         if (err !== null) {
@@ -157,6 +157,6 @@ export class nedbForElectron {
   };
 }
 
-export const defaultDB = new nedbForElectron("nedb");
+export const defaultDB = new NedbForElectron("nedb");
 
 export default defaultDB.db;
