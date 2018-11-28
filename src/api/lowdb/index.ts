@@ -117,8 +117,12 @@ export class LowdbForElectron {
    */
   insert(entity: string, data: any) {
     console.log("Inserting in " + entity);
+    if (this.find(entity, data) !== null) {
+      console.log("Identity Entity exites, skip!")
+      return;
+    };
+    data.id && delete data.id;
     try {
-      data.id && delete data.id;
       this.db
         .read()
         .get(`${lowerFirst(entity)}`)

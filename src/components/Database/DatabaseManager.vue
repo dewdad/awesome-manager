@@ -2,9 +2,12 @@
   <v-layout
       wrap
       row>
+
+    <!-- start choice radio button -->
     <v-flex
         xs12
-        sm12>
+        md4
+        sm6>
       <!-- Import Card -->
       <v-card>
         <v-card-title>
@@ -17,6 +20,9 @@
               v-model="outputDocFile"
               label="Select Document Name"
               :items="templateDocs"/>
+        </v-card-title>
+
+        <v-responsive>
           <v-radio-group
               v-model="radioGroup"
               row>
@@ -29,71 +35,31 @@
                 :value="n"
             ></v-radio>
           </v-radio-group>
-        </v-card-title>
+        </v-responsive>
 
-      </v-card>
-    </v-flex>
+        <v-responsive v-show="radioGroup === '导入'">
+          <input
+              type="file"
+              multiple="multiple"
+              @change="importEntities($event)"/>
+        </v-responsive>
 
-    <v-flex
-        xs12
-        sm12>
-      <!-- Import Card -->
-      <v-card v-show="radioGroup === '导入'">
-        <v-toolbar class="primary white--text lighten-1">
-          <v-layout
-              row
-              wrap>
-            <v-flex
-                xs6
-                md6
-                md-offset-3>
-              <input
-                  type="file"
-                  multiple="multiple"
-                  @change="importCollection($event)"/>
-            </v-flex>
-          </v-layout>
-        </v-toolbar>
-      </v-card>
+        <v-responsive v-show="radioGroup === '导出'">
+          <v-btn
+              class="accent"
+              @click="exportEntities">
+            导出数据
+          </v-btn>
+        </v-responsive>
 
-      <!-- Export Card -->
-      <v-card v-show="radioGroup === '导出'">
-        <v-toolbar class="primary white--text lighten-1">
-          <v-layout
-              row
-              wrap>
-            <v-flex
-                xs6
-                md6
-                md-offset-3>
-              <v-btn
-                  class="accent"
-                  @click="exportCollection">
-                导出数据
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-toolbar>
-      </v-card>
+        <v-responsive v-show="radioGroup === '删除'">
+          <v-btn
+              class="accent"
+              @click="resetEntities">
+            重置数据
+          </v-btn>
+        </v-responsive>
 
-      <!-- Reset Card -->
-      <v-card v-show="radioGroup === '删除'" >
-        <v-toolbar class="primary white--text lighten-1">
-          <v-layout
-              row
-              wrap>
-            <v-flex
-                xs6
-                md6
-                md-offset-3>
-              <v-btn
-                  class="accent"
-                  @click="resetCollection">
-                重置数据
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-toolbar>
       </v-card>
     </v-flex>
 
@@ -101,6 +67,11 @@
 </template>
 
 <script>
+
+import { join } from "path";
+import { shell, remote } from "electron";
+import { LowdbForElectron } from "@/api/lowdb";
+import { entities } from "@/api/globals";
 import {
   log,
   getFilesByExtentionInDir,
@@ -110,16 +81,11 @@ import {
   ArrayToNedb,
 } from "@/util";
 
-import { LowdbForElectron } from "@/api/lowdb";
-import { entities } from "@/api/globals";
-
-import { join } from "path";
-
 export default {
   data() {
     return {
       // entity DB instance
-      entity: null,
+      entityDb: null,
       // entity name list
       entities: [],
       // entity name
@@ -133,10 +99,6 @@ export default {
       bIsImport: true,
       // Switch between import/export/reset
       radioGroup: "导入",
-      alert: false,
-      dialog: false,
-      // If isEditing, dive into Edit Mode and show XForm
-      isEditing: false,
     };
   },
   created() {
@@ -145,70 +107,54 @@ export default {
   },
   methods: {
     updateEntity() {
-      this.entity = new LowdbForElectron(this.dbName);
+      this.entityDb = new LowdbForElectron(this.dbName);
     },
     findDocuments() {
-      this.templateDir = path.join(remote.app.getPath("home"), "/Documents/template");
+      this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
       log.suc("Template Directory is: " + this.templateDir);
+
       this.templateDocs = getFilesByExtentionInDir(this.templateDir, "doc");
       log.suc(this.templateDocs);
     },
     async importEntities(e) {
-      /**
-       * Import collection from a local json file
-       */
-      // Get File Object from html input
+
+      log.info("Importing...");
+
       let sourceFile = e.target.files[0];
-      console.log(file);
-      // Import csv file and return data of the papaparse results
+      log.info(sourceFile);
+
       let data = await ImportCSV(sourceFile);
-      console.log(data);
-      // Put array to nedb
-      if (Array.isArray(data)) {
-        log.info("Start to write to persistence ...");
-        data.forEach(item => {
-          console.log(item);
-          try {
-            this.entity.db
-              .read()
-              .get(`${this.dbName}`)
-              .push(item)
-              .write();
-          } catch (e) {
-            throw new Error("添加数据失败!");
-          }
-        });
-      } else {
-        log.err("You must pass a array to save!");
-      }
+      if (!Array.isArray(data)) return;
+      log.info(data);
+
+      // Make sure {this} is {that}
+      let { entityDb, dbName } =  this;
+      if(entityDb === undefined || dbName === undefined) return;
+
+      data.forEach(item => {
+        entityDb.insert(`${dbName}`, item);
+      });
     },
     async exportEntities() {
-      /**
-       * Export data to file with file dialog
-       */
+
       log.info("Exporting...");
-      let csvFilePath = path.join(this.templateDir, `${this.dbName}.csv`);
-      log.suc(filePath);
-      // Export CSV
-      try {
-        let data = this.entity.db
-          .read()
-          .get(`${this.dbName}`)
-          .value();
-        GenerateCSV(data, csvFilePath);
-        // open template file
-        shell.showItemInFolder(csvFilePath);
-        // shell.showItemInFolder(outputDocFile);
-      } catch (e) {
-        throw new Error("读取数据失败!");
-      }
+
+      let targetPath = join(this.templateDir, `${this.dbName}.csv`);
+      log.suc(targetPath);
+
+      let { entityDb, dbName } =  this;
+      if(entityDb === undefined || dbName === undefined) return;
+      
+      let data = entityDb.find(`${dbName}`, {});
+      if (!Array.isArray(data)) return;
+
+      GenerateCSV(data, targetPath);
+      shell.showItemInFolder(targetPath);
     },
     resetEntities() {
-      let { source } = this.entity.adapter;
+      let { source } = this.entityDb.adapter;
       alert("请手动删除以下Json文件：" + source);
       shell.showItemInFolder(source);
-      // Delelet the file
-      // shell.moveItemToTrash(collectionJsonFile);
     },
   },
 };

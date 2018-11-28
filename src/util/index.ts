@@ -1,7 +1,6 @@
 /* tslint:disable:no-console */
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
-import path from "path";
 const stringify = require("csv-stringify");
 /**
  * Beautiful log with colors and fonts
@@ -60,8 +59,7 @@ export function baseFilter(items: any[], sortKey: any, filterKey: any): any[] {
  * @param item Object with keys and values
  */
 export function ObjectKeysToArray(item: any): any[] {
-  let ArrayOfKeys = Object.keys(item);
-  return ArrayOfKeys;
+  return Object.keys(item);
 }
 
 /**
@@ -70,11 +68,11 @@ export function ObjectKeysToArray(item: any): any[] {
  */
 export function LimitedObjectKeysToArray(item: any): any[] {
   let LimitedArrayOfKeys: any[] = [];
-  Object.keys(item).map((key: any, index: any) => {
-    if (index > 10) return;
-    LimitedArrayOfKeys.push({ text: key, value: key });
-  });
-  return LimitedArrayOfKeys;
+  return Object.keys(item).reduce((res: any[], key: string, index: number) => {
+    if (index > 8) return;
+    res.push({ text: key, value: key });
+    return res;
+  }, []);
 }
 
 /**
@@ -86,10 +84,10 @@ export function LimitedObjectKeysToArray(item: any): any[] {
  * @param inputData
  * @param datasourcePath
  */
-export function GenerateCSV(inputData: any[], datasourcePath: string) {
-  // const input = [ [ 'a', 'b', 'c', 'd' ],[ '1', '2', '3', '4' ] ];
+export function GenerateCSV(data: any[], targetFilePath: string) {
+  if (!Array.isArray(data)) return;
   stringify(
-    inputData,
+    data,
     {
       delimiter: ",",
       header: true,
@@ -97,11 +95,11 @@ export function GenerateCSV(inputData: any[], datasourcePath: string) {
       quotedEmpty: true,
     },
     function(_err: string, output: any) {
+      _err && console.log(_err);
       console.log("Data to be written:");
-      console.log(output);
-      fs.writeFileSync(datasourcePath, output, "utf8");
-      console.log("File Name:");
-      console.log(datasourcePath);
+      console.table(output);
+      fs.writeFileSync(targetFilePath, output, "utf8");
+      console.log(`Data written to ${targetFilePath}`);
     },
   );
 }
@@ -138,18 +136,15 @@ export const kebab = (str: string) => {
   return (str || "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 };
 
-export function getFilesByExtentionInDir(path: string, ext: string): any[] {
-  const Docs: any = [];
-  fs.readdir(path, (_, files) => {
-    files.forEach((file: string) => {
-      log.info(file);
-      if (file.substring(file.length - ext.length) !== ext) return;
-      // Regex Replacement:   ./    .doc     .json
-      let keyName: string = file.replace(/(\.\/|\.doc|\.json|\.js|\.ts)/g, "");
-      Docs.push(keyName);
-    });
-  });
-  return Docs;
+export function getFilesByExtentionInDir(path: string, ext: string): string[] {
+  let files = fs.readdirSync(path, "utf8")
+  return files.reduce((res: string[], file) => {
+    // FIXME extension name issue
+    if (file.substring(file.length - ext.length) !== ext) return;
+    let fileName = file.replace(/(\.\/|\.doc|\.json|\.js|\.ts)/g, "");
+    res.push(fileName);
+    return res;
+  }, [])
 }
 
 export const randomElement = (arr = []) => {

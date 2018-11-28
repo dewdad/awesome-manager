@@ -1,4 +1,4 @@
-import { Model } from "@vuex-orm/core";
+import { Model, BelongsTo } from "@vuex-orm/core";
 
 export interface INotification {
   _id: string;
