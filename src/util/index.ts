@@ -1,10 +1,10 @@
 /* tslint:disable:no-console */
+import { map, find, filter, reduce } from "lodash/fp";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
 /**
- * Beautiful log with colors and fonts
- * Suitable for chrome console display
+ * 美化命令行终端日志输出
  */
 export const log = {
   suc: (_: any, ...args: any[]) => {
@@ -17,6 +17,26 @@ export const log = {
     console.log(`%c ${_}`, "color: red;font-size:12px;font-weight:bold;", ...args);
   },
 };
+
+/**
+ * 在指定目录下查找某扩展名的文件
+ * @param {String} path 需要查找的目录
+ * @param {String} ext  文件扩展名
+ * @return {Array} 无扩展名的文件名数组
+ */
+export function getFilesByExtentionInDir(path: string, ext: string): string[] {
+  let files = fs.readdirSync(path, "utf8")
+  return files.reduce((res: string[], file) => {
+    // FIXME extension name issue
+    const match = new RegExp(`.*${ext}$`)
+    const replace = new RegExp(`\.${ext}`)
+    if (file.match(match)) {
+      res.push(file.replace(replace, ""));
+    }
+    return res;
+  }, [])
+}
+
 /**
  * @计算属性
  * 返回过滤并排序后的数组items
@@ -29,33 +49,70 @@ export const log = {
  *c
  * @sortKey:   用来排序的排序器
  */
-export function baseFilter(items: any[], sortKey: any, filterKey: any): any[] {
+export function baseFilter(items: any[], sortKey: string, filterKey: string): any[] {
   var filter = filterKey && filterKey.toLowerCase();
   var order = 1;
   var data = items;
-  if (filter) {
-    data = data.filter(function(item: any) {
-      return Object.keys(item).some(function(key) {
-        return (
-          String(item[key])
-            .toLowerCase()
-            .indexOf(filter) > -1
-        );
-      });
-    });
-  }
-  if (sortKey) {
-    data = data.slice().sort(function(a: any, b: any) {
-      a = a[sortKey];
-      b = b[sortKey];
-      return (a === b ? 0 : a > b ? 1 : -1) * order;
-    });
-  }
+  data = lazyFilter(filter, data);
+  data = lazySorter(sortKey, data, order);
   return data;
 }
 
+export function lazySorter(sortKey: string, data: any[], order: number) {
+  if (sortKey) {
+    data = data.slice().sort(sliceAndSort());
+  }
+  return data;
+
+  function sliceAndSort(): (a: any, b: any) => number {
+    return function (a: any, b: any) {
+      a = a[sortKey];
+      b = b[sortKey];
+      return comparePairs(a, b);
+    };
+  }
+
+  function comparePairs(a: any, b: any): number {
+    const compareFirst = a > b ? 1 : -1;
+    const compareSecond = a === b ? 0 : compareFirst;
+    return compareSecond * order;
+  }
+}
+
 /**
- * Convert keys of a Object to Array to display
+ * 1. 过滤
+ * 2. 查找
+ * 3. 转换
+ * @param filter 
+ * @param data 
+ */
+export function lazyFilter(filter: string, data: any[]) {
+  // 1. 过滤
+  if (filter) {
+    return data.filter(function (item: any) {
+      return find(item);
+    });
+  }
+  // 2. 查找
+  function find(item: any): any {
+    return Object.keys(item).some(function (key) {
+      return convert(item, key);
+    });
+  }
+  // 3. 转换
+  function convert(item: any, key: string): boolean {
+    return (String(item[key])
+      .toLowerCase()
+      .indexOf(filter) > -1);
+  }
+}
+
+export function lazyFilterFp(filter: string, data: any[]) {
+
+}
+
+/**
+ * 讲对象的键值转化为数组
  * @param item Object with keys and values
  */
 export function ObjectKeysToArray(item: any): any[] {
@@ -63,7 +120,7 @@ export function ObjectKeysToArray(item: any): any[] {
 }
 
 /**
- * Convert keys of a Object to Array to display
+ * 将部分数据键值转化为数组
  * @param item Object with keys and values
  */
 export function LimitedObjectKeysToArray(item: any): any[] {
@@ -76,13 +133,11 @@ export function LimitedObjectKeysToArray(item: any): any[] {
 }
 
 /**
- * Using csv-stringify to convert a array to string
- * Save the string to a csv file with utf8 encoding
- * Note that if you are using windows, you may experience trouble
- * with encoding. Should you use schema.ini file to specify the csv
- * encoding.
- * @param inputData
- * @param datasourcePath
+ * 使用csv-stringify转数组为字符串
+ * 保持字符串到指定文件
+ * windows下如有文档编码显示错误，可在目录下设置schema.ini文件
+ * @param {Array} data 需要到处的数据
+ * @param {String} targetFilePath 目标文件地址
  */
 export function GenerateCSV(data: any[], targetFilePath: string) {
   if (!Array.isArray(data)) return;
@@ -105,11 +160,10 @@ export function GenerateCSV(data: any[], targetFilePath: string) {
 }
 
 /**
- * Parse a file uploaded by html page
- * Return a Promise which resolve results as a object
- * results have a key [data] holding the real array
- */
-
+ * 使用文件空间上传文件对象
+ * @param {String|Object} 文件对象
+ * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
+ **/
 export const ImportCSV = async (file: any) => {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
@@ -136,16 +190,6 @@ export const kebab = (str: string) => {
   return (str || "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 };
 
-export function getFilesByExtentionInDir(path: string, ext: string): string[] {
-  let files = fs.readdirSync(path, "utf8")
-  return files.reduce((res: string[], file) => {
-    // FIXME extension name issue
-    if (file.substring(file.length - ext.length) !== ext) return;
-    let fileName = file.replace(/(\.\/|\.doc|\.json|\.js|\.ts)/g, "");
-    res.push(fileName);
-    return res;
-  }, [])
-}
 
 export const randomElement = (arr = []) => {
   return arr[Math.floor(Math.random() * arr.length)];
