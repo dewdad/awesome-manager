@@ -96,9 +96,7 @@ export function comparePairs(a: any, b: any, order: any): number {
 }
 
 /**
- * 1. 过滤
- * 2. 查找
- * 3. 转换
+ * 过滤  查找  转换
  * @param filter 
  * @param data 
  */

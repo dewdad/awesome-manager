@@ -4,7 +4,7 @@ to: src/api/models/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
 <%
 const ModelName = h.capitalize(h.inflection.singularize(model))
 const EntityName = h.inflection.singularize(model).toLowerCase()
-%>import { Model } from "@vuex-orm/core";
+%>import { Model, BelongsTo } from "@vuex-orm/core";
 
 export interface I<%= ModelName %> {
    _id: string;

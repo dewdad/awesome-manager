@@ -1,4 +1,5 @@
 export const entities = [
+  "menu",
   "notification",
   "generic",
   "monthvisit",
