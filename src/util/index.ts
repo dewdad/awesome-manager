@@ -1,7 +1,8 @@
 /* tslint:disable:no-console */
-import { compose, map, find, filter, reduce } from "lodash/fp";
+import { curry, pipe, map } from "lodash/fp";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
+import Item from '@/api/models/Item';
 const stringify = require("csv-stringify");
 /**
  * 美化命令行终端日志输出
@@ -37,6 +38,8 @@ export function getFilesByExtentionInDir(path: string, ext: string): string[] {
   }, [])
 }
 
+const getFilesFp = curry(getFilesByExtentionInDir);
+
 /**
  * @计算属性
  * 返回过滤并排序后的数组items
@@ -49,12 +52,12 @@ export function getFilesByExtentionInDir(path: string, ext: string): string[] {
  *c
  * @sortKey:   用来排序的排序器
  */
-export function baseFilter(items: any[], sortKey: string, filterKey: string): any[] {
+export const baseFilter =  (sortKey: string) => (filterKey: string) => (items: any[]): any[]  => {
   var filter = filterKey && filterKey.toLowerCase();
   var order = 1;
   var data = items;
-  data = lazyFilter(filter, data);
-  data = lazySorter(sortKey, data, order);
+  data = lazyFilter(filter)(data);
+  data = lazySorter(sortKey)(order)(data);
   return data;
 }
 
@@ -64,8 +67,8 @@ export function baseFilter(items: any[], sortKey: string, filterKey: string): an
  * @param {Array} data 数据
  * @param {Number} order 排序方向
  */
-export function lazySorter(sortKey: string, data: any[], order: number) {
-  return data.slice().sort(compareObjectValues(sortKey, order));
+export const lazySorter = (sortKey: string) =>( order: number) => (data: any[]) =>{
+  return data.slice().sort(compareObjectValues(sortKey)(order));
 }
 
 /**
@@ -74,10 +77,9 @@ export function lazySorter(sortKey: string, data: any[], order: number) {
  * @param order 排序方向
  * @return 通用比较函数
  */
-export function compareObjectValues(key: string, order?: number): (a: any, b: any) => number {
-  return function (a: any, b: any): number {
-    return comparePairs(a[key], b[key], order || 1);
-  };
+
+export const compareObjectValues = (key: string) => (order: number) => {
+  return (a, b) => comparePairs(a[key])(b[key])(order)
 }
 
 /**
@@ -89,7 +91,7 @@ export function compareObjectValues(key: string, order?: number): (a: any, b: an
  * @param order  顺序为1， 逆序为-1
  * @return number 0|1|-1
  */
-export function comparePairs(a: any, b: any, order: any): number {
+export const comparePairs = (a) => (b) => (order: number): number => {
   const notEqualCompare = a > b ? 1 : -1;
   const equalCompare = a === b ? 0 : notEqualCompare;
   return equalCompare * order;
@@ -100,10 +102,10 @@ export function comparePairs(a: any, b: any, order: any): number {
  * @param filter 
  * @param data 
  */
-export function lazyFilter(filter: string, data: any[]) {
+export const lazyFilter = (filter: string) => (data: any[]) => {
   return data.reduce((filteredData: any[], item: any) => {
     Object.keys(item).some(key => {
-      if (checkStringMatch(item[key], filter)) { 
+      if (checkStringMatch(item[key])(filter)) { 
         filteredData.push(item) 
         return true
       };
@@ -112,15 +114,14 @@ export function lazyFilter(filter: string, data: any[]) {
   }, [])
 }
 
-export function checkStringMatch(test: string, filter: string): boolean {
+export const checkStringMatch = (test: string) => (filter: string): boolean => {
   return String(test).toLowerCase().indexOf(filter) > -1;
 }
-
 /**
  * 讲对象的键值转化为数组
  * @param item Object with keys and values
  */
-export function ObjectKeysToArray(item: any): any[] {
+export const ObjectKeysToArray = (item: any): any[] => {
   return Object.keys(item);
 }
 
@@ -128,7 +129,7 @@ export function ObjectKeysToArray(item: any): any[] {
  * 将部分数据键值转化为数组
  * @param item Object with keys and values
  */
-export function LimitedObjectKeysToArray(item: any): any[] {
+export const LimitedObjectKeysToArray = (item: any): any[] => {
   let LimitedArrayOfKeys: any[] = [];
   return Object.keys(item).reduce((res: any[], key: string, index: number) => {
     if (index > 8) return;
@@ -144,7 +145,7 @@ export function LimitedObjectKeysToArray(item: any): any[] {
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
  */
-export function GenerateCSV(data: any[], targetFilePath: string) {
+export const GenerateCSV = (data: any[], targetFilePath: string) => {
   if (!Array.isArray(data)) return;
   stringify(
     data,
@@ -154,7 +155,7 @@ export function GenerateCSV(data: any[], targetFilePath: string) {
       quoted: true,
       quotedEmpty: true,
     },
-    function(_err: string, output: any) {
+    (_err: string, output: any) => {
       _err && console.log(_err);
       console.log("Data to be written:");
       console.table(output);
@@ -183,19 +184,26 @@ export const ImportCSV = async (file: any) => {
   });
 };
 
-export function capitalizeFirstLetter(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+export const capitalizeFirstLetter = (message: string) => {
+  return message.charAt(0).toUpperCase() + message.slice(1).toLowerCase();
 }
 
-export function uncapitalizeFirstLetter(string: string) {
-  return string.charAt(0).toLowerCase() + string.slice(1).toLowerCase();
+export const uncapitalizeFirstLetter = (message: string) => {
+  return message.charAt(0).toLowerCase() + message.slice(1).toLowerCase();
 }
 
-export const kebab = (str: string) => {
-  return (str || "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+export const kebab = (message: string) => {
+  return (message || "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 };
-
 
 export const randomElement = (arr = []) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
+
+export const slugify = (message: string) => {
+  pipe(
+    (message: string) => message.split(" "),
+    map(m => m.toLowerCase()),
+    (messages: string[]) => messages.join("-")
+  )(message)
+}
