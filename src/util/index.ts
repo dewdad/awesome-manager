@@ -1,5 +1,5 @@
 /* tslint:disable:no-console */
-import { map, find, filter, reduce } from "lodash/fp";
+import { compose, map, find, filter, reduce } from "lodash/fp";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
@@ -58,25 +58,41 @@ export function baseFilter(items: any[], sortKey: string, filterKey: string): an
   return data;
 }
 
+/**
+ * 对数组中每个对象，用某一个键名称进行排序
+ * @param {String} sortKey 排序键名称
+ * @param {Array} data 数据
+ * @param {Number} order 排序方向
+ */
 export function lazySorter(sortKey: string, data: any[], order: number) {
-  if (sortKey) {
-    data = data.slice().sort(sliceAndSort());
-  }
-  return data;
+  return data.slice().sort(compareObjectValues(sortKey, order));
+}
 
-  function sliceAndSort(): (a: any, b: any) => number {
-    return function (a: any, b: any) {
-      a = a[sortKey];
-      b = b[sortKey];
-      return comparePairs(a, b);
-    };
-  }
+/**
+ * 比较对象中，每个键对应值的大小
+ * @param key 排序键
+ * @param order 排序方向
+ * @return 通用比较函数
+ */
+export function compareObjectValues(key: string, order?: number): (a: any, b: any) => number {
+  return function (a: any, b: any): number {
+    return comparePairs(a[key], b[key], order || 1);
+  };
+}
 
-  function comparePairs(a: any, b: any): number {
-    const compareFirst = a > b ? 1 : -1;
-    const compareSecond = a === b ? 0 : compareFirst;
-    return compareSecond * order;
-  }
+/**
+ * 快速排序
+ * 前数大于后数，为正。后数大于前数，为负。
+ * 前数等于后数，为平。
+ * @param a  前一元素
+ * @param b  后一元素
+ * @param order  顺序为1， 逆序为-1
+ * @return number 0|1|-1
+ */
+export function comparePairs(a: any, b: any, order: any): number {
+  const notEqualCompare = a > b ? 1 : -1;
+  const equalCompare = a === b ? 0 : notEqualCompare;
+  return equalCompare * order;
 }
 
 /**
@@ -87,28 +103,19 @@ export function lazySorter(sortKey: string, data: any[], order: number) {
  * @param data 
  */
 export function lazyFilter(filter: string, data: any[]) {
-  // 1. 过滤
-  if (filter) {
-    return data.filter(function (item: any) {
-      return find(item);
+  return data.reduce((filteredData: any[], item: any) => {
+    Object.keys(item).some(key => {
+      if (checkStringMatch(item[key], filter)) { 
+        filteredData.push(item) 
+        return true
+      };
     });
-  }
-  // 2. 查找
-  function find(item: any): any {
-    return Object.keys(item).some(function (key) {
-      return convert(item, key);
-    });
-  }
-  // 3. 转换
-  function convert(item: any, key: string): boolean {
-    return (String(item[key])
-      .toLowerCase()
-      .indexOf(filter) > -1);
-  }
+    return filteredData;
+  }, [])
 }
 
-export function lazyFilterFp(filter: string, data: any[]) {
-
+export function checkStringMatch(test: string, filter: string): boolean {
+  return String(test).toLowerCase().indexOf(filter) > -1;
 }
 
 /**
