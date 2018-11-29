@@ -1,0 +1,62 @@
+{
+	"fp": {
+		"scope": "javascript,typescript",
+		"prefix": "fp",
+		"body": [
+			"import { pipe, compose, curry, map, at, find, some, reduce, pick, merge, concat, split, join }  from \"lodash/fp\";"
+		],
+		"description": "import lodash fp lib"
+	},
+	"Pipe functional programming": {
+		"scope": "javascript,typescript",
+		"prefix": "pip",
+		"body": [
+			"import { pipe } from \"lodash/fp\"",
+			"const $3 = pipe(",
+			"  ($1) => $1 + 1,",
+			"  ($1) => $1 - 1,",
+			")($2)",
+			"$3",
+		],
+		"description": "Log output to console"
+	},
+	"Reduce functional programming": {
+		"scope": "javascript,typescript",
+		"prefix": "red",
+		"body": [
+			"import { reduce } from \"lodash/fp\"",
+			"const $1 = [1,2,3].reduce((acc: number[], item: number)=> {",
+			"  acc.push(item);",
+			"  return acc;",
+			"},[]);",
+			"$1",
+			"const $2 = reduce((acc: number[], item: number)=> {",
+			"  acc.push(item);",
+			"  return acc;",
+			"},[], [1,2,3])",
+			"$2"
+		],
+		"description": "Log output to console"
+	},
+	"Component Store Test": {
+		"scope": "javascript,typescript",
+		"prefix": "test",
+		"body": [
+			"import { shallowMount, createLocalVue } from \"@vue/test-utils\";",
+			"import $1 from \"./$1\";",
+			"import $2 from \"./$2\";",
+			"const localVue = createLocalVue();",
+			"const store = (global as any).createORMStore([{ model: $2}], \"entities\");",
+			"describe(\"$3\", () => {",
+			"  let wrapper",
+			"  beforeEach(() => {",
+			"    wrapper = shallowMount($1, {localVue, store})",
+			"  });",
+			"  it(\"$4\", () => {;",
+			"    expect($2).toBeAComponent",
+			"  }",
+			"}",
+		],
+		"description": "Test a component with store"
+	}
+}
