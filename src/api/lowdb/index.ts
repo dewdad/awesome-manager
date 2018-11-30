@@ -24,14 +24,12 @@ export class LowdbForElectron {
 
   ensureElectronEnv() {
     this.electronApp = process.type === "renderer" ? remote.app : app;
-    // add to window/global object
-    (window as any).electronApp = process.type === "renderer" ? remote.app : app;
     return true;
   }
 
   /**
    * Ensure the path of db file exists
-   * @param {String} subDir subDirectory where data file stored
+   * @param {string} subDir subDirectory where data file stored
    */
   ensuredbPath(subDir: string) {
     if (this.electronApp !== undefined) {
@@ -48,7 +46,7 @@ export class LowdbForElectron {
 
   /**
    * Create lowdb store persisted in disk
-   * @param {String} dbName Name of the store file
+   * @param {string} dbName Name of the store file
    */
   createPersistence(dbName: string) {
     if (this.dbPath !== undefined) {
@@ -91,7 +89,7 @@ export class LowdbForElectron {
   /**
    * Set a array as fefault value of a key or key or entity
    * { entity: []}
-   * @param {String} node key or key or entity name, i.e. activity
+   * @param {string} node key or key or entity name, i.e. activity
    */
   dbCreate(node: string) {
     console.log(`creating default value in ${node} lowdb`);
@@ -103,7 +101,7 @@ export class LowdbForElectron {
   }
   /**
    * Remove a key
-   * @param {String} node key or key or entity name, i.e. activity
+   * @param {string} node key or key or entity name, i.e. activity
    */
   dbRemove(node: string) {
     if (!this.db.has(node).value()) {
@@ -112,69 +110,63 @@ export class LowdbForElectron {
   }
   /**
    * Inserta data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace like activity
-   * @param {Object} data data without id, since lodash-id will use unique id
+   * @param {string} entity key or entity namespace like activity
+   * @param {object} data data without id, since lodash-id will use unique id
+   * @return {undefined} undefined
    */
   insert(entity: string, data: any) {
     console.log("Inserting in " + entity);
-    // if (this.find(entity, { _id: data._id }) !== []) {
-    //   console.log("Identity Entity exites, skip!");
-    //   return;
-    // }
-    data.id && delete data.id;
-    try {
-      this.db
-        .read()
-        .get(`${lowerFirst(entity)}`)
-        .push(data)
-        .write();
-    } catch (e) {
-      return e;
+    // skip reinsert same _id
+    if (this.find(entity, { _id: data._id }) !== undefined) {
+      console.log("Identity Entity exites, skip!");
+      return;
     }
+    // delete if has id property, only for avoid lodash-id conflict
+    data.id && delete data.id;
+    return this.db
+      .read()
+      .get(`${lowerFirst(entity)}`)
+      .push(data)
+      .write();
   }
 
   /**
    * Update data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace
-   * @param {Object} query query statements
-   * @param {Object} data data
+   * @param {string} entity key or entity namespace
+   * @param {object} query query statements
+   * @param {object} data data
+   * @return {undefined} undefined
    */
   update(entity: string, query: any, data: any) {
     console.log("Updating in " + entity);
-    try {
-      this.db
+    return this.db
         .read()
         .get(`${lowerFirst(entity)}`)
         .find(query)
         .assign(data)
         .write();
-    } catch (e) {
-      return e;
-    }
   }
 
   /**
    * Delete data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace
-   * @param {Object} query query statement
+   * @param {string} entity key or entity namespace
+   * @param {object} query query statement
+   * @return {undefined} undefined
    */
   delete(entity: string, query: any) {
     console.log("Deleting in " + entity);
-    try {
-      this.db
+    return this.db
         .read()
         .get(`${lowerFirst(entity)}`)
         .remove(query)
         .write();
-    } catch (e) {
-      return e;
-    }
   }
 
   /**
    * Find and Query data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace
-   * @param {Object} query query statement
+   * @param {string} entity key or entity namespace
+   * @param {object} query query statement
+   * @return {array, object, undefined} undefined is found nothing, else the data set
    */
   find(entity: string, query: any) {
     console.log("Querying in " + entity);
@@ -186,7 +178,8 @@ export class LowdbForElectron {
   }
   /**
    * Find and Query data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace
+   * @param {string} entity key or entity namespace
+   * @return {undefined} undefined
    */
   all(entity: string) {
     console.log("Querying in " + entity);
@@ -198,7 +191,7 @@ export class LowdbForElectron {
 
   /**
    * Find and Query data in a specific key with key or entity namespace
-   * @param {String} entity key or entity namespace
+   * @param {string} entity key or entity namespace
    */
   clear(entity: string) {
     console.log("Clearing in " + entity);

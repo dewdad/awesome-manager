@@ -4,19 +4,16 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome Play",
+      "name": "Launch Chrome",
       "url": "http://localhost:9229",
       "webRoot": "${workspaceFolder}"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Play Program",
+      "name": "Launch fp Program",
       "runtimeExecutable": "node",
-      "runtimeArgs": [
-        "--inspect-brk=9229",
-      ],
-      "program": "${workspaceFolder}/lib/util/play.js"
+      "program": "${workspaceFolder}/lib/util/bin/fp.js",
     },
     {
       "type": "node",

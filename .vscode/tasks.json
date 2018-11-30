@@ -26,6 +26,14 @@
       "type": "npm",
       "script": "lint",
       "problemMatcher": []
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "lib\\util\\tsconfig.json",
+      "option": "watch",
+      "problemMatcher": [
+        "$tsc-watch"
+      ]
     }
   ]
 }
