@@ -4,31 +4,41 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome",
+      "name": "打开Chrome，端口9229",
       "url": "http://localhost:9229",
       "webRoot": "${workspaceFolder}"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch fp Program",
+      "name": "通过node调试fp程序，端口随机",
       "runtimeExecutable": "node",
-      "program": "${workspaceFolder}/lib/util/bin/fp.js",
+      "program": "${workspaceFolder}/lib/util/bin/fp.js"
     },
     {
+      "name": "通过Yarn调试fp程序，端口9229",
       "type": "node",
       "request": "launch",
-      "name": "Launch Electron Dev Server",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
-        "--inspect-brk",
-        "dev"
+        "debug"
       ],
       "port": 9229
     },
     {
       "type": "node",
-      "name": "vscode-jest-tests",
+      "request": "launch",
+      "name": "打开Electron开发服务器，端口8080",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "dev"
+      ],
+      "port": 8080
+    },
+    {
+      "type": "node",
+      "name": "使用Jest测试",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/jest/bin/jest",
       "args": [
@@ -41,30 +51,19 @@
     {
       "type": "electron",
       "request": "launch",
-      "name": "Launch Electron",
+      "name": "启动Electron调试安装压缩包",
       "appDir": "/dist_electron/bundled",
       "sourceMaps": true
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch storybook",
+      "name": "启动storybook，端口6006",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
         "storybook:serve",
       ],
-      "port": 9229
+      "port": 6006
     },
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "vuejs: chrome",
-      "url": "http://localhost:8080",
-      "webRoot": "${workspaceFolder}/src",
-      "breakOnLoad": true,
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      }
-    }
   ]
 }

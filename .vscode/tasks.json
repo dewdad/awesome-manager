@@ -34,6 +34,29 @@
       "problemMatcher": [
         "$tsc-watch"
       ]
-    }
+    },
+    {
+      "label": "Remove all release",
+      "type": "shell",
+      "command": "./lib/bin/remove-all-release.sh",
+      "windows": {
+        "command": ".\\lib\\bin\\remove-all=release.cmd"
+      },
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Quick deploy with now",
+      "type": "shell",
+      "command": "now ./dist",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
   ]
 }
