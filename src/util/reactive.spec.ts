@@ -5,6 +5,7 @@ import {
   mapToExample,
   delayExample,
   scanExample,
+  pipeExample,
 } from "./reactive";
 
 describe("Test rxjs operators", () => {
@@ -31,5 +32,12 @@ describe("Test rxjs operators", () => {
   it("delay operator", () => {
     const delay = delayExample();
     expect(delay).toEqual(undefined);
+  });
+});
+
+describe("Test rxjs pipe map", () => {
+  it("map and take operator with mostbeautiful", () => {
+    const piped = pipeExample();
+    expect(piped).toEqual(undefined);
   });
 });

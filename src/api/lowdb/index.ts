@@ -117,10 +117,10 @@ export class LowdbForElectron {
    */
   insert(entity: string, data: any) {
     console.log("Inserting in " + entity);
-    if (this.find(entity, data) !== null) {
-      console.log("Identity Entity exites, skip!")
-      return;
-    };
+    // if (this.find(entity, { _id: data._id }) !== []) {
+    //   console.log("Identity Entity exites, skip!");
+    //   return;
+    // }
     data.id && delete data.id;
     try {
       this.db
@@ -181,7 +181,7 @@ export class LowdbForElectron {
     return this.db
       .read()
       .get(`${lowerFirst(entity)}`)
-      .filter(query)
+      .find(query)
       .value();
   }
   /**

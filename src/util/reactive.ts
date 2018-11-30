@@ -1,3 +1,4 @@
+import { TICK, LENGTH, gaussian } from "./math";
 import { of, from, observable, interval, pipe, merge, defer } from "rxjs";
 import {
   delay,
@@ -6,6 +7,7 @@ import {
   concat,
   debounce,
   map,
+  take,
   mergeMap,
   scan,
   reduce,
@@ -110,4 +112,29 @@ export function delayExample() {
   );
   // 输出: 'Hello'...'World!'...'Goodbye'...'World!'
   const subscribe = message.subscribe(val => console.log(val));
+}
+
+/**
+ * Reactive Explorer Examples
+ * @example
+ * import { interval } from 'rxjs';
+ * import { take } from 'rxjs/operators';
+ * const intervalCount = interval(1000);
+ * const takeFive = intervalCount.pipe(take(5));
+ * takeFive.subscribe(x => console.log(x));
+ */
+
+export function pipeExample() {
+  const draw = (brush: string) =>
+    pipe(
+      map((num: number) => brush.repeat(Math.floor(num * 65))),
+      take(25),
+    );
+
+  const gaussian_stream = interval(350).pipe(
+    map(gaussian),
+    draw("•"),
+  );
+
+  const normalDistribution = gaussian_stream.subscribe(v => console.log(v));
 }

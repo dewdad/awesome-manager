@@ -9,7 +9,7 @@ const pool = entities.reduce((entitiesDb, entity) => {
   DB.dbCreate(entity);
   entitiesDb[entity] = DB;
   return entitiesDb;
-}, Object.create(null));
+}, {});
 
 describe("testing lowdb class", () => {
   beforeEach(() => {
@@ -82,7 +82,7 @@ describe("testing lowdb pool", () => {
     DB.insert("user", {
       name: "xingwenju",
     });
-    const newValue = DB.db.get("user").value();
+    const newValue = DB.find("user", {});
     expect(newValue).toEqual([{ name: "xingwenju" }]);
   });
 });
