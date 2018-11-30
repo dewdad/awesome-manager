@@ -1,5 +1,5 @@
 import { TICK, LENGTH, gaussian } from "./math";
-import { of, from, observable, interval, pipe, merge, defer, Subscription } from "rxjs";
+import { of, from, interval, pipe, merge, Subscription } from "rxjs";
 import {
   delay,
   mapTo,
