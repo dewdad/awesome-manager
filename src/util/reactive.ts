@@ -1,5 +1,5 @@
 import { TICK, LENGTH, gaussian } from "./math";
-import { of, from, observable, interval, pipe, merge, defer } from "rxjs";
+import { of, from, observable, interval, pipe, merge, defer, Subscription } from "rxjs";
 import {
   delay,
   mapTo,
@@ -25,6 +25,7 @@ export const filterExample = () => {
     console.log(`Even number: ${val}`);
     return val;
   });
+  return subscribe;
 };
 
 /**
@@ -43,9 +44,10 @@ export function beautyExample() {
   });
 
   const couples = mostBeautiful.pipe(concat(hansome));
-  couples.subscribe(value => {
+  const subscribe = couples.subscribe(value => {
     console.log(`Good couples: ${value}`);
   });
+  return subscribe;
 }
 
 export function mapToExample() {
@@ -70,6 +72,7 @@ export function mapToExample() {
     const subscribe = example.subscribe(val => {
       console.log(val);
     });
+    return subscribe;
   } catch (error) {
     console.log(error);
   }
@@ -80,6 +83,7 @@ export function reduceExample() {
   const example = source.pipe(reduce((acc, val) => acc + val));
   // 输出: Sum: 10'
   const subscribe = example.subscribe(val => console.log("ReducedSum:", val));
+  return subscribe;
 }
 
 export function scanExample() {
@@ -89,6 +93,7 @@ export function scanExample() {
   // 输出累加值
   // 输出: 1,3,6
   const subscribe = example.subscribe(val => console.log("scaned", val));
+  return subscribe;
 }
 
 export function delayExample() {
@@ -112,6 +117,7 @@ export function delayExample() {
   );
   // 输出: 'Hello'...'World!'...'Goodbye'...'World!'
   const subscribe = message.subscribe(val => console.log(val));
+  return subscribe;
 }
 
 /**
@@ -136,5 +142,6 @@ export function pipeExample() {
     draw("•"),
   );
 
-  const normalDistribution = gaussian_stream.subscribe(v => console.log(v));
+  const subscribe = gaussian_stream.subscribe(v => console.log(v));
+  return subscribe;
 }
