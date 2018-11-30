@@ -25,5 +25,6 @@ yarn-error.log*
 /dist_electron
 # Vuepressoutput
 /docs/.vuepress/dist
+/lib/util/bin
 # Tern server tmp file
 **/**/.tern-port
