@@ -140,11 +140,11 @@ export class LowdbForElectron {
   update(entity: string, query: any, data: any) {
     console.log("Updating in " + entity);
     return this.db
-        .read()
-        .get(`${lowerFirst(entity)}`)
-        .find(query)
-        .assign(data)
-        .write();
+      .read()
+      .get(`${lowerFirst(entity)}`)
+      .find(query)
+      .assign(data)
+      .write();
   }
 
   /**
@@ -156,10 +156,10 @@ export class LowdbForElectron {
   delete(entity: string, query: any) {
     console.log("Deleting in " + entity);
     return this.db
-        .read()
-        .get(`${lowerFirst(entity)}`)
-        .remove(query)
-        .write();
+      .read()
+      .get(`${lowerFirst(entity)}`)
+      .remove(query)
+      .write();
   }
 
   /**

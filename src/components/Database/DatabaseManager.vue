@@ -67,7 +67,6 @@
 </template>
 
 <script>
-
 import { join } from "path";
 import { shell, remote } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
@@ -117,7 +116,6 @@ export default {
       log.suc(this.templateDocs);
     },
     async importEntities(e) {
-
       log.info("Importing...");
 
       let sourceFile = e.target.files[0];
@@ -128,23 +126,22 @@ export default {
       log.info(data);
 
       // Make sure {this} is {that}
-      let { entityDb, dbName } =  this;
-      if(entityDb === undefined || dbName === undefined) return;
+      let { entityDb, dbName } = this;
+      if (entityDb === undefined || dbName === undefined) return;
 
       data.forEach(item => {
         entityDb.insert(`${dbName}`, item);
       });
     },
     async exportEntities() {
-
       log.info("Exporting...");
 
       let targetPath = join(this.templateDir, `${this.dbName}.csv`);
       log.suc(targetPath);
 
-      let { entityDb, dbName } =  this;
-      if(entityDb === undefined || dbName === undefined) return;
-      
+      let { entityDb, dbName } = this;
+      if (entityDb === undefined || dbName === undefined) return;
+
       let data = entityDb.find(`${dbName}`, {});
       if (!Array.isArray(data)) return;
 
