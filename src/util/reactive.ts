@@ -32,7 +32,7 @@ export const filterExample = () => {
  * literal example
  *
  **/
-export function beautyExample() {
+export const beautyExample = () => {
   const beauty = from(["Monica", "Johana"]);
   const hansome = from(["Antonio", "Juan"]);
 
@@ -48,9 +48,9 @@ export function beautyExample() {
     console.log(`Good couples: ${value}`);
   });
   return subscribe;
-}
+};
 
-export function mapToExample() {
+export const mapToExample = () => {
   try {
     // 每2.5秒发出值
     const first = interval(2500);
@@ -76,17 +76,17 @@ export function mapToExample() {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export function reduceExample() {
+export const reduceExample = () => {
   const source = of(1, 2, 3, 4);
   const example = source.pipe(reduce((acc, val) => acc + val));
   // 输出: Sum: 10'
   const subscribe = example.subscribe(val => console.log("ReducedSum:", val));
   return subscribe;
-}
+};
 
-export function scanExample() {
+export const scanExample = () => {
   const source = of(1, 2, 3);
   // 基础的 scan 示例，从0开始，随着时间的推移计算总数
   const example = source.pipe(scan((acc, curr) => acc + curr, 0));
@@ -94,9 +94,9 @@ export function scanExample() {
   // 输出: 1,3,6
   const subscribe = example.subscribe(val => console.log("scaned", val));
   return subscribe;
-}
+};
 
-export function delayExample() {
+export const delayExample = () => {
   // 发出一项
   const example = of(null);
   // 每延迟一次输出便增加1秒延迟时间
@@ -118,7 +118,7 @@ export function delayExample() {
   // 输出: 'Hello'...'World!'...'Goodbye'...'World!'
   const subscribe = message.subscribe(val => console.log(val));
   return subscribe;
-}
+};
 
 /**
  * Reactive Explorer Examples
@@ -130,7 +130,7 @@ export function delayExample() {
  * takeFive.subscribe(x => console.log(x));
  */
 
-export function pipeExample() {
+export const pipeExample = () => {
   const draw = (brush: string) =>
     pipe(
       map((num: number) => brush.repeat(Math.floor(num * 65))),
@@ -144,4 +144,4 @@ export function pipeExample() {
 
   const subscribe = gaussian_stream.subscribe(v => console.log(v));
   return subscribe;
-}
+};
