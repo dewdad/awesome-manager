@@ -1,5 +1,5 @@
-import { of, pipe, interval, merge } from "rxjs";
-import { map, take, mapTo, delay, scan } from "rxjs/operators";
+import { interval, merge, of, pipe } from "rxjs";
+import { delay, map, mapTo, scan, take } from "rxjs/operators";
 export const TICK = 350;
 export const LENGTH = 25;
 
