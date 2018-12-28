@@ -1,7 +1,9 @@
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
+import { join } from "path";
 import { pullAll } from "lodash";
+import { remote, shell } from "electron";
 export default {
   components: {
     UserForm,
@@ -27,6 +29,11 @@ export default {
     },
     editItem(item) {
       window.UserForm.$emit("SET_EDITING", item);
+    },
+    exportItem(item) {
+      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
+      GenerateCSV([item], filePath);
+      shell.showItemInFolder(filePath);
     },
   },
 };
@@ -72,6 +79,12 @@ export default {
                 class="mx-0"
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
+            </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
           </td>
           <td

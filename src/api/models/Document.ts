@@ -1,4 +1,5 @@
-import { Model } from "@vuex-orm/core";
+import { Model, BelongsTo } from "@vuex-orm/core";
+import { keys } from "lodash";
 import User from "./User";
 import Entity from "./Entity";
 export default class Document extends Model {
@@ -10,6 +11,20 @@ export default class Document extends Model {
     return Object.keys(this.fields());
   }
 
+  static relationFieldsList() {
+    /**
+     * fields that has relations
+     * return {Array} fields which value are BelongsTo
+     */
+    return keys(this.fields()).reduce((list, field) => {
+      if (this.fields()[field] instanceof BelongsTo) {
+        list.push(`${field}_id`);
+        list.push(field);
+      }
+      return list;
+    }, []);
+  }
+
   static fields() {
     return {
       _id: this.increment(),
@@ -19,13 +34,18 @@ export default class Document extends Model {
       startDate: this.string("XXX"),
       title: this.string("XXX"),
       text: this.string("XXX"),
-      fromEntity: this.belongsTo(Entity, "entity_id"),
-      sendingEntity: this.belongsTo(Entity, "entity_id"),
-      toEntity: this.belongsTo(Entity, "entity_id"),
-      copyEntity: this.belongsTo(Entity, "entity_id"),
+      sendingEntity_id: this.attr(1),
+      fromEntity_id: this.attr(1),
+      sendingEntity: this.belongsTo(Entity, "sendingEntity_id"),
+      fromEntity: this.belongsTo(Entity, "fromEntity_id"),
+      toEntity_id: this.attr(1),
+      copyEntity_id: this.attr(1),
+      toEntity: this.belongsTo(Entity, "toEntity_id"),
+      copyEntity: this.belongsTo(Entity, "copyEntity_id"),
       attachment: this.string("XXX"),
       tags: this.string("XXX"),
-      author: this.belongsTo(User, "user_id"),
+      author: this.belongsTo(User, "author_id"),
+      author_id: this.attr(1),
     };
   }
 }

@@ -1,5 +1,5 @@
 import { Model, BelongsTo } from "@vuex-orm/core";
-import { keys, values } from "lodash";
+import { keys } from "lodash";
 import Entity from "@/api/models/Entity";
 export default class User extends Model {
   static entity = "user";
