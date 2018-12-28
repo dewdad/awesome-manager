@@ -24,7 +24,10 @@ export default class <%= ModelName %> extends Model {
 
   static relationFieldsList() {
     return this.fieldsList().reduce((list, field) => {
-      if (this.fields()[field] instanceof BelongsTo) list.push(`${field}_id`);
+      if (this.fields()[field] instanceof BelongsTo) {
+        list.push(`${field}_id`);
+        list.push(field);
+      }
       return list
     },[])
   }
