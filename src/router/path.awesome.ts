@@ -520,6 +520,6 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-      `@/components/widgets/RxCounter.vue`),
+      `@/components/widgets/RxSearch.vue`),
   },
 ];

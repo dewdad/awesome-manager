@@ -10,8 +10,8 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "off" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "off" : "off",
     "no-unreachable": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-empty": process.env.NODE_ENV === "production" ? "off" : "error",
-    "no-trailing-spaces": process.env.NODE_ENV === "production" ? "error" : "error",
+    "no-empty": process.env.NODE_ENV === "production" ? "off" : "warn",
+    "no-trailing-spaces": process.env.NODE_ENV === "production" ? "warn" : "warn",
     "vue/html-indent": [
       "warn",
       2,

@@ -30,7 +30,7 @@ export function getFilesByExtentionInDir(path: string, ext: string): string[] {
   return files.reduce((res: string[], file) => {
     // FIXME extension name issue
     const match = new RegExp(`.*${ext}$`);
-    const replace = new RegExp(`\.${ext}`);
+    const replace = new RegExp(`.${ext}`);
     if (file.match(match)) {
       res.push(file.replace(replace, ""));
     }

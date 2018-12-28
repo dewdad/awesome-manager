@@ -22,7 +22,7 @@
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
-        "debug"
+        "play:debug"
       ],
       "port": 9229
     },

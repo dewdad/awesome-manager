@@ -28,6 +28,3 @@ export default {
     </v-responsive>
   </v-card>
 </template>
-
-<style lang="scss" module>
-</style>

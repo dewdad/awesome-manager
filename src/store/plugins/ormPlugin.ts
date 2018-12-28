@@ -1,7 +1,7 @@
 import VuexORM, { Database, Query } from "@vuex-orm/core";
 import models from "@/api/models";
 import modules from "@/store/modules";
-import { curry } from 'lodash';
+import { curry } from "lodash";
 
 import { LowdbForElectron } from "@/api/lowdb";
 /**
@@ -34,17 +34,17 @@ Query.on("afterUpdate", model => {
 /**
  * Database register model and modules
  */
-export const registerDatabase = (models: any, modules: any) : Database => {
+export const registerDatabase = (models: any, modules: any): Database => {
   const database = new Database();
   Object.keys(models).map(key => {
     console.log(`Registering ORM for ${key} model`);
     database.register(models[key], modules[key] || {});
   });
   return database;
-}
+};
 
 export const curriedRegisterDatabase = curry(registerDatabase);
-export const curriedDatabase = curriedRegisterDatabase(models)(modules)
+export const curriedDatabase = curriedRegisterDatabase(models)(modules);
 
 /**
  * Register database as Vuex plugin
@@ -54,4 +54,3 @@ export const database = registerDatabase(models, modules);
 const ormPlugin = VuexORM.install(database);
 
 export default ormPlugin;
-

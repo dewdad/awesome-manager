@@ -6,7 +6,6 @@ import { linkTo } from "@storybook/addon-links";
 import { VBtn, VContainer, VFlex } from "vuetify/lib";
 
 import MyButton from "../components/base/MyButton.vue";
-import RxCounter from "../components/widgets/RxCounter.vue";
 
 storiesOf("Button", module).add("with text", () => ({
   components: { MyButton },
@@ -17,11 +16,6 @@ storiesOf("Button", module).add("with other text", () => ({
   components: { MyButton },
   template: '<my-button @click="action">RX Button</my-button>',
   methods: { action: action("Rx clicked") },
-}));
-storiesOf("Counter", module).add("Rx Counter", () => ({
-  components: { RxCounter },
-  template: "<rx-counter></rx-counter>",
-  methods: { action: action("count$") },
 }));
 // .add("with JSX", () => ({
 //   components: { MyButton },

@@ -1,13 +1,13 @@
 import { Model, BelongsTo } from "@vuex-orm/core";
 
 export interface IMenu {
-   _id: string;
-   title: string;
-   group: string;
-   icon: string;
-   href: string;
-   target: string;
-   name: string;
+  _id: string;
+  title: string;
+  group: string;
+  icon: string;
+  href: string;
+  target: string;
+  name: string;
 }
 
 export default class Menu extends Model {
@@ -22,8 +22,8 @@ export default class Menu extends Model {
   static relationFieldsList() {
     return this.fieldsList().reduce((list, field) => {
       if (this.fields()[field] instanceof BelongsTo) list.push(`${field}_id`);
-      return list
-    },[])
+      return list;
+    }, []);
   }
 
   static fields() {

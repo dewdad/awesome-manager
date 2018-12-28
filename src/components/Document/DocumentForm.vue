@@ -1,5 +1,8 @@
 <script>
+import { map, pick, pullAll } from "lodash/fp";
 import Document from "@/api/models/Document";
+import Entity from "@/api/models/Entity";
+import User from "@/api/models/User";
 export default {
   data() {
     return {
@@ -16,7 +19,10 @@ export default {
     window.DocumentForm = this;
   },
   computed: {
-    fields: () => Document.fieldsList(),
+    relationFields: () => Document.relationFieldsList().filter(r => r.match(/.*_id/)),
+    selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
+    selectUsers: () => map(pick(["_id", "name"]), User.all()),
+    fields: () => pullAll(Document.relationFieldsList(), Document.fieldsList()),
   },
   methods: {
     reset() {
@@ -63,6 +69,29 @@ export default {
             :key="field"
             :label=" $t !== undefined ? $t(field) : field">
         </v-text-field>
+      </v-flex>
+      <v-flex
+          xs12
+          md3
+          sm3>
+        <v-select
+            v-if="relationField !== 'author_id'"
+            v-for="relationField in relationFields"
+            v-model="model[relationField]"
+            :key="relationField"
+            :label=" $t(relationField) "
+            :items="selectEntities"
+            item-text="name"
+            item-value="_id">
+        </v-select>
+        <v-select
+            v-model="model['author_id']"
+            key="author_id"
+            :label=" $t(author_id) "
+            :items="selectUsers"
+            item-text="name"
+            item-value="_id">
+        </v-select>
       </v-flex>
     </v-layout>
   </v-container>

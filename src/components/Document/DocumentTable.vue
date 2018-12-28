@@ -1,6 +1,8 @@
 <script>
 import Document from "@/api/models/Document";
 import DocumentForm from "./DocumentForm";
+import { join } from "path";
+import { pullAll } from "lodash";
 import { remote, shell } from "electron";
 export default {
   components: {
@@ -12,8 +14,11 @@ export default {
     };
   },
   computed: {
-    all: () => Document.all(),
-    headers: () => Document.fieldsList(),
+    all: () =>
+      Document.query()
+        .withAll()
+        .get(),
+    headers: () => pullAll(Document.fieldsList(), Document.relationFieldsList()),
   },
   created() {
     window.DocumentTable = this;
@@ -26,7 +31,7 @@ export default {
       window.DocumentForm.$emit("SET_EDITING", item);
     },
     exportItem(item) {
-      let filePath = path.join(remote.app.getPath("home"), "/Documents/template/db.csv");
+      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
       GenerateCSV([item], filePath);
       shell.showItemInFolder(filePath);
     },
@@ -50,6 +55,11 @@ export default {
             slot-scope="props">
           <tr>
             <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
+            <th
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
@@ -60,13 +70,6 @@ export default {
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -86,6 +89,13 @@ export default {
                 @click="exportItem(props.item)">
               <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
+          </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
         </template>
       </v-data-table>
