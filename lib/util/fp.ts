@@ -1,4 +1,4 @@
-import { of, pipe , interval } from 'rxjs';
+import { of, pipe, interval } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 export const TICK = 350;
 export const LENGTH = 25;
