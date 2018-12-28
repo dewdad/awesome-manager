@@ -9,7 +9,7 @@ const getters = {
     return Object.keys(state.currentItem).filter(keyName => keyName !== "_id");
   },
   itemFiltered: state => {
-      return baseFilter(state.filter.sort)(state.filter.search)(state.items);
+    return baseFilter(state.filter.sort)(state.filter.search)(state.items);
   },
   itemLimited: state => {
     return state.filter.limit ? state.items.slice(0, state.filter.limit) : state.items;

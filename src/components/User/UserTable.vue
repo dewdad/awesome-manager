@@ -1,6 +1,7 @@
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
+import { GenerateCSV } from "@/util";
 import { join } from "path";
 import { pullAll } from "lodash";
 import { remote, shell } from "electron";
