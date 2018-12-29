@@ -20,7 +20,7 @@ export default {
     }
   },
   computed: {
-    all: ()=><%= modelName %>.all(),
+    all: ()=><%= modelName %>.query().withAll().get(),
     headers: ()=><%= modelName %>.fieldsList(),
   },
   created() {
@@ -61,6 +61,11 @@ if (blocks.indexOf('template') !== -1) {
             slot-scope="props">
           <tr>
             <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
+            <th
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
@@ -71,13 +76,6 @@ if (blocks.indexOf('template') !== -1) {
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -91,6 +89,13 @@ if (blocks.indexOf('template') !== -1) {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+          </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
         </template>
       </v-data-table>
