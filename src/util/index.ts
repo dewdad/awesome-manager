@@ -29,13 +29,17 @@ export function getFilesByExtentionInDir(path: string, ext: string): string[] {
   let files = fs.readdirSync(path, "utf8");
   return files.reduce((res: string[], file) => {
     // FIXME extension name issue
-    const match = new RegExp(`.*${ext}$`);
-    const replace = new RegExp(`.${ext}`);
-    if (file.match(match)) {
-      res.push(file.replace(replace, ""));
+        const match = newFunction();
+        const replace = new RegExp(`.${ext}`);
+        if (file.match(match)) {
+            res.push(file.replace(replace, ""));
+        }
+        return res;
+    }, []);
+
+    function newFunction() {
+        return new RegExp(`.*${ext}$`);
     }
-    return res;
-  }, []);
 }
 
 const getFilesFp = curry(getFilesByExtentionInDir);

@@ -1,4 +1,4 @@
-import VuexORM, { Database, Query } from "@vuex-orm/core";
+import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
 import models from "@/api/models";
 import modules from "@/store/modules";
 import { curry } from "lodash";
@@ -8,7 +8,7 @@ import { LowdbForElectron } from "@/api/lowdb";
  * Query hooks
  */
 
-Query.on("afterCreate", model => {
+Query.on("afterCreate", (model: Model) => {
   // NOTE https://vuex-orm.github.io/vuex-orm/guide/components/models.html#model-conventions
   // Get class static property with instance method $self
   const entity = model.$self().entity;
@@ -17,14 +17,14 @@ Query.on("afterCreate", model => {
   DB.insert(entity, model);
 });
 
-Query.on("afterDelete", model => {
+Query.on("beforeDelete", (model: Model) => {
   const entity = model.$self().entity;
   console.log("Delete Hook in " + entity);
   const DB: LowdbForElectron = new LowdbForElectron(entity);
   DB.delete(entity, { _id: model._id });
 });
 
-Query.on("afterUpdate", model => {
+Query.on("afterUpdate", (model: Model) => {
   const entity = model.$self().entity;
   console.log("Update Hook in " + entity);
   const DB: LowdbForElectron = new LowdbForElectron(entity);
