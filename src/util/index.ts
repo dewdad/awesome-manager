@@ -1,5 +1,5 @@
 /* tslint:disable:no-console */
-import { curry, pipe, map, keys, values, reduce } from "lodash/fp";
+import { curry, pipe, map, keys } from "lodash/fp";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
@@ -145,15 +145,28 @@ export const LimitedObjectKeysToArray = (item: any): any[] => {
   }, []);
 };
 
-
-export const zipHeaders = (data: any[], headers: any) => {
-  return pipe(
-    (data: any[]) => data,
-    (data: any[]) => data,
-    (data: any[]) => data,
-    (data: any[]) => data,
-    (data: any[]) => data,
-  )(data)
+/**
+ * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
+ * @param data 原始数组, [{ name: "zip"},...]
+ * @param headers json对象，包含标题行翻译 { name: "姓名"}
+ * @return result 新数组, { "姓名": "zip"}
+ */
+export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?:boolean): any[] => {
+  let result = [];
+  data.forEach(item => {
+    let newItem;
+    keys(item).map(key => {
+      let newKey;
+      if (reverse) {
+        newKey = Object.keys(keysDef).filter(k => item[k] = key)[0]
+      } else {
+        newKey = keysDef[key]
+      }
+      newItem[newKey] = item[key];
+    })
+    result.push(newItem)
+  })
+  return result;
 }
 
 /**
@@ -163,8 +176,11 @@ export const zipHeaders = (data: any[], headers: any) => {
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
  */
-export const GenerateCSV = (data: any[], targetFilePath: string) => {
+export const GenerateCSV = (data: any[], targetFilePath: string, needTranslate?: boolean, keysDef?: any) => {
   if (!Array.isArray(data)) return;
+  // 进行列标题转译
+  if(needTranslate) data = deepCloneWithNewKeys(data, keysDef)
+  // 进行输出
   stringify(
     data,
     {
@@ -176,7 +192,7 @@ export const GenerateCSV = (data: any[], targetFilePath: string) => {
     (_err: string, output: any) => {
       _err && console.log(_err);
       console.log("Data to be written:");
-      console.table(output);
+      console.log(output);
       fs.writeFileSync(targetFilePath, output, "utf8");
       console.log(`Data written to ${targetFilePath}`);
     },
@@ -188,15 +204,21 @@ export const GenerateCSV = (data: any[], targetFilePath: string) => {
  * @param {String|Object} 文件对象
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
  **/
-export const ImportCSV = async (file: any) => {
+export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: any) => {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
       skipEmptyLines: true,
       complete: function(results: any) {
-        log.info(results.data[0]);
-        resolve(results.data);
+        // 开始转译
+        let data;
+        if(needTranslate) { 
+          data = deepCloneWithNewKeys(results.data, keysDef)
+        } else {
+          data = results.data;
+        }
+        resolve(data);
       },
     });
   });
