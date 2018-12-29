@@ -11,6 +11,7 @@
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
+    "noImplicitThis": false,
     "strictNullChecks": false,
     "allowUnreachableCode": false,
     "noEmitOnError": true,

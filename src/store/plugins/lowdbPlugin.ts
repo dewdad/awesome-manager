@@ -19,26 +19,26 @@ export default options => {
     /**
      * Subscription to actions for logging each entity mutation
      * payload before persiste to state
-     */
-    store.subscribeAction((action, state) => {
-      let { entity } = action.payload;
-      if (entity !== entity) return;
+    //  */
+    // store.subscribeAction((action, state) => {
+    //   let { entity } = action.payload;
+    //   if (entity !== entity) return;
 
-      if (action.type === "entities/insert") {
-        console.log(`Insert ${entity} entity`);
-        console.log(action.type);
-        console.log(action.payload);
-      }
-      if (action.type === "entities/delete") {
-        console.log(`Delete ${entity} entity`);
-        console.log(action.type);
-        console.log(action.payload);
-      }
-      if (action.type === "entities/update") {
-        console.log(`Update ${entity} entity`);
-        console.log(action.type);
-        console.log(action.payload);
-      }
-    });
+    //   if (action.type === "entities/insert") {
+    //     console.log(`Insert ${entity} entity`);
+    //     console.log(action.type);
+    //     console.log(action.payload);
+    //   }
+    //   if (action.type === "entities/delete") {
+    //     console.log(`Delete ${entity} entity`);
+    //     console.log(action.type);
+    //     console.log(action.payload);
+    //   }
+    //   if (action.type === "entities/update") {
+    //     console.log(`Update ${entity} entity`);
+    //     console.log(action.type);
+    //     console.log(action.payload);
+    //   }
+    // });
   };
 };

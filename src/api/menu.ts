@@ -3,20 +3,8 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 const mainMenu = [
   { header: "常用功能" },
   {
-    title: "Entity",
+    title: "单位",
     name: "Entity",
-    group: "apps",
-    icon: "fas fa-tasks",
-  },
-  {
-    title: "Generic",
-    name: "Generic",
-    group: "apps",
-    icon: "fas fa-tasks",
-  },
-  {
-    title: "Test rxjs",
-    name: "components/rx",
     group: "apps",
     icon: "fas fa-tasks",
   },
@@ -33,10 +21,16 @@ const mainMenu = [
     icon: "fas fa-user",
   },
   {
-    title: "内部文件收发",
+    title: "内部文件",
     name: "Document",
     group: "apps",
     icon: "fas fa-file-export",
+  },
+  {
+    title: "导入导出",
+    group: "hight",
+    icon: "fas fa-save",
+    name: "Database",
   },
   {
     title: "控制面板",
@@ -48,6 +42,12 @@ const mainMenu = [
 
 const seniorMenu = [
   { header: "高级功能" },
+  {
+    title: "测试rx",
+    name: "components/rx",
+    group: "apps",
+    icon: "fas fa-tasks",
+  },
   {
     title: "打开微信",
     group: "senior",
@@ -90,12 +90,6 @@ const seniorMenu = [
     name: "BBVA",
   },
   {
-    title: "导入导出",
-    group: "hight",
-    icon: "fas fa-save",
-    name: "Database",
-  },
-  {
     title: "更多应用",
     group: "senior",
     icon: "fab fa-chrome",
@@ -107,12 +101,6 @@ const seniorMenu = [
 
 const extraMenu = [
   { header: "扩展功能" },
-  {
-    title: "账户信息",
-    group: "apps",
-    icon: "fas fa-user-edit",
-    name: "AccountProfile",
-  },
   {
     title: "即时通讯",
     group: "extra",

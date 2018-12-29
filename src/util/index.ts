@@ -1,8 +1,7 @@
 /* tslint:disable:no-console */
-import { curry, pipe, map } from "lodash/fp";
+import { curry, pipe, map, keys, values, reduce } from "lodash/fp";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
-import Item from "@/api/models/Item";
 const stringify = require("csv-stringify");
 /**
  * 美化命令行终端日志输出
@@ -145,6 +144,17 @@ export const LimitedObjectKeysToArray = (item: any): any[] => {
     return res;
   }, []);
 };
+
+
+export const zipHeaders = (data: any[], headers: any) => {
+  return pipe(
+    (data: any[]) => data,
+    (data: any[]) => data,
+    (data: any[]) => data,
+    (data: any[]) => data,
+    (data: any[]) => data,
+  )(data)
+}
 
 /**
  * 使用csv-stringify转数组为字符串
