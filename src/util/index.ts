@@ -137,7 +137,6 @@ export const ObjectKeysToArray = (item: any): any[] => {
  * @param item Object with keys and values
  */
 export const LimitedObjectKeysToArray = (item: any): any[] => {
-  let LimitedArrayOfKeys: any[] = [];
   return Object.keys(item).reduce((res: any[], key: string, index: number) => {
     if (index > 8) return;
     res.push({ text: key, value: key });
@@ -149,16 +148,20 @@ export const LimitedObjectKeysToArray = (item: any): any[] => {
  * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
  * @param data 原始数组, [{ name: "zip"},...]
  * @param headers json对象，包含标题行翻译 { name: "姓名"}
+ * @param reverse 如果反向查找,在json文件中通过键值查找键名
  * @return result 新数组, { "姓名": "zip"}
+ * @example
+ * import * as keysDef from "@/locales/cn.json"
+ * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
 export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?:boolean): any[] => {
   let result = [];
   data.forEach(item => {
-    let newItem;
+    let newItem = {};
     keys(item).map(key => {
-      let newKey;
+      let newKey: string;
       if (reverse) {
-        newKey = Object.keys(keysDef).filter(k => item[k] = key)[0]
+        newKey = Object.keys(keysDef).filter(k => keysDef[k] === key)[0]
       } else {
         newKey = keysDef[key]
       }
@@ -179,7 +182,7 @@ export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?:boolean
 export const GenerateCSV = (data: any[], targetFilePath: string, needTranslate?: boolean, keysDef?: any) => {
   if (!Array.isArray(data)) return;
   // 进行列标题转译
-  if(needTranslate) data = deepCloneWithNewKeys(data, keysDef)
+  if(needTranslate) data = deepCloneWithNewKeys(data, keysDef, false)
   // 进行输出
   stringify(
     data,
@@ -201,11 +204,13 @@ export const GenerateCSV = (data: any[], targetFilePath: string, needTranslate?:
 
 /**
  * 使用文件空间上传文件对象
- * @param {String|Object} 文件对象
+ * @param {String|Object} file 文件对象
+ * @param {String|Object} needTranslate 需要转移列标题
+ * @param {String|Object} keysDef? 标题定义json文件
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
  **/
 export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: any) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
@@ -213,8 +218,8 @@ export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: an
       complete: function(results: any) {
         // 开始转译
         let data;
-        if(needTranslate) { 
-          data = deepCloneWithNewKeys(results.data, keysDef)
+        if(needTranslate) {
+          data = deepCloneWithNewKeys(results.data, keysDef, true)
         } else {
           data = results.data;
         }
