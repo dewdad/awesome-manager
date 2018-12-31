@@ -1,5 +1,6 @@
 /* tslint:disable:no-console */
 import { curry, pipe, map, keys } from "lodash/fp";
+import { head, tail, mapKeys, findKey } from "lodash";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
@@ -28,17 +29,17 @@ export function getFilesByExtentionInDir(path: string, ext: string): string[] {
   let files = fs.readdirSync(path, "utf8");
   return files.reduce((res: string[], file) => {
     // FIXME extension name issue
-        const match = newFunction();
-        const replace = new RegExp(`.${ext}`);
-        if (file.match(match)) {
-            res.push(file.replace(replace, ""));
-        }
-        return res;
-    }, []);
-
-    function newFunction() {
-        return new RegExp(`.*${ext}$`);
+    const match = newFunction();
+    const replace = new RegExp(`.${ext}`);
+    if (file.match(match)) {
+      res.push(file.replace(replace, ""));
     }
+    return res;
+  }, []);
+
+  function newFunction() {
+    return new RegExp(`.*${ext}$`);
+  }
 }
 
 const getFilesFp = curry(getFilesByExtentionInDir);
@@ -154,24 +155,64 @@ export const LimitedObjectKeysToArray = (item: any): any[] => {
  * import * as keysDef from "@/locales/cn.json"
  * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
-export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?:boolean): any[] => {
+export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolean): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
     keys(item).map(key => {
       let newKey: string;
       if (reverse) {
-        newKey = Object.keys(keysDef).filter(k => keysDef[k] === key)[0]
+        newKey = Object.keys(keysDef).filter(k => keysDef[k] === key)[0];
       } else {
-        newKey = keysDef[key]
+        newKey = keysDef[key];
       }
       newItem[newKey] = item[key];
-    })
-    result.push(newItem)
-  })
+    });
+    result.push(newItem);
+  });
   return result;
-}
+};
 
+export const deepCloneWithNewKeysFp = (data: any[], keysDef: any, reverse?: boolean): any[] => {
+  let result = [];
+  data.forEach(item => {
+    let newItem = {};
+    if (reverse) {
+      newItem = mapKeys(item, (_: string, k: string) => findKey(keysDef, v => v === k));
+    } else {
+      newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
+    }
+    result.push(newItem);
+  });
+  return result;
+};
+
+export const changeCSVHeader = (content: string) => (fieldDefs: any): string => {
+  return pipe(
+    (content: string) => content.split("\n"),
+    (lines: string[]) => head(lines.reverse()),
+    (firstLine: string) => firstLine.split(","),
+    map(fieldName => fieldDefs[fieldName]),
+    (fieldNames: string[]) => fieldNames.join(","),
+    (content: string) => content + "\n",
+  )(content);
+};
+
+export const getCSVData = (content: string): string => {
+  return pipe(
+    (content: string) => content.split("\n"),
+    (lines: string[]) => tail(lines.reverse()),
+    (lines: string[]) => lines.join("\n"),
+  )(content);
+};
+
+export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
+  const content = fs.readFileSync(targetFilePath, "utf8");
+  const header = changeCSVHeader(content)(keysDef);
+  const data = getCSVData(content);
+  fs.writeFileSync(targetFilePath, header, { encoding: "utf-8", flag: "w" });
+  fs.writeFileSync(targetFilePath, data, { encoding: "utf-9", flag: "a" });
+};
 /**
  * 使用csv-stringify转数组为字符串
  * 保持字符串到指定文件
@@ -179,10 +220,15 @@ export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?:boolean
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
  */
-export const GenerateCSV = (data: any[], targetFilePath: string, needTranslate?: boolean, keysDef?: any) => {
+export const GenerateCSV = (
+  data: any[],
+  targetFilePath: string,
+  needTranslate?: boolean,
+  keysDef?: any,
+) => {
   if (!Array.isArray(data)) return;
   // 进行列标题转译
-  if(needTranslate) data = deepCloneWithNewKeys(data, keysDef, false)
+  if (needTranslate) data = deepCloneWithNewKeys(data, keysDef, false);
   // 进行输出
   stringify(
     data,
@@ -218,8 +264,8 @@ export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: an
       complete: function(results: any) {
         // 开始转译
         let data;
-        if(needTranslate) {
-          data = deepCloneWithNewKeys(results.data, keysDef, true)
+        if (needTranslate) {
+          data = deepCloneWithNewKeys(results.data, keysDef, true);
         } else {
           data = results.data;
         }
@@ -245,10 +291,10 @@ export const randomElement = (arr = []) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-export const slugify = (message: string) => {
+export const slugify = (words: string) => {
   return pipe(
-    (message: string) => message.split(" "),
-    map(m => m.toLowerCase()),
-    (messages: string[]) => messages.join("-"),
-  )(message);
+    (words: string) => words.split(" "),
+    map(word => word.toLowerCase()),
+    (words: string[]) => words.join("-"),
+  )(words);
 };

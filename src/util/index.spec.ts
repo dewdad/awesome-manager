@@ -1,4 +1,4 @@
-import { baseFilter, slugify, deepCloneWithNewKeys } from "./index";
+import { baseFilter, slugify, deepCloneWithNewKeys, deepCloneWithNewKeysFp} from "./index";
 
 const data = [
   {
@@ -47,5 +47,14 @@ describe("Simple i18n translater", () => {
     const result = deepCloneWithNewKeys(expectedData, typeDefs, true)
     expect(result).toEqual(data)
     console.log(result);
+  });
+  it("should clone with new keys with functional programming", () => {
+    const result = deepCloneWithNewKeysFp(data, typeDefs, false)
+    expect(result).toEqual(expectedData)
+    console.log(result);
+  });
+  it("should clone with new keys reversely with functional programming", () => {
+    const result = deepCloneWithNewKeysFp(expectedData, typeDefs, true)
+    expect(result).toEqual(data)
   });
 });
