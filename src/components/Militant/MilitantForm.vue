@@ -1,5 +1,5 @@
 <script>
-import Generic from "@/api/models/Generic";
+import Militant from "@/api/models/Militant";
 export default {
   data() {
     return {
@@ -8,33 +8,33 @@ export default {
     };
   },
   created() {
-    this.model = new Generic();
+    this.model = new Militant();
     this.$on("SET_EDITING", item => {
       this.editing = true;
       this.model = item;
     });
-    window.GenericForm = this;
+    window.MilitantForm = this;
   },
   computed: {
-    fields: () => Generic.fieldsList(),
+    fields: () => Militant.fieldsList(),
   },
   methods: {
     reset() {
       this.editing = false;
-      this.model = new Generic();
+      this.model = new Militant();
     },
     saveItem() {
       if (!this.editing) {
-        Generic.insert({
+        Militant.insert({
           data: this.model,
         });
-        this.model = new Generic();
+        this.model = new Militant();
       } else {
-        Generic.update(this.model);
+        Militant.update(this.model);
         this.editing = false;
-        this.model = new Generic();
+        this.model = new Militant();
       }
-      console.log(Generic.all());
+      console.log(Militant.all());
     },
   },
 };
@@ -48,17 +48,22 @@ export default {
           xs12
           md12
           sm12>
-        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+        <v-btn
+            color="primary"
+            @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+        <span class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</span>
       </v-flex>
+      <v-flex
+          xs12
+          md4
+          sm6>
       <v-text-field
           v-for="field in fields"
           v-model="model[field]"
           :key="field"
           :label=" $t !== undefined ? $t(field) : field">
       </v-text-field>
-      <v-btn
-          color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>

@@ -1,9 +1,12 @@
 <script>
-import Generic from "@/api/models/Generic";
-import GenericForm from "./GenericForm";
+import Resummee from "@/api/models/Resummee";
+import ResummeeForm from "./ResummeeForm";
+import { join } from "path";
+import { remote, shell } from "electron";
+import { GenerateCSV } from "@/util";
 export default {
   components: {
-    GenericForm,
+    ResummeeForm,
   },
   data() {
     return {
@@ -11,18 +14,26 @@ export default {
     };
   },
   computed: {
-    all: () => Generic.all(),
-    headers: () => Generic.fieldsList(),
+    all: () =>
+      Resummee.query()
+        .withAll()
+        .get(),
+    headers: () => Resummee.fieldsList(),
   },
   created() {
-    window.GenericTable = this;
+    window.ResummeeTable = this;
   },
   methods: {
     deleteItem(item) {
-      Generic.delete(item._id);
+      Resummee.delete(item._id);
     },
     editItem(item) {
-      window.GenericForm.$emit("SET_EDITING", item);
+      window.ResummeeForm.$emit("SET_EDITING", item);
+    },
+    exportItem(item) {
+      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
+      GenerateCSV([item], filePath);
+      shell.showItemInFolder(filePath);
     },
   },
 };
@@ -31,19 +42,23 @@ export default {
 <template>
   <v-card>
     <v-card-title>
-      GenericTable
+      ResummeeTable
     </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
           class="elevation-0"
         >
         <template
             slot="headers"
             slot-scope="props">
           <tr>
+            <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
             <th
                 v-for="header in props.headers"
                 class="text-xs-left"
@@ -55,13 +70,6 @@ export default {
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -75,13 +83,26 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
+            </v-btn>
+          </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
         </template>
       </v-data-table>
 
     </v-responsive>
     <v-responsive>
-      <GenericForm></GenericForm>
+        <ResummeeForm></ResummeeForm>
     </v-responsive>
   </v-card>
 </template>

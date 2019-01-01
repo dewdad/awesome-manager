@@ -1,6 +1,6 @@
 export default {
   path: "/user-table",
-  name: "User",
+  name: "apps/User",
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */

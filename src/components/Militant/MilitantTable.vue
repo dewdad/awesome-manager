@@ -1,13 +1,12 @@
 <script>
-import Document from "@/api/models/Document";
-import DocumentForm from "./DocumentForm";
+import Militant from "@/api/models/Militant";
+import MilitantForm from "./MilitantForm";
 import { GenerateCSV } from "@/util";
 import { join } from "path";
-import { pullAll } from "lodash";
 import { remote, shell } from "electron";
 export default {
   components: {
-    DocumentForm,
+    MilitantForm,
   },
   data() {
     return {
@@ -16,20 +15,20 @@ export default {
   },
   computed: {
     all: () =>
-      Document.query()
+      Militant.query()
         .withAll()
         .get(),
-    headers: () => pullAll(Document.fieldsList(), Document.relationFieldsList()),
+    headers: () => Militant.fieldsList(),
   },
   created() {
-    window.DocumentTable = this;
+    window.MilitantTable = this;
   },
   methods: {
     deleteItem(item) {
-      Document.delete(item._id);
+      Militant.delete(item._id);
     },
     editItem(item) {
-      window.DocumentForm.$emit("SET_EDITING", item);
+      window.MilitantForm.$emit("SET_EDITING", item);
     },
     exportItem(item) {
       let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
@@ -42,8 +41,8 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title v-show="false">
-      DocumentTable
+    <v-card-title>
+      MilitantTable
     </v-card-title>
     <v-responsive>
       <v-data-table
@@ -103,7 +102,7 @@ export default {
 
     </v-responsive>
     <v-responsive>
-      <DocumentForm></DocumentForm>
+        <MilitantForm></MilitantForm>
     </v-responsive>
   </v-card>
 </template>

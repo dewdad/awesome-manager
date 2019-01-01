@@ -57,7 +57,7 @@ export default {
           :label=" $t !== undefined ? $t(field) : field">
       </v-text-field>
       <v-btn
-          color="primary"
+          :color="editing ? 'warning' : 'primary'"
           @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
     </v-layout>
   </v-container>

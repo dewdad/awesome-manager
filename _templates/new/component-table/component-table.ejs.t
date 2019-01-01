@@ -10,6 +10,9 @@ if (blocks.indexOf('script') !== -1) {
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
+import { join } from "path";
+import { remote, shell } from "electron";
+import { GenerateCSV } from "@/util";
 export default {
   components: {
     <%= modelFormName %>
@@ -32,7 +35,12 @@ export default {
     },
     editItem(item) {
       window.<%= h.capitalize(h.inflection.singularize(model)) %>Form.$emit("SET_EDITING", item)
-    }
+    },
+    exportItem(item) {
+      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
+      GenerateCSV([item], filePath);
+      shell.showItemInFolder(filePath);
+    },
   },
   <% if (blocks.indexOf('template') === -1) {
   %>render(h) {
@@ -88,6 +96,12 @@ if (blocks.indexOf('template') !== -1) {
                 class="mx-0"
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
+            </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
           </td>
           <td

@@ -1,10 +1,10 @@
 ---
 inject: true
 to: src/api/menu.ts
-after: mainMenu
+after: header
 ---
 <% const modelName = h.capitalize(h.inflection.singularize(model))
-%>{
+%>  {
     title: "<%= modelName %>",
     name: "<%= modelName %>",
     group: "apps",

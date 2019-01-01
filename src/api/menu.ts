@@ -3,22 +3,38 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 const mainMenu = [
   { header: "常用功能" },
   {
-    title: "单位",
+    title: "单位管理",
     name: "Entity",
     group: "apps",
     icon: "fas fa-tasks",
   },
   {
-    title: "活动登记",
+    title: "活动管理",
     name: "Activity",
     group: "apps",
     icon: "fas fa-calendar",
   },
   {
-    title: "本馆人员",
-    name: "User",
+    title: "人员管理",
     group: "apps",
     icon: "fas fa-user",
+    items: [
+      {
+        title: "本馆人员",
+        name: "User",
+        icon: "fas fa-user",
+      },
+      {
+        title: "个人简历",
+        name: "Resummee",
+        icon: "fas fa-tasks",
+      },
+      {
+        title: "党员管理",
+        name: "Militant",
+        icon: "fas fa-tasks",
+      },
+    ],
   },
   {
     title: "内部文件",
@@ -45,7 +61,7 @@ const seniorMenu = [
   {
     title: "测试rx",
     name: "components/rx",
-    group: "apps",
+    group: "senior",
     icon: "fas fa-tasks",
   },
   {
@@ -232,7 +248,7 @@ const sampleMenu = [
 let Menu: any = [];
 
 if (isDevelopment) {
-  Menu = [...mainMenu, ...seniorMenu, ...extraMenu, ...sampleMenu];
+  Menu = [...mainMenu, ...seniorMenu, ...sampleMenu, ...extraMenu];
 } else {
   Menu = [...mainMenu, ...seniorMenu];
 }

@@ -1,4 +1,4 @@
-import { baseFilter, slugify, deepCloneWithNewKeys, deepCloneWithNewKeysFp} from "./index";
+import { baseFilter, slugify, deepCloneWithNewKeys, deepCloneWithNewKeysFp } from "./index";
 
 const data = [
   {
@@ -21,9 +21,9 @@ const expectedData = [
   },
 ];
 const typeDefs = {
-    name: "姓名",
-    age: "年龄"
-}
+  name: "姓名",
+  age: "年龄",
+};
 
 describe("Simple filter", () => {
   it("should filter and sort", () => {
@@ -39,22 +39,19 @@ describe("Simple filter", () => {
 
 describe("Simple i18n translater", () => {
   it("should clone with new keys", () => {
-    const result = deepCloneWithNewKeys(data, typeDefs, false)
-    expect(result).toEqual(expectedData)
-    console.log(result);
+    const result = deepCloneWithNewKeys(data, typeDefs, false);
+    expect(result).toEqual(expectedData);
   });
   it("should clone with new keys reversely", () => {
-    const result = deepCloneWithNewKeys(expectedData, typeDefs, true)
-    expect(result).toEqual(data)
-    console.log(result);
+    const result = deepCloneWithNewKeys(expectedData, typeDefs, true);
+    expect(result).toEqual(data);
   });
   it("should clone with new keys with functional programming", () => {
-    const result = deepCloneWithNewKeysFp(data, typeDefs, false)
-    expect(result).toEqual(expectedData)
-    console.log(result);
+    const result = deepCloneWithNewKeysFp(data, typeDefs, false);
+    expect(result).toEqual(expectedData);
   });
   it("should clone with new keys reversely with functional programming", () => {
-    const result = deepCloneWithNewKeysFp(expectedData, typeDefs, true)
-    expect(result).toEqual(data)
+    const result = deepCloneWithNewKeysFp(expectedData, typeDefs, true);
+    expect(result).toEqual(data);
   });
 });

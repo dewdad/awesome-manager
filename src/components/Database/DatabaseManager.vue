@@ -17,6 +17,7 @@
               label="Select Database Name"
               :items="entities"/>
           <v-select
+              v-show="false"
               v-model="outputDocFile"
               label="Select Document Name"
               :items="templateDocs"/>
@@ -142,7 +143,7 @@ export default {
       let { entityDb, dbName } = this;
       if (entityDb === undefined || dbName === undefined) return;
 
-      let data = entityDb.find(`${dbName}`, {});
+      let data = entityDb.all(`${dbName}`);
       if (!Array.isArray(data)) return;
 
       GenerateCSV(data, targetPath);

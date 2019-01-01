@@ -38,7 +38,12 @@ export default {
         this.editing = false;
         this.model = new User();
       }
-      console.log(User.all());
+    },
+    militantInformation() {
+      this.$router.push("/militant");
+    },
+    resummeeInformation() {
+      this.$router.push("/resummee");
     },
   },
 };
@@ -52,10 +57,16 @@ export default {
           xs12
           md12
           sm12>
+        <span class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</span>
         <v-btn
             :color="editing ? 'warning' : 'primary'"
             @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
-        <span class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</span>
+        <v-btn
+            :color="editing ? 'warning' : 'primary'"
+            @click="militantInformation">党员信息</v-btn>
+        <v-btn
+            :color="editing ? 'warning' : 'primary'"
+            @click="resummeeInformation">填写简历</v-btn>
       </v-flex>
       <v-flex
           xs12

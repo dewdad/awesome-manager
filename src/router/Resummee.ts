@@ -1,9 +1,9 @@
 export default {
-  path: "/test-table",
-  name: "Test",
+  path: "/resummee",
+  name: "apps/Resummee",
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Test/TestTable.vue`),
+    `@/components/Resummee/ResummeeTable.vue`).then(m => m.default),
 };

@@ -1,9 +1,9 @@
 export default {
-  path: "/generic-table",
-  name: "Generic",
+  path: "/militant",
+  name: "apps/Militant",
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Generic/GenericTable.vue`),
+    `@/components/Militant/MilitantTable.vue`).then(m => m.default),
 };
