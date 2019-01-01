@@ -2,6 +2,7 @@ import Vue from "vue";
 import router from "./router";
 import store from "./store";
 import App from "./entry/App.awesome.vue";
+// import { App } from "./entry/App.play";
 // Register service worker
 import "./registerServiceWorker";
 // Register global components
@@ -13,7 +14,6 @@ import "./plugins/rx";
 // Register styles
 import "./plugins/vuetify";
 import "./plugins/styles";
-// Register styles
 
 Vue.config.productionTip = false;
 
