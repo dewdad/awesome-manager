@@ -2,9 +2,12 @@ import { Model, BelongsTo } from "@vuex-orm/core";
 import { keys } from "lodash";
 
 export interface IResummee {
-   _id: string;
-   name: string;
-   startDate: string;endDate: string;entity: string;role: string;
+  _id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  entity: string;
+  role: string;
 }
 
 export default class Resummee extends Model {
@@ -38,7 +41,6 @@ export default class Resummee extends Model {
       endDate: this.string("endDate"),
       entity: this.string("entity"),
       role: this.string("role"),
-      
     };
   }
 }

@@ -32,12 +32,6 @@
       <v-icon>fab fa-github</v-icon>
     </v-btn>
 
-    <v-btn
-        icon
-        @click="handleFullScreen()">
-      <v-icon>fullscreen</v-icon>
-    </v-btn>
-
     <v-menu
         offset-y
         origin="center center"
@@ -94,7 +88,6 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-
   </v-toolbar>
 </template>
 <script>
@@ -108,27 +101,11 @@ export default {
   data: () => ({
     items: [
       {
-        icon: "account_circle",
-        href: "#",
-        title: "个人资料",
-        click(e) {
-          window.getApp.$emit("APP_ACCOUNTPROFILE");
-        },
-      },
-      {
         icon: "settings",
         href: "#",
         title: "个人设置",
         click(e) {
           window.getApp.$emit("APP_ACCOUNTSETTING");
-        },
-      },
-      {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "实验场",
-        click(e) {
-          window.getApp.$emit("APP_PLAYGROUND");
         },
       },
       {
@@ -149,9 +126,6 @@ export default {
   methods: {
     handleDrawerToggle() {
       window.getApp.$emit("APP_DRAWER_TOGGLED");
-    },
-    handleFullScreen() {
-      Util.toggleFullScreen();
     },
   },
 };

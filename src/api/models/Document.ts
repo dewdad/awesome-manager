@@ -31,7 +31,7 @@ export default class Document extends Model {
       type: this.string("XXX"),
       mark: this.string("XXX"),
       classification: this.string("XXX"),
-      startDate: this.string("XXX"),
+      startDate: this.string("2018-12-30"),
       title: this.string("XXX"),
       text: this.string("XXX"),
       sendingEntity_id: this.attr(1),

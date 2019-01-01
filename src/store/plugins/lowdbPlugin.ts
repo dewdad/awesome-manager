@@ -19,7 +19,7 @@ export default options => {
     /**
      * Subscription to actions for logging each entity mutation
      * payload before persiste to state
-    //  */
+     //  */
     // store.subscribeAction((action, state) => {
     //   let { entity } = action.payload;
     //   if (entity !== entity) return;

@@ -30,14 +30,10 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title>
-      EntityTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
           class="elevation-0"
         >
         <template

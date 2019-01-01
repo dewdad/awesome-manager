@@ -4,8 +4,8 @@ import Militant from "@/api/models/Militant";
 export default {
   data() {
     return {
-      model: { "_id": 1, label: "Select Militant" },
-    }
+      model: { _id: 1, label: "Select Militant" },
+    };
   },
   created() {
     window.MilitantSelect = this;
@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     change() {
-      this.$emit("Militant_CHANGED", this.model._id)
-    }
-  }
-}
+      this.$emit("Militant_CHANGED", this.model._id);
+    },
+  },
+};
 </script>
 <template>
   <v-select

@@ -1,6 +1,5 @@
 <template>
   <v-card>
-    <v-card-title> Activity </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"

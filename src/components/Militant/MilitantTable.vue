@@ -41,9 +41,6 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title>
-      MilitantTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
@@ -102,7 +99,7 @@ export default {
 
     </v-responsive>
     <v-responsive>
-        <MilitantForm></MilitantForm>
+      <MilitantForm></MilitantForm>
     </v-responsive>
   </v-card>
 </template>

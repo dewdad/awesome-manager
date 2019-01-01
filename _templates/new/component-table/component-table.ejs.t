@@ -5,8 +5,6 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><%
-if (blocks.indexOf('script') !== -1) {
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
@@ -42,22 +40,11 @@ export default {
       shell.showItemInFolder(filePath);
     },
   },
-  <% if (blocks.indexOf('template') === -1) {
-  %>render(h) {
-    return <div/>
-  }<% } %>
 }
 </script>
-<%
-}
 
-if (blocks.indexOf('template') !== -1) {
-%>
 <template>
   <v-card>
-    <v-card-title>
-      <%= modelTableName %>
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
@@ -119,13 +106,5 @@ if (blocks.indexOf('template') !== -1) {
     </v-responsive>
   </v-card>
 </template>
-<%
-}
-
-if (blocks.indexOf('style') !== -1) {
-%>
 <style lang="scss" module>
-
-</style><%
-}
-%>
+</style>
