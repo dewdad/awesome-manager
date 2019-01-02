@@ -1,12 +1,12 @@
-import * as tsx from "vue-tsx-support";
-import { VNode } from "vue";
-import { Evaluation } from "@/components/Evaluation/Evaluation.tsx";
-import { AppToolbar } from "@/components/AppToolbar.tsx";
 import AppDrawer from "@/components/AppDrawer.vue";
 import AppFab from "@/components/AppFab.vue";
+import { AppToolbar } from "@/components/AppToolbar.tsx";
+import { Evaluation } from "@/components/Evaluation/Evaluation.tsx";
 import PageHeader from "@/components/PageHeader.vue";
 import ThemeSettings from "@/components/ThemeSettings.vue";
 import AppEvents from "@/util/event";
+import { VNode } from "vue";
+import * as tsx from "vue-tsx-support";
 // Customized events and data interface
 interface IAppEvents {
   changeItem: (value: String) => void;
