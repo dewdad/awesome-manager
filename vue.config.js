@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   configureWebpack: {
     entry: {
@@ -7,11 +8,13 @@ module.exports = {
     },
     devtool: "source-map",
     plugins: [
-      new CopyWebpackPlugin({
-        from: path.join(__dirname, "public/template"),
-        to: path.resolve("~/template"),
-        toType: "dir",
-      }),
+      new CopyWebpackPlugin([
+        {
+          from: path.join(__dirname, "public/template"),
+          to: path.resolve("~/template"),
+          toType: "dir",
+        },
+      ]),
     ],
   },
   chainWebpack: config => {
