@@ -9,8 +9,8 @@ import Memory from "lowdb/adapters/Memory";
 
 export class LowdbForElectron {
   isElectron: boolean;
-  hasdbPath: boolean;
-  hasdb: boolean;
+  hasDbPath: boolean;
+  hasDb: boolean;
   electronApp: App;
   adapter: AdapterSync;
   db: LowdbSync<any>;
@@ -18,20 +18,20 @@ export class LowdbForElectron {
 
   constructor(dbName: string) {
     this.isElectron = this.ensureElectronEnv();
-    this.hasdbPath = this.ensuredbPath("data");
-    this.hasdb = this.createPersistence(dbName);
+    this.hasDbPath = this.ensuredbPath("data");
+    this.hasDb = this.createPersistence(dbName);
   }
 
-  ensureElectronEnv() {
+  ensureElectronEnv(): boolean {
     this.electronApp = process.type === "renderer" ? remote.app : app;
-    return true;
+    return this.electronApp !== undefined? true: false;
   }
 
   /**
    * Ensure the path of db file exists
    * @param {string} subDir subDirectory where data file stored
    */
-  ensuredbPath(subDir: string) {
+  ensuredbPath(subDir: string): boolean {
     if (this.electronApp !== undefined) {
       this.dbPath = join(this.electronApp.getPath("userData"), subDir);
     } else {
@@ -48,7 +48,7 @@ export class LowdbForElectron {
    * Create lowdb store persisted in disk
    * @param {string} dbName Name of the store file
    */
-  createPersistence(dbName: string) {
+  createPersistence(dbName: string): boolean {
     if (this.dbPath !== undefined) {
       this.adapter = new FileSync(join(this.dbPath, `${dbName}.json`));
     } else {
@@ -56,14 +56,14 @@ export class LowdbForElectron {
     }
     this.db = Datastore(this.adapter);
     this.db._.mixin(LodashId);
-    return this.db === undefined ? false : true;
+    return this.db !== undefined ? true: false;
   }
 
   /**
    * Database persistence Module
    */
 
-  dbOpen(node: string) {
+  dbOpen(node: string): any {
     return this.db
       .read()
       .get(node)
@@ -72,7 +72,7 @@ export class LowdbForElectron {
   /**
    * Init a set of default values
    */
-  dbInit(nodes: string[]) {
+  dbInit(nodes: string[]): void {
     // Create user-level nodes like user.json
     nodes && this.dbCreateUserLevelnode(nodes);
   }
@@ -80,7 +80,7 @@ export class LowdbForElectron {
   /**
    * Create nodes from a array
    */
-  dbCreateUserLevelnode(nodes: string[]) {
+  dbCreateUserLevelnode(nodes: string[]): void {
     nodes &&
       nodes.forEach(node => {
         this.dbCreate(node);
@@ -91,7 +91,7 @@ export class LowdbForElectron {
    * { entity: []}
    * @param {string} node key or key or entity name, i.e. activity
    */
-  dbCreate(node: string) {
+  dbCreate(node: string): void {
     console.log(`creating default value in ${node} lowdb`);
     if (!this.db.has(node).value()) {
       this.db.set(node, []).write();
@@ -103,7 +103,7 @@ export class LowdbForElectron {
    * Remove a key
    * @param {string} node key or key or entity name, i.e. activity
    */
-  dbRemove(node: string) {
+  dbRemove(node: string): void {
     if (!this.db.has(node).value()) {
       this.db.unset(node).write();
     }
@@ -112,9 +112,9 @@ export class LowdbForElectron {
    * Inserta data in a specific key with key or entity namespace
    * @param {string} entity key or entity namespace like activity
    * @param {object} data data without id, since lodash-id will use unique id
-   * @return {undefined} undefined
+   * @return {void} void
    */
-  insert(entity: string, data: any) {
+  insert(entity: string, data: any): void {
     console.log("Inserting in " + entity);
     // skip reinsert same _id
     if (this.find(entity, { _id: data._id }) !== undefined) {
@@ -123,7 +123,7 @@ export class LowdbForElectron {
     }
     // delete if has id property, only for avoid lodash-id conflict
     data.id && delete data.id;
-    return this.db
+    this.db
       .read()
       .get(`${lowerFirst(entity)}`)
       .push(data)
@@ -135,11 +135,11 @@ export class LowdbForElectron {
    * @param {string} entity key or entity namespace
    * @param {object} query query statements
    * @param {object} data data
-   * @return {undefined} undefined
+   * @return {void} void
    */
-  update(entity: string, query: any, data: any) {
+  update(entity: string, query: any, data: any): void {
     console.log("Updating in " + entity);
-    return this.db
+    this.db
       .read()
       .get(`${lowerFirst(entity)}`)
       .find(query)
@@ -153,9 +153,9 @@ export class LowdbForElectron {
    * @param {object} query query statement
    * @return {undefined} undefined
    */
-  delete(entity: string, query: any) {
+  delete(entity: string, query: any): void {
     console.log("Deleting in " + entity);
-    return this.db
+    this.db
       .read()
       .get(`${lowerFirst(entity)}`)
       .remove(query)
@@ -166,9 +166,9 @@ export class LowdbForElectron {
    * Find and Query data in a specific key with key or entity namespace
    * @param {string} entity key or entity namespace
    * @param {object} query query statement
-   * @return {array, object, undefined} undefined is found nothing, else the data set
+   * @return {object, undefined} undefined is found nothing, else the data set
    */
-  find(entity: string, query: any) {
+  find(entity: string, query: any): object|undefined {
     console.log("Querying in " + entity);
     return this.db
       .read()
@@ -176,12 +176,20 @@ export class LowdbForElectron {
       .find(query)
       .value();
   }
+  filter(entity: string, query: any): any[] {
+    console.log("Querying in " + entity);
+    return this.db
+      .read()
+      .get(`${lowerFirst(entity)}`)
+      .filter(query)
+      .value();
+  }
   /**
    * Find and Query data in a specific key with key or entity namespace
    * @param {string} entity key or entity namespace
-   * @return {undefined} undefined
+   * @return {array} array of all element 
    */
-  all(entity: string) {
+  all(entity: string): any[] {
     console.log("Querying in " + entity);
     return this.db
       .read()
@@ -193,7 +201,7 @@ export class LowdbForElectron {
    * Find and Query data in a specific key with key or entity namespace
    * @param {string} entity key or entity namespace
    */
-  clear(entity: string) {
+  clear(entity: string): void {
     console.log("Clearing in " + entity);
     this.db.set(`${lowerFirst(entity)}`, []).write();
   }

@@ -1,7 +1,4 @@
 import { LowdbForElectron } from "../index";
-import Datastore from "lowdb";
-
-const testDB = new LowdbForElectron("test");
 
 const entities = ["user", "document", "account"];
 const pool = entities.reduce((entitiesDb, entity) => {
@@ -12,7 +9,9 @@ const pool = entities.reduce((entitiesDb, entity) => {
 }, {});
 
 describe("testing lowdb class", () => {
+  let testDB: LowdbForElectron;
   beforeEach(() => {
+    testDB = new LowdbForElectron("test");
     testDB.clear("activity");
     testDB.dbInit(["activity"]);
   });
@@ -51,42 +50,41 @@ describe("testing lowdb class", () => {
     let activities = testDB.all("activity");
     expect(activities.length).toBe(2);
 
-    activities = testDB.find("activity", { name: "xingwenju" });
-    expect(activities).toEqual({ name: "xingwenju" });
+    let activity;
+
+    activity = testDB.find("activity", { name: "xingwenju" });
+    expect(activity).toEqual({ name: "xingwenju" });
 
     testDB.update("activity", { name: "xingwenju" }, { name: "wanglulu" });
-    activities = testDB.find("activity", { name: "wanglulu" });
-    expect(activities).toEqual({ name: "wanglulu" });
+    activity = testDB.find("activity", { name: "wanglulu" });
+    expect(activity).toEqual({ name: "wanglulu" });
 
     testDB.delete("activity", { name: "wanglulu" });
-    activities = testDB.find("activity", { name: "wanglulu" });
-    expect(activities).toBe(undefined);
+    activity = testDB.find("activity", { name: "wanglulu" });
+    expect(activity).toBe(undefined);
   });
 });
 
 describe("testing lowdb pool", () => {
+  let userDB: LowdbForElectron;
   beforeEach(() => {
-    testDB.clear("user");
-    testDB.dbInit(["user"]);
+    userDB = pool["user"];
+    userDB.clear("user");
+    userDB.dbInit(["user"]);
   });
   it("should create pool with file", () => {
-    const DB = pool["user"];
-    expect(DB).not.toBeNull();
-    expect(DB.db).not.toBeNull();
+    expect(userDB).not.toBeNull();
+    expect(userDB.db).not.toBeNull();
   });
   it("should set default value of entity", () => {
-    const DB = pool["user"];
-    DB.clear("user");
-    const defaultValue = DB.db.get("user").value();
+    const defaultValue = userDB.db.get("user").value();
     expect(defaultValue).toEqual([]);
   });
   it("should set new value of entity", () => {
-    const DB = pool["user"];
-    DB.clear("user");
-    DB.insert("user", {
+    userDB.insert("user", {
       name: "xingwenju",
     });
-    const newValue = DB.find("user", {});
+    const newValue = userDB.find("user", {});
     expect(newValue).toEqual({ name: "xingwenju" });
   });
 });
