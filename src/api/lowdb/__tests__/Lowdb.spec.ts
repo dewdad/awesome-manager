@@ -55,7 +55,7 @@ describe("testing lowdb class", () => {
     expect(activities).toEqual({ name: "xingwenju" });
 
     testDB.update("activity", { name: "xingwenju" }, { name: "wanglulu" });
-    activities = testDB.find("activity", { name: "xingwenju" });
+    activities = testDB.find("activity", { name: "wanglulu" });
     expect(activities).toEqual({ name: "wanglulu" });
 
     testDB.delete("activity", { name: "wanglulu" });
