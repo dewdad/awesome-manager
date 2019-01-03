@@ -52,19 +52,23 @@ describe("testing lowdb class", () => {
     expect(activities.length).toBe(2);
 
     activities = testDB.find("activity", { name: "xingwenju" });
-    expect(activities.length).toBe(1);
+    expect(activities).toEqual({ name: "xingwenju" });
 
     testDB.update("activity", { name: "xingwenju" }, { name: "wanglulu" });
     activities = testDB.find("activity", { name: "xingwenju" });
-    expect(activities.length).toBe(0);
+    expect(activities).toEqual({ name: "wanglulu" });
 
     testDB.delete("activity", { name: "wanglulu" });
     activities = testDB.find("activity", { name: "wanglulu" });
-    expect(activities.length).toBe(0);
+    expect(activities).toBe(undefined);
   });
 });
 
 describe("testing lowdb pool", () => {
+  beforeEach(() => {
+    testDB.clear("user");
+    testDB.dbInit(["user"]);
+  });
   it("should create pool with file", () => {
     const DB = pool["user"];
     expect(DB).not.toBeNull();
@@ -83,6 +87,6 @@ describe("testing lowdb pool", () => {
       name: "xingwenju",
     });
     const newValue = DB.find("user", {});
-    expect(newValue).toEqual([{ name: "xingwenju" }]);
+    expect(newValue).toEqual({ name: "xingwenju" });
   });
 });
