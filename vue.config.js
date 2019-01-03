@@ -2,22 +2,14 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   configureWebpack: {
-    entry: {
-      app: ["./src/main.ts"],
-      // app: ["./src/main.play.ts"],
-    },
     devtool: "source-map",
-    plugins: [
-      new CopyWebpackPlugin([
-        {
-          from: path.join(__dirname, "public/template"),
-          to: path.resolve("~/template"),
-          toType: "dir",
-        },
-      ]),
-    ],
+    // entry: {
+    //   // app: ["./src/main.ts"],
+    //   app: ["./src/main.play.ts"],
+    // },
   },
   chainWebpack: config => {
+    // configure vue loader
     config.module
       .rule("vue")
       .use("vue-loader")
@@ -29,8 +21,18 @@ module.exports = {
         };
         return options;
       });
+    // config html plugin
     config.plugin("html").tap(args => {
       args[0].template = path.resolve("public/index.html");
+      return args;
+    });
+    // configure copy plugin
+    config.plugin("copy").tap(args => {
+      args.push({
+        from: path.join(__dirname, "public/template"),
+        to: path.join(__dirname, "dist/template"),
+        toType: "dir",
+      });
       return args;
     });
   },

@@ -1,6 +1,6 @@
 /* tslint:disable:no-console */
 import { curry, pipe, map, keys } from "lodash/fp";
-import { head, tail, mapKeys, findKey } from "lodash";
+import { head, tail, mapKeys, findKey, mapValues } from "lodash";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
@@ -155,7 +155,7 @@ export const LimitedObjectKeysToArray = (item: any): any[] => {
  * import * as keysDef from "@/locales/cn.json"
  * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
-export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolean): any[] => {
+export const deepCloneWithNewKeysBasic = (data: any[], keysDef: any, reverse?: boolean): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
@@ -173,14 +173,19 @@ export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolea
   return result;
 };
 
-export const deepCloneWithNewKeysFp = (data: any[], keysDef: any, reverse?: boolean): any[] => {
+export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolean): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
     if (reverse) {
       newItem = mapKeys(item, (_: string, k: string) => findKey(keysDef, v => v === k));
     } else {
+      // 翻译键值为相应语言
       newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
+      // 提取对象型键值的字段作为新的键值
+      newItem = mapValues(newItem, (value: any) =>{
+        return typeof value === "object"? value["name"]: value;
+      })
     }
     result.push(newItem);
   });

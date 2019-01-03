@@ -69,6 +69,7 @@
 
 <script>
 import { join } from "path";
+import { copyFileSync } from "fs";
 import { shell, remote } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
@@ -81,6 +82,8 @@ import {
   ArrayToNedb,
 } from "@/util";
 
+import * as keysDef from '@/locales/cn.json';
+
 export default {
   data() {
     return {
@@ -92,6 +95,7 @@ export default {
       dbName: "",
       // Template dir path
       templateDir: "",
+      userDataTemplateDir: "",
       outputJsonFile: "",
       outputDocFile: "",
       templateDocs: [],
@@ -115,6 +119,12 @@ export default {
 
       this.templateDocs = getFilesByExtentionInDir(this.templateDir, "doc");
       log.suc(this.templateDocs);
+    },
+    copyDocument() {
+      // 将word模板文件和字符定义配置拷贝到`HOME/documents/template`目录下
+      this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
+      this.userDataTemplateDir =  join(remote.app.getPath("userData"), "template");
+      fs.copySync(this.appDataTemplateDir, this.templateDir);
     },
     async importEntities(e) {
       log.info("Importing...");
@@ -146,7 +156,7 @@ export default {
       let data = entityDb.all(`${dbName}`);
       if (!Array.isArray(data)) return;
 
-      GenerateCSV(data, targetPath);
+      GenerateCSV(data, targetPath, true, keysDef);
       shell.showItemInFolder(targetPath);
     },
     resetEntities() {
