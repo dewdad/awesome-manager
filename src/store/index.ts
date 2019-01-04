@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 import plugins from "./plugins";
+// import modules from "./modules"
 
 Vue.use(Vuex);
 
@@ -19,5 +20,6 @@ const pool = entities.reduce((entitiesDb, entity) => {
 
 export default new Vuex.Store({
   state: { pool, entities },
+  // modules,
   plugins,
 });

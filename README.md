@@ -10,12 +10,48 @@
 - [**First-class tests**](docs/zh/guide): Practice test-driven development with both unit and end-to-end tests. Unit tests with Jest live as first-class citizens alongside your source files, while Cypress provides reliable end-to-end tests in an intuitive GUI for development.
 - [**Speedy development**](docs/zh/guide): Between [configurable generators](docs/zh/guide), [handy aliases](docs/development.md#aliases), and [global base components](docs/development.md#base-components), your productivity will skyrocket.
 
-::: tip
 请务必查看 [文档](https://github.com/linuxing3/awesome-manager/blob/master/docs/README.md)。
-在这里，你将找到有关项目配置、项目结构和构建应用程序的有用信息。
-:::
 
-## Project setup
+在这里，你将找到有关项目配置、项目结构和构建应用程序的有用信息。
+
+
+## Electron Project setup
+
+### Compiles and hot-reloads for electron development
+```
+yarn dev
+yarn electron:serve
+```
+
+### Compiles and minifies for production
+```
+yarn dist
+yarn electron:build
+```
+
+### install necessary plugins
+
+```
+yarn plugins:install
+```
+
+### install local vue plugins
+
+``` sh
+yarn db:add
+yarn db:invoke
+```
+
+### generate new
+
+``` sh
+# hygen new component-table
+yarn new component-table
+# hygen new model && hygen new router && hygen new component-table && hygen new component-form",
+yarn new:all
+```
+
+## General Project setup
 ```
 yarn install
 ```
@@ -43,6 +79,22 @@ yarn run test:unit
 ### Run your end-to-end tests
 ```
 yarn run test:e2e
+```
+
+## Graphql
+
+``` sh
+yarn prisma:add
+yarn prisma:generate
+yarn prisma:demo
+yarn prisma:deploy
+```
+
+## Storybook
+
+``` sh
+yarn storybook:serve
+yarn storybook:build
 ```
 
 ## Documentation
