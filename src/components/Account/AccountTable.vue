@@ -6,26 +6,29 @@ import { remote, shell } from "electron";
 import { GenerateCSV } from "@/util";
 export default {
   components: {
-    AccountForm
+    AccountForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    all: ()=>Account.query().withAll().get(),
-    headers: ()=>Account.fieldsList(),
+    all: () =>
+      Account.query()
+        .withAll()
+        .get(),
+    headers: () => Account.fieldsList(),
   },
   created() {
     window.AccountTable = this;
   },
   methods: {
     deleteItem(item) {
-      Account.delete(item._id)
+      Account.delete(item._id);
     },
     editItem(item) {
-      window.AccountForm.$emit("SET_EDITING", item)
+      window.AccountForm.$emit("SET_EDITING", item);
     },
     exportItem(item) {
       let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
@@ -33,7 +36,7 @@ export default {
       shell.showItemInFolder(filePath);
     },
   },
-}
+};
 </script>
 
 <template>

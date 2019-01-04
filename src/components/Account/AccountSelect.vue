@@ -4,8 +4,8 @@ import Account from "@/api/models/Account";
 export default {
   data() {
     return {
-      model: { "_id": 1, label: "Select Account" },
-    }
+      model: { _id: 1, label: "Select Account" },
+    };
   },
   created() {
     window.AccountSelect = this;
@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     change() {
-      this.$emit("Account_CHANGED", this.model._id)
-    }
-  }
-}
+      this.$emit("Account_CHANGED", this.model._id);
+    },
+  },
+};
 </script>
 <template>
   <v-select

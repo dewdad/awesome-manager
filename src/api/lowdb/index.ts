@@ -24,7 +24,7 @@ export class LowdbForElectron {
 
   ensureElectronEnv(): boolean {
     this.electronApp = process.type === "renderer" ? remote.app : app;
-    return this.electronApp !== undefined? true: false;
+    return this.electronApp !== undefined ? true : false;
   }
 
   /**
@@ -56,7 +56,7 @@ export class LowdbForElectron {
     }
     this.db = Datastore(this.adapter);
     this.db._.mixin(LodashId);
-    return this.db !== undefined ? true: false;
+    return this.db !== undefined ? true : false;
   }
 
   /**
@@ -168,7 +168,7 @@ export class LowdbForElectron {
    * @param {object} query query statement
    * @return {object, undefined} undefined is found nothing, else the data set
    */
-  find(entity: string, query: any): object|undefined {
+  find(entity: string, query: any): object | undefined {
     console.log("Querying in " + entity);
     return this.db
       .read()
@@ -187,7 +187,7 @@ export class LowdbForElectron {
   /**
    * Find and Query data in a specific key with key or entity namespace
    * @param {string} entity key or entity namespace
-   * @return {array} array of all element 
+   * @return {array} array of all element
    */
   all(entity: string): any[] {
     console.log("Querying in " + entity);

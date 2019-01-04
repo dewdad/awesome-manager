@@ -53,10 +53,10 @@ import Notification from "@/api/models/Notification";
 import NotificationForm from "@/components/Notification/NotificationForm";
 export default {
   components: {
-    NotificationForm
+    NotificationForm,
   },
   computed: {
-    items: ()=> Notification.all()
+    items: () => Notification.all(),
   },
   methods: {
     handleClick: e => {

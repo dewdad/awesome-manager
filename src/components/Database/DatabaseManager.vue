@@ -86,7 +86,7 @@ import { shell, remote } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 import models from "@/api/models";
-import * as keysDef from '@/locales/cn.json';
+import * as keysDef from "@/locales/cn.json";
 import {
   log,
   getFilesByExtentionInDir,
@@ -96,8 +96,7 @@ import {
   GenerateCSV,
   ArrayToNedb,
 } from "@/util";
-import { objectArrayFromClassKeys } from '@/util/transformer';
-
+import { objectArrayFromClassKeys } from "@/util/transformer";
 
 export default {
   data() {
@@ -122,7 +121,8 @@ export default {
       clearGroup: "保留",
     };
   },
-  created() {objectArrayFromClassKeys
+  created() {
+    objectArrayFromClassKeys;
     this.entities = entities;
     this.models = models;
     this.findDocuments();
@@ -143,7 +143,7 @@ export default {
     copyDocument() {
       // 将word模板文件和字符定义配置拷贝到`HOME/documents/template`目录下
       this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
-      this.userDataTemplateDir =  join(remote.app.getPath("userData"), "template");
+      this.userDataTemplateDir = join(remote.app.getPath("userData"), "template");
       fs.copySync(this.appDataTemplateDir, this.templateDir);
     },
     refreshEntityState() {
@@ -151,7 +151,9 @@ export default {
       if (dbName === undefined) return;
 
       let NSModel = this.models[`${dbName}`];
-      NSModel.query().withAll().get();
+      NSModel.query()
+        .withAll()
+        .get();
 
       this.$router.push(`/${dbName}-table`);
     },
@@ -190,7 +192,9 @@ export default {
       if (dbName === undefined) return;
 
       let NSModel = this.models[`${dbName}`];
-      let data = NSModel.query().withAll().get();
+      let data = NSModel.query()
+        .withAll()
+        .get();
 
       // 导出csv文件, 并更改列标题和对应键
       GenerateCSV(data, targetPath, true, keysDef.default);

@@ -183,9 +183,9 @@ export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolea
       // 翻译键值为相应语言
       newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
       // 提取对象型键值的字段作为新的键值
-      newItem = mapValues(newItem, (value: any) =>{
-        return typeof value === "object"? value["name"]: value;
-      })
+      newItem = mapValues(newItem, (value: any) => {
+        return typeof value === "object" ? value["name"] : value;
+      });
     }
     result.push(newItem);
   });

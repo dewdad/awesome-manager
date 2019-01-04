@@ -50,15 +50,11 @@ const <%= modelName %> = tsx.componentFactoryOf<I<%=modelName %>Events>().create
     const { list, left, right} = this
     return (
       <div class="wrapper">
-        <h2><%= modelName %></h2>
-        <div class='list'>
-          {list.map(item =>
-            <span 
-              onClick={() => this.$emit('changeItem', item)}
-            >
-            {item}
-            </span>)
-          }
+        <h2>Evaluation</h2>
+        <div class="list">
+          {list.map(item => (
+            <span onClick={() => this.$emit("changeItem", item)}>{item}</span>
+          ))}
         </div>
       </div>
     )

@@ -6,7 +6,7 @@ const data = [
     name: "xingwenju",
     age: 40,
     entity: {
-      name: "MFA"
+      name: "MFA",
     },
   },
   {
@@ -19,9 +19,9 @@ const expectedData1 = [
   {
     姓名: "xingwenju",
     年龄: 40,
-    单位:  {
-      name: "MFA"
-    }
+    单位: {
+      name: "MFA",
+    },
   },
   {
     姓名: "wanglulu",
@@ -33,7 +33,7 @@ const expectedData2 = [
   {
     姓名: "xingwenju",
     年龄: 40,
-    单位:  "MFA"
+    单位: "MFA",
   },
   {
     姓名: "wanglulu",
@@ -45,7 +45,7 @@ const expectedData3 = [
   {
     name: "xingwenju",
     age: 40,
-    entity: "MFA"
+    entity: "MFA",
   },
   {
     name: "wanglulu",
@@ -56,7 +56,7 @@ const expectedData3 = [
 const typeDefs = {
   name: "姓名",
   age: "年龄",
-  entity: "单位"
+  entity: "单位",
 };
 
 describe("Simple filter", () => {

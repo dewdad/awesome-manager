@@ -5,38 +5,38 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new Notification()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new Notification();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.NotificationForm = this;
   },
   computed: {
-    fields: () => Notification.fieldsList()
+    fields: () => Notification.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new Notification()
+      this.editing = false;
+      this.model = new Notification();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         Notification.insert({
-          data: this.model
-        })
-        this.model = new Notification()
+          data: this.model,
+        });
+        this.model = new Notification();
       } else {
-        Notification.update(this.model)
-        this.editing = false
-        this.model = new Notification()
+        Notification.update(this.model);
+        this.editing = false;
+        this.model = new Notification();
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <template>

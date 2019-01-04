@@ -5,38 +5,38 @@ export default {
     return {
       editing: false,
       model: {},
-    }
+    };
   },
   created() {
-    this.model = new Account()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
+    this.model = new Account();
+    this.$on("SET_EDITING", item => {
+      this.editing = true;
+      this.model = item;
+    });
     window.AccountForm = this;
   },
   computed: {
-    fields: () => Account.fieldsList()
+    fields: () => Account.fieldsList(),
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new Account()
+      this.editing = false;
+      this.model = new Account();
     },
     saveItem() {
-      if(!this.editing) {
+      if (!this.editing) {
         Account.insert({
-          data: this.model
-        })
-        this.model = new Account()
+          data: this.model,
+        });
+        this.model = new Account();
       } else {
-        Account.update(this.model)
-        this.editing = false
-        this.model = new Account()
+        Account.update(this.model);
+        this.editing = false;
+        this.model = new Account();
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <template>

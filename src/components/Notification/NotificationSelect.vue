@@ -4,8 +4,8 @@ import Notification from "@/api/models/Notification";
 export default {
   data() {
     return {
-      model: { "_id": 1, label: "Select Notification" },
-    }
+      model: { _id: 1, label: "Select Notification" },
+    };
   },
   created() {
     window.NotificationSelect = this;
@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     change() {
-      this.$emit("Notification_CHANGED", this.model._id)
-    }
-  }
-}
+      this.$emit("Notification_CHANGED", this.model._id);
+    },
+  },
+};
 </script>
 <template>
   <v-select
