@@ -63,15 +63,9 @@ const events: Event[] = [
     },
   },
   {
-    name: "APP_ACCOUNTPROFILE",
-    callback: function(e: any) {
-      this.$router.push({ path: "/accounts-profile" });
-    },
-  },
-  {
     name: "APP_ACCOUNTSETTING",
     callback: function(e: any) {
-      this.$router.push({ path: "/accounts-setting" });
+      this.$router.push({ path: "/account-form" });
     },
   },
   {

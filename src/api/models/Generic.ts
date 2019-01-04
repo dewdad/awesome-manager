@@ -2,9 +2,8 @@ import { Model, BelongsTo } from "@vuex-orm/core";
 import { keys } from "lodash";
 
 export interface IGeneric {
-   _id: string;
-   name: string;
-   : string;
+  _id: string;
+  name: string;
 }
 
 export default class Generic extends Model {
@@ -34,8 +33,6 @@ export default class Generic extends Model {
     return {
       _id: this.increment(),
       name: this.string("name"),
-      : this.string(""),
-      
     };
   }
 }

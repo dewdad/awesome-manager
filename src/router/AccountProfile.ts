@@ -1,8 +1,8 @@
 export default {
-  path: "/component/account-profile",
+  path: "/account-profile",
   name: "AccountProfile",
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Account/AccountProfile.vue`).then(m => m.default),
+    `@/components/Account/AccountForm.vue`).then(m => m.default),
 };
