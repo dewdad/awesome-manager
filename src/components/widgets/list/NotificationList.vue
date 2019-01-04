@@ -41,16 +41,23 @@
           flat
           class="ma-0">All</v-btn>
       <v-divider></v-divider>
+      <notification-form></notification-form>
+      <v-divider></v-divider>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import notes from "@/api/notification";
+// import notes from "@/api/notification";
+import Notification from "@/api/models/Notification";
+import NotificationForm from "@/components/Notification/NotificationForm";
 export default {
-  data: () => ({
-    items: notes,
-  }),
+  components: {
+    NotificationForm
+  },
+  computed: {
+    items: ()=> Notification.all()
+  },
   methods: {
     handleClick: e => {
       console.log(e);

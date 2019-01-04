@@ -27,10 +27,10 @@ export default class Notification extends Model {
   static fields() {
     return {
       _id: this.increment(),
-      title: this.string("notification"),
-      color: this.string("color"),
-      icon: this.string("icon"),
-      timeLabel: this.string("timeLabel"),
+      title: this.string("New message from Michael"),
+      color: this.string("light-green"),
+      icon: this.string("account_circle"),
+      timeLabel: this.string("2 min ago"),
     };
   }
 }
