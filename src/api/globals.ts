@@ -1,6 +1,5 @@
 export const entities = [
   "generic",
-
   "menu",
   "notification",
   "generic",

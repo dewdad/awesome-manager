@@ -1,6 +1,6 @@
 import { Model } from "@vuex-orm/core";
 export default class MonthVisit extends Model {
-  static entity = "monthVisit";
+  static entity = "monthvisit";
 
   static primaryKey = "_id";
 
