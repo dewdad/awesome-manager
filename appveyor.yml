@@ -35,7 +35,7 @@ artifacts:
 
 deploy:
   - provider: GitHub
-    release: awesome-manager-v$(APPVEYOR_REPO_TAG_NAME)
+    release: awesome-manager-v$(appveyor_build_version)
     description: "A awesome dashbaord manager powered by vue and electron"
     artifacts: bin
     tag: $(APPVEYOR_REPO_TAG_NAME)
