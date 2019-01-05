@@ -4,7 +4,7 @@
  */
 process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || 9999;
 module.exports = {
-  preset: 'ts-jest',
+  preset: "ts-jest",
   globals: {
     "vue-jest": {
       // Disable CSS compilation until it's more stable
@@ -12,6 +12,11 @@ module.exports = {
     },
     "ts-jest": {
       compiler: "typescript",
+      // tsConfig: "tests/unit/tsconfig.json",
+      // babelConfig: {
+      //   presets: ["@vue/app"],
+      //   plugins: ["transform-vue-jsx"],
+      // },
       isolatedModules: false,
       diagnostics: true,
     },
@@ -26,6 +31,7 @@ module.exports = {
   transform: {
     "^.+\\.vue$": "vue-jest",
     "^.+\\.tsx?$": "ts-jest",
+    // "^.+\\.tsx?$": "babel-jest",
     ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
   },
   moduleNameMapper: {
