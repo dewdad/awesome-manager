@@ -26,15 +26,6 @@ module.exports = {
       args[0].template = path.resolve("public/index.html");
       return args;
     });
-    // configure copy plugin
-    config.plugin("copy").tap(args => {
-      args.push({
-        from: path.join(__dirname, "public/template"),
-        to: path.join(__dirname, "dist/template"),
-        toType: "dir",
-      });
-      return args;
-    });
   },
   pluginOptions: {
     i18n: {
