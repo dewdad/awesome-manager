@@ -12,8 +12,8 @@ import "./components/_widgets";
 import i18n from "./plugins/i18n";
 import "./plugins/rx";
 // Register styles
-import "./plugins/vuetify";
 import "./plugins/styles";
+import "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
