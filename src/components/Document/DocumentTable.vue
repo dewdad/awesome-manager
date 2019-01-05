@@ -1,10 +1,8 @@
 <script>
 import Document from "@/api/models/Document";
 import DocumentForm from "./DocumentForm";
-import { GenerateCSV } from "@/util";
-import { join } from "path";
 import { pullAll } from "lodash";
-import { remote, shell } from "electron";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     DocumentForm,
@@ -15,12 +13,14 @@ export default {
     };
   },
   computed: {
+    modelName: () => Document.entity,
     all: () =>
       Document.query()
         .withAll()
         .get(),
     headers: () => pullAll(Document.fieldsList(), Document.relationFieldsList()),
   },
+  mixins: [exportMixin],
   created() {
     window.DocumentTable = this;
   },
@@ -30,11 +30,6 @@ export default {
     },
     editItem(item) {
       window.DocumentForm.$emit("SET_EDITING", item);
-    },
-    exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
     },
   },
 };

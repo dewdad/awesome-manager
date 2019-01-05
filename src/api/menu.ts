@@ -16,7 +16,7 @@ const mainMenu = [
   },
   {
     title: "人员管理",
-    group: "apps",
+    group: "users",
     icon: "fas fa-user",
     items: [
       {

@@ -1,6 +1,6 @@
 export default {
-  path: "/resummee",
-  name: "apps/Resummee",
+  path: "/users/resummee",
+  name: "users/Resummee",
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */

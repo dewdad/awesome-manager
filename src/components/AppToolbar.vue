@@ -28,7 +28,7 @@
 
     <v-btn
         icon
-        href="https://github.com/linuxing3/official-manager">
+        href="https://github.com/linuxing3/awesome-manager">
       <v-icon>fab fa-github</v-icon>
     </v-btn>
 
@@ -45,7 +45,7 @@
         <v-badge
             color="red"
             overlap>
-          <span slot="badge">3</span>
+          <span slot="badge">{{ notificationCount }}</span>
           <v-icon medium>notifications</v-icon>
         </v-badge>
       </v-btn>
@@ -92,6 +92,7 @@
 </template>
 <script>
 import NotificationList from "@/components/widgets/list/NotificationList";
+import Notification from "@/api/models/Notification";
 import { toggleFullScreen } from "@/util";
 export default {
   name: "app-toolbar",
@@ -119,14 +120,11 @@ export default {
     ],
   }),
   computed: {
-    toolbarColor() {
-      return this.$vuetify.options.extra.mainNav;
-    },
+    toolbarColor: () => this.$vuetify.options.extra.mainNav,
+    notificationCount: () => Notification.query().count(),
   },
   methods: {
-    handleDrawerToggle() {
-      window.getApp.$emit("APP_DRAWER_TOGGLED");
-    },
+    handleDrawerToggle: () => window.getApp.$emit("APP_DRAWER_TOGGLED"),
   },
 };
 </script>

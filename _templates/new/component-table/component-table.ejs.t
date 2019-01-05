@@ -8,9 +8,7 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
-import { join } from "path";
-import { remote, shell } from "electron";
-import { GenerateCSV } from "@/util";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     <%= modelFormName %>
@@ -21,24 +19,21 @@ export default {
     }
   },
   computed: {
+    modelName: <%= modelName %>.entity,
     all: ()=><%= modelName %>.query().withAll().get(),
     headers: ()=><%= modelName %>.fieldsList(),
   },
+  mixins: [exportMixin],
   created() {
-    window.<%= modelName %>Table = this;
+    window.<%= modelTableName %> = this;
   },
   methods: {
     deleteItem(item) {
       <%= modelName %>.delete(item._id)
     },
     editItem(item) {
-      window.<%= h.capitalize(h.inflection.singularize(model)) %>Form.$emit("SET_EDITING", item)
-    },
-    exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
-    },
+      window.<%= modelFormName %>.$emit("SET_EDITING", item)
+    }
   },
 }
 </script>

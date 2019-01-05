@@ -25,7 +25,7 @@ export const log = {
  * @param {String} ext  文件扩展名
  * @return {Array} 无扩展名的文件名数组
  */
-export function getFilesByExtentionInDir(path: string, ext: string): string[] {
+export function getFilesByExtentionInDir({ path = "", ext = "" }): string[] {
   let files = fs.readdirSync(path, "utf8");
   return files.reduce((res: string[], file) => {
     // FIXME extension name issue
@@ -173,7 +173,7 @@ export const deepCloneWithNewKeysBasic = (data: any[], keysDef: any, reverse?: b
   return result;
 };
 
-export const deepCloneWithNewKeys = (data: any[], keysDef: any, reverse?: boolean): any[] => {
+export const deepCloneWithNewKeys = ({ data = [], keysDef = {}, reverse = false }): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
@@ -225,15 +225,15 @@ export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
  */
-export const GenerateCSV = (
-  data: any[],
-  targetFilePath: string,
-  needTranslate?: boolean,
-  keysDef?: any,
-) => {
+export const GenerateCSV = ({
+  data = [],
+  targetFilePath = "string",
+  needTranslate = false,
+  keysDef = {},
+}) => {
   if (!Array.isArray(data)) return;
   // 进行列标题转译
-  if (needTranslate) data = deepCloneWithNewKeys(data, keysDef, false);
+  if (needTranslate) data = deepCloneWithNewKeys({ data, keysDef, reverse: false });
   // 进行输出
   stringify(
     data,
@@ -260,8 +260,8 @@ export const GenerateCSV = (
  * @param {String|Object} keysDef? 标题定义json文件
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
  **/
-export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: any) => {
-  return new Promise((resolve, _) => {
+export const ImportCSV = async ({ file = {}, needTranslate = false, keysDef = {} }): Promise<any> =>
+  new Promise((resolve, _) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
@@ -270,7 +270,7 @@ export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: an
         // 开始转译
         let data;
         if (needTranslate) {
-          data = deepCloneWithNewKeys(results.data, keysDef, true);
+          data = deepCloneWithNewKeys({ data: results.data, keysDef, reverse: true });
         } else {
           data = results.data;
         }
@@ -278,7 +278,6 @@ export const ImportCSV = async (file: any, needTranslate?: boolean, keysDef?: an
       },
     });
   });
-};
 
 export const capitalizeFirstLetter = (message: string) => {
   return message.charAt(0).toUpperCase() + message.slice(1).toLowerCase();

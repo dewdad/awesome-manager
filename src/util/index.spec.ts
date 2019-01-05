@@ -53,7 +53,7 @@ const expectedData3 = [
   },
 ];
 // 键名翻译的对照定义
-const typeDefs = {
+const keysDef = {
   name: "姓名",
   age: "年龄",
   entity: "单位",
@@ -73,19 +73,19 @@ describe("Simple filter", () => {
 
 describe("Simple i18n translater", () => {
   it("should clone with new keys basicly", () => {
-    const result = deepCloneWithNewKeysBasic(data, typeDefs, false);
+    const result = deepCloneWithNewKeysBasic(data, keysDef, false);
     expect(result).toEqual(expectedData1);
   });
   it("should clone with new keys basicly and reversely", () => {
-    const result = deepCloneWithNewKeysBasic(expectedData1, typeDefs, true);
+    const result = deepCloneWithNewKeysBasic(expectedData1, keysDef, true);
     expect(result).toEqual(data);
   });
   it("should clone with new keys", () => {
-    const result = deepCloneWithNewKeys(data, typeDefs, false);
+    const result = deepCloneWithNewKeys({ data, keysDef, reverse: false });
     expect(result).toEqual(expectedData2);
   });
   it("should clone with new keys reversely", () => {
-    const result = deepCloneWithNewKeys(expectedData2, typeDefs, true);
+    const result = deepCloneWithNewKeys({ data: expectedData2, keysDef, reverse: true });
     expect(result).toEqual(expectedData3);
   });
 });

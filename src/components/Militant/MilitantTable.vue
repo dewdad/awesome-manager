@@ -1,9 +1,7 @@
 <script>
 import Militant from "@/api/models/Militant";
 import MilitantForm from "./MilitantForm";
-import { GenerateCSV } from "@/util";
-import { join } from "path";
-import { remote, shell } from "electron";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     MilitantForm,
@@ -14,12 +12,14 @@ export default {
     };
   },
   computed: {
+    modelName: () => Militant.entity,
     all: () =>
       Militant.query()
         .withAll()
         .get(),
     headers: () => Militant.fieldsList(),
   },
+  mixins: [exportMixin],
   created() {
     window.MilitantTable = this;
   },
@@ -29,11 +29,6 @@ export default {
     },
     editItem(item) {
       window.MilitantForm.$emit("SET_EDITING", item);
-    },
-    exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
     },
   },
 };

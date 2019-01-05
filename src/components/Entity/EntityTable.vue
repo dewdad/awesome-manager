@@ -1,6 +1,7 @@
 <script>
 import Entity from "@/api/models/Entity";
 import EntityForm from "./EntityForm";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     EntityForm,
@@ -11,9 +12,11 @@ export default {
     };
   },
   computed: {
+    modelName: () => Entity.entity,
     all: () => Entity.all(),
     headers: () => Entity.fieldsList(),
   },
+  mixins: [exportMixin],
   created() {
     window.EntityTable = this;
   },
@@ -70,6 +73,12 @@ export default {
                 class="mx-0"
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
+            </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
           </td>
         </template>

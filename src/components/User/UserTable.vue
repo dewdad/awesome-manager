@@ -1,10 +1,8 @@
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
-import { GenerateCSV } from "@/util";
-import { join } from "path";
 import { pullAll } from "lodash";
-import { remote, shell } from "electron";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     UserForm,
@@ -15,12 +13,14 @@ export default {
     };
   },
   computed: {
+    modelName: () => User.entity,
     all: () =>
       User.query()
         .withAll()
         .get(),
     headers: () => pullAll(User.fieldsList(), User.relationFieldsList()),
   },
+  mixins: [exportMixin],
   created() {
     window.UserApp = this;
   },
@@ -30,11 +30,6 @@ export default {
     },
     editItem(item) {
       window.UserForm.$emit("SET_EDITING", item);
-    },
-    exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
     },
   },
 };

@@ -23,6 +23,7 @@ export default {
     window.<%= modelFormName %> = this;
   },
   computed: {
+    modelName: () => <%= modelName %>.entity,
     fields: () => <%= modelName %>.fieldsList()
   },
   methods: {

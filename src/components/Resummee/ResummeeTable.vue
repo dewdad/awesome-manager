@@ -1,9 +1,7 @@
 <script>
 import Resummee from "@/api/models/Resummee";
 import ResummeeForm from "./ResummeeForm";
-import { join } from "path";
-import { remote, shell } from "electron";
-import { GenerateCSV } from "@/util";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     ResummeeForm,
@@ -19,7 +17,9 @@ export default {
         .withAll()
         .get(),
     headers: () => Resummee.fieldsList(),
+    modelName: () => Resummee.entity,
   },
+  mixins: [exportMixin],
   created() {
     window.ResummeeTable = this;
   },
@@ -29,11 +29,6 @@ export default {
     },
     editItem(item) {
       window.ResummeeForm.$emit("SET_EDITING", item);
-    },
-    exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
     },
   },
 };

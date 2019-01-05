@@ -135,7 +135,7 @@ export default {
       this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
       log.suc("Template Directory is: " + this.templateDir);
 
-      this.templateDocs = getFilesByExtentionInDir(this.templateDir, "doc");
+      this.templateDocs = getFilesByExtentionInDir({ path: this.templateDir, ext: "doc" });
       this.templateDocs.forEach(t => {
         log.suc(t);
       });
@@ -161,7 +161,11 @@ export default {
       log.info("Importing...");
 
       // 导入csv文件, 并更改列标题和对应键名
-      let data = await ImportCSV(e.target.files[0], true, keysDef.default);
+      let data = await ImportCSV({
+        file: e.target.files[0],
+        needTranslate: true,
+        keysDef: keysDef.default,
+      });
       if (!Array.isArray(data)) return;
 
       // Make sure {this} is {that}
@@ -197,7 +201,12 @@ export default {
         .get();
 
       // 导出csv文件, 并更改列标题和对应键
-      GenerateCSV(data, targetPath, true, keysDef.default);
+      GenerateCSV({
+        data,
+        targetPath,
+        needTranslate: true,
+        keysDef: keysDef.default,
+      });
       // 显示csv文件
       shell.showItemInFolder(targetPath);
     },

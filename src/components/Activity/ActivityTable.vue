@@ -41,6 +41,12 @@
                 @click="deleteItem(props.item);">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item);">
+              <v-icon color="pink">fas fa-print</v-icon>
+            </v-btn>
           </td>
         </template>
       </v-data-table>
@@ -51,9 +57,9 @@
   </v-card>
 </template>
 <script lang="js">
-import { cloneDeep } from 'lodash';
 import Activity from "@/api/models/Activity";
 import ActivityForm from "./ActivityForm";
+import exportMixin from "@/mixins/exportMixin";
 
 export default {
   components: {
@@ -65,9 +71,11 @@ export default {
     }
   },
   computed: {
+    modelName: () => Activity.entity,
     all: () => Activity.all(),
     headers: () => Activity.fieldsList()
   },
+  mixins: [ exportMixin ],
   created() {
     window.activityTable = this;
   },
