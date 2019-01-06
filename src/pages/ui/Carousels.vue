@@ -54,16 +54,16 @@ export default {
     return {
       items: [
         {
-          src: "/static/nature/n1.jpeg",
+          src: "/nature/n1.jpeg",
         },
         {
-          src: "/static/nature/n2.jpeg",
+          src: "/nature/n2.jpeg",
         },
         {
-          src: "/static/nature/n3.jpeg",
+          src: "/nature/n3.jpeg",
         },
         {
-          src: "/static/nature/n4.jpeg",
+          src: "/nature/n4.jpeg",
         },
       ],
     };

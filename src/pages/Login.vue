@@ -107,7 +107,7 @@ export default {
         this.loading = true;
         setTimeout(() => {
           if (this.status) {
-            this.$router.push("/account-form");
+            this.$router.push("/docs/manual");
           } else {
             this.loading = false;
             window.getApp.$emit("APP_LOGIN_DATA_INVALID");

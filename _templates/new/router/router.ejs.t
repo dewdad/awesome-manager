@@ -11,5 +11,5 @@ to: src/router/<%= h.capitalize(h.inflection.singularize(model)) %>.ts
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/<%= modelName %>/<%= modelName %>Table.vue`).then(m => m.default),
+    `@/components/<%= modelName %>/<%= modelName %>Table.vue`)
 };

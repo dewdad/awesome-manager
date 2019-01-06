@@ -4,7 +4,7 @@ import store from "./store";
 import App from "./entry/App.awesome.vue";
 // import { App } from "./entry/App.play";
 // Register service worker
-import "./registerServiceWorker";
+import "./sw";
 // Register global components
 import "./components/_global";
 import "./components/_widgets";

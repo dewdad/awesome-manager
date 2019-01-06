@@ -1,6 +1,6 @@
 export default {
   path: "/users/militant",
-  name: "users/Militant",
+  name: "users/militant",
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */

@@ -2,6 +2,8 @@
   "me": "邢文聚",
   "message": "你好, i18n !!",
   "action": "操作",
+  "icon": "图标",
+  "timeLabel": "时间标签",
   "value": "值",
   "entity": "单位",
   "id": "编号",

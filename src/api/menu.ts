@@ -21,18 +21,18 @@ const mainMenu = [
     items: [
       {
         title: "本馆人员",
-        name: "User",
-        icon: "fas fa-user",
+        name: "user",
+        component: "users/user",
       },
       {
         title: "个人简历",
-        name: "Resummee",
-        icon: "fas fa-tasks",
+        name: "resummee",
+        component: "users/resummee",
       },
       {
         title: "党员管理",
-        name: "Militant",
-        icon: "fas fa-tasks",
+        name: "militant",
+        component: "users/militant",
       },
     ],
   },
@@ -53,6 +53,12 @@ const mainMenu = [
     group: "apps",
     icon: "fas fa-th",
     name: "Dashboard",
+  },
+  {
+    title: "用户手册",
+    name: "docs/manual",
+    group: "apps",
+    icon: "fas fa-th",
   },
 ];
 
