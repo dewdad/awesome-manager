@@ -1,8 +1,9 @@
+import { entities } from "@/api/globals";
 import { LowdbForElectron } from "@/api/lowdb";
 import { stateObjectFromArray } from "@/util/transformer";
 import { Model } from "@vuex-orm/core";
 import models from "@/api/models";
-export default options => {
+const lowdbPlugin = options => {
   const entity = options.namespace || "data";
   return store => {
     /**
@@ -42,3 +43,13 @@ export default options => {
     // });
   };
 };
+
+const lowdbPlugins = () => {
+  let plugins = [];
+  entities.forEach(entity => {
+    plugins.push(lowdbPlugin({ namespace: entity }));
+  });
+  return plugins;
+};
+
+export default lowdbPlugins;

@@ -1,9 +1,7 @@
 export const entities = [
   "evaluation",
-  "generic",
   "menu",
   "notification",
-  "generic",
   "monthvisit",
   "location",
   "social",
@@ -13,7 +11,6 @@ export const entities = [
   "contact",
   "document",
   "entity",
-  "hr",
   "file",
   "finance",
   "item",
