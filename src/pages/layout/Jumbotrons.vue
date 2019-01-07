@@ -72,7 +72,7 @@
                   label="Gradient"
                   v-model="gradient2"></v-text-field>
               <v-jumbotron
-                  src="/static/bg/16.jpg"
+                  :src="`${baseUrl}static/bg/16.jpg`"
                   :gradient="gradient2"
                   dark
                 >
@@ -94,6 +94,7 @@
 
 <script>
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
@@ -104,6 +105,9 @@ export default {
       gradient2: "to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)",
     };
   },
+  mixins: [
+    baseUrlMixin
+  ],
   computed: {},
   methods: {},
 };

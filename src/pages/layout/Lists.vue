@@ -295,7 +295,7 @@
           </v-widget>
           <v-card class="mt-3">
             <v-card-media
-                src="/static/bg/15.jpg"
+                :src="`${baseUrl}/static/bg/15.jpg`"
                 height="300px">
               <v-layout
                   column
@@ -386,10 +386,14 @@
 <script>
 import { getUser } from "@/api/user";
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
   },
+  mixins: [
+    baseUrlMixin
+  ],
   data() {
     return {
       notifications: false,

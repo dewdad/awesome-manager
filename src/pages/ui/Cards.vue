@@ -76,7 +76,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/bg/8.jpg"
+                :src="`${baseUrl}/static/bg/8.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -100,7 +100,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/nature/n3.jpeg"
+                :src="`${baseUrl}nature/n3.jpeg`"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -111,7 +111,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    src="/static/avatar/man_2.jpg"
+                    :src="`${baseUrl}avatar/man_2.jpg`"
                     alt="">
               </v-avatar>
               <div>
@@ -131,7 +131,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/nature/n4.jpeg"
+                :src="`${baseUrl}nature/n4.jpeg`"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -232,10 +232,14 @@
 
 <script>
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
   },
+  mixins: [
+    baseUrlMixin
+  ],
   data() {
     return {
       show: true,

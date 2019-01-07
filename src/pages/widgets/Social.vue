@@ -115,7 +115,7 @@ export default {
           jobTitle: "Product Manager",
           name: "John Doe",
           dark: true,
-          cardBgImage: "/static/bg/15.jpg",
+          cardBgImage: `${baseUrl}bg/15.jpg`,
           avatar: {
             src: "https://randomuser.me/api/portraits/men/5.jpg",
             size: "36",

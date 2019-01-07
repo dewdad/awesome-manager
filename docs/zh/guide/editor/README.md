@@ -23,7 +23,7 @@ const items = [
     username: "Dessie79",
     jobTitle: "Web Developer",
     phone: "1-360-812-9380 x511",
-    avatar: "/static/avatar/a2.jpg",
+    avatar: "/avatar/a2.jpg",
   },
   {
     uuid: "65a6eb21-67b5-45c3-9af7-faca2d9b60d4",
@@ -32,7 +32,7 @@ const items = [
     username: "Dessie79",
     jobTitle: "Web Developer",
     phone: "1-360-812-9380 x511",
-    avatar: "/static/avatar/a2.jpg",
+    avatar: "/avatar/a2.jpg",
   },
 ];
 ```

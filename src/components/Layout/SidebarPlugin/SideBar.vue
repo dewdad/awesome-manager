@@ -41,8 +41,12 @@
 <script>
 import SidebarLink from "./SidebarLink.vue";
 import MobileMenu from "@/components/Layout/MobileMenu.vue";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 
 export default {
+  mixins: [
+    baseUrlMixin
+  ],
   components: {
     SidebarLink,
     MobileMenu,
@@ -54,7 +58,7 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: require("/bg/2.jpg"),
+      default: require(`${baseUrl}/bg/2.jpg`),
     },
     imgLogo: {
       type: String,

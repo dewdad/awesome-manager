@@ -8,7 +8,7 @@
           slot="activator">
         <v-avatar>
           <img
-              src="/static/avatar/man_4.jpg"
+              :src="`${baseUrl}avatar/man_4.jpg`"
               alt="Micahel Wang">
         </v-avatar>
       </v-btn>
@@ -32,12 +32,16 @@
 </template>
 
 <script>
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   props: {
     items: {
       type: Array,
     },
   },
+  mixins: [
+    baseUrlMixin
+  ],
 };
 </script>
 

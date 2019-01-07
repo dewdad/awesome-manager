@@ -48,7 +48,7 @@
                             <v-avatar
                                 class="mx-auto"
                                 color="info">
-                              <img src="/static/avatar/a1.jpg">
+                              <img :src="`${baseUrl}avatar/a1.jpg`">
                             </v-avatar>
                             <div class="text-center flex ml-2">
                               <div class="subheading">John Doe</div>
@@ -75,7 +75,7 @@
                   <div class="timeline-content">
                     <v-card>
                       <v-card-media
-                          src="/static/bg/5.jpg"
+                          :src="`${baseUrl}static/bg/5.jpg`"
                           height="200px"
                         >
                       </v-card-media>
@@ -141,14 +141,15 @@
 import VWidget from "@/components/VWidget";
 import API from "@/api";
 import VCircle from "@/components/circle/VCircle.js";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
     VCircle,
   },
-  data() {
-    return {};
-  },
+  mixins: [
+    baseUrlMixin
+  ],
   computed: {
     activity() {
       return API.getActivity();

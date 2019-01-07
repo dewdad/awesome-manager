@@ -10,7 +10,7 @@
       <v-card class="elevation-0">
         <v-card-media
             height="380"
-            src="/static/bg/4.jpg">
+            :src="`${baseUrl}/bg/4.jpg`">
           <v-layout
               column
               align-center
@@ -147,6 +147,7 @@
 
 <script>
 import { getUserById } from "@/api/user";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   data() {
     return {
@@ -154,6 +155,9 @@ export default {
       selectedTab: null,
     };
   },
+  mixins: [
+    baseUrlMixin
+  ],
   computed: {
     user() {
       let Origin = {

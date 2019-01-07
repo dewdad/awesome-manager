@@ -78,7 +78,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/bg/1.jpg"
+                :src="`${baseUrl}/bg/1.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 制作标准的人员编制表格
@@ -103,7 +103,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="`{baseUrl}bg/10.jpg`"
+                :src="`${baseUrl}bg/10.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 记录每一份文档,并用Word模板输出打印
@@ -240,7 +240,11 @@
 
 <script>
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
+  mixins: [
+    baseUrlMixin
+  ],
   components: {
     VWidget,
   },

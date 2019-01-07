@@ -11,7 +11,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax src="/static/bg/12.jpg">
+              <v-parallax :src="`${baseUrl}bg/12.jpg`">
               </v-parallax>
             </div>
           </v-widget>
@@ -21,7 +21,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax src="/static/bg/1.jpg">
+              <v-parallax :src="`${baseUrl}bg/1.jpg`">
                 <v-layout
                     column
                     align-center
@@ -39,7 +39,7 @@
                 slot="widget-content"
                 class="text-xs-center">
               <v-parallax
-                  src="/static/bg/21.jpg"
+                  :src="`${baseUrl}bg/21.jpg`"
                   height="700"
                   jumbotron
               ></v-parallax>
@@ -53,10 +53,14 @@
 
 <script>
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
   },
+  mixins: [
+    baseUrlMixin
+  ],
   data() {
     return {
       page: 1,
