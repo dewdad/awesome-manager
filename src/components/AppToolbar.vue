@@ -64,7 +64,7 @@
           slot="activator">
         <v-avatar size="30px">
           <img
-              src="`${baseUrl}avatar/mf-avatar.svg`"
+              :src="`${baseUrl}avatar/mf-avatar.svg`"
               alt="Xing Wenju"/>
         </v-avatar>
       </v-btn>
