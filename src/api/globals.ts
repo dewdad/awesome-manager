@@ -1,24 +1,2 @@
-export const entities = [
-  "evaluation",
-  "menu",
-  "notification",
-  "monthvisit",
-  "location",
-  "social",
-  "account",
-  "activity",
-  "address",
-  "contact",
-  "document",
-  "entity",
-  "file",
-  "finance",
-  "item",
-  "location",
-  "mail",
-  "militant",
-  "test",
-  "trending",
-  "user",
-  "vacation",
-];
+import models from "./models";
+export const entities = Object.keys(models);
