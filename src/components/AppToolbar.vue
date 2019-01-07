@@ -64,7 +64,7 @@
           slot="activator">
         <v-avatar size="30px">
           <img
-              src="/avatar/mf-avatar.svg"
+              src="`${baseUrl}avatar/mf-avatar.svg`"
               alt="Xing Wenju"/>
         </v-avatar>
       </v-btn>
@@ -100,6 +100,7 @@ export default {
     NotificationList,
   },
   data: () => ({
+    baseUrl: process.env.BASE_URL,
     items: [
       {
         icon: "settings",
