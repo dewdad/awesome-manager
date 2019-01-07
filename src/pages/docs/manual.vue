@@ -103,7 +103,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/bg/10.jpg"
+                src="`{baseUrl}bg/10.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 记录每一份文档,并用Word模板输出打印
@@ -114,7 +114,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    src="/avatar/man_4.jpg"
+                    :src="`{baseUrl}avatar/man_4.jpg`"
                     alt="">
               </v-avatar>
               <div>
@@ -135,7 +135,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/bg/4.jpg"
+                :src="`{baseUrl}bg/4.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 党员信息采集,组织关系转接,从未如此方便
@@ -247,6 +247,7 @@ export default {
   data() {
     return {
       show: true,
+      baseUrl: process.env.BASE_URL,
       cardText: "请查看手册, 了解具体使用方法",
     };
   },
