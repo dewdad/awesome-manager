@@ -55,8 +55,11 @@ export default {
         extended
         color="primary"
         dark="">
-      <v-toolbar-title class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</v-toolbar-title>
+      <v-toolbar-title class="headline">请输入文函信息</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-title :class="editing ? 'yellow--text' : 'white--text'">
+        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+      </v-toolbar-title>
       <v-btn
           icon
           @click="reset">

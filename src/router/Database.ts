@@ -1,5 +1,5 @@
 export default {
-  path: "/component/database",
+  path: "/database-manager",
   name: "Database",
   component: () =>
     import(/* webpackChunkName: "routes" */

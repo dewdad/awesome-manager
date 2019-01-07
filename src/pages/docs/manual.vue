@@ -6,6 +6,9 @@
       <v-layout
           row
           wrap>
+        <v-flex sm12>
+          <h3>常用功能</h3>
+        </v-flex>
         <v-flex
             lg4
             sm12>
@@ -13,7 +16,7 @@
               color="purple"
               dark>
             <v-card-title class="pb-0">
-              <h4>开始人员管理</h4>
+              <h2>开始人员管理</h2>
             </v-card-title>
             <v-card-text>
               {{cardText}}
@@ -22,7 +25,7 @@
               <v-btn
                   @click="$router.push('/users/user-table')"
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -33,7 +36,7 @@
               color="teal"
               dark>
             <v-card-title class="pb-0">
-              <h4>开始机构管理</h4>
+              <h2>开始机构管理</h2>
             </v-card-title>
             <v-card-text>
               {{cardText}}
@@ -42,7 +45,7 @@
               <v-btn
                   @click="$router.push('/entity-table')"
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -51,7 +54,7 @@
             sm12>
           <v-card>
             <v-card-title class="pb-0">
-              <h4>Basic</h4>
+              <h2>开始文件管理</h2>
             </v-card-title>
             <v-card-text>
               {{cardText}}
@@ -59,7 +62,7 @@
             <v-card-actions>
               <v-btn
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -68,17 +71,17 @@
           row
           wrap>
         <v-flex sm12>
-          <h3>Image Card</h3>
+          <h3>查看实例</h3>
         </v-flex>
         <v-flex
             lg4
             sm12>
           <v-card>
             <v-card-media
-                src="/bg/8.jpg"
+                src="/bg/1.jpg"
                 height="250">
               <h2 class="white--text pa-3">
-                Card with image
+                制作标准的人员编制表格
               </h2>
             </v-card-media>
             <v-card-text>
@@ -89,8 +92,9 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
+                  @click="$router.push('/users/user-table')"
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -99,10 +103,10 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/nature/n3.jpeg"
+                src="/bg/10.jpg"
                 height="250">
               <h2 class="white--text pa-3">
-                开始文档管理
+                记录每一份文档,并用Word模板输出打印
               </h2>
             </v-card-media>
             <v-card-text>
@@ -110,7 +114,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    src="/static/avatar/man_2.jpg"
+                    src="/avatar/man_4.jpg"
                     alt="">
               </v-avatar>
               <div>
@@ -120,8 +124,9 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
+                  @click="$router.push('/document-table')"
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -130,10 +135,10 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/nature/n4.jpeg"
+                src="/bg/4.jpg"
                 height="250">
               <h2 class="white--text pa-3">
-                开始党员管理
+                党员信息采集,组织关系转接,从未如此方便
               </h2>
             </v-card-media>
             <v-card-text>
@@ -152,8 +157,9 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
+                  @click="$router.push('/users/militant')"
                   flat
-                  small>Link</v-btn>
+                  small>查看</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -162,7 +168,7 @@
           row
           wrap>
         <v-flex sm12>
-          <h3>导入导出数据</h3>
+          <h3>已有自己的历史数据,导入导出帮助你事半功倍</h3>
         </v-flex>
         <v-flex
             lg4
@@ -176,15 +182,16 @@
                   color="indigo"
                   dark>
                 <v-card-title class="pb-0">
-                  <h3>开始活动管理</h3>
+                  <h3>导入数据</h3>
                 </v-card-title>
                 <v-card-text>
                   {{cardText}}
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
+                      @click="$router.push('/database-manager')"
                       flat
-                      small>Link</v-btn>
+                      small>查看</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -193,15 +200,16 @@
                   color="teal"
                   dark>
                 <v-card-title class="pb-0">
-                  <h3>开始地址管理</h3>
+                  <h3>导出数据</h3>
                 </v-card-title>
                 <v-card-text>
                   {{cardText}}
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
+                      @click="$router.push('/database-manager')"
                       flat
-                      small>Link</v-btn>
+                      small>查看</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -210,15 +218,16 @@
                   color="purple"
                   dark>
                 <v-card-title class="pb-0">
-                  <h3>Basic card with `purple` background</h3>
+                  <h3>导出到文档的template目录</h3>
                 </v-card-title>
                 <v-card-text>
                   {{cardText}}
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
+                      @click="$router.push('/database-manager')"
                       flat
-                      small>Link</v-btn>
+                      small>查看</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -238,8 +247,7 @@ export default {
   data() {
     return {
       show: true,
-      cardText:
-        "Hey there, I am a very simple card. I am good at containing small bits of information. I am quite convenient because I require little markup to use effectively.",
+      cardText: "请查看手册, 了解具体使用方法",
     };
   },
   computed: {},

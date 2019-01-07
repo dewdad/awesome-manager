@@ -6,7 +6,7 @@ const mainMenu = [
     title: "单位管理",
     name: "Entity",
     group: "apps",
-    icon: "fas fa-tasks",
+    icon: "fas fa-building",
   },
   {
     title: "活动管理",
@@ -30,6 +30,11 @@ const mainMenu = [
         component: "users/resummee",
       },
       {
+        title: "年终考核",
+        name: "Evaluation",
+        component: "users/evaluation",
+      },
+      {
         title: "党员管理",
         name: "militant",
         component: "users/militant",
@@ -37,15 +42,15 @@ const mainMenu = [
     ],
   },
   {
-    title: "内部文件",
+    title: "文函处理",
     name: "Document",
     group: "apps",
-    icon: "fas fa-file-export",
+    icon: "fas fa-book",
   },
   {
     title: "导入导出",
     group: "hight",
-    icon: "fas fa-save",
+    icon: "fas fa-file-export",
     name: "Database",
   },
   {
@@ -58,7 +63,7 @@ const mainMenu = [
     title: "用户手册",
     name: "docs/manual",
     group: "apps",
-    icon: "fas fa-th",
+    icon: "fas fa-book-open",
   },
 ];
 

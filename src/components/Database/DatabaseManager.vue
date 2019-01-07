@@ -1,82 +1,97 @@
 <template>
-  <v-layout
-      wrap
-      row>
+  <div id="pageCard">
+    <v-container
+        grid-list-xl
+        fluid>
+      <v-layout
+          wrap
+          row>
 
-    <!-- start choice radio button -->
-    <v-flex
-        xs12
-        md4
-        sm6>
-      <!-- Import Card -->
-      <v-card>
-        <v-card-title>
-          <v-select
-              v-model="dbName"
-              @change="updateEntity"
-              label="Select Database Name"
-              :items="entities"/>
-          <v-select
-              v-show="false"
-              v-model="outputDocFile"
-              label="Select Document Name"
-              :items="templateDocs"/>
-        </v-card-title>
+        <v-flex
+            class="mt-56"
+            xs12
+            md4
+            sm4>
+          <DatabasesIterator>
+          </DatabasesIterator>
+        </v-flex>
+        <!-- start choice radio button -->
+        <v-flex
+            class="mt-56"
+            xs12
+            md4
+            sm4>
+          <!-- Import Card -->
+          <v-card>
+            <v-card-title>
+              <v-select
+                  v-model="dbName"
+                  @change="updateEntity"
+                  label="Select Database Name"
+                  :items="entities"/>
+              <v-select
+                  v-show="false"
+                  v-model="outputDocFile"
+                  label="Select Document Name"
+                  :items="templateDocs"/>
+            </v-card-title>
 
-        <v-responsive>
-          <v-radio-group
-              v-model="actionGroup"
-              row>
-            <v-radio
-                color="indigo"
-                row
-                v-for="n in ['导入', '导出', '删除']"
-                :key="n"
-                :label="`${n}`"
-                :value="n"
-            ></v-radio>
-          </v-radio-group>
-        </v-responsive>
+            <v-responsive class="mt-45">
+              <v-radio-group
+                  v-model="actionGroup"
+                  row>
+                <v-radio
+                    color="indigo"
+                    row
+                    v-for="n in ['导入', '导出', '删除']"
+                    :key="n"
+                    :label="`${n}`"
+                    :value="n"
+                ></v-radio>
+              </v-radio-group>
+            </v-responsive>
 
-        <v-responsive v-show="actionGroup === '导入'">
-          <input
-              type="file"
-              multiple="multiple"
-              @change="importEntities($event)"/>
-          <v-radio-group
-              v-model="clearGroup"
-              row>
-            <v-radio
-                color="indigo"
-                row
-                v-for="n in ['保留', '清除']"
-                :key="n"
-                :label="`${n}已有数据`"
-                :value="n"
-            ></v-radio>
-          </v-radio-group>
-        </v-responsive>
+            <v-responsive class="mt-45" v-show="actionGroup === '导入'">
+              <input
+                  type="file"
+                  multiple="multiple"
+                  @change="importEntities($event)"/>
+              <v-radio-group
+                  v-model="clearGroup"
+                  row>
+                <v-radio
+                    color="indigo"
+                    row
+                    v-for="n in ['保留', '清除']"
+                    :key="n"
+                    :label="`${n}已有数据`"
+                    :value="n"
+                ></v-radio>
+              </v-radio-group>
+            </v-responsive>
 
-        <v-responsive v-show="actionGroup === '导出'">
-          <v-btn
-              class="accent"
-              @click="exportEntities">
-            导出数据
-          </v-btn>
-        </v-responsive>
+            <v-responsive class="mt-45" v-show="actionGroup === '导出'">
+              <v-btn
+                  class="accent"
+                  @click="exportEntities">
+                导出数据
+              </v-btn>
+            </v-responsive>
 
-        <v-responsive v-show="actionGroup === '删除'">
-          <v-btn
-              class="accent"
-              @click="resetEntities">
-            重置数据
-          </v-btn>
-        </v-responsive>
+            <v-responsive class="mt-45" v-show="actionGroup === '删除'">
+              <v-btn
+                  class="accent"
+                  @click="resetEntities">
+                重置数据
+              </v-btn>
+            </v-responsive>
 
-      </v-card>
-    </v-flex>
+          </v-card>
+        </v-flex>
 
-  </v-layout>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -87,6 +102,7 @@ import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 import models from "@/api/models";
 import * as keysDef from "@/locales/cn.json";
+import DatabasesIterator from "./DatabasesIterator.vue";
 import {
   log,
   getFilesByExtentionInDir,
@@ -99,6 +115,9 @@ import {
 import { objectArrayFromClassKeys } from "@/util/transformer";
 
 export default {
+  components: {
+    DatabasesIterator,
+  },
   data() {
     return {
       // entity name list
@@ -224,3 +243,10 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+  .mt-45
+    margin: 45px
+  .mt-56
+    margin: 56px
+</style>

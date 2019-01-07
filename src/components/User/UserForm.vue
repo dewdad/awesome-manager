@@ -40,10 +40,13 @@ export default {
       }
     },
     militantInformation() {
-      this.$router.push("/militant");
+      this.$router.push("/users/militant");
     },
     resummeeInformation() {
-      this.$router.push("/resummee");
+      this.$router.push("/users/resummee");
+    },
+    writeEvaluation() {
+      this.$router.push("/users/evaluation");
     },
   },
 };
@@ -100,13 +103,16 @@ export default {
       <v-spacer></v-spacer>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          @click="saveItem">{{editing ? "更新": "添加"}}信息</v-btn>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
           @click="militantInformation">党员信息</v-btn>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
           @click="resummeeInformation">填写简历</v-btn>
+      <v-btn
+          :color="editing ? 'warning' : 'primary'"
+          @click="writeEvaluation">进行考核</v-btn>
     </v-card-actions>
   </v-card>
 </template>
