@@ -1,4 +1,3 @@
-import { entities } from "@/api/globals";
 import { LowdbForElectron } from "@/api/lowdb";
 import { stateObjectFromArray } from "@/util/transformer";
 import { Model } from "@vuex-orm/core";
@@ -46,7 +45,7 @@ const lowdbPlugin = options => {
 
 const lowdbPlugins = () => {
   let plugins = [];
-  entities.forEach(entity => {
+  Object.keys(models).forEach(entity => {
     plugins.push(lowdbPlugin({ namespace: entity }));
   });
   return plugins;
