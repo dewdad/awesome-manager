@@ -22,7 +22,7 @@ function createWindow() {
     createProtocol("app");
     // Load the index.html when not in development
     win.loadFile("index.html");
-    win.webContents.openDevTools();
+    if (!process.env.IS_TEST) win.webContents.openDevTools();
   }
 
   win.on("closed", () => {
