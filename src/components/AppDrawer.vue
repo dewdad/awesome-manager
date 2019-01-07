@@ -12,7 +12,7 @@
         color="primary darken-1"
         dark>
       <img
-          src="/icon/google.png"
+          src="`${baseUrl}icon/google.png`"
           height="48"
           alt="admin">
       <v-toolbar-title class="ml-0 pl-3">
@@ -133,6 +133,7 @@ export default {
     },
   },
   data: () => ({
+    baseUrl: process.env.BASE_URL,
     mini: false,
     drawer: true,
     menus: menu,
