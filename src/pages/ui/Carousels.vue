@@ -67,9 +67,8 @@ export default {
         {
           src: join(process.env.BASE_URL, "bg/4.jpg"),
         },
-      ],
+      ];
     }
   },
-  methods: {},
 };
 </script>
