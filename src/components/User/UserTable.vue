@@ -38,9 +38,6 @@ export default {
 <template>
   <v-card>
     <v-responsive>
-      <UserForm></UserForm>
-    </v-responsive>
-    <v-responsive>
       <v-data-table
           :headers="headers"
           :items="all"
@@ -96,6 +93,9 @@ export default {
         </template>
       </v-data-table>
 
+    </v-responsive>
+    <v-responsive>
+      <UserForm></UserForm>
     </v-responsive>
   </v-card>
 </template>

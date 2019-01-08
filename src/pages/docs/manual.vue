@@ -240,6 +240,7 @@
 </template>
 
 <script>
+import { join } from "path";
 import VWidget from "@/components/VWidget";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
