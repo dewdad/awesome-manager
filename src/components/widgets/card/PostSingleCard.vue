@@ -78,9 +78,7 @@
 <script>
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   props: {
     featuredImage: { type: String },
     imageHeight: { type: [String, Number], default: "350" },

@@ -44,9 +44,7 @@ import MobileMenu from "@/components/Layout/MobileMenu.vue";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 
 export default {
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   components: {
     SidebarLink,
     MobileMenu,

@@ -23,7 +23,7 @@
               class=" post--link pa-4 layout row ma-0 text--primary">
             <div class="post--media">
               <img
-                  src="/public/discover_word/thumb/ds_3.jpg"
+                  :src="`${baseUrl}discover_word/thumb/ds_3.jpg`"
                   alt=""
                   height="100"
                   class="image-scale">
@@ -74,7 +74,9 @@
 </template>
 
 <script>
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
+  mixins: [baseUrlMixin],
   props: {
     items: { type: [Array, Object] },
   },

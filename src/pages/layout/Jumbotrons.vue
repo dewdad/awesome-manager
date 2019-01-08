@@ -105,9 +105,7 @@ export default {
       gradient2: "to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)",
     };
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   computed: {},
   methods: {},
 };

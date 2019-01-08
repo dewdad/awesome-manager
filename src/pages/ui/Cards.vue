@@ -237,9 +237,7 @@ export default {
   components: {
     VWidget,
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   data() {
     return {
       show: true,

@@ -51,7 +51,9 @@
               </v-radio-group>
             </v-responsive>
 
-            <v-responsive class="mt-45" v-show="actionGroup === '导入'">
+            <v-responsive
+                class="mt-45"
+                v-show="actionGroup === '导入'">
               <input
                   type="file"
                   multiple="multiple"
@@ -70,7 +72,9 @@
               </v-radio-group>
             </v-responsive>
 
-            <v-responsive class="mt-45" v-show="actionGroup === '导出'">
+            <v-responsive
+                class="mt-45"
+                v-show="actionGroup === '导出'">
               <v-btn
                   class="accent"
                   @click="exportEntities">
@@ -78,7 +82,9 @@
               </v-btn>
             </v-responsive>
 
-            <v-responsive class="mt-45" v-show="actionGroup === '删除'">
+            <v-responsive
+                class="mt-45"
+                v-show="actionGroup === '删除'">
               <v-btn
                   class="accent"
                   @click="resetEntities">

@@ -4,8 +4,8 @@ import Evaluation from "@/api/models/Evaluation";
 export default {
   data() {
     return {
-      model: { "_id": 1, label: "Select Evaluation" },
-    }
+      model: { _id: 1, label: "Select Evaluation" },
+    };
   },
   created() {
     window.EvaluationSelect = this;
@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     change() {
-      this.$emit("Evaluation_CHANGED", this.model._id)
-    }
-  }
-}
+      this.$emit("Evaluation_CHANGED", this.model._id);
+    },
+  },
+};
 </script>
 <template>
   <v-select

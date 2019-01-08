@@ -1,7 +1,7 @@
 <template>
   <v-card>
-    <v-card-media
-        :src="`${baseUrl}/bg/10.jpg`"
+    <v-img
+        :src="`${baseUrl}bg/10.jpg`"
         height="390">
       <v-layout
           column
@@ -30,7 +30,7 @@
           <div class="display-1 pl-5 pt-5">Ali Conners</div>
         </v-card-title>
       </v-layout>
-    </v-card-media>
+    </v-img>
     <v-list
         two-line
         class="pa-0">
@@ -90,8 +90,6 @@
 <script>
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
 };
 </script>

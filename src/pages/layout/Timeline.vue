@@ -147,9 +147,7 @@ export default {
     VWidget,
     VCircle,
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   computed: {
     activity() {
       return API.getActivity();

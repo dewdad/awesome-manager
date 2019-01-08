@@ -14,14 +14,14 @@
         <template v-for="(item, index) in items">
           <v-subheader
               v-if="item.header"
-              :key="item.header">{{ item.header }}</v-subheader>
+              :key="index">{{ item.header }}</v-subheader>
           <v-divider
               v-else-if="item.divider"
               :key="index"></v-divider>
           <v-list-tile
               avatar
               v-else
-              :key="item.title"
+              :key="index"
               @click="handleClick">
             <v-list-tile-avatar :color="item.color">
               <v-icon dark>{{item.icon}}</v-icon>

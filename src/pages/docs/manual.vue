@@ -61,6 +61,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
+                  @click="$router.push('/document-table')"
                   flat
                   small>查看</v-btn>
             </v-card-actions>
@@ -78,7 +79,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}/bg/1.jpg`"
+                :src="`${baseUrl}bg/1.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 制作标准的人员编制表格
@@ -114,7 +115,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    :src="`{baseUrl}avatar/man_4.jpg`"
+                    :src="`${baseUrl}avatar/man_4.jpg`"
                     alt="">
               </v-avatar>
               <div>
@@ -134,13 +135,13 @@
             lg4
             sm12>
           <v-card>
-            <v-card-media
-                :src="`{baseUrl}bg/4.jpg`"
+            <v-img
+                :src="`${baseUrl}bg/4.jpg`"
                 height="250">
               <h2 class="white--text pa-3">
                 党员信息采集,组织关系转接,从未如此方便
               </h2>
-            </v-card-media>
+            </v-img>
             <v-card-text>
               <v-btn
                   icon
@@ -242,16 +243,13 @@
 import VWidget from "@/components/VWidget";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   components: {
     VWidget,
   },
   data() {
     return {
       show: true,
-      baseUrl: process.env.BASE_URL,
       cardText: "请查看手册, 了解具体使用方法",
     };
   },

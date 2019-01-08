@@ -26,9 +26,7 @@
 <script>
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
 };
 </script>
 

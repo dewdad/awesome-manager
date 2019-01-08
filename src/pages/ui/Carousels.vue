@@ -51,23 +51,21 @@ export default {
   components: {
     VWidget,
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   data() {
     return {
       items: [
         {
-          src: `${baseUrl}nature/n5.jpeg`
+          src: `${baseUrl}nature/n5.jpeg`,
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`
+          src: `${baseUrl}nature/n5.jpeg`,
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`
+          src: `${baseUrl}nature/n5.jpeg`,
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`
+          src: `${baseUrl}nature/n5.jpeg`,
         },
       ],
     };

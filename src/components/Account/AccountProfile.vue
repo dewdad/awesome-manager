@@ -1,8 +1,8 @@
 <template>
   <v-card>
-    <v-card-media
-        :src="`${baseUrl}nature/n5.jpeg`"
-        height="350">
+    <v-img
+        :src="`${baseUrl}bg/10.jpg`"
+        height="390">
       <v-layout
           column
           class="media ma-0">
@@ -30,13 +30,21 @@
           <div class="display-1 pl-5 pt-5">Ali Conners</div>
         </v-card-title>
       </v-layout>
-    </v-card-media>
-    <v-list two-line>
+    </v-img>
+    <v-list
+        two-line
+        class="pa-0">
       <v-list-tile href="#">
+        <v-list-tile-action>
+          <v-icon color="indigo">phone</v-icon>
+        </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Monday</v-list-tile-title>
-          <!-- <v-list-tile-sub-title>Mobile</v-list-tile-sub-title> -->
+          <v-list-tile-title>(650) 555-1234</v-list-tile-title>
+          <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
         </v-list-tile-content>
+        <v-list-tile-action>
+          <v-icon>chat</v-icon>
+        </v-list-tile-action>
       </v-list-tile>
       <v-list-tile href="#">
         <v-list-tile-action></v-list-tile-action>
@@ -80,8 +88,12 @@
 </template>
 
 <script>
+import Account from "@/api/models/Account";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   mixins: [baseUrlMixin],
+  computed: {
+    fields: () => Account.fieldsList(),
+  },
 };
 </script>

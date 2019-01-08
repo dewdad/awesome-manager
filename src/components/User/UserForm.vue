@@ -2,13 +2,16 @@
 import { map, pick, pullAll } from "lodash/fp";
 import User from "@/api/models/User";
 import Entity from "@/api/models/Entity";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   data() {
     return {
       editing: false,
+      mini: false,
       model: {},
     };
   },
+  mixins: [baseUrlMixin],
   created() {
     this.model = new User();
     this.$on("SET_EDITING", item => {
@@ -21,6 +24,15 @@ export default {
     relationFields: () => User.relationFieldsList().filter(r => r.match(/.*_id/)),
     selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
     fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
+    computeCardLayout() {
+      return this.mini ? "row" : "column";
+    },
+    computeTextAlgin() {
+      return this.mini ? "text-sm-right" : "text-sm-center";
+    },
+    computeAvatarSize() {
+      return this.mini ? "48" : "96";
+    },
   },
   methods: {
     reset() {
@@ -60,13 +72,25 @@ export default {
         extended
         color="primary"
         dark="">
-      <v-toolbar-title class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</v-toolbar-title>
+      <div
+          class="layout pa-2 align-center"
+          :class="computeCardLayout">
+        <v-avatar
+            :size="computeAvatarSize"
+            color="primary">
+          <img
+              :src="`${baseUrl}avatar/man_1.jpg`"
+              :alt="model.name">
+        </v-avatar>
+        <div
+            class="flex"
+            :class="computeTextAlgin">
+          <div class="subheading">{{model.name}}</div>
+          <span class="caption">{{model.position}}</span>
+        </div>
+      </div>
       <v-spacer></v-spacer>
-      <v-btn
-          icon
-          @click="reset">
-        <v-icon>close</v-icon>
-      </v-btn>
+      <v-toolbar-title>{{editing ? "你在进行编辑更新" : "你在添加模式"}}</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
       <v-form>

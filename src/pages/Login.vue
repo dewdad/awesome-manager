@@ -19,7 +19,7 @@
 
                 <div class="layout column align-center">
                   <img
-                      :src="`${baserUrl}avatar/man_1.jpg`"
+                      :src="`${baseUrl}avatar/man_1.jpg`"
                       alt="Admin Panel"
                       width="120"
                       height="120">

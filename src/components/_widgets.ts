@@ -23,6 +23,8 @@ requireComponent.keys().forEach(fileName => {
     ),
   );
 
+  console.log("Registing global widgets!");
+  console.log(componentName);
   // 全局注册组件
   Vue.component(
     componentName,

@@ -1,7 +1,7 @@
 export default {
-    data () {
+  data() {
     return {
-      baseUrl: process.env.BASE_URL
-    }
+      baseUrl: process.env.BASE_URL,
+    };
   },
 };

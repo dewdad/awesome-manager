@@ -155,9 +155,7 @@ export default {
       selectedTab: null,
     };
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
   computed: {
     user() {
       let Origin = {

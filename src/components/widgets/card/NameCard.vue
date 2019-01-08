@@ -28,7 +28,7 @@
               :size="computeAvatarSize"
               color="primary">
             <img
-                v-bind:src="avatar.src"
+                :src="`${baseUrl}avatar/man_1.jpg`"
                 v-bind:alt="name"
                 v-if="showAvatar">
             <span
@@ -75,7 +75,9 @@
 </template>
 
 <script>
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
+  mixins: [baseUrlMixin],
   props: {
     name: {
       type: String,

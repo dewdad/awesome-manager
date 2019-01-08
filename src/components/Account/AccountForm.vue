@@ -1,6 +1,8 @@
 <script>
 import Account from "@/api/models/Account";
+import AccountProfile from "./AccountProfile.vue";
 export default {
+  components: { AccountProfile },
   data() {
     return {
       editing: false,
@@ -41,6 +43,7 @@ export default {
 
 <template>
   <v-card>
+    <AccountProfile></AccountProfile>
     <v-toolbar
         card
         prominent

@@ -75,11 +75,13 @@
 <script>
 import NameCard from "@/components/widgets/card/NameCard";
 import ProfileCard from "@/components/widgets/card/ProfileCard";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     NameCard,
     ProfileCard,
   },
+  mixins: [baseUrlMixin],
   data() {
     return {
       users: [
@@ -115,7 +117,7 @@ export default {
           jobTitle: "Product Manager",
           name: "John Doe",
           dark: true,
-          cardBgImage: `${baseUrl}bg/15.jpg`,
+          cardBgImage: `${this.baseUrl}bg/15.jpg`,
           avatar: {
             src: "https://randomuser.me/api/portraits/men/5.jpg",
             size: "36",

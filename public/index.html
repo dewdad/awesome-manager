@@ -19,7 +19,7 @@
       const { ipcRenderer } = require('electron')
       function updateOnlineStatus () {
         ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
-        document.write(navigator.onLine ? 'online' : 'offline')
+        document.write(navigator.onLine ? 'You are online' : 'You are offline')
       }
       window.addEventListener('online', updateOnlineStatus)
       window.addEventListener('offline', updateOnlineStatus)

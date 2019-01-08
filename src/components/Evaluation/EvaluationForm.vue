@@ -131,8 +131,8 @@ export default {
     <v-card-actions class="pb-3">
       <v-spacer></v-spacer>
       <v-btn
-        @click="saveItem"
-        color="primary">Save</v-btn>
+          @click="saveItem"
+          color="primary">Save</v-btn>
     </v-card-actions>
   </v-card>
 </template>

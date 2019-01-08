@@ -39,9 +39,7 @@ export default {
       type: Array,
     },
   },
-  mixins: [
-    baseUrlMixin
-  ],
+  mixins: [baseUrlMixin],
 };
 </script>
 
