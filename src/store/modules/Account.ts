@@ -10,7 +10,7 @@ const state = {
   items: [],
   cached: [],
   currentItem: {},
-  status: false,
+  LoggedIn: false,
   filter: {
     search: "",
     sort: "",
@@ -25,7 +25,7 @@ const state = {
 
 const mutations: any = {
   ...make.mutations(state),
-  CACHE_ACCOUNT(state, newAccount) {
+  CACHE_USER(state, newAccount) {
     state.cached.push(newAccount);
   },
 };
@@ -56,7 +56,7 @@ const AccountActions = {
           ctx.dispatch("signin", createdAccount);
         } else {
           console.log("Invalid password");
-          ctx.commit("SET_STATUS", false);
+          ctx.commit("SET_LOGGED_IN", false);
           return;
         }
       } catch (e) {
@@ -71,13 +71,17 @@ const AccountActions = {
         ctx.dispatch("signin", authedAccount);
       } else {
         console.log("Invalid password");
-        ctx.commit("SET_STATUS", false);
+        ctx.commit("SET_LOGGED_IN", false);
         return;
       }
     }
   },
   async signin(ctx: ActionContext<any, any>, authData) {
+    // 登录状态为真
     ctx.commit("SET_STATUS", true);
+    // 缓存用户数据
+    ctx.commit("CACHE_USER", authData);
+    // 设置简单托证
     ctx.commit("SET_TOKEN", {
       ...ctx.state.token,
       ...{
@@ -87,7 +91,10 @@ const AccountActions = {
   },
   // Logs out the current user.
   logout({ commit }) {
-    commit("SET_CURRENT_ITEM", null);
+        // 登录状态为真
+    commit("SET_STATUS", false);
+        // 缓存用户数据
+    commit("SET_CACHED", []);
   },
 };
 
