@@ -73,7 +73,7 @@ export default {
         color="primary"
         dark="">
       <div
-          class="layout pa-2 align-center"
+          class="layout pa-2 align-center avatar"
           :class="computeCardLayout">
         <v-avatar
             :size="computeAvatarSize"
@@ -144,5 +144,8 @@ export default {
 <style lang="scss" module>
 .headline {
   padding: 20px;
+}
+.avatar {
+  padding-top: 100px;
 }
 </style>
