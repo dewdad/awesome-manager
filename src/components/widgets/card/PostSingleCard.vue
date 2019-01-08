@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-media
-        src="/public/nature/n3.jpeg"
+        :src="`${baseUrl}nature/n3.jpeg`"
         :height="imageHeight"
         class="white--text">
       <v-layout
@@ -76,7 +76,11 @@
 </template>
 
 <script>
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
+  mixins: [
+    baseUrlMixin
+  ],
   props: {
     featuredImage: { type: String },
     imageHeight: { type: [String, Number], default: "350" },

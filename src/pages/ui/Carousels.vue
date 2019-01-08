@@ -46,24 +46,28 @@
 
 <script>
 import VWidget from "@/components/VWidget";
+import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   components: {
     VWidget,
   },
+  mixins: [
+    baseUrlMixin
+  ],
   data() {
     return {
       items: [
         {
-          src: "/nature/n1.jpeg",
+          src=`${baseUrl}nature/n5.jpeg`
         },
         {
-          src: "/nature/n2.jpeg",
+          src=`${baseUrl}nature/n5.jpeg`
         },
         {
-          src: "/nature/n3.jpeg",
+          src=`${baseUrl}nature/n5.jpeg`
         },
         {
-          src: "/nature/n4.jpeg",
+          src=`${baseUrl}nature/n5.jpeg`
         },
       ],
     };

@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-media
-        src="/static/nature/n5.jpeg"
+        :src="`${baseUrl}nature/n5.jpeg`"
         height="350">
       <v-layout
           column
@@ -80,5 +80,10 @@
 </template>
 
 <script>
-export default {};
+import baseUrlMixin from "@/mixins/baseUrlMixin";
+export default {
+  mixins: [
+    baseUrlMixin
+  ],
+};
 </script>

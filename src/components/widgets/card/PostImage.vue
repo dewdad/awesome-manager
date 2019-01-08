@@ -2,7 +2,7 @@
   <v-card>
 
     <v-card-media
-        src="/static/nature/n3.jpeg"
+        :src="`${baseUrl}nature/n3.jpeg`"
         class="white--text">
     </v-card-media>
     <v-card-text>
@@ -24,7 +24,12 @@
 </template>
 
 <script>
-export default {};
+import baseUrlMixin from "@/mixins/baseUrlMixin";
+export default {
+  mixins: [
+    baseUrlMixin
+  ],
+};
 </script>
 
 <style>

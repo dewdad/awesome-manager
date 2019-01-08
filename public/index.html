@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>awesome-manager</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons"> -->
   </head>
   <body>
     <noscript>
@@ -15,5 +15,15 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      const { ipcRenderer } = require('electron')
+      function updateOnlineStatus () {
+        ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
+        document.write(navigator.onLine ? 'online' : 'offline')
+      }
+      window.addEventListener('online', updateOnlineStatus)
+      window.addEventListener('offline', updateOnlineStatus)
+      updateOnlineStatus()
+    </script>
   </body>
 </html>
