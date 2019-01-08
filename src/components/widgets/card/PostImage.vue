@@ -2,7 +2,7 @@
   <v-card>
 
     <v-card-media
-        :src="`${baseUrl}nature/n3.jpeg`"
+        :src="computeImgePath"
         class="white--text">
     </v-card-media>
     <v-card-text>
@@ -24,9 +24,13 @@
 </template>
 
 <script>
+import { join } from "path";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   mixins: [baseUrlMixin],
+  computed: {
+    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
+  },
 };
 </script>
 

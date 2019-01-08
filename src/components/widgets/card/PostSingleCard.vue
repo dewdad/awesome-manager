@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-media
-        :src="`${baseUrl}nature/n3.jpeg`"
+        :src="computeImgePath"
         :height="imageHeight"
         class="white--text">
       <v-layout
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { join } from "path";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   mixins: [baseUrlMixin],
@@ -87,7 +88,9 @@ export default {
     text: { type: String },
     createdAt: { type: String },
   },
-
+  computed: {
+    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
+  },
   methods: {
     handleThumb() {
       // implement your own method here

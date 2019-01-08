@@ -295,7 +295,7 @@
           </v-widget>
           <v-card class="mt-3">
             <v-card-media
-                :src="`${baseUrl}/static/bg/15.jpg`"
+                :src="computeImgePath"
                 height="300px">
               <v-layout
                   column

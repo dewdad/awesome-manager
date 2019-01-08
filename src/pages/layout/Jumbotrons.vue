@@ -72,7 +72,7 @@
                   label="Gradient"
                   v-model="gradient2"></v-text-field>
               <v-jumbotron
-                  :src="`${baseUrl}static/bg/16.jpg`"
+                  :src="computeImgePath"
                   :gradient="gradient2"
                   dark
                 >

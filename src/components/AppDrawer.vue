@@ -12,7 +12,7 @@
         color="primary darken-1"
         dark>
       <img
-          :src="`${baseUrl}icon/google.png`"
+          :src="computeLogo"
           height="48"
           alt="admin">
       <v-toolbar-title class="ml-0 pl-3">
@@ -121,6 +121,7 @@
 <script>
 import menu from "@/api/menu";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import { join } from "path";
 export default {
   name: "app-drawer",
   components: {
@@ -133,7 +134,6 @@ export default {
     },
   },
   data: () => ({
-    baseUrl: process.env.BASE_URL,
     mini: false,
     drawer: true,
     menus: menu,
@@ -142,16 +142,9 @@ export default {
     },
   }),
   computed: {
-    computeGroupActive() {
-      return true;
-    },
-    computeLogo() {
-      return "/static/m.png";
-    },
-
-    sideToolbarColor() {
-      return this.$vuetify.options.extra.sideNav;
-    },
+    computeGroupActive: () => true,
+    computeLogo: () => join(process.env.BASE_URL, "icon/google.png"),
+    sideToolbarColor: () => this.$vuetify.options.extra.sideNav
   },
   created() {
     window.getApp.$on("APP_DRAWER_TOGGLED", () => {

@@ -79,7 +79,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}bg/1.jpg`"
+                :src="computeBg1"
                 height="250">
               <h2 class="white--text pa-3">
                 制作标准的人员编制表格
@@ -104,7 +104,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}bg/10.jpg`"
+                :src="computeBg10"
                 height="250">
               <h2 class="white--text pa-3">
                 记录每一份文档,并用Word模板输出打印
@@ -115,7 +115,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    :src="`${baseUrl}avatar/man_4.jpg`"
+                    :src="computeAvatarMan4"
                     alt="">
               </v-avatar>
               <div>
@@ -136,7 +136,7 @@
             sm12>
           <v-card>
             <v-img
-                :src="`${baseUrl}bg/4.jpg`"
+                :src="computeBg4"
                 height="250">
               <h2 class="white--text pa-3">
                 党员信息采集,组织关系转接,从未如此方便
@@ -253,7 +253,16 @@ export default {
       cardText: "请查看手册, 了解具体使用方法",
     };
   },
-  computed: {},
+  computed: {
+    computeBg1: () => join(process.env.BASE_URL, "bg/1.jpg"),
+    computeBg2: () => join(process.env.BASE_URL, "bg/2.jpg"),
+    computeBg3: () => join(process.env.BASE_URL, "bg/3.jpg"),
+    computeBg4: () => join(process.env.BASE_URL, "bg/4.jpg"),
+    computeBg5: () => join(process.env.BASE_URL, "bg/5.jpg"),
+    computeBg6: () => join(process.env.BASE_URL, "bg/6.jpg"),
+    computeBg10: () => join(process.env.BASE_URL, "bg/10.jpg"),
+    computeAvatarMan4: () => join(process.env.BASE_URL, "avatar/man_4.jpg"),
+  },
   methods: {},
 };
 </script>

@@ -48,7 +48,7 @@
                             <v-avatar
                                 class="mx-auto"
                                 color="info">
-                              <img :src="`${baseUrl}avatar/a1.jpg`">
+                              <img :src="computeImgePath">
                             </v-avatar>
                             <div class="text-center flex ml-2">
                               <div class="subheading">John Doe</div>
@@ -74,11 +74,11 @@
                 <li class="timeline-block">
                   <div class="timeline-content">
                     <v-card>
-                      <v-card-media
-                          :src="`${baseUrl}static/bg/5.jpg`"
+                      <v-img
+                          :src="computeImgePath"
                           height="200px"
                         >
-                      </v-card-media>
+                      </v-img>
                       <v-card-title primary-title>
                         <div>
                           <div class="headline">Top western road trips</div>
@@ -152,6 +152,7 @@ export default {
     activity() {
       return API.getActivity();
     },
+    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
   },
 
   methods: {},

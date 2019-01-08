@@ -76,7 +76,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}/static/bg/8.jpg`"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -100,7 +100,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}nature/n3.jpeg`"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -111,7 +111,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    :src="`${baseUrl}avatar/man_2.jpg`"
+                    :src="computeImgePath"
                     alt="">
               </v-avatar>
               <div>
@@ -131,7 +131,7 @@
             sm12>
           <v-card>
             <v-card-media
-                :src="`${baseUrl}nature/n4.jpeg`"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image

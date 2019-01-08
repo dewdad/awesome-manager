@@ -64,7 +64,7 @@
           slot="activator">
         <v-avatar size="30px">
           <img
-              :src="`${baseUrl}avatar/mf-avatar.svg`"
+              :src="computeAvatar"
               alt="Xing Wenju"/>
         </v-avatar>
       </v-btn>
@@ -94,6 +94,7 @@
 import NotificationList from "@/components/widgets/list/NotificationList";
 import Notification from "@/api/models/Notification";
 import { toggleFullScreen } from "@/util";
+import { join } from "path";
 export default {
   name: "app-toolbar",
   components: {
@@ -121,6 +122,7 @@ export default {
     ],
   }),
   computed: {
+    computeAvatar: () => join(process.env.BASE_URL, "avatar/mf-avatar.svg"),
     toolbarColor: () => this.$vuetify.options.extra.mainNav,
     notificationCount: () => Notification.query().count(),
   },

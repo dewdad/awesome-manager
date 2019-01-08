@@ -19,7 +19,7 @@
 
                 <div class="layout column align-center">
                   <img
-                      :src="`${baseUrl}avatar/man_1.jpg`"
+                      :src="computeAvatar"
                       alt="Admin Panel"
                       width="120"
                       height="120">
@@ -78,6 +78,7 @@
 
 <script>
 import { get, sync, call } from "vuex-pathify";
+import { join } from "path";
 export default {
   data: () => ({
     loading: false,
@@ -91,6 +92,7 @@ export default {
     baseUrl: process.env.BASE_URL,
   }),
   computed: {
+    computeAvatar: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
     currentItem: sync("entities/account/currentItem"),
     status: sync("entities/account/status"),
   },

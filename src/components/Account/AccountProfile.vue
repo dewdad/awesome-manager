@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-img
-        :src="`${baseUrl}bg/10.jpg`"
+        :src="computeImgePath"
         height="390">
       <v-layout
           column
@@ -88,12 +88,14 @@
 </template>
 
 <script>
+import { join } from "path";
 import Account from "@/api/models/Account";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
   mixins: [baseUrlMixin],
   computed: {
     fields: () => Account.fieldsList(),
+    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
   },
 };
 </script>

@@ -52,25 +52,24 @@ export default {
     VWidget,
   },
   mixins: [baseUrlMixin],
-  data() {
-    return {
-      items: [
+  computed: {
+    items: () => {
+      return [
         {
-          src: `${baseUrl}nature/n5.jpeg`,
+          src: join(process.env.BASE_URL, "bg/1.jpg"),
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`,
+          src: join(process.env.BASE_URL, "bg/2.jpg"),
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`,
+          src: join(process.env.BASE_URL, "bg/3.jpg"),
         },
         {
-          src: `${baseUrl}nature/n5.jpeg`,
+          src: join(process.env.BASE_URL, "bg/4.jpg"),
         },
       ],
-    };
+    }
   },
-  computed: {},
   methods: {},
 };
 </script>

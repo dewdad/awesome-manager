@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-media
-        :src="`${baseUrl}nature/n5.jpeg`"
+        :src="computeImgePath"
         height="350">
       <v-layout
           column

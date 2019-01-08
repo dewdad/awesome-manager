@@ -11,7 +11,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax :src="`${baseUrl}bg/12.jpg`">
+              <v-parallax :src="computeImgePath">
               </v-parallax>
             </div>
           </v-widget>
@@ -21,7 +21,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax :src="`${baseUrl}bg/1.jpg`">
+              <v-parallax :src="computeImgePath">
                 <v-layout
                     column
                     align-center
@@ -39,7 +39,7 @@
                 slot="widget-content"
                 class="text-xs-center">
               <v-parallax
-                  :src="`${baseUrl}bg/21.jpg`"
+                  :src="computeImgePath"
                   height="700"
                   jumbotron
               ></v-parallax>

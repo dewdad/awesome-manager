@@ -56,7 +56,7 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: require(`${baseUrl}/bg/2.jpg`),
+      default: require("@/assets/logo.png"),
     },
     imgLogo: {
       type: String,

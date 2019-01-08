@@ -10,7 +10,7 @@
       <v-card class="elevation-0">
         <v-card-media
             height="380"
-            :src="`${baseUrl}/bg/4.jpg`">
+            :src="computeImgePath">
           <v-layout
               column
               align-center
@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import { join } from "path";
 import { getUserById } from "@/api/user";
 import baseUrlMixin from "@/mixins/baseUrlMixin";
 export default {
@@ -166,5 +167,6 @@ export default {
       return Object.assign(Origin, user);
     },
   },
+  computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
 };
 </script>

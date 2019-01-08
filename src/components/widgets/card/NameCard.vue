@@ -28,7 +28,7 @@
               :size="computeAvatarSize"
               color="primary">
             <img
-                :src="`${baseUrl}avatar/man_1.jpg`"
+                :src="computeImgePath"
                 v-bind:alt="name"
                 v-if="showAvatar">
             <span
