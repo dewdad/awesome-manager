@@ -25,8 +25,9 @@ export default {
     relationFields: () => User.relationFieldsList().filter(r => r.match(/.*_id/)),
     selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
     fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
-    computeCardLayout: () => this.mini ? "row" : "column",
-    computeTextAlgin: () => this.mini ? "text-sm-right" : "text-sm-center",    computeAvatarSize: () => this.mini ? "48" : "96",
+    computeCardLayout() { return this.mini ? "row" : "column"} ,
+    computeTextAlgin() { return this.mini ? "text-sm-right" : "text-sm-center" },
+    computeAvatarSize() { return this.mini ? "48" : "96" },
     computeAvatarMan1: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
   },
   methods: {
