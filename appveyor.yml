@@ -20,15 +20,13 @@ install:
   - ps: Install-Product node 8 x86
   - yarn
 
-# build: off
+# test_script:
+#   - yarn test:unit
 
 build_script:
   - yarn electron:build
 
 version: '{build}'
-
-test_script:
-  - yarn test:unit
 
 artifacts:
   - path: dist_electron\*.exe
