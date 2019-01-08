@@ -9,11 +9,6 @@ platform:
 environment:
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  access_token:
-    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  APPVEYOR_SSH_KEY: AAAAB3NzaC1yc2EAAAADAQABAAABAQDb4cZ5qhWjV8GOeRJ24nVBWuwrRVXQ8P8kMJS3LWgNS9apAhhWtlOXoLvOCevOsZMWHdS2nRATu8GSvp7QDAREr4ynhZfjICRwzD7CRLKbdfwKKOAyUGMleoAssa7CQkguOgU8XjdiP5GAtXl3h9OjKBx8PLLjWxDPnw5xi5vLEA
-  APPVEYOR_SSH_BLOCK: false
-  APPVEYOR_RDP_PASSWORD: WroirOn#2009
 
 cache:
   - node_modules
@@ -30,24 +25,11 @@ install:
 build_script:
   - yarn electron:build
 
-artifacts:
-  - path: dist_electron\*.exe
-    name: bin
-
-matrix:
-  fast_finish: true
-
 version: '{build}'
-
-shallow_clone: true
-
-clone_depth: 1
 
 test_script:
   - yarn test:unit
 
-init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+artifacts:
+  - path: dist_electron\*.exe
+    name: bin
