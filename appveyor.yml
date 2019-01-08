@@ -7,7 +7,6 @@ platform:
   - x86
 
 environment:
-  APPVEYOR_REPO_TAG: true
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   access_token:
@@ -26,6 +25,8 @@ install:
   - ps: Install-Product node 8 x86
   - yarn
 
+# build: off
+
 build_script:
   - yarn electron:build
 
@@ -33,39 +34,20 @@ artifacts:
   - path: dist_electron\*.exe
     name: bin
 
-deploy:
-  - provider: GitHub
-    release: awesome-manager-v$(appveyor_build_version)
-    description: "A awesome dashbaord manager powered by vue and electron"
-    artifacts: bin
-    auth_token:
-      secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-    on:
-      # branch: master
-      appveyor_repo_tag: true
+matrix:
+  fast_finish: true
 
-test: off
+version: '{build}'
 
-branches:
-  only:
-    - master
+shallow_clone: true
+
+clone_depth: 1
+
+test_script:
+  - yarn test:unit
 
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-
-# For Linux only
-# image: ubuntu
-# install:
-# - yarn 
-# test_script:
-# - yarn test
-# build: off
-# init:
-#   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
-# on_finish:
-#   - sh: export APPVEYOR_SSH_BLOCK=true
-#   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
