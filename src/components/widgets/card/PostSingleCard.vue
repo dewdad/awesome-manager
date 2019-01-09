@@ -89,7 +89,7 @@ export default {
     createdAt: { type: String },
   },
   computed: {
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
+    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
   },
   methods: {
     handleThumb() {

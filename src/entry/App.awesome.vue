@@ -127,7 +127,18 @@ export default {
 </script>
 
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
+// Allow element/type selectors, because this is global CSS.
+// stylelint-disable selector-max-type, selector-class-pattern
+// Normalize default styles across browsers,
+// https://necolas.github.io/normalize.css/
+@import "~normalize.css/normalize.css";
+// Style loading bar between pages.
+// https://github.com/rstacruz/nprogress
+@import "~nprogress/nprogress.css";
+// Design variables and utilities from src/design.
+@import "@design";
+
 .setting-fab {
   top: 50% !important;
   right: 0;

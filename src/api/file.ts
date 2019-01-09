@@ -26,7 +26,7 @@ export const Items = [
     uuid: "a32c4aec-54de-4ff4-b165-8571ae805598",
     fileName: "1.jpg",
     fileType: false,
-    path: ()=> join(process.env.BASE_URL, "bg/1.jpg"),
+    path: () => join(process.env.BASE_URL, "bg/1.jpg"),
     fullPath: "",
     ext: "",
     dir: "public",

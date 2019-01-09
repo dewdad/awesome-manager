@@ -167,6 +167,6 @@ export default {
       return Object.assign(Origin, user);
     },
   },
-  computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg")
+  computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
 };
 </script>

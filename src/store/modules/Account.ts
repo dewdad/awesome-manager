@@ -91,9 +91,9 @@ const AccountActions = {
   },
   // Logs out the current user.
   logout({ commit }) {
-        // 登录状态为真
+    // 登录状态为真
     commit("SET_LOGGED_IN", false);
-        // 缓存用户数据
+    // 缓存用户数据
     commit("SET_CACHED", []);
   },
 };

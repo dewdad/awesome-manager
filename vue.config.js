@@ -1,5 +1,5 @@
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 module.exports = {
   configureWebpack: {
     devtool: "source-map",
@@ -7,6 +7,9 @@ module.exports = {
     //   // app: ["./src/main.ts"],
     //   app: ["./src/main.play.ts"],
     // },
+    resolve: {
+      alias: require("./aliases.config").webpack,
+    },
   },
   chainWebpack: config => {
     // configure vue loader

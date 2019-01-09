@@ -33,11 +33,11 @@ function createWindow() {
 
 function registerShortcuts() {
   globalShortcut.register("CommandOrControl+X", () => {
-    githubWin = new BrowserWindow({ backgroundColor: "#2e2c29"});
+    githubWin = new BrowserWindow({ backgroundColor: "#2e2c29" });
     githubWin.loadURL("https://github.com/linuxing3/awesome-manager");
     if (!process.env.IS_TEST) githubWin.webContents.openDevTools();
     githubWin.show();
-  })
+  });
 }
 
 // Quit when all windows are closed.
@@ -86,5 +86,5 @@ if (isDevelopment) {
 
 ipcMain.on("online-status-changed", (event, arg) => {
   console.log(arg);
-  event.sender.send("online-status-change-received", "Electron Got it!")
-})
+  event.sender.send("online-status-change-received", "Electron Got it!");
+});

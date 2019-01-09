@@ -144,7 +144,7 @@ export default {
   computed: {
     computeGroupActive: () => true,
     computeLogo: () => join(process.env.BASE_URL, "icon/google.png"),
-    sideToolbarColor: () => this.$vuetify.options.extra.sideNav
+    sideToolbarColor: () => this.$vuetify.options.extra.sideNav,
   },
   created() {
     window.getApp.$on("APP_DRAWER_TOGGLED", () => {
