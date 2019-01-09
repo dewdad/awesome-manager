@@ -94,12 +94,11 @@ export default {
   computed: {
     computeAvatar: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
     currentItem: sync("entities/account/currentItem"),
-    status: sync("entities/account/status"),
+    loggedIn: sync("entities/account/loggedIn"),
   },
   mounted() {
     console.log(this.baseUrl);
   },
-
   methods: {
     signup: call("entities/account/signup"),
     async login() {
@@ -108,7 +107,7 @@ export default {
         await this.signup(this.model);
         this.loading = true;
         setTimeout(() => {
-          if (this.status) {
+          if (this.loggedIn) {
             this.$router.push("/docs/manual");
           } else {
             this.loading = false;
