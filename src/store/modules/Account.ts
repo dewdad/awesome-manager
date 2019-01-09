@@ -78,7 +78,7 @@ const AccountActions = {
   },
   async signin(ctx: ActionContext<any, any>, authData) {
     // 登录状态为真
-    ctx.commit("SET_STATUS", true);
+    ctx.commit("SET_LOGGED_IN", true);
     // 缓存用户数据
     ctx.commit("CACHE_USER", authData);
     // 设置简单托证
@@ -92,7 +92,7 @@ const AccountActions = {
   // Logs out the current user.
   logout({ commit }) {
         // 登录状态为真
-    commit("SET_STATUS", false);
+    commit("SET_LOGGED_IN", false);
         // 缓存用户数据
     commit("SET_CACHED", []);
   },
