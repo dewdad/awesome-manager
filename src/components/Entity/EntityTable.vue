@@ -1,10 +1,14 @@
 <script>
 import Entity from "@/api/models/Entity";
 import EntityForm from "./EntityForm";
+import EntityIterator from "./EntityIterator";
+import EntityList from "./EntityList";
 import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
     EntityForm,
+    EntityIterator,
+    EntityList,
   },
   data() {
     return {
@@ -84,6 +88,12 @@ export default {
         </template>
       </v-data-table>
 
+    </v-responsive>
+    <v-responsive>
+      <EntityForm></EntityForm>
+    </v-responsive>
+    <v-responsive>
+      <EntityList></EntityList>
     </v-responsive>
     <v-responsive>
       <EntityForm></EntityForm>

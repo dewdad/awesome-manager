@@ -19,9 +19,9 @@ export default {
     }
   },
   computed: {
-    modelName: <%= modelName %>.entity,
-    all: ()=><%= modelName %>.query().withAll().get(),
-    headers: ()=><%= modelName %>.fieldsList(),
+    modelName: () => <%= modelName %>.entity,
+    all: () =><%= modelName %>.query().withAll().get(),
+    headers: () => <%= modelName %>.fieldsList(),
   },
   mixins: [exportMixin],
   created() {

@@ -1,17 +1,10 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>List.vue"
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelListName = h.capitalize(h.inflection.singularize(model)) + 'List'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from "@/api/models/<%= modelName %>";
-import <%= modelFormName %> from "./<%= modelFormName %>";
+<script>
+import Entity from "@/api/models/Entity";
+import EntityForm from "./EntityForm";
 import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
-    <%= modelFormName %>
+    EntityForm
   },
   data() {
     return {
@@ -19,20 +12,20 @@ export default {
     }
   },
   computed: {
-    modelName: () => <%= modelName %>.entity,
-    all: () => <%= modelName %>.query().withAll().get(),
-    headers: () => <%= modelName %>.fieldsList(),
+    modelName: ()=> Entity.entity,
+    all: ()=> Entity.query().withAll().get(),
+    headers: ()=>Entity.fieldsList(),
   },
   mixins: [exportMixin],
   created() {
-    window.<%= modelListName %> = this;
+    window.EntityList = this;
   },
   methods: {
     deleteItem(item) {
-      <%= modelName %>.delete(item._id)
+      Entity.delete(item._id)
     },
     editItem(item) {
-      window.<%= modelFormName %>.$emit("SET_EDITING", item)
+      window.EntityForm.$emit("SET_EDITING", item)
     }
   },
 }
@@ -48,7 +41,7 @@ export default {
       <v-list-group
           v-for="(item, i) in all"
           :key="i"
-          :group="i"
+          group="group"
           prepend-icon=""
           no-action="no-action"
         >

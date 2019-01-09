@@ -25,7 +25,7 @@
           <v-card>
             <v-card-title>
               <v-select
-                  v-model="dbName"
+                  v-model="modelName"
                   @change="updateEntity"
                   label="Select Database Name"
                   :items="entities"/>
@@ -101,45 +101,30 @@
 </template>
 
 <script>
-import { join } from "path";
-import { copyFileSync } from "fs";
+
 import { shell, remote } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 import models from "@/api/models";
 import * as keysDef from "@/locales/cn.json";
 import DatabasesIterator from "./DatabasesIterator.vue";
+import exportMixin from "@/mixins/exportMixin";
 import {
   log,
-  getFilesByExtentionInDir,
-  ObjectKeysToArray,
-  stateObjectFromArray,
-  ImportCSV,
-  GenerateCSV,
-  ArrayToNedb,
+  ImportCSV
 } from "@/util";
-import { objectArrayFromClassKeys } from "@/util/transformer";
 
 export default {
   components: {
     DatabasesIterator,
   },
+  mixins: [exportMixin],
   data() {
     return {
-      // entity name list
-      entities: [],
       // entity DB instance for lowdb
       entityDb: null,
-      // models instance for vuex/orm
-      models: null,
       // entity file name/ csv file name / modelname
-      dbName: "",
-      // Template dir path
-      templateDir: "",
-      userDataTemplateDir: "",
-      outputJsonFile: "",
-      outputDocFile: "",
-      templateDocs: [],
+      modelName: "",
       // Switch between import/export/reset
       actionGroup: "导入",
       // Import and clear
@@ -147,40 +132,21 @@ export default {
     };
   },
   created() {
-    objectArrayFromClassKeys;
-    this.entities = entities;
-    this.models = models;
     this.findDocuments();
+  },
+  computed: {
+    // models instance for vuex/orm
+    models: () => models,
+    // entity name list
+    entities: () => entities,
   },
   methods: {
     updateEntity() {
-      this.entityDb = new LowdbForElectron(this.dbName);
+      this.entityDb = new LowdbForElectron(this.modelName);
     },
     findDocuments() {
-      this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
       log.suc("Template Directory is: " + this.templateDir);
-
-      this.templateDocs = getFilesByExtentionInDir({ path: this.templateDir, ext: "doc" });
-      this.templateDocs.forEach(t => {
-        log.suc(t);
-      });
-    },
-    copyDocument() {
-      // 将word模板文件和字符定义配置拷贝到`HOME/documents/template`目录下
-      this.templateDir = join(remote.app.getPath("home"), "/Documents/template");
-      this.userDataTemplateDir = join(remote.app.getPath("userData"), "template");
-      fs.copySync(this.appDataTemplateDir, this.templateDir);
-    },
-    refreshEntityState() {
-      let { dbName } = this;
-      if (dbName === undefined) return;
-
-      let NSModel = this.models[`${dbName}`];
-      NSModel.query()
-        .withAll()
-        .get();
-
-      this.$router.push(`/${dbName}-table`);
+      this.templateDocs.forEach(t => log.suc(t));
     },
     async importEntities(e) {
       log.info("Importing...");
@@ -194,18 +160,18 @@ export default {
       if (!Array.isArray(data)) return;
 
       // Make sure {this} is {that}
-      let { entityDb, dbName } = this;
-      if (entityDb === undefined || dbName === undefined) return;
+      let { entityDb, modelName } = this;
+      if (entityDb === undefined || modelName === undefined) return;
 
       // 如果需要清除数据存储文件中的原有数据
       if (this.clearGroup === "清除") {
-        entityDB.clear(dbName);
-        entityDB.dbInit([dbName]);
+        entityDB.clear(modelName);
+        entityDB.dbInit([modelName]);
       }
 
       // 逐个插入数据到数据存储文件
       data.forEach(item => {
-        entityDb.insert(`${dbName}`, item);
+        entityDb.insert(`${modelName}`, item);
       });
 
       // 刷新vuex状态
@@ -214,34 +180,24 @@ export default {
     async exportEntities() {
       log.info("Exporting...");
 
-      let targetFilePath = join(this.templateDir, `${this.dbName}.csv`);
-      log.suc(targetFilePath);
+      let { modelName } = this;
+      if (modelName === undefined) return;
 
-      let { dbName } = this;
-      if (dbName === undefined) return;
-
-      let NSModel = this.models[`${dbName}`];
+      let NSModel = this.models[`${modelName}`];
       let data = NSModel.query()
         .withAll()
         .get();
 
       // 导出csv文件, 并更改列标题和对应键
-      GenerateCSV({
-        data,
-        targetFilePath,
-        needTranslate: true,
-        keysDef: keysDef.default,
-      });
-      // 显示csv文件
-      shell.showItemInFolder(targetPath);
+      this.exportItem(data);
     },
     resetEntities() {
       // 删除文件中的数据
-      let { entityDb, dbName } = this;
-      if (entityDb === undefined || dbName === undefined) return;
+      let { entityDb, modelName } = this;
+      if (entityDb === undefined || modelName === undefined) return;
 
-      entityDB.clear(dbName);
-      entityDB.dbInit([dbName]);
+      entityDB.clear(modelName);
+      entityDB.dbInit([modelName]);
       // 删除物理文件
       alert("如需删除物理文件，请手动删除：" + entityDb.adapter.source);
       shell.showItemInFolder(entityDb.adapter.source);

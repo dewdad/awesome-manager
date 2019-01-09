@@ -3,7 +3,7 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelIteratorName = h.capitalize(h.inflection.singularize(model)) + 'Iterator'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
@@ -19,13 +19,13 @@ export default {
     }
   },
   computed: {
-    modelName: <%= modelName %>.entity,
-    all: ()=><%= modelName %>.query().withAll().get(),
-    headers: ()=><%= modelName %>.fieldsList(),
+    modelName: () =><%= modelName %>.entity,
+    all: () =><%= modelName %>.query().withAll().get(),
+    headers: () =><%= modelName %>.fieldsList(),
   },
   mixins: [exportMixin],
   created() {
-    window.<%= modelTableName %> = this;
+    window.<%= modelIteratorName %> = this;
   },
   methods: {
     deleteItem(item) {

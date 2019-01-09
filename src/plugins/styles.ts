@@ -13,3 +13,4 @@ import "@fortawesome/fontawesome-free/css/all.css";
  * Global Stype install
  */
 import "@/styles/default.styl";
+// import "@/styles/index.scss";
