@@ -28,8 +28,6 @@ install:
 build_script:
   - yarn electron:build
 
-version: 'awesome-manager-v{build}'
-
 deploy:
   provider: GitHub
   release: awesome-manager-v$(appveyor_build_version)
