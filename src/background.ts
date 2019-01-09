@@ -1,12 +1,13 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, globalShortcut } from "electron";
 import { createProtocol, installVueDevtools } from "vue-cli-plugin-electron-builder/lib";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let githubWin;
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(["app"], { secure: true });
@@ -28,6 +29,15 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
+}
+
+function registerShortcuts() {
+  globalShortcut.register("CommandOrControl+X", () => {
+    githubWin = new BrowserWindow({ backgroundColor: "#2e2c29"});
+    githubWin.loadURL("https://github.com/linuxing3/awesome-manager");
+    if (!process.env.IS_TEST) githubWin.webContents.openDevTools();
+    githubWin.show();
+  })
 }
 
 // Quit when all windows are closed.
@@ -56,6 +66,7 @@ app.on("ready", async () => {
     await installVueDevtools();
   }
   createWindow();
+  registerShortcuts();
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -72,3 +83,8 @@ if (isDevelopment) {
     });
   }
 }
+
+ipcMain.on("online-status-changed", (event, arg) => {
+  console.log(arg);
+  event.sender.send("online-status-change-received", "Electron Got it!")
+})
