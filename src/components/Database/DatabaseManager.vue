@@ -124,7 +124,7 @@ export default {
       // entity DB instance for lowdb
       entityDb: null,
       // entity file name/ csv file name / modelname
-      modelName: "",
+      modelName: "user",
       // Switch between import/export/reset
       actionGroup: "导入",
       // Import and clear
