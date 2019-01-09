@@ -214,8 +214,8 @@ export default {
     async exportEntities() {
       log.info("Exporting...");
 
-      let targetPath = join(this.templateDir, `${this.dbName}.csv`);
-      log.suc(targetPath);
+      let targetFilePath = join(this.templateDir, `${this.dbName}.csv`);
+      log.suc(targetFilePath);
 
       let { dbName } = this;
       if (dbName === undefined) return;
@@ -228,7 +228,7 @@ export default {
       // 导出csv文件, 并更改列标题和对应键
       GenerateCSV({
         data,
-        targetPath,
+        targetFilePath,
         needTranslate: true,
         keysDef: keysDef.default,
       });

@@ -227,7 +227,7 @@ export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
  */
 export const GenerateCSV = ({
   data = [],
-  targetFilePath = "string",
+  targetFilePath = "",
   needTranslate = false,
   keysDef = {},
 }) => {
