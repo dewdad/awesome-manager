@@ -10,7 +10,7 @@ const state = {
   items: [],
   cached: [],
   currentItem: {},
-  LoggedIn: false,
+  loggedIn: false,
   filter: {
     search: "",
     sort: "",
