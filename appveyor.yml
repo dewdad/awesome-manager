@@ -9,6 +9,8 @@ platform:
 environment:
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+  ACCESS_TOKEN:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
 
 cache:
   - node_modules
@@ -26,7 +28,7 @@ install:
 build_script:
   - yarn electron:build
 
-version: '{build}'
+version: 'awesome-manager-v{build}'
 
 artifacts:
   - path: dist_electron\*.exe
