@@ -26,7 +26,7 @@ export default {
     },
     exportItem(item) {
       let data;
-      console.log(`导出${this.mdoelName}.csv文件...`);
+      console.log(`导出${this.modelName}.csv文件...`);
       if (!Array.isArray(item)) {
         data = [item]
       } else {
