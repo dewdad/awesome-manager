@@ -192,48 +192,51 @@ export const deepCloneWithNewKeys = ({ data = [], keysDef = {}, reverse = false 
   return result;
 };
 
+export const splitCSVHeaderBody = (content: string) : any => {
+  return pipe(
+    (content: string) => content.split("\n"),
+    (lines: string[]) => ({ header: head(lines), body: tail(lines) }),
+  )(content);
+};
+
 /**
  * 
  * @param content string to parse
  * @param fieldDefs object with i18n translation
  * @result string
  * @example
- * let re = changeCSVHeader("name,age\nxxx,yyy")({
+ * let re = changeCSVHeader("\'name\',\'age\'\n\'xxx\',\'yyy\'")({
  *   name: "姓名",
  *   age: "年龄"
  * })
  */
-export const changeCSVHeader = (content: string) => (fieldDefs: any): string => {
+export const changeCSVHeader = (header: string) => (fieldDefs: any): string => {
   return pipe(
-    (content: string) => content.split("\n"),
-    (lines: string[]) => head(lines),
-    (firstLine: string) => firstLine.split(","),
+    (header: string) => header.split(","),
     map(fieldName => {
-      fieldName = fieldName.replace(/\\/g, "");
-      fieldName = fieldName.replace(/'/g, "");
+      fieldName = fieldName.replace(/(\\|\n|'|")/g, "");
       console.log(fieldName);
       return fieldDefs[fieldName.toString()];
     }),
     (fieldNames: string[]) => fieldNames.join(","),
-  )(content);
+  )(header);
 };
 
-export const getCSVData = (content: string): string => {
+export const getCSVData = (data: string): string => {
   return pipe(
     (content: string) => content.split("\n"),
     (lines: string[]) => tail(lines),
     (lines: string[]) => lines.join("\n"),
-  )(content);
+  )(data);
 };
 
 export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
   const content = fs.readFileSync(targetFilePath, "utf8");
-  console.log(content);
-  const header = changeCSVHeader(content)(keysDef);
-  const data = getCSVData(content);
+  let { header, body } = splitCSVHeaderBody(content);
+  const newHeader = changeCSVHeader(header)(keysDef);
+  const data = getCSVData(body);
   console.log(header);
-  console.log(data);
-  fs.writeFileSync(targetFilePath, header, { encoding: "utf-8", flag: "w" });
+  fs.writeFileSync(targetFilePath, newHeader, { encoding: "utf-8", flag: "w" });
   fs.writeFileSync(targetFilePath, "\n", { encoding: "utf-8", flag: "a" });
   fs.writeFileSync(targetFilePath, data, { encoding: "utf-8", flag: "a" });
 };
