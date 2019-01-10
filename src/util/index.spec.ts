@@ -1,4 +1,11 @@
-import { baseFilter, slugify, deepCloneWithNewKeys, deepCloneWithNewKeysBasic } from "./index";
+import {
+  baseFilter,
+  changeCSVHeader,
+  slugify,
+  deepCloneWithNewKeys,
+  deepCloneWithNewKeysBasic,
+  changeHeaderOfCSV,
+} from "./index";
 
 // 原始数据
 const data = [
@@ -68,6 +75,11 @@ describe("Simple filter", () => {
   it("should slugify", () => {
     const re = slugify("Hello Xing");
     expect(re).toBe("hello-xing");
+  });
+
+  it("should changeCSVHeader", () => {
+    const re = changeCSVHeader("name,age\nXing,40")(keysDef);
+    expect(re).toBe("姓名,年龄");
   });
 });
 
