@@ -199,6 +199,7 @@ export const changeCSVHeader = (content: string) => (fieldDefs: any): string => 
     (firstLine: string) => firstLine.split(","),
     map(fieldName => {
       fieldName = fieldName.replace(/\\/, "");
+      fieldName = fieldName.replace(/\n/, "");
       console.log([fieldName]);
       return fieldDefs[fieldName.toString()];
     }),
