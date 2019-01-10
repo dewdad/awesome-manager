@@ -192,31 +192,50 @@ export const deepCloneWithNewKeys = ({ data = [], keysDef = {}, reverse = false 
   return result;
 };
 
+/**
+ * 
+ * @param content string to parse
+ * @param fieldDefs object with i18n translation
+ * @result string
+ * @example
+ * let re = changeCSVHeader("name,age\nxxx,yyy")({
+ *   name: "姓名",
+ *   age: "年龄"
+ * })
+ */
 export const changeCSVHeader = (content: string) => (fieldDefs: any): string => {
   return pipe(
     (content: string) => content.split("\n"),
-    (lines: string[]) => head(lines.reverse()),
+    (lines: string[]) => head(lines),
     (firstLine: string) => firstLine.split(","),
-    map(fieldName => fieldDefs[fieldName]),
+    map(fieldName => {
+      fieldName = fieldName.replace(/\\/g, "");
+      fieldName = fieldName.replace(/'/g, "");
+      console.log(fieldName);
+      return fieldDefs[fieldName.toString()];
+    }),
     (fieldNames: string[]) => fieldNames.join(","),
-    (content: string) => content + "\n",
   )(content);
 };
 
 export const getCSVData = (content: string): string => {
   return pipe(
     (content: string) => content.split("\n"),
-    (lines: string[]) => tail(lines.reverse()),
+    (lines: string[]) => tail(lines),
     (lines: string[]) => lines.join("\n"),
   )(content);
 };
 
 export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
   const content = fs.readFileSync(targetFilePath, "utf8");
+  console.log(content);
   const header = changeCSVHeader(content)(keysDef);
   const data = getCSVData(content);
+  console.log(header);
+  console.log(data);
   fs.writeFileSync(targetFilePath, header, { encoding: "utf-8", flag: "w" });
-  fs.writeFileSync(targetFilePath, data, { encoding: "utf-9", flag: "a" });
+  fs.writeFileSync(targetFilePath, "\n", { encoding: "utf-8", flag: "a" });
+  fs.writeFileSync(targetFilePath, data, { encoding: "utf-8", flag: "a" });
 };
 /**
  * 使用csv-stringify转数组为字符串
@@ -231,7 +250,9 @@ export const GenerateCSV = ({
   needTranslate = false,
   keysDef = {},
 }) => {
-  if (!Array.isArray(data)) return;
+  if (!Array.isArray(data)) {
+    data = [data];
+  }
   // 进行列标题转译
   if (needTranslate) data = deepCloneWithNewKeys({ data, keysDef, reverse: false });
   // 进行输出
