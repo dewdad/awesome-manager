@@ -4,6 +4,7 @@ import { head, tail, mapKeys, findKey, mapValues } from "lodash";
 import Papa from "papaparse/papaparse.js";
 import fs from "fs";
 const stringify = require("csv-stringify");
+
 /**
  * 美化命令行终端日志输出
  */
@@ -53,7 +54,7 @@ const getFilesFp = curry(getFilesByExtentionInDir);
  *  3. 对键值数组，使用some方法，迭代每个键名
  *  4. 对每个键名，代入到item对象，获取每个键值。
  *  5. 对每一个键值，使用indexOf方法，根据filterkey返回符合条件的数据
- *c
+ *
  * @sortKey:   用来排序的排序器
  */
 export const baseFilter = (sortKey: string) => (filterKey: string) => (items: any[]): any[] => {
@@ -107,14 +108,14 @@ export const comparePairs = a => b => (order: number): number => {
  * @param data
  */
 export const lazyFilter = (filter: string) => (data: any[]) => {
-  return data.reduce((filteredData: any[], item: any) => {
+  return data.reduce((list: any[], item: any) => {
     Object.keys(item).some(key => {
       if (checkStringMatch(item[key])(filter)) {
-        filteredData.push(item);
+        list.push(item);
         return true;
       }
     });
-    return filteredData;
+    return list;
   }, []);
 };
 
@@ -137,25 +138,33 @@ export const ObjectKeysToArray = (item: any): any[] => {
  * 将部分数据键值转化为数组
  * @param item Object with keys and values
  */
-export const LimitedObjectKeysToArray = (item: any): any[] => {
-  return Object.keys(item).reduce((res: any[], key: string, index: number) => {
+export const limitedObjectKeysToArray = (item: any): any[] => {
+  return Object.keys(item).reduce((list: any[], key: string, index: number) => {
     if (index > 8) return;
-    res.push({ text: key, value: key });
-    return res;
+    list.push({ text: key, value: key });
+    return list;
   }, []);
 };
 
 /**
- * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
- * @param data 原始数组, [{ name: "zip"},...]
- * @param headers json对象，包含标题行翻译 { name: "姓名"}
- * @param reverse 如果反向查找,在json文件中通过键值查找键名
- * @return result 新数组, { "姓名": "zip"}
- * @example
- * import * as keysDef from "@/locales/cn.json"
- * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
+ * 将 CSV 文件分割为头和体
  */
-export const deepCloneWithNewKeysBasic = (data: any[], keysDef: any, reverse?: boolean): any[] => {
+export const splitCSVHeaderBody = (content: string): { header: string; body: string[] } => {
+  return pipe(
+    (content: string) => content.split("\n"),
+    (lines: string[]) => ({ header: head(lines), body: tail(lines) }),
+  )(content);
+};
+
+/**
+ * Like translateHeaders, but in more primitive way
+ * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
+ * @param data 原始数组, [{ name: "xxx"},...]
+ * @param keysDef json对象，包含标题行翻译 { name: "姓名"}
+ * @param reverse 如果反向查找,在json文件中通过键值查找键名
+ * @return result 新数组, { "姓名": "xxx"}
+ */
+export const translateHeadersLegancy = (data: any[], keysDef: any, reverse?: boolean): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
@@ -173,47 +182,55 @@ export const deepCloneWithNewKeysBasic = (data: any[], keysDef: any, reverse?: b
   return result;
 };
 
-export const translateHeaders = ({ data = [], keysDef = {}, reverse = false,keepRelations = false }): any[] => {
-  let result = [];
-  data.forEach(item => {
+/**
+ * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
+ * @param data 原始数组, [{ name: "zip"},...]
+ * @param keysDef json对象，包含标题行翻译 { name: "姓名"}
+ * @param reverse 如果反向查找,在json文件中通过键值查找键名
+ * @return result 新数组, { "姓名": "zip"}
+ * @example
+ * import * as keysDef from "@/locales/cn.json"
+ * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
+ */
+export const translateHeaders = ({ data = [], keysDef = {}, reverse = false }): any[] => {
+  return data.reduce((list: any[], item) => {
     let newItem = {};
     if (reverse) {
+      // NOTE 反向查找, 翻译键值为相应语言
       newItem = mapKeys(item, (_: string, k: string) => findKey(keysDef, v => v === k));
     } else {
-      // 翻译键值为相应语言
+      // NOTE 翻译键值为相应语言
       newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
     }
-    result.push(newItem);
-  });
-  return result;
+    list.push(newItem);
+    return list;
+  }, []);
 };
-export const translateBody = ({ data = [], onlyKeepStringValue = false }): any[] => {
-  let result = [];
-  data.forEach(item => {
-    let newItem = {};
-    if (!onlyKeepStringValue) {
-      newItem = preferValueAsString(newItem);
-    }
-    result.push(newItem);
-  });
-  return result;
-};
-
-export const preferValueAsString = (item: any) => {
-  return mapValues(item, (value: any) => {
-    return typeof value === "object" ? value["name"] : value;
-  });
-};
-
-export const splitCSVHeaderBody = (content: string) : { header: string, body: string[]} => {
-  return pipe(
-    (content: string) => content.split("\n"),
-    (lines: string[]) => ({ header: head(lines), body: tail(lines) }),
-  )(content);
+/**
+ * 翻译行数据, 对值为对象的, 使用其 name 字段作为导出的值
+ * NOTE Implementation1. forEach methods
+ * let result = [];
+ * data.forEach(item => {
+ *   let newItem = mapValues(item, preferValueAsString);
+ *   result.push(newItem);
+ * });
+ * return result;
+ * NOTE Implementation2. reduce methods
+ */
+export const translateBody = ({ data = [], onlyKeepStringValue = true }): any[] => {
+  if (onlyKeepStringValue) {
+    return data.reduce((list, item) => {
+      let newItem = mapValues(item, preferValueAsString);
+      list.push(newItem);
+      return list;
+    }, []);
+  } else {
+    return data;
+  }
 };
 
 /**
- * 
+ * 更改 CSV 文件的列标题
  * @param content string to parse
  * @param fieldDefs object with i18n translation
  * @result string
@@ -235,6 +252,17 @@ export const changeCSVHeader = (header: string) => (fieldDefs: any): string => {
   )(header);
 };
 
+/**
+ * 更改 CSV 文件的列标题
+ * @param content string to parse
+ * @param fieldDefs object with i18n translation
+ * @result string
+ * @example
+ * let re = changeCSVHeader("\'name\',\'age\'\n\'xxx\',\'yyy\'")({
+ *   name: "姓名",
+ *   age: "年龄"
+ * })
+ */
 export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
   const content = fs.readFileSync(targetFilePath, "utf8");
   let { header, body } = splitCSVHeaderBody(content);
@@ -245,12 +273,16 @@ export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
   fs.writeFileSync(targetFilePath, "\n", { encoding: "utf-8", flag: "a" });
   fs.writeFileSync(targetFilePath, data, { encoding: "utf-8", flag: "a" });
 };
+
 /**
  * 使用csv-stringify转数组为字符串
  * 保持字符串到指定文件
  * windows下如有文档编码显示错误，可在目录下设置schema.ini文件
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
+ * @param {Object} keysDef
+ * @param {Boolean} needTranslateHeader
+ * @param {Boolean} onlyKeepStringValue
  */
 export const GenerateCSV = ({
   data = [],
@@ -263,12 +295,13 @@ export const GenerateCSV = ({
     data = [data];
   }
   // 进行列标题转译
-  if (needTranslateHeader) { 
+  if (needTranslateHeader) {
     data = translateHeaders({ data, keysDef, reverse: false });
-  };
-  if (onlyKeepStringValue) { 
+  }
+  // 转对象类键值为字符串键值
+  if (onlyKeepStringValue) {
     data = translateBody({ data, onlyKeepStringValue: false });
-  };
+  }
   // 进行输出
   stringify(
     data,
@@ -289,13 +322,17 @@ export const GenerateCSV = ({
 };
 
 /**
- * 使用文件空间上传文件对象
+ * 使用文件控件上传文件对象
  * @param {String|Object} file 文件对象
  * @param {String|Object} needTranslate 需要转移列标题
  * @param {String|Object} keysDef? 标题定义json文件
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
  **/
-export const ImportCSV = async ({ file = {}, needTranslate = false, keysDef = {} }): Promise<any> =>
+export const ImportCSV = async ({
+  file = {},
+  needTranslate = false,
+  keysDef = {},
+}): Promise<any> => {
   new Promise((resolve, _) => {
     Papa.parse(file, {
       header: true,
@@ -305,9 +342,9 @@ export const ImportCSV = async ({ file = {}, needTranslate = false, keysDef = {}
         // 开始转译
         let data;
         if (needTranslate) {
-          data = translateHeaders({ 
-            data: results.data, 
-            keysDef, 
+          data = translateHeaders({
+            data: results.data,
+            keysDef,
             reverse: true,
           });
         } else {
@@ -317,7 +354,9 @@ export const ImportCSV = async ({ file = {}, needTranslate = false, keysDef = {}
       },
     });
   });
+};
 
+// String Helpers
 export const capitalizeFirstLetter = (message: string) => {
   return message.charAt(0).toUpperCase() + message.slice(1).toLowerCase();
 };
@@ -340,4 +379,11 @@ export const slugify = (words: string) => {
     map(word => word.toLowerCase()),
     (words: string[]) => words.join("-"),
   )(words);
+};
+
+/**
+ * 值为对象的, 使用其 name 字段作为新值
+ */
+export const preferValueAsString = (value: any) => {
+  return typeof value === "object" ? value["name"] : value;
 };

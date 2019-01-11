@@ -2,9 +2,9 @@ import {
   baseFilter,
   changeCSVHeader,
   slugify,
-  deepCloneWithNewKeys,
-  deepCloneWithNewKeysBasic,
-  changeHeaderOfCSV,
+  translateHeaders,
+  translateBody,
+  translateHeadersLegancy,
 } from "./index";
 
 // 原始数据
@@ -77,27 +77,28 @@ describe("Simple filter", () => {
     expect(re).toBe("hello-xing");
   });
 
-  it("should changeCSVHeader", () => {
-    const re = changeCSVHeader("name,age\nXing,40")(keysDef);
-    expect(re).toBe("姓名,年龄");
+  it("should change CSV Header", () => {
+    const newHeader = changeCSVHeader("name,age")(keysDef);
+    expect(newHeader).toBe("姓名,年龄");
   });
 });
 
 describe("Simple i18n translater", () => {
   it("should clone with new keys basicly", () => {
-    const result = deepCloneWithNewKeysBasic(data, keysDef, false);
+    const result = translateHeadersLegancy(data, keysDef, false);
     expect(result).toEqual(expectedData1);
   });
   it("should clone with new keys basicly and reversely", () => {
-    const result = deepCloneWithNewKeysBasic(expectedData1, keysDef, true);
+    const result = translateHeadersLegancy(expectedData1, keysDef, true);
     expect(result).toEqual(data);
   });
   it("should clone with new keys", () => {
-    const result = deepCloneWithNewKeys({ data, keysDef, reverse: false });
+    let result = translateHeaders({ data, keysDef, reverse: false });
+    result = translateBody({ data: result, onlyKeepStringValue: true });
     expect(result).toEqual(expectedData2);
   });
   it("should clone with new keys reversely", () => {
-    const result = deepCloneWithNewKeys({ data: expectedData2, keysDef, reverse: true });
+    const result = translateHeaders({ data: expectedData2, keysDef, reverse: true });
     expect(result).toEqual(expectedData3);
   });
 });
