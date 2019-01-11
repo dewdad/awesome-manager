@@ -77,9 +77,13 @@ describe("Simple filter", () => {
     expect(re).toBe("hello-xing");
   });
 
-  it("should change CSV Header", () => {
-    const newHeader = changeCSVHeader("name,age")(keysDef);
+  it("should change CSV Header from english to chinese", () => {
+    const newHeader = changeCSVHeader( { header: "name,age", keysDef, reverse: false });
     expect(newHeader).toBe("姓名,年龄");
+  });
+  it("should change CSV Header from chinese to english", () => {
+    const newHeader = changeCSVHeader( { header: "姓名,年龄", keysDef, reverse: true });
+    expect(newHeader).toBe("name,age");
   });
 });
 

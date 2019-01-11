@@ -26,14 +26,8 @@
             <v-card-title>
               <v-select
                   v-model="modelName"
-                  @change="updateEntity"
-                  label="Select Database Name"
+                  label="选择需要导出的数据表"
                   :items="entities"/>
-              <v-select
-                  v-show="false"
-                  v-model="outputDocFile"
-                  label="Select Document Name"
-                  :items="templateDocs"/>
             </v-card-title>
 
             <v-responsive class="mt-45">
@@ -43,10 +37,10 @@
                 <v-radio
                     color="indigo"
                     row
-                    v-for="n in ['导入', '导出', '删除']"
-                    :key="n"
-                    :label="`${n}`"
-                    :value="n"
+                    v-for="option in ['导入', '导出', '删除']"
+                    :key="option"
+                    :label="`${option}`"
+                    :value="option"
                 ></v-radio>
               </v-radio-group>
             </v-responsive>
@@ -64,10 +58,10 @@
                 <v-radio
                     color="indigo"
                     row
-                    v-for="n in ['保留', '清除']"
-                    :key="n"
-                    :label="`${n}已有数据`"
-                    :value="n"
+                    v-for="option in ['保留', '清除']"
+                    :key="option"
+                    :label="`${option}已有数据`"
+                    :value="option"
                 ></v-radio>
               </v-radio-group>
             </v-responsive>
@@ -75,11 +69,45 @@
             <v-responsive
                 class="mt-45"
                 v-show="actionGroup === '导出'">
+              <!-- 仅导出CSV/Excel -->
               <v-btn
                   class="accent"
                   @click="exportEntities">
-                导出数据
+                导出到CSV/Excel
               </v-btn>
+              <!-- 选择是否合并到Word -->
+              <v-btn 
+                v-show=" !needMergeWord "
+                @click=" needMergeWord = !needMergeWord">
+                选择Word模板
+              </v-btn>
+              <v-btn
+                v-show=" needMergeWord "
+                @click=" mergeWordApp ">
+                开始导出打印
+              </v-btn>
+              <v-select
+                  v-show=" needMergeWord "
+                  v-model="outputDocFile"
+                  label="选择Word目标文件，默认为template.doc"
+                  :items="templateDocs"/>
+              <!-- 选择是否需要翻译列标题 -->
+              <v-btn
+                @click=" changeCSVHeader ">
+                翻译CSV/Excel标题
+              </v-btn>
+              <v-radio-group
+                  v-model="reverseTranslate"
+                  row>
+                <v-radio
+                    color="indigo"
+                    row
+                    v-for="option in ['外译中', '中译外']"
+                    :key="option"
+                    :label="`${option}第一行标题`"
+                    :value=" option === '外译中' ? false : true "
+                ></v-radio>
+              </v-radio-group>
             </v-responsive>
 
             <v-responsive
@@ -102,13 +130,15 @@
 
 <script>
 
-import { shell, remote } from "electron";
+import { shell } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
 import models from "@/api/models";
-import * as keysDef from "@/locales/cn.json";
-import DatabasesIterator from "./DatabasesIterator.vue";
+
 import exportMixin from "@/mixins/exportMixin";
+
+import DatabasesIterator from "./DatabasesIterator.vue";
+
 import {
   log,
   ImportCSV
@@ -118,17 +148,16 @@ export default {
   components: {
     DatabasesIterator,
   },
-  mixins: [exportMixin],
+  mixins: [ exportMixin ],
   data() {
     return {
-      // entity DB instance for lowdb
-      entityDb: null,
       // entity file name/ csv file name / modelname
       modelName: "user",
       // Switch between import/export/reset
       actionGroup: "导入",
       // Import and clear
       clearGroup: "保留",
+      changeHeaderGroup: false,
     };
   },
   created() {
@@ -137,54 +166,23 @@ export default {
   computed: {
     // models instance for vuex/orm
     models: () => models,
+    Model: () => this.models[`${this.modelName}`],
     // entity name list
     entities: () => entities,
   },
   methods: {
-    updateEntity() {
-      this.entityDb = new LowdbForElectron(this.modelName);
-    },
     findDocuments() {
       log.suc("Template Directory is: " + this.templateDir);
       this.templateDocs.forEach(t => log.suc(t));
     },
     async importEntities(e) {
-      log.info("Importing...");
-
-      // 导入csv文件, 并更改列标题和对应键名
-      let data = await ImportCSV({
-        file: e.target.files[0],
-        needTranslate: true,
-        keysDef: keysDef.default,
-      });
-      if (!Array.isArray(data)) return;
-
-      // Make sure {this} is {that}
-      let { entityDb, modelName } = this;
-      if (entityDb === undefined || modelName === undefined) return;
-
-      // 如果需要清除数据存储文件中的原有数据
-      if (this.clearGroup === "清除") {
-        entityDB.clear(modelName);
-        entityDB.dbInit([modelName]);
-      }
-
-      // 逐个插入数据到数据存储文件
-      data.forEach(item => {
-        entityDb.insert(`${modelName}`, item);
-      });
-
-      // 刷新vuex状态
-      // this.refreshEntityState();
+      // 导入csv文件, 并更改列标题和对应键
+      this.modelDatasource = e.target.files[0];
+      this.importItem();
     },
     async exportEntities() {
-      log.info("Exporting...");
 
-      let { modelName } = this;
-      if (modelName === undefined) return;
-
-      let NSModel = this.models[`${modelName}`];
-      let data = NSModel.query()
+      let data = this.Model.query()
         .withAll()
         .get();
 

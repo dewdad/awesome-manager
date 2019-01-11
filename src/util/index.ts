@@ -46,7 +46,6 @@ export function getFilesByExtentionInDir({ path = "", ext = "" }): string[] {
 const getFilesFp = curry(getFilesByExtentionInDir);
 
 /**
- * @计算属性
  * 返回过滤并排序后的数组items
  * @filterKey: 过滤器，用来模糊查询一个数组中的每个对象的每个字段
  *  1. 对数组items，使用filter方法，获取每一个item
@@ -157,7 +156,8 @@ export const splitCSVHeaderBody = (content: string): { header: string; body: str
 };
 
 /**
- * Like translateHeaders, but in more primitive way
+ * 操作 JSON 对象。
+ * 转译列标题，不适用lodash辅助函数。
  * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
  * @param data 原始数组, [{ name: "xxx"},...]
  * @param keysDef json对象，包含标题行翻译 { name: "姓名"}
@@ -183,7 +183,9 @@ export const translateHeadersLegancy = (data: any[], keysDef: any, reverse?: boo
 };
 
 /**
- * 将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
+ * 操作 JSON 对象。
+ * 转译列标题，使用lodash辅助函数。
+ * 应用场景是将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
  * @param data 原始数组, [{ name: "zip"},...]
  * @param keysDef json对象，包含标题行翻译 { name: "姓名"}
  * @param reverse 如果反向查找,在json文件中通过键值查找键名
@@ -207,15 +209,17 @@ export const translateHeaders = ({ data = [], keysDef = {}, reverse = false }): 
   }, []);
 };
 /**
- * 翻译行数据, 对值为对象的, 使用其 name 字段作为导出的值
- * NOTE Implementation1. forEach methods
+ * 操作 JSON 对象。
+ * 转[对象类]键值为[字符串]键值。应用场景为翻译每一行数据。
+ * 如果值为对象的, 使用其 name 字段作为新值，避免在导出CSV中出现JSON格式。
+ * NOTE 实现方法1. forEach methods
  * let result = [];
  * data.forEach(item => {
  *   let newItem = mapValues(item, preferValueAsString);
  *   result.push(newItem);
  * });
  * return result;
- * NOTE Implementation2. reduce methods
+ * NOTE 实现方法2. reduce methods
  */
 export const translateBody = ({ data = [], onlyKeepStringValue = true }): any[] => {
   if (onlyKeepStringValue) {
@@ -230,7 +234,8 @@ export const translateBody = ({ data = [], onlyKeepStringValue = true }): any[] 
 };
 
 /**
- * 更改 CSV 文件的列标题
+ * 操作 CSV 物理文件。
+ * 更改 CSV 文件的列标题，主要面向 CSV 物理文件进行操作，比逐项操作 JSON 对象性能更高。
  * @param content string to parse
  * @param fieldDefs object with i18n translation
  * @result string
@@ -240,44 +245,64 @@ export const translateBody = ({ data = [], onlyKeepStringValue = true }): any[] 
  *   age: "年龄"
  * })
  */
-export const changeCSVHeader = (header: string) => (fieldDefs: any): string => {
-  return pipe(
-    (header: string) => header.split(","),
-    map(fieldName => {
-      fieldName = fieldName.replace(/(\\|\n|'|")/g, "");
-      console.log(fieldName);
-      return fieldDefs[fieldName.toString()];
-    }),
-    (fieldNames: string[]) => fieldNames.join(","),
-  )(header);
+export const changeCSVHeader = ({ header = "", keysDef = {}, reverse = false }): string => {
+  if (reverse) {
+    return pipe(
+      (header: string) => header.split(","),
+      map(fieldName => {
+        fieldName = fieldName.replace(/(\\|\n|'|")/g, "");
+        return findKey(keysDef, (value) => value === fieldName).toString();
+      }),
+      (fieldNames: string[]) => fieldNames.join(","),
+    )(header);
+  } else {
+    return pipe(
+      (header: string) => header.split(","),
+      map(fieldName => {
+        fieldName = fieldName.replace(/(\\|\n|'|")/g, "");
+        return keysDef[fieldName.toString()];
+      }),
+      (fieldNames: string[]) => fieldNames.join(","),
+    )(header);
+  }
 };
 
 /**
- * 更改 CSV 文件的列标题
+ * 操作 CSV 物理文件。
+ * 更改 CSV 文件的列标题, 保留数据没行格式不变
  * @param content string to parse
  * @param fieldDefs object with i18n translation
  * @result string
- * @example
- * let re = changeCSVHeader("\'name\',\'age\'\n\'xxx\',\'yyy\'")({
- *   name: "姓名",
- *   age: "年龄"
- * })
  */
-export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
-  const content = fs.readFileSync(targetFilePath, "utf8");
+export const changeHeaderOfCSV = ({targetFilePath = "", keysDef = {}, reverse = false}) => {
+  // 1. 读取文件为字符串
+  let content = fs.readFileSync(targetFilePath, "utf8");
+  // 2. 分别获取第一行为列标题，其他为数据行
   let { header, body } = splitCSVHeaderBody(content);
-  const newHeader = changeCSVHeader(header)(keysDef);
-  const data = body.join("\n");
-  console.log(header);
+  // 3. 翻译第一行，如果reverse为真，进行反向翻译。
+  let newHeader = changeCSVHeader({ header, keysDef, reverse });
+  // 3. 写入第一行为列标题
+  console.log(`原有列标题如下:\n${header}`);
+  console.log(`新的列标题如下:\n${newHeader}`);
+  console.log(`清空原有数据，写入新的列标题`);
   fs.writeFileSync(targetFilePath, newHeader, { encoding: "utf-8", flag: "w" });
   fs.writeFileSync(targetFilePath, "\n", { encoding: "utf-8", flag: "a" });
+  // 4. 写入其他数据行
+  const data = body.join("\n");
+  console.log(`添加新的数据行`);
   fs.writeFileSync(targetFilePath, data, { encoding: "utf-8", flag: "a" });
+  console.log(`成功更新CSV文件的列标题！`);
 };
 
 /**
- * 使用csv-stringify转数组为字符串
- * 保持字符串到指定文件
- * windows下如有文档编码显示错误，可在目录下设置schema.ini文件
+ * 生成CSV文件的函数
+ * 步骤如下:
+ * 1. 使用csv-stringify转数组为字符串，并进行必要字符串转换
+ *    如果输入数据不是数组，转化为数组
+ *    如果需要，进行列标题转译
+ *    如果需要，转[对象类]键值为[字符串]键值
+ * 2. 保存字符串到指定文件
+ * 3. windows下如有文档编码显示错误，可在目录下设置schema.ini文件
  * @param {Array} data 需要到处的数据
  * @param {String} targetFilePath 目标文件地址
  * @param {Object} keysDef
