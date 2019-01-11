@@ -173,7 +173,7 @@ export const deepCloneWithNewKeysBasic = (data: any[], keysDef: any, reverse?: b
   return result;
 };
 
-export const deepCloneWithNewKeys = ({ data = [], keysDef = {}, reverse = false }): any[] => {
+export const translateHeaders = ({ data = [], keysDef = {}, reverse = false,keepRelations = false }): any[] => {
   let result = [];
   data.forEach(item => {
     let newItem = {};
@@ -182,17 +182,30 @@ export const deepCloneWithNewKeys = ({ data = [], keysDef = {}, reverse = false 
     } else {
       // 翻译键值为相应语言
       newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
-      // 提取对象型键值的字段作为新的键值
-      newItem = mapValues(newItem, (value: any) => {
-        return typeof value === "object" ? value["name"] : value;
-      });
+    }
+    result.push(newItem);
+  });
+  return result;
+};
+export const translateBody = ({ data = [], onlyKeepStringValue = false }): any[] => {
+  let result = [];
+  data.forEach(item => {
+    let newItem = {};
+    if (!onlyKeepStringValue) {
+      newItem = preferValueAsString(newItem);
     }
     result.push(newItem);
   });
   return result;
 };
 
-export const splitCSVHeaderBody = (content: string) : any => {
+export const preferValueAsString = (item: any) => {
+  return mapValues(item, (value: any) => {
+    return typeof value === "object" ? value["name"] : value;
+  });
+};
+
+export const splitCSVHeaderBody = (content: string) : { header: string, body: string[]} => {
   return pipe(
     (content: string) => content.split("\n"),
     (lines: string[]) => ({ header: head(lines), body: tail(lines) }),
@@ -222,19 +235,11 @@ export const changeCSVHeader = (header: string) => (fieldDefs: any): string => {
   )(header);
 };
 
-export const getCSVData = (data: string): string => {
-  return pipe(
-    (content: string) => content.split("\n"),
-    (lines: string[]) => tail(lines),
-    (lines: string[]) => lines.join("\n"),
-  )(data);
-};
-
 export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
   const content = fs.readFileSync(targetFilePath, "utf8");
   let { header, body } = splitCSVHeaderBody(content);
   const newHeader = changeCSVHeader(header)(keysDef);
-  const data = getCSVData(body);
+  const data = body.join("\n");
   console.log(header);
   fs.writeFileSync(targetFilePath, newHeader, { encoding: "utf-8", flag: "w" });
   fs.writeFileSync(targetFilePath, "\n", { encoding: "utf-8", flag: "a" });
@@ -250,14 +255,20 @@ export const changeHeaderOfCSV = (targetFilePath: string) => (keysDef: any) => {
 export const GenerateCSV = ({
   data = [],
   targetFilePath = "",
-  needTranslate = false,
   keysDef = {},
+  needTranslateHeader = true,
+  onlyKeepStringValue = true,
 }) => {
   if (!Array.isArray(data)) {
     data = [data];
   }
   // 进行列标题转译
-  if (needTranslate) data = deepCloneWithNewKeys({ data, keysDef, reverse: false });
+  if (needTranslateHeader) { 
+    data = translateHeaders({ data, keysDef, reverse: false });
+  };
+  if (onlyKeepStringValue) { 
+    data = translateBody({ data, onlyKeepStringValue: false });
+  };
   // 进行输出
   stringify(
     data,
@@ -294,7 +305,11 @@ export const ImportCSV = async ({ file = {}, needTranslate = false, keysDef = {}
         // 开始转译
         let data;
         if (needTranslate) {
-          data = deepCloneWithNewKeys({ data: results.data, keysDef, reverse: true });
+          data = translateHeaders({ 
+            data: results.data, 
+            keysDef, 
+            reverse: true,
+          });
         } else {
           data = results.data;
         }

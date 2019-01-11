@@ -37,8 +37,9 @@ export default {
       GenerateCSV({
         data: item,
         targetFilePath: this.modelDatasource,
-        needTranslate: false,
         keysDef: keysDef.default,
+        needTranslateHeader: true,
+        onlyKeepStringValue: true,
       });
 
       setTimeout(() => {
