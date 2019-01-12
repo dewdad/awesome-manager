@@ -3,7 +3,7 @@ import { copyFileSync, pathExistsSync } from "fs-extra";
 import { remote, shell } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import * as keysDef from "@/locales/cn.json";
-import { getFilesByExtentionInDir, GenerateCSV, ImportCSV,  changeHeaderOfCSV } from "@/util";
+import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from "@/util";
 export default {
   data() {
     return {
@@ -64,7 +64,6 @@ export default {
     importDataToDb(data) {
       let { entityDb, modelName } = this;
       console.log(`导入到${this.modelName}对应的lowdb数据文件...`);
-      
       // 逐个插入数据到数据存储文件
       data.forEach(item => {
         entityDb.insert(`${modelName}`, item);
@@ -82,6 +81,7 @@ export default {
         needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
         onlyKeepStringValue: this.onlyKeepStringValue, // 这里转换[对象类]键值为[字符串类]键值
       });
+      (window as any).getApp.$emit("DATA_EXPORTED");
     },
     /**
      * 导出文件修改标题函数
@@ -92,9 +92,10 @@ export default {
         changeHeaderOfCSV({
           targetFilePath: this.modelDatasource,
           keysDef: this.keysDef,
-          reverse: this.reverseTranslate
+          reverse: this.reverseTranslate,
         });
       }
+      (window as any).getApp.$emit("DATA_HEAD_CHANGED");
     },
     /**
      * 导出文件备份函数

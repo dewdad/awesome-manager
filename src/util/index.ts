@@ -325,7 +325,7 @@ export const GenerateCSV = ({
   }
   // 转对象类键值为字符串键值
   if (onlyKeepStringValue) {
-    data = translateBody({ data, onlyKeepStringValue: false });
+    data = translateBody({ data, onlyKeepStringValue: true });
   }
   // 进行输出
   stringify(
@@ -333,8 +333,7 @@ export const GenerateCSV = ({
     {
       delimiter: ",",
       header: true,
-      quoted: true,
-      quotedEmpty: true,
+      quoted: false,
     },
     (_err: string, output: any) => {
       _err && console.log(_err);
@@ -404,6 +403,10 @@ export const slugify = (words: string) => {
     map(word => word.toLowerCase()),
     (words: string[]) => words.join("-"),
   )(words);
+};
+
+export const surround = (words: string) => {
+  return words.replace(/^(w+)$/,"\"$1\"");
 };
 
 /**

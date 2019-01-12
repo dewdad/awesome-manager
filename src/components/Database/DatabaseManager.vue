@@ -8,22 +8,25 @@
           row>
 
         <v-flex
-            class="mt-56"
+            class="mt-15"
             xs12
-            md4
-            sm4>
-          <DatabasesIterator>
-          </DatabasesIterator>
+            md2
+            sm2>
+          <DatabaseChips>
+          </DatabaseChips>
         </v-flex>
         <!-- start choice radio button -->
         <v-flex
-            class="mt-56"
+            class="mt-15"
             xs12
-            md4
-            sm4>
+            md8
+            sm8>
           <!-- Import Card -->
           <v-card>
-            <v-card-title>
+            <v-card-title
+                v-show="false"
+                color="primary"
+                class="mt-15 white--text">
               <v-select
                   v-model="modelName"
                   label="选择需要导出的数据表"
@@ -46,7 +49,7 @@
             </v-responsive>
 
             <v-responsive
-                class="mt-45"
+                class="mt-15"
                 v-show="actionGroup === '导入'">
               <input
                   type="file"
@@ -67,16 +70,33 @@
             </v-responsive>
 
             <v-responsive
-                class="mt-45"
+                class="mt-15"
                 v-show="actionGroup === '导出'">
               <!-- 仅导出CSV/Excel -->
-              <v-btn
-                  class="accent"
-                  @click="exportEntities">
-                导出到CSV/Excel
-              </v-btn>
+              <v-tooltip bottom>
+                <v-btn
+                    slot="activator"
+                    class="accent"
+                    @click="exportEntities">
+                  导出数据表
+                </v-btn>
+                <span>你可以方便地导出数据到csv文件,用Excel打开</span>
+              </v-tooltip>
+              <v-radio-group
+                  v-model="onlyKeepStringValue"
+                  row>
+                <v-radio
+                    color="indigo"
+                    row
+                    v-for="option in ['字符', '全部']"
+                    :key="option"
+                    :label="`保留${option}`"
+                    :value=" option === '字符' ? true : false "
+                ></v-radio>
+              </v-radio-group>
+              <v-divider></v-divider>
               <!-- 选择是否合并到Word -->
-              <v-btn 
+              <v-btn
                 v-show=" !needMergeWord "
                 @click=" needMergeWord = !needMergeWord">
                 选择Word模板
@@ -92,6 +112,7 @@
                   label="选择Word目标文件，默认为template.doc"
                   :items="templateDocs"/>
               <!-- 选择是否需要翻译列标题 -->
+              <v-divider></v-divider>
               <v-btn
                 @click=" changeCSVHeader ">
                 翻译CSV/Excel标题
@@ -111,7 +132,7 @@
             </v-responsive>
 
             <v-responsive
-                class="mt-45"
+                class="mt-15"
                 v-show="actionGroup === '删除'">
               <v-btn
                   class="accent"
@@ -129,7 +150,6 @@
 </template>
 
 <script>
-
 import { shell } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
@@ -138,17 +158,16 @@ import models from "@/api/models";
 import exportMixin from "@/mixins/exportMixin";
 
 import DatabasesIterator from "./DatabasesIterator.vue";
+import DatabaseChips from "./DatabaseChips.vue";
 
-import {
-  log,
-  ImportCSV
-} from "@/util";
+import { log, ImportCSV } from "@/util";
 
 export default {
   components: {
     DatabasesIterator,
+    DatabaseChips,
   },
-  mixins: [ exportMixin ],
+  mixins: [exportMixin],
   data() {
     return {
       // entity file name/ csv file name / modelname
@@ -162,11 +181,16 @@ export default {
   },
   created() {
     this.findDocuments();
+    this.$on("SELECT_MODEL", modelName => {
+      this.modelName = modelName;
+    });
+    window.dbApp = this;
   },
   computed: {
     // models instance for vuex/orm
-    models: () => models,
-    Model: () => this.models[`${this.modelName}`],
+    Model: function() {
+      return models[`${this.modelName}`];
+    },
     // entity name list
     entities: () => entities,
   },
@@ -181,7 +205,6 @@ export default {
       this.importItem();
     },
     async exportEntities() {
-
       let data = this.Model.query()
         .withAll()
         .get();
@@ -194,8 +217,8 @@ export default {
       let { entityDb, modelName } = this;
       if (entityDb === undefined || modelName === undefined) return;
 
-      entityDB.clear(modelName);
-      entityDB.dbInit([modelName]);
+      entityDb.clear(modelName);
+      entityDb.dbInit([modelName]);
       // 删除物理文件
       alert("如需删除物理文件，请手动删除：" + entityDb.adapter.source);
       shell.showItemInFolder(entityDb.adapter.source);
@@ -205,6 +228,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .mt-15
+    margin: 45px
   .mt-45
     margin: 45px
   .mt-56

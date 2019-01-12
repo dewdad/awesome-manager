@@ -29,10 +29,10 @@ export default {
   },
   methods: {
     deleteItem(item) {
-      <%= modelName %>.delete(item._id)
+      <%= modelName %>.delete(item._id);
     },
     editItem(item) {
-      window.<%= modelFormName %>.$emit("SET_EDITING", item)
+      window.<%= modelFormName %>.$emit("SET_EDITING", item);
     }
   },
 }

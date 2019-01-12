@@ -15,11 +15,11 @@ export default {
     }
   },
   created() {
-    this.model = new <%= modelName %>()
+    this.model = new <%= modelName %>();
     this.$on("SET_EDITING", (item) => {
       this.editing = true
       this.model = item
-    })
+    });
     window.<%= modelFormName %> = this;
   },
   computed: {
@@ -28,19 +28,19 @@ export default {
   },
   methods: {
     reset() {
-      this.editing = false
-      this.model = new <%= modelName %>()
+      this.editing = false;
+      this.model = new <%= modelName %>();
     },
     saveItem() {
       if(!this.editing) {
         <%= modelName %>.insert({
           data: this.model
-        })
-        this.model = new <%= modelName %>()
+        });
+        this.model = new <%= modelName %>();
       } else {
-        <%= modelName %>.update(this.model)
-        this.editing = false
-        this.model = new <%= modelName %>()
+        <%= modelName %>.update(this.model);
+        this.editing = false;
+        this.model = new <%= modelName %>();
       }
     }
   }

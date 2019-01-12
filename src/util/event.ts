@@ -145,6 +145,28 @@ const events: Event[] = [
       console.log(resolve("./src/router"));
     },
   },
+  {
+    name: "DATA_EXPORTED",
+    // @error api response data
+    callback: function(e: any) {
+      this.snackbar = {
+        show: true,
+        color: "green",
+        text: "导出成功!",
+      };
+    },
+  },
+  {
+    name: "DATA_HEAD_CHANGED",
+    // @error api response data
+    callback: function(e: any) {
+      this.snackbar = {
+        show: true,
+        color: "green",
+        text: "标题修改成功!",
+      };
+    },
+  },
 ];
 
 export default events;
