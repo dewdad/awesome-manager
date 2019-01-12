@@ -23,16 +23,7 @@
             sm8>
           <!-- Import Card -->
           <v-card>
-            <v-card-title
-                v-show="false"
-                color="primary"
-                class="mt-15 white--text">
-              <v-select
-                  v-model="modelName"
-                  label="选择需要导出的数据表"
-                  :items="entities"/>
-            </v-card-title>
-
+            <h2 class="heading">已选定表: {{ modelName }}</h2>
             <v-responsive class="mt-45">
               <v-radio-group
                   v-model="actionGroup"
@@ -54,7 +45,16 @@
               <input
                   type="file"
                   multiple="multiple"
-                  @change="importEntities($event)"/>
+                  @change=" getImportFile($event) "/>
+              <v-tooltip bottom>
+                <v-btn
+                    slot="activator"
+                    class="accent"
+                    @click=" importItem ">
+                  开始导入
+                </v-btn>
+                <span>你可以方便地导入csv文件的数据, 请确认标题为英文,如不是请先转换</span>
+              </v-tooltip>
               <v-radio-group
                   v-model="clearGroup"
                   row>
@@ -172,6 +172,7 @@ export default {
     return {
       // entity file name/ csv file name / modelname
       modelName: "user",
+      importDatasource: {},
       // Switch between import/export/reset
       actionGroup: "导入",
       // Import and clear
@@ -199,12 +200,12 @@ export default {
       log.suc("Template Directory is: " + this.templateDir);
       this.templateDocs.forEach(t => log.suc(t));
     },
-    async importEntities(e) {
-      // 导入csv文件, 并更改列标题和对应键
-      this.modelDatasource = e.target.files[0];
-      this.importItem();
+    getImportFile(e) {
+      // 从选择控件获取文件对象
+      this.importDatasource = e.target.files[0];
+      console.log(this.importDatasource);
     },
-    async exportEntities() {
+    exportEntities() {
       let data = this.Model.query()
         .withAll()
         .get();

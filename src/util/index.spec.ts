@@ -103,6 +103,6 @@ describe("Simple i18n translater", () => {
   });
   it("should clone with new keys reversely", () => {
     const result = translateHeaders({ data: expectedData2, keysDef, reverse: true });
-    expect(result).toEqual(expectedData3);
+    expect(result).toEqual(expectedData2);
   });
 });

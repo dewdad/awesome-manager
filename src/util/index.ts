@@ -188,25 +188,22 @@ export const translateHeadersLegancy = (data: any[], keysDef: any, reverse?: boo
  * 应用场景是将数组中的元素对象的键名称进行翻译，结合i18n可以进行导入导出。
  * @param data 原始数组, [{ name: "zip"},...]
  * @param keysDef json对象，包含标题行翻译 { name: "姓名"}
- * @param reverse 如果反向查找,在json文件中通过键值查找键名
+ * @param reverse 如果反向, 不转译
  * @return result 新数组, { "姓名": "zip"}
  * @example
  * import * as keysDef from "@/locales/cn.json"
  * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
 export const translateHeaders = ({ data = [], keysDef = {}, reverse = false }): any[] => {
-  return data.reduce((list: any[], item) => {
-    let newItem = {};
     if (reverse) {
-      // NOTE 反向查找, 翻译键值为相应语言
-      newItem = mapKeys(item, (_: string, k: string) => findKey(keysDef, v => v === k));
+        return data;
     } else {
-      // NOTE 翻译键值为相应语言
-      newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
+      return data.reduce((list: any[], item) => {
+        let newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
+        list.push(newItem);
+        return list;
+      }, []);
     }
-    list.push(newItem);
-    return list;
-  }, []);
 };
 /**
  * 操作 JSON 对象。
@@ -354,27 +351,15 @@ export const GenerateCSV = ({
  **/
 export const ImportCSV = async ({
   file = {},
-  needTranslate = false,
   keysDef = {},
 }): Promise<any> => {
-  new Promise((resolve, _) => {
+  return new Promise((resolve, _) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
       skipEmptyLines: true,
-      complete: function(results: any) {
-        // 开始转译
-        let data;
-        if (needTranslate) {
-          data = translateHeaders({
-            data: results.data,
-            keysDef,
-            reverse: true,
-          });
-        } else {
-          data = results.data;
-        }
-        resolve(data);
+      complete: function( result: any ) {
+        resolve(result.data);
       },
     });
   });

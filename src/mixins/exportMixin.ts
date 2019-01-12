@@ -16,7 +16,9 @@ export default {
   },
   computed: {
     keysDef: () => keysDef.default, // 翻译定义
-    entityDb: () => new LowdbForElectron(this.modelName), // 当前lowdb数据库
+    entityDb: function() {
+      return new LowdbForElectron(this.modelName); // 当前lowdb数据库
+    },
     templateDir: () => join(remote.app.getPath("home"), "/Documents/template"), // 用户模板目录
     userDataDir: () => join(remote.app.getPath("userData"), "data"), // 用户数据目录
     // 获取模板目录下的doc文件
@@ -48,25 +50,20 @@ export default {
      * 导入数据函数
      */
     async importItem() {
-      let data = await this.importDataFromCSVFile();
-      this.importDataToDb(data);
-    },
-    async importDataFromCSVFile(e) {
-      // 导入csv文件, 并更改列标题和对应键名
       console.log(`导入${this.modelName}.csv文件...`);
       let data = await ImportCSV({
-        file: this.modelDatasource,
-        needTranslate: true,
+        file: this.importDatasource,
         keysDef: this.keysDef,
       });
-      return data;
+      console.log(data);
+      this.importDataToDb(data);
     },
     importDataToDb(data) {
-      let { entityDb, modelName } = this;
+      if (!Array.isArray(data)) return;
       console.log(`导入到${this.modelName}对应的lowdb数据文件...`);
       // 逐个插入数据到数据存储文件
       data.forEach(item => {
-        entityDb.insert(`${modelName}`, item);
+        this.entityDb.insert(`${this.modelName}`, item);
       });
     },
     /**
