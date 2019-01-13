@@ -32,8 +32,7 @@ export default {
 
 <template>
   <v-card
-      class="mt-15"
-      max-width="600"
+      class="mt-45"
   >
     <v-card-text>
      <v-timeline>
@@ -66,7 +65,7 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
-  .mt-15
-    margin-left: 15px
-    margin-right: 15px
+  .mt-45
+    margin-left: 45px
+    margin-right: 45px
 </style>

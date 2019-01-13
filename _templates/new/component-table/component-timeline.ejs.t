@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="mt-15">
      <v-timeline>
       <v-timeline-item
         v-for="(item, i) in all"
@@ -64,3 +64,9 @@ export default {
     </v-timeline>
   </div>
 </template>
+
+<style lang="stylus" scoped>
+  .mt-15
+    margin-left: 15px
+    margin-right: 15px
+</style>
