@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-responsive>
+    <v-responsive v-show="false">
       <ActivityTimeline>
       </ActivityTimeline>
     </v-responsive>

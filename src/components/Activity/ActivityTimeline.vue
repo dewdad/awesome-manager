@@ -1,7 +1,11 @@
 <script>
 import Activity from "@/api/models/Activity";
+import ActivityForm from "./ActivityForm";
 import exportMixin from "@/mixins/exportMixin";
 export default {
+  components: {
+    ActivityForm,
+  },
   data() {
     return {
       editing: false,
@@ -24,7 +28,7 @@ export default {
       Activity.delete(item._id);
     },
     editItem(item) {
-      window.ActivityForm.$emit("SET_EDITING", item);
+      window.activityForm.$emit("SET_EDITING", item);
     },
   },
 };
@@ -39,28 +43,43 @@ export default {
         <v-timeline-item
             v-for="(item, i) in all"
             color="primary"
+            icon="star"
             :key="i"
-            small
+            fill-dot
           >
           <span
               :class="`headline font-weight-bold blue--text`"
               v-text="item.occurenceDate"
           ></span>
-          <div class="py-3">
-            <h2 :class="`headline font-weight-light mb-3 black--text`">{{ item.content }}</h2>
-            <div>
-              {{ item.instruction }}
-            </div>
-            <v-btn
-                icon
-                class="mx-0"
-                @click="deleteItem(item)">
-              <v-icon color="pink">delete</v-icon>
-            </v-btn>
-          </div>
+          <v-card
+              color="indigo"
+              dark
+          >
+              <v-card-title class="title">
+                {{ item.applicant }}
+              </v-card-title>
+              <v-card-text class="white text--primary">
+                {{ item.content }}
+                <v-spacer></v-spacer>
+                <v-btn
+                    icon
+                    class="mx-0"
+                    @click="editItem(item);">
+                  <v-icon color="teal">edit</v-icon>
+                </v-btn>
+                <v-btn
+                    icon
+                    @click="deleteItem(item)">
+                  <v-icon color="pink">delete</v-icon>
+                </v-btn>
+              </v-card-text>
+          </v-card>
         </v-timeline-item>
       </v-timeline>
     </v-card-text>
+    <v-card-actions>
+      <ActivityForm></ActivityForm>
+    </v-card-actions>
   </v-card>
 </template>
 

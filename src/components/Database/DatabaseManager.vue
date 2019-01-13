@@ -69,7 +69,7 @@
                 </v-layout>
                 <v-divider></v-divider>
                 <!-- changeCSVHeader slot -->
-                <v-layout>
+                <v-layout class="translate">
                   <div slot="translate">
                     <v-flex>
                       <v-btn
@@ -93,11 +93,11 @@
                     </v-flex>
                   </div>
                   <!-- translate-csv-header slot -->
-                  <template>
-                    <v-flex>
-                      <slot name="translate"></slot>
-                    </v-flex>
-                  </template>
+                  <translate>
+                    <template>
+                        <slot name="translate"></slot>
+                    </template>
+                  </translate>
                   <!-- end of translate-csv-header slot -->
                 </v-layout>
               </div>

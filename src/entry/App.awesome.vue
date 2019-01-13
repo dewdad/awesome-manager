@@ -11,7 +11,9 @@
           <!-- Page Header -->
           <page-header v-if="$route.meta.breadcrumb"></page-header>
           <div class="page-wrapper">
-            <router-view></router-view>
+            <router-view
+                :key="$route.fullPath"
+            ></router-view>
           </div>
           <!-- App Footer -->
           <v-footer
@@ -56,7 +58,9 @@
     <template v-else>
       <transition>
         <keep-alive>
-          <router-view></router-view>
+          <router-view
+              :key="$route.fullPath"
+          ></router-view>
         </keep-alive>
       </transition>
     </template>
