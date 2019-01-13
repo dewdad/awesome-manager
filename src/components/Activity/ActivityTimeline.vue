@@ -33,31 +33,31 @@ export default {
 <template>
   <v-card
       class="mt-45"
-  >
+    >
     <v-card-text>
-     <v-timeline>
-      <v-timeline-item
-        v-for="(item, i) in all"
-        color="primary"
-        :key="i"
-        small
-      >
-        <span
-          :class="`headline font-weight-bold blue--text`"
-          v-text="item.occurenceDate"
-        ></span>
-        <div class="py-3">
-          <h2 :class="`headline font-weight-light mb-3 black--text`">{{ item.content }}</h2>
-          <div>
-            {{ item.instruction }}
+      <v-timeline>
+        <v-timeline-item
+            v-for="(item, i) in all"
+            color="primary"
+            :key="i"
+            small
+          >
+          <span
+              :class="`headline font-weight-bold blue--text`"
+              v-text="item.occurenceDate"
+          ></span>
+          <div class="py-3">
+            <h2 :class="`headline font-weight-light mb-3 black--text`">{{ item.content }}</h2>
+            <div>
+              {{ item.instruction }}
+            </div>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="deleteItem(item)">
+              <v-icon color="pink">delete</v-icon>
+            </v-btn>
           </div>
-          <v-btn
-             icon
-             class="mx-0"
-             @click="deleteItem(item)">
-            <v-icon color="pink">delete</v-icon>
-          </v-btn>
-        </div>
         </v-timeline-item>
       </v-timeline>
     </v-card-text>

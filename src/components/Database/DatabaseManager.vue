@@ -70,26 +70,35 @@
                 <v-divider></v-divider>
                 <!-- changeCSVHeader slot -->
                 <v-layout>
-                  <v-flex>
-                    <v-btn
-                        @click=" changeCSVHeader ">
-                      翻译数据表标题
-                    </v-btn>
-                  </v-flex>
-                  <v-flex>
-                    <v-radio-group
-                        v-model="reverseTranslate"
-                        row>
-                      <v-radio
-                          color="primary"
-                          row
-                          v-for="option in ['外译中', '中译外']"
-                          :key="option"
-                          :label="`${option}第一行标题`"
-                          :value=" option === '外译中' ? false : true "
-                      ></v-radio>
-                    </v-radio-group>
-                  </v-flex>
+                  <div slot="translate">
+                    <v-flex>
+                      <v-btn
+                          @click=" changeCSVHeader ">
+                        翻译数据表标题
+                      </v-btn>
+                    </v-flex>
+                    <v-flex>
+                      <v-radio-group
+                          v-model="reverseTranslate"
+                          row>
+                        <v-radio
+                            color="primary"
+                            row
+                            v-for="option in ['外译中', '中译外']"
+                            :key="option"
+                            :label="`${option}第一行标题`"
+                            :value=" option === '外译中' ? false : true "
+                        ></v-radio>
+                      </v-radio-group>
+                    </v-flex>
+                  </div>
+                  <!-- translate-csv-header slot -->
+                  <template>
+                    <v-flex>
+                      <slot name="translate"></slot>
+                    </v-flex>
+                  </template>
+                  <!-- end of translate-csv-header slot -->
                 </v-layout>
               </div>
             </v-tab-item>
@@ -136,29 +145,36 @@
                     :items="templateDocs"/>
 
                 <v-divider></v-divider>
-                <v-layout
-                    row
-                    wrap>
-                  <v-flex>
-                    <v-btn
-                        @click=" changeCSVHeader ">
-                      翻译数据表标题
-                    </v-btn>
-                  </v-flex>
-                  <v-flex>
-                    <v-radio-group
-                        v-model="reverseTranslate"
-                        row>
-                      <v-radio
-                          color="primary"
-                          row
-                          v-for="option in ['外译中', '中译外']"
-                          :key="option"
-                          :label="`${option}第一行标题`"
-                          :value=" option === '外译中' ? false : true "
-                      ></v-radio>
-                    </v-radio-group>
-                  </v-flex>
+                <v-layout>
+                  <div slot="translate">
+                    <v-flex>
+                      <v-btn
+                          @click=" changeCSVHeader ">
+                        翻译数据表标题
+                      </v-btn>
+                    </v-flex>
+                    <v-flex>
+                      <v-radio-group
+                          v-model="reverseTranslate"
+                          row>
+                        <v-radio
+                            color="primary"
+                            row
+                            v-for="option in ['外译中', '中译外']"
+                            :key="option"
+                            :label="`${option}第一行标题`"
+                            :value=" option === '外译中' ? false : true "
+                        ></v-radio>
+                      </v-radio-group>
+                    </v-flex>
+                  </div>
+                  <!-- translate-csv-header slot -->
+                  <template>
+                    <v-flex>
+                      <slot name="translate"></slot>
+                    </v-flex>
+                  </template>
+                  <!-- end of translate-csv-header slot -->
                 </v-layout>
               </div>
             </v-tab-item>

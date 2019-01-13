@@ -1,8 +1,8 @@
 <template>
   <v-card>
     <v-responsive>
-        <ActivityTimeline>
-        </ActivityTimeline>
+      <ActivityTimeline>
+      </ActivityTimeline>
     </v-responsive>
     <v-responsive>
       <v-data-table

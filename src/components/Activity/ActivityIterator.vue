@@ -4,17 +4,20 @@ import ActivityForm from "./ActivityForm";
 import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
-    ActivityForm
+    ActivityForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
-    modelName: () =>Activity.entity,
-    all: () =>Activity.query().withAll().get(),
-    headers: () =>Activity.fieldsList(),
+    modelName: () => Activity.entity,
+    all: () =>
+      Activity.query()
+        .withAll()
+        .get(),
+    headers: () => Activity.fieldsList(),
   },
   mixins: [exportMixin],
   created() {
@@ -22,13 +25,13 @@ export default {
   },
   methods: {
     deleteItem(item) {
-      Activity.delete(item._id)
+      Activity.delete(item._id);
     },
     editItem(item) {
-      window.ActivityForm.$emit("SET_EDITING", item)
-    }
+      window.ActivityForm.$emit("SET_EDITING", item);
+    },
   },
-}
+};
 </script>
 
 <template>

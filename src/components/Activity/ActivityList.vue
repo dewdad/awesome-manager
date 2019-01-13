@@ -4,16 +4,19 @@ import ActivityForm from "./ActivityForm";
 import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
-    ActivityForm
+    ActivityForm,
   },
   data() {
     return {
       editing: false,
-    }
+    };
   },
   computed: {
     modelName: () => Activity.entity,
-    all: () => Activity.query().withAll().get(),
+    all: () =>
+      Activity.query()
+        .withAll()
+        .get(),
     headers: () => Activity.fieldsList(),
   },
   mixins: [exportMixin],
@@ -26,9 +29,9 @@ export default {
     },
     editItem(item) {
       window.ActivityForm.$emit("SET_EDITING", item);
-    }
+    },
   },
-}
+};
 </script>
 
 <template>
