@@ -195,15 +195,15 @@ export const translateHeadersLegancy = (data: any[], keysDef: any, reverse?: boo
  * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
 export const translateHeaders = ({ data = [], keysDef = {}, reverse = false }): any[] => {
-    if (reverse) {
-        return data;
-    } else {
-      return data.reduce((list: any[], item) => {
-        let newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
-        list.push(newItem);
-        return list;
-      }, []);
-    }
+  if (reverse) {
+    return data;
+  } else {
+    return data.reduce((list: any[], item) => {
+      let newItem = mapKeys(item, (_: string, k: string) => keysDef[k]);
+      list.push(newItem);
+      return list;
+    }, []);
+  }
 };
 /**
  * 操作 JSON 对象。
@@ -248,7 +248,7 @@ export const changeCSVHeader = ({ header = "", keysDef = {}, reverse = false }):
       (header: string) => header.split(","),
       map(fieldName => {
         fieldName = fieldName.replace(/(\\|\n|'|")/g, "");
-        return findKey(keysDef, (value) => value === fieldName).toString();
+        return findKey(keysDef, value => value === fieldName).toString();
       }),
       (fieldNames: string[]) => fieldNames.join(","),
     )(header);
@@ -271,7 +271,7 @@ export const changeCSVHeader = ({ header = "", keysDef = {}, reverse = false }):
  * @param fieldDefs object with i18n translation
  * @result string
  */
-export const changeHeaderOfCSV = ({targetFilePath = "", keysDef = {}, reverse = false}) => {
+export const changeHeaderOfCSV = ({ targetFilePath = "", keysDef = {}, reverse = false }) => {
   // 1. 读取文件为字符串
   let content = fs.readFileSync(targetFilePath, "utf8");
   // 2. 分别获取第一行为列标题，其他为数据行
@@ -349,16 +349,13 @@ export const GenerateCSV = ({
  * @param {String|Object} keysDef? 标题定义json文件
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
  **/
-export const ImportCSV = async ({
-  file = {},
-  keysDef = {},
-}): Promise<any> => {
+export const ImportCSV = async ({ file = {}, keysDef = {} }): Promise<any> => {
   return new Promise((resolve, _) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
       skipEmptyLines: true,
-      complete: function( result: any ) {
+      complete: function(result: any) {
         resolve(result.data);
       },
     });
@@ -391,7 +388,7 @@ export const slugify = (words: string) => {
 };
 
 export const surround = (words: string) => {
-  return words.replace(/^(w+)$/,"\"$1\"");
+  return words.replace(/^(w+)$/, '"$1"');
 };
 
 /**

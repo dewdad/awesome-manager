@@ -1,37 +1,34 @@
 <script>
-import Entity from "@/api/models/Entity";
-import EntityForm from "./EntityForm";
+import Activity from "@/api/models/Activity";
+import ActivityForm from "./ActivityForm";
 import exportMixin from "@/mixins/exportMixin";
 export default {
   components: {
-    EntityForm,
+    ActivityForm
   },
   data() {
     return {
       editing: false,
-    };
+    }
   },
   computed: {
-    modelName: () => Entity.entity,
-    all: () =>
-      Entity.query()
-        .withAll()
-        .get(),
-    headers: () => Entity.fieldsList(),
+    modelName: () =>Activity.entity,
+    all: () =>Activity.query().withAll().get(),
+    headers: () =>Activity.fieldsList(),
   },
   mixins: [exportMixin],
   created() {
-    window.EntityIterator = this;
+    window.ActivityIterator = this;
   },
   methods: {
     deleteItem(item) {
-      Entity.delete(item._id);
+      Activity.delete(item._id)
     },
     editItem(item) {
-      window.EntityForm.$emit("SET_EDITING", item);
-    },
+      window.ActivityForm.$emit("SET_EDITING", item)
+    }
   },
-};
+}
 </script>
 
 <template>

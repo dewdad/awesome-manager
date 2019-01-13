@@ -18,11 +18,19 @@
     <script>
       const { ipcRenderer } = require('electron')
       function updateOnlineStatus () {
-        ipcRenderer.on("online-status-change-received", (event, arg) => {
-          console.log(arg);
+        // Listen to ipcMain
+        ipcRenderer.on("ONLINE_STATUS_CHANGED", (event, status) => {
+          console.log(status);
         })
+        // Emit to Vue Event
+        if (window.getApp !== undefined) {
+          console.log("Changed online status!")
+          window.getApp.$emit("ONLINE_STATUS_CHANGED", status)
+        }
+        // Send to ipcMain
         ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
-        document.write(navigator.onLine ? 'You are online' : 'You are offline')
+        // Write to Document
+        // document.write(navigator.onLine ? 'You are online' : 'You are offline')
       }
       window.addEventListener('online', updateOnlineStatus)
       window.addEventListener('offline', updateOnlineStatus)

@@ -78,7 +78,7 @@ export default {
         needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
         onlyKeepStringValue: this.onlyKeepStringValue, // 这里转换[对象类]键值为[字符串类]键值
       });
-      (window as any).getApp.$emit("DATA_EXPORTED");
+      (window as any).getApp.$emit("DATA_EXPORTED", this.modelDatasource);
     },
     /**
      * 导出文件修改标题函数
@@ -92,7 +92,7 @@ export default {
           reverse: this.reverseTranslate,
         });
       }
-      (window as any).getApp.$emit("DATA_HEAD_CHANGED");
+      (window as any).getApp.$emit("DATA_HEAD_CHANGED", this.modelDatasource);
     },
     /**
      * 导出文件备份函数

@@ -78,11 +78,11 @@ describe("Simple filter", () => {
   });
 
   it("should change CSV Header from english to chinese", () => {
-    const newHeader = changeCSVHeader( { header: "name,age", keysDef, reverse: false });
+    const newHeader = changeCSVHeader({ header: "name,age", keysDef, reverse: false });
     expect(newHeader).toBe("姓名,年龄");
   });
   it("should change CSV Header from chinese to english", () => {
-    const newHeader = changeCSVHeader( { header: "姓名,年龄", keysDef, reverse: true });
+    const newHeader = changeCSVHeader({ header: "姓名,年龄", keysDef, reverse: true });
     expect(newHeader).toBe("name,age");
   });
 });

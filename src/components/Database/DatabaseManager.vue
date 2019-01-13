@@ -7,149 +7,182 @@
           wrap
           row>
 
-        <v-flex
-            class="mt-15"
-            xs12
-            md2
-            sm2>
-          <DatabaseChips>
-          </DatabaseChips>
-        </v-flex>
-        <!-- start choice radio button -->
-        <v-flex
-            class="mt-15"
-            xs12
-            md8
-            sm8>
-          <!-- Import Card -->
-          <v-card>
-            <h2 class="heading">已选定表: {{ modelName }}</h2>
-            <v-responsive class="mt-45">
-              <v-radio-group
-                  v-model="actionGroup"
-                  row>
-                <v-radio
-                    color="indigo"
-                    row
-                    v-for="option in ['导入', '导出', '删除']"
-                    :key="option"
-                    :label="`${option}`"
-                    :value="option"
-                ></v-radio>
-              </v-radio-group>
-            </v-responsive>
-
-            <v-responsive
-                class="mt-15"
-                v-show="actionGroup === '导入'">
-              <input
-                  type="file"
-                  multiple="multiple"
-                  @change=" getImportFile($event) "/>
-              <v-tooltip bottom>
+        <v-flex class="mt-15">
+          <div class="mt-15">
+            <h1 class="heading">
+              当前数据表: {{ modelName  }}
+            </h1>
+          </div>
+          <div class="mt-15">
+            <DatabaseChips>
+            </DatabaseChips>
+          </div>
+          <v-tabs
+              v-model="activeTab"
+              color="primary"
+              dark
+              slider-color="yellow"
+              class="mt-15"
+            >
+            <v-tab
+                v-for="tab in ['导入', '导出', '删除']"
+                :key="tab"
+                ripple
+              >
+              <h4>{{ tab }}</h4>
+            </v-tab>
+            <!-- tab1 -->
+            <v-tab-item>
+              <div class="mt-15">
+                <v-layout>
+                  <v-flex>
+                    <input
+                        type="file"
+                        multiple="multiple"
+                        @change=" getImportFile($event) "/>
+                  </v-flex>
+                  <v-flex>
+                    <v-radio-group
+                        v-model="clearGroup"
+                        row>
+                      <v-radio
+                          color="primary"
+                          row
+                          v-for="option in ['保留', '清除']"
+                          :key="option"
+                          :label="`${option}已有数据`"
+                          :value="option"
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-flex>
+                  <v-flex>
+                    <v-tooltip bottom>
+                      <v-btn
+                          slot="activator"
+                          class="accent"
+                          @click=" importItem ">
+                        开始导入
+                      </v-btn>
+                      <span>你可以方便地导入csv文件的数据, 请确认标题为英文,如不是请先转换</span>
+                    </v-tooltip>
+                  </v-flex>
+                </v-layout>
+                <v-divider></v-divider>
+                <!-- changeCSVHeader slot -->
+                <v-layout>
+                  <v-flex>
+                    <v-btn
+                        @click=" changeCSVHeader ">
+                      翻译数据表标题
+                    </v-btn>
+                  </v-flex>
+                  <v-flex>
+                    <v-radio-group
+                        v-model="reverseTranslate"
+                        row>
+                      <v-radio
+                          color="primary"
+                          row
+                          v-for="option in ['外译中', '中译外']"
+                          :key="option"
+                          :label="`${option}第一行标题`"
+                          :value=" option === '外译中' ? false : true "
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-flex>
+                </v-layout>
+              </div>
+            </v-tab-item>
+            <!-- tab2 -->
+            <v-tab-item>
+              <div class="mt-15">
+                <v-tooltip bottom>
+                  <v-btn
+                      slot="activator"
+                      class="accent"
+                      @click="exportEntities">
+                    导出数据表
+                  </v-btn>
+                  <span>你可以方便地导出数据到csv文件,用Excel打开</span>
+                </v-tooltip>
+                <v-radio-group
+                    v-model="onlyKeepStringValue"
+                    row>
+                  <v-radio
+                      color="primary"
+                      row
+                      v-for="option in ['字符', '全部']"
+                      :key="option"
+                      :label="`保留${option}`"
+                      :value=" option === '字符' ? true : false "
+                  ></v-radio>
+                </v-radio-group>
+                <v-divider></v-divider>
+                <!-- 选择是否合并到Word -->
                 <v-btn
-                    slot="activator"
-                    class="accent"
-                    @click=" importItem ">
-                  开始导入
+                    v-show=" !needMergeWord "
+                    @click=" needMergeWord = !needMergeWord">
+                  选择Word模板
                 </v-btn>
-                <span>你可以方便地导入csv文件的数据, 请确认标题为英文,如不是请先转换</span>
-              </v-tooltip>
-              <v-radio-group
-                  v-model="clearGroup"
-                  row>
-                <v-radio
-                    color="indigo"
-                    row
-                    v-for="option in ['保留', '清除']"
-                    :key="option"
-                    :label="`${option}已有数据`"
-                    :value="option"
-                ></v-radio>
-              </v-radio-group>
-            </v-responsive>
-
-            <v-responsive
-                class="mt-15"
-                v-show="actionGroup === '导出'">
-              <!-- 仅导出CSV/Excel -->
-              <v-tooltip bottom>
                 <v-btn
-                    slot="activator"
-                    class="accent"
-                    @click="exportEntities">
-                  导出数据表
+                    v-show=" needMergeWord "
+                    @click=" mergeWordApp ">
+                  开始导出打印
                 </v-btn>
-                <span>你可以方便地导出数据到csv文件,用Excel打开</span>
-              </v-tooltip>
-              <v-radio-group
-                  v-model="onlyKeepStringValue"
-                  row>
-                <v-radio
-                    color="indigo"
-                    row
-                    v-for="option in ['字符', '全部']"
-                    :key="option"
-                    :label="`保留${option}`"
-                    :value=" option === '字符' ? true : false "
-                ></v-radio>
-              </v-radio-group>
-              <v-divider></v-divider>
-              <!-- 选择是否合并到Word -->
-              <v-btn
-                v-show=" !needMergeWord "
-                @click=" needMergeWord = !needMergeWord">
-                选择Word模板
-              </v-btn>
-              <v-btn
-                v-show=" needMergeWord "
-                @click=" mergeWordApp ">
-                开始导出打印
-              </v-btn>
-              <v-select
-                  v-show=" needMergeWord "
-                  v-model="outputDocFile"
-                  label="选择Word目标文件，默认为template.doc"
-                  :items="templateDocs"/>
-              <!-- 选择是否需要翻译列标题 -->
-              <v-divider></v-divider>
-              <v-btn
-                @click=" changeCSVHeader ">
-                翻译CSV/Excel标题
-              </v-btn>
-              <v-radio-group
-                  v-model="reverseTranslate"
-                  row>
-                <v-radio
-                    color="indigo"
-                    row
-                    v-for="option in ['外译中', '中译外']"
-                    :key="option"
-                    :label="`${option}第一行标题`"
-                    :value=" option === '外译中' ? false : true "
-                ></v-radio>
-              </v-radio-group>
-            </v-responsive>
+                <v-select
+                    v-show=" needMergeWord "
+                    v-model="outputDocFile"
+                    label="选择Word目标文件，默认为template.doc"
+                    :items="templateDocs"/>
 
-            <v-responsive
-                class="mt-15"
-                v-show="actionGroup === '删除'">
-              <v-btn
-                  class="accent"
-                  @click="resetEntities">
-                重置数据
-              </v-btn>
-            </v-responsive>
-
-          </v-card>
+                <v-divider></v-divider>
+                <v-layout
+                    row
+                    wrap>
+                  <v-flex>
+                    <v-btn
+                        @click=" changeCSVHeader ">
+                      翻译数据表标题
+                    </v-btn>
+                  </v-flex>
+                  <v-flex>
+                    <v-radio-group
+                        v-model="reverseTranslate"
+                        row>
+                      <v-radio
+                          color="primary"
+                          row
+                          v-for="option in ['外译中', '中译外']"
+                          :key="option"
+                          :label="`${option}第一行标题`"
+                          :value=" option === '外译中' ? false : true "
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-flex>
+                </v-layout>
+              </div>
+            </v-tab-item>
+            <!-- tab3 -->
+            <v-tab-item>
+              <div class="mt-15">
+                <v-btn
+                    class="accent"
+                    @click="resetEntities">
+                  重置数据
+                </v-btn>
+              </div>
+            </v-tab-item>
+          </v-tabs>
         </v-flex>
-
+        <v-flex>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 
 <script>
+import { join } from "path";
 import { shell } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import { entities } from "@/api/globals";
@@ -174,6 +207,7 @@ export default {
       modelName: "user",
       importDatasource: {},
       // Switch between import/export/reset
+      activeTab: 0,
       actionGroup: "导入",
       // Import and clear
       clearGroup: "保留",
@@ -194,6 +228,7 @@ export default {
     },
     // entity name list
     entities: () => entities,
+    cardImage: () => join(process.env.BASE_URL, "bg/17.jpg"),
   },
   methods: {
     findDocuments() {
@@ -230,7 +265,7 @@ export default {
 
 <style lang="stylus" scoped>
   .mt-15
-    margin: 45px
+    margin: 15px
   .mt-45
     margin: 45px
   .mt-56

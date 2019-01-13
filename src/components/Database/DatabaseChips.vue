@@ -1,25 +1,16 @@
 <template>
-  <div>
-    <v-data-iterator
-        :items="entities"
-        row
-        wrap
+  <v-flex>
+    <v-chip
+        v-for="item in entities"
+        :key="item"
+        @click="select(item)"
+        :color="selectedColor"
+        outline
+        close
       >
-      <v-flex
-          slot="item"
-          slot-scope="props"
-        >
-        <v-chip
-            @click="select(props.item)"
-            :color="selectedColor"
-            outline
-            close
-          >
-          {{ props.item }}
-        </v-chip>
-      </v-flex>
-    </v-data-iterator>
-  </div>
+      {{ item }}
+    </v-chip>
+  </v-flex>
 </template>
 <script>
 import { entities } from "@/api/globals";
@@ -27,7 +18,7 @@ export default {
   data() {
     return {
       entities: [],
-      selectedColor: "green",
+      selectedColor: "primary",
     };
   },
   methods: {

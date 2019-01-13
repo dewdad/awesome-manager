@@ -1,6 +1,10 @@
 <template>
   <v-card>
     <v-responsive>
+        <ActivityTimeline>
+        </ActivityTimeline>
+    </v-responsive>
+    <v-responsive>
       <v-data-table
           :headers="headers"
           :items="all"
@@ -59,11 +63,13 @@
 <script lang="js">
 import Activity from "@/api/models/Activity";
 import ActivityForm from "./ActivityForm";
+import ActivityTimeline from "./ActivityTimeline";
 import exportMixin from "@/mixins/exportMixin";
 
 export default {
   components: {
-    ActivityForm
+    ActivityForm,
+    ActivityTimeline
   },
   data() {
     return {

@@ -47,8 +47,8 @@ const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
   },
 });
 
-describe('@components/Evaluation/Evaluation', () => {
-  it('exports a valid component', () => {
-    expect(Evaluation).toBeAComponent()
-  })
-})
+describe("@components/Evaluation/Evaluation", () => {
+  it("exports a valid component", () => {
+    expect(Evaluation).toBeAComponent();
+  });
+});

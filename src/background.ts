@@ -6,8 +6,8 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
-let githubWin;
+let win: any;
+let githubWin: any;
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(["app"], { secure: true });
@@ -84,7 +84,6 @@ if (isDevelopment) {
   }
 }
 
-ipcMain.on("online-status-changed", (event, arg) => {
-  console.log(arg);
-  event.sender.send("online-status-change-received", "Electron Got it!");
+ipcMain.on("online-status-changed", (event, status) => {
+  event.sender.send("ONLINE-STATUS-CHANGE", `${status}`);
 });

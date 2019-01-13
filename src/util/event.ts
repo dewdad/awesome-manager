@@ -111,12 +111,13 @@ const events: Event[] = [
     },
   },
   {
-    name: "online-status-changed",
+    name: "ONLINE_STATUS_CHANGED",
     // @error api response data
-    callback: function(e: any) {
+    callback: function(status: string) {
+      let color = status === "online" ? "green" : "red";
       this.snackbar = {
         show: true,
-        color: "green",
+        color,
         text: "在线状态改变!",
       };
     },
@@ -147,23 +148,21 @@ const events: Event[] = [
   },
   {
     name: "DATA_EXPORTED",
-    // @error api response data
-    callback: function(e: any) {
+    callback: function(path: string) {
       this.snackbar = {
         show: true,
         color: "green",
-        text: "导出成功!",
+        text: `导出成功!文件在${path}`,
       };
     },
   },
   {
     name: "DATA_HEAD_CHANGED",
-    // @error api response data
-    callback: function(e: any) {
+    callback: function(path: string) {
       this.snackbar = {
         show: true,
         color: "green",
-        text: "标题修改成功!",
+        text: `标题修改成功!文件在${path}`,
       };
     },
   },
