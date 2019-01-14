@@ -396,9 +396,7 @@ export const surround = (words: string) => {
  * @param filename 文件名
  */
 export const fileShortName = (filename: string) => {
-  return filename
-  .replace(/^\.\//, "")
-  .replace(/\.\w+$/, "");
+  return filename.replace(/^\.\//, "").replace(/\.\w+$/, "");
 };
 
 /**
@@ -410,7 +408,6 @@ export const matchFileName = (filename: string) => {
   const matched = filename.match(/([A-Za-z0-9-_]+)\./i);
   if (matched && matched.length > 1) return matched[1];
 };
-
 
 /**
  * 值为对象的, 使用其 name 字段作为新值

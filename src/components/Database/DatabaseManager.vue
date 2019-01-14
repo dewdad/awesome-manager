@@ -95,7 +95,7 @@
                   <!-- translate-csv-header slot -->
                   <translate>
                     <template>
-                        <slot name="translate"></slot>
+                      <slot name="translate"></slot>
                     </template>
                   </translate>
                   <!-- end of translate-csv-header slot -->

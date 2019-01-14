@@ -54,25 +54,25 @@ export default {
           <v-card
               color="indigo"
               dark
-          >
-              <v-card-title class="title">
-                {{ item.applicant }}
-              </v-card-title>
-              <v-card-text class="white text--primary">
-                {{ item.content }}
-                <v-spacer></v-spacer>
-                <v-btn
-                    icon
-                    class="mx-0"
-                    @click="editItem(item);">
-                  <v-icon color="teal">edit</v-icon>
-                </v-btn>
-                <v-btn
-                    icon
-                    @click="deleteItem(item)">
-                  <v-icon color="pink">delete</v-icon>
-                </v-btn>
-              </v-card-text>
+            >
+            <v-card-title class="title">
+              {{ item.applicant }}
+            </v-card-title>
+            <v-card-text class="white text--primary">
+              {{ item.content }}
+              <v-spacer></v-spacer>
+              <v-btn
+                  icon
+                  class="mx-0"
+                  @click="editItem(item);">
+                <v-icon color="teal">edit</v-icon>
+              </v-btn>
+              <v-btn
+                  icon
+                  @click="deleteItem(item)">
+                <v-icon color="pink">delete</v-icon>
+              </v-btn>
+            </v-card-text>
           </v-card>
         </v-timeline-item>
       </v-timeline>
