@@ -392,6 +392,27 @@ export const surround = (words: string) => {
 };
 
 /**
+ * 返回文件名，不含目录和扩展名
+ * @param filename 文件名
+ */
+export const fileShortName = (filename: string) => {
+  return filename
+  .replace(/^\.\//, "")
+  .replace(/\.\w+$/, "");
+};
+
+/**
+ * 返回文件名，不含目录和扩展名
+ * @param filename 文件名
+ */
+export const matchFileName = (filename: string) => {
+  // 确定键名符合要求
+  const matched = filename.match(/([A-Za-z0-9-_]+)\./i);
+  if (matched && matched.length > 1) return matched[1];
+};
+
+
+/**
  * 值为对象的, 使用其 name 字段作为新值
  */
 export const preferValueAsString = (value: any) => {

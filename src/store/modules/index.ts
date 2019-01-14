@@ -6,14 +6,13 @@
  */
 import { toLower } from "lodash";
 
-let files = require["context"](".", false, /\.ts$/);
+let requiredModule: RequireContext = require.context(".", false, /\.ts$/);
 let modules = {};
 
-files.keys().forEach(key => {
+requiredModule.keys().forEach(key => {
   if (key === "./index.ts") return;
   let moduleName = toLower(key.replace(/(\.\/|\.ts)/g, ""));
-  modules[moduleName] = files(key).default;
+  modules[moduleName] = requiredModule(key).default;
 });
 
-console.log(modules);
 export default modules;

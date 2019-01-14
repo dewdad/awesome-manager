@@ -90,6 +90,8 @@ declare var TEST: boolean;
 declare var DEVELOPMENT: boolean;
 declare var PRODUCTION: boolean;
 
+declare type RequireContext = __WebpackModuleApi.RequireContext;
+
 interface Window {
   store: any;
   __INITIAL_STATE__: any;

@@ -86,6 +86,9 @@ And the batch import helper is `src/store/modules/index.ts`, which use the
 webpack `require.context` to automatically import all separate module files
 under the directory.
 
+NOTE:
+ *  require.context is availabe after intalled `webpack-env` and in `tsconfig.json` must set `types: ['webpack-env']`
+
 ```javascript
 import { toLower } from "lodash";
 

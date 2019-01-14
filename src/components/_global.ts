@@ -5,6 +5,7 @@
 import Vue from "vue";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+import { fileShortName } from "@/util";
 
 // https://webpack.js.org/guides/dependency-management/#require-context
 const requireComponent = require.context(
@@ -21,15 +22,7 @@ requireComponent.keys().forEach(fileName => {
   // Get the component config
   const componentConfig = requireComponent(fileName);
   // Get the PascalCase version of the component name
-  const componentName = upperFirst(
-    camelCase(
-      fileName
-        // Remove the "./_" from the beginning
-        .replace(/^\.\/_/, "")
-        // Remove the file extension from the end
-        .replace(/\.\w+$/, ""),
-    ),
-  );
+  const componentName = upperFirst(camelCase(fileShortName(fileName)));
   console.log(`Base Component ${componentName} registered globally!`);
   // Globally register the component
   Vue.component(componentName, componentConfig.default || componentConfig);
