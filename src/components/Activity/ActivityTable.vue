@@ -83,7 +83,7 @@ export default {
   },
   mixins: [ exportMixin ],
   created() {
-    window.activityTable = this;
+    window.ActivityTable = this;
   },
   methods: {
     deleteItem(item) {
