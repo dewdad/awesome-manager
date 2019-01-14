@@ -311,7 +311,7 @@ export default {
       this.editing = true
       this.model = item
     })
-    window.activityForm = this;
+    window.ActivityForm = this;
   },
   computed: {
     fields: () => Activity.fieldsList()

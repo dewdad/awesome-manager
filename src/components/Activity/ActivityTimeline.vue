@@ -28,7 +28,7 @@ export default {
       Activity.delete(item._id);
     },
     editItem(item) {
-      window.activityForm.$emit("SET_EDITING", item);
+      window.ActivityForm.$emit("SET_EDITING", item);
     },
   },
 };
