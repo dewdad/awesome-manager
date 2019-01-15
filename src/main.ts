@@ -15,8 +15,14 @@ import "./plugins/rx";
 import "./plugins/styles";
 import "./plugins/vuetify";
 
+// 取消不必要提示
 Vue.config.productionTip = false;
+// async函数无法记录
+process.on("unhandledRejection", error => {
+  console.log(error);
+})
 
+// 启动并挂载
 new Vue({
   router,
   store,

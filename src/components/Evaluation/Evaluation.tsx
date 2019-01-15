@@ -39,6 +39,11 @@ const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
       list: ["item1", "item2", "item3"],
     };
   },
+  methods: {
+    onChangeItem(item) {
+      console.log(`Log from Evaluation with ${item}`);
+    }
+  },
   render(): VNode {
     const { list, left, right } = this;
     return (
@@ -46,7 +51,12 @@ const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
         <h2>Evaluation</h2>
         <div class="list">
           {list.map(item => (
-            <span onClick={() => this.$emit("changeItem", item)}>{item}</span>
+            <span onClick={() => { 
+              // Evaluation Component
+              this.onChangeItem(item);
+              // App Component
+              this.$emit("changeItem", item);
+            }}>{item}</span>
           ))}
         </div>
       </div>

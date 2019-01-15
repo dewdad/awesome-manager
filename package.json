@@ -14,6 +14,8 @@
         "dev": "yarn electron:serve",
         "dist": "yarn electron:build",
         "electron:build": "vue-cli-service electron:build",
+        "electron:build:legacy": "vue-cli-service electron:build --legacy",
+        "electron:build:skip": "vue-cli-service electron:build --skipBundle",
         "electron:serve": "vue-cli-service electron:serve",
         "electron:toolkit": "electron ./node_modules/electron-toolkit",
         "new": "hygen new",
@@ -33,6 +35,7 @@
         "release:patch": "git add CHANGELOG.md && git commit -m 'chore: update changelog' && npm version patch && git push origin && git push origin --tags",
         "storybook:build": "vue-cli-service build:storybook -c config/storybook",
         "storybook:serve": "vue-cli-service serve:storybook -p 6006 -c config/storybook",
+        "inspect": "vue inspect",
         "test:e2e": "vue-cli-service test:e2e",
         "test:unit": "vue-cli-service test:unit",
         "test:unit:watch": "vue-cli-service test:unit --watch"
