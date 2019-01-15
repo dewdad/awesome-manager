@@ -33,7 +33,7 @@ module.exports = {
     });
     /* config.plugin('define') */
     config.plugin("define").tap(args => {
-      args[0]["process.env"]["STATIC"] = "/";
+      args[0]["process.env"]["STATIC"] = "'/'";
       return args;
     });
     /* config.plugin('copy') */
