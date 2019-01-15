@@ -29,7 +29,9 @@ function mergeLocales(locales: RequireContext): LocaleMessages {
     let locale = matchFileName(current);
     result[locale] = {
       ...result[locale],
+      // For plain json file
       ...locales(current),
+      // For js|ts file with default exports
       ...locales(current).default,
     };
     return result;
