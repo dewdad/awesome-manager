@@ -7,9 +7,9 @@
  */
 
 export default function openWindow(url, title, w, h) {
-  // Fixes dual-screen position                            Most browsers       Firefox
-  const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left
-  const dualScreenTop = window.screenTop !== undefined ? window.screenTop : screen.top
+  // Fixes dual-screen position 
+  const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : (screen as any).left
+  const dualScreenTop = window.screenTop !== undefined ? window.screenTop : (screen as any).top
 
   const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
   const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
