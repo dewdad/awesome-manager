@@ -16,37 +16,24 @@ function loadLocaleMessages(): LocaleMessages {
   );
 
   // 合并不同扩展名文件的语言定义
-  let mergedLocales: RequireContext = mergeLocales(requiredLocales);
-
-  // 存储对语言定义对象的引用
-  return mergedLocales.keys().reduce(
-    (messages, key) => {
-      console.log(`注册国际化组件${key}...`);
-      messages[key] = mergedLocales(key);
-      return messages;
-    },
-    {} as LocaleMessages,
-  );
+  let mergedLocales: LocaleMessages = mergeLocales(requiredLocales);
+  return mergedLocales;
 }
 
 /**
  * 如果模块的文件短名一致，合并其模块导出对象
  * @param locales 语言定义对象的模块，可以是json,js,ts模块
  */
-function mergeLocales(locales: any): RequireContext {
-  return locales.keys().reduce(
-    (previous, current, _, result) => {
-      if (matchFileName(previous) === matchFileName(current)) {
-        result[matchFileName(previous)] = {
-          ...locales[previous],
-          ...locales[previous].default,
-          ...locales[current],
-          ...locales[current].default,
-        };
-      }
-    },
-    {} as RequireContext,
-  );
+function mergeLocales(locales: RequireContext): LocaleMessages {
+  return locales.keys().reduce((result, current) => {
+    let locale = matchFileName(current);
+    result[locale] = {
+      ...result[locale],
+      ...locales(current),
+      ...locales(current).default,
+    };
+    return result;
+  }, {});
 }
 
 export default new VueI18n({
