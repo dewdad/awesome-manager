@@ -12,7 +12,7 @@ module.exports = {
     config
       .entry("app")
       .clear()
-      .add("./src/main.ts")
+      .add("./src/main.play.ts")
       .end();
     /* config.module.rule('vue') */
     config.module

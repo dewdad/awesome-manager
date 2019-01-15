@@ -1,3 +1,4 @@
+import { Query, Model } from "@vuex-orm/core";
 import models from "@/api/models";
 export default {
   data() {
@@ -8,11 +9,11 @@ export default {
     };
   },
   computed: {
-    Model: function() {
+    Model: function(): Model {
       return models[this.modelName];
     },
-    readItems: function() {
-      this.Model.query().get();
+    items: function(): any[] {
+      return this.Model.query().get();
     },
   },
   created() {

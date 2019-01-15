@@ -8,18 +8,21 @@ Happy hacking!
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
 
+import crudMixin from "@/mixins/crudMixin";
+
 // Customized events and data interface
 interface IEvaluationEvents {
   onChangeItem: (value: String) => void;
 }
 
 interface IEvaluationData {
-  list: String[];
+  modelName: String;
 }
 
 // Component Definition
 const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
   name: "Evaluation",
+  mixins: [crudMixin],
   props: {
     left: {
       type: Number,
@@ -36,31 +39,30 @@ const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
   },
   data(): IEvaluationData {
     return {
-      list: ["item1", "item2", "item3"],
+      modelName: "evaluation",
     };
   },
   methods: {
     onChangeItem(item) {
       console.log(`Log from Evaluation with ${item}`);
-    }
+    },
   },
   render(): VNode {
-    const { list, left, right } = this;
-    return (
-      <div class="wrapper">
+    const { items } = this;
+    return <div class="wrapper">
         <h2>Evaluation</h2>
         <div class="list">
-          {list.map(item => (
-            <span onClick={() => { 
-              // Evaluation Component
-              this.onChangeItem(item);
-              // App Component
-              this.$emit("changeItem", item);
-            }}>{item}</span>
-          ))}
+          {items.map(item => <p onClick={() => {
+                // Evaluation Component
+                this.onChangeItem(item.description);
+                // App Component
+                this.$emit("changeItem", item.description);
+              }}>
+              {item.name}
+            </p>)}
+          <br />
         </div>
-      </div>
-    );
+      </div>;
   },
 });
 
