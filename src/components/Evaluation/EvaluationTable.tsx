@@ -19,7 +19,7 @@ interface IEvaluationData {
   modelName: String;
 };
 
-const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
+const EvaluationTable = tsx.componentFactoryOf<IEvaluationEvents>().create({
   name: "Evaluation",
   mixins: [crudMixin],
   props: {
@@ -39,24 +39,33 @@ const Evaluation = tsx.componentFactoryOf<IEvaluationEvents>().create({
     },
   },
   render(): VNode {
-    const { items } = this
+    const { items, fields } = this
     return (
-      <div class="wrapper">
-        <h2>Evaluation</h2>
-          <div class="list">
-            {items.map(item => <p onClick={() => {
-                  this.onChangeItem(item);
-                  this.$emit("changeItem", item);
-                }}>
+      <v-card>
+        <v-card-title>
+          Evaluation Table
+        </v-card-title>
+        <v-responsive>
+          <table>
+            <tr>{fields.map(field =>
+              <th>{field}</th>  
+              )}
+            </tr>
+            {items.map((item: any) => {
+              return <tr>
                 {Object.keys(item).map(key =>
-                    <h4>{key}:{item[key]}</h4>
-                  )}
-              </p>)}
-            <br />
-        </div>
-      </div>
+                <td class="text-xs-left">
+                    { item[key] }
+                </td>
+                )}
+              </tr>
+              }
+            )}
+          </table>
+        </v-responsive>
+      </v-card>
     )
   }
 })
 
-export { Evaluation }
+export { EvaluationTable }

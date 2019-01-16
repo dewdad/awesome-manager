@@ -1,8 +1,7 @@
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
-import { pullAll } from "lodash";
-
 import { Evaluation } from "@/components/Evaluation/Evaluation.tsx";
+import { EvaluationTable } from "@/components/Evaluation/EvaluationTable.tsx";
 
 
 // Customized events and data interface
@@ -11,7 +10,6 @@ interface IAppEvents {
 }
 
 interface IAppData {
-  list: string[];
   selectedItem: string;
 }
 
@@ -20,10 +18,10 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
   name: "App",
   components: {
     Evaluation,
+    EvaluationTable
   },
   data(): IAppData {
     return {
-      list: ["item1", "item2", "item3"],
       selectedItem: "",
     };
   },
@@ -38,14 +36,9 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
   },
   render(): VNode {
     return (
-      <div id="appRoot">
-        <Evaluation
-          left={5}
-          right={10}
-          selectedItem={(this as any).selectedItem}
-          onChangeItem={(this as any).changeItem}
-        />
-      </div>
+      <v-content>
+        <EvaluationTable selectedItem={""}/>
+      </v-content>
     );
   },
 });

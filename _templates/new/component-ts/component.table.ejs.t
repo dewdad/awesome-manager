@@ -1,5 +1,5 @@
 ---
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>.tsx"
+to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.tsx"
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
@@ -26,7 +26,7 @@ interface I<%= modelName %>Data {
   modelName: String;
 };
 
-const <%= modelName %> = tsx.componentFactoryOf<I<%=modelName %>Events>().create({
+const <%= modelTableName %> = tsx.componentFactoryOf<I<%=modelName %>Events>().create({
   name: "<%= modelName %>",
   mixins: [crudMixin],
   props: {
@@ -46,24 +46,30 @@ const <%= modelName %> = tsx.componentFactoryOf<I<%=modelName %>Events>().create
     },
   },
   render(): VNode {
-    const { items } = this
+    const { items, headers } = this
     return (
-      <div class="wrapper">
-        <h2><%= modelName %></h2>
-          <div class="list">
-            {items.map(item => <p onClick={() => {
-                  this.onChangeItem(item);
-                  this.$emit("changeItem", item);
-                }}>
-                {Object.keys(item).map(key =>
-                    <h4>{key}:{item[key]}</h4>
-                  )}
-              </p>)}
-            <br />
-        </div>
-      </div>
+      <v-card>
+        <v-responsive>
+          <v-data-table
+              headers={headers}
+              items={items}
+              class="elevation-0"
+            >
+              {items.map((item: any) => {
+                  {Object.keys(item).map(key =>
+                    <td
+                        class="text-xs-left"
+                        key={key}>
+                      { item[key] }
+                    </td>
+                    )}
+                  }
+                )}
+          </v-data-table>
+        </v-responsive>
+      </v-card>
     )
   }
 })
 
-export { <%= modelName %> }
+export { <%= modelTableName %> }

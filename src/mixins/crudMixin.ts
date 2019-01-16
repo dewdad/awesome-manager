@@ -15,6 +15,9 @@ export default {
     items: function(): any[] {
       return this.Model.query().get();
     },
+    fields: function(): any[] {
+      return this.Model.fieldsList();
+    },
   },
   created() {
     this.model = new this.Model();
