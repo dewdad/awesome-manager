@@ -6,13 +6,9 @@ import store from "./store";
 import i18n from "./plugins/i18n";
 // Register styles
 import { VuetifyUseOptions } from 'vuetify';
-import { directives, transitions, Vuetify } from 'vuetify-tsx';
+import Vuetify from 'vuetify';
 
 const options: VuetifyUseOptions = {
-  directives,
-  components: {
-    transitions,
-  },
   theme: {
     primary: '#795548',
     secondary: '#A98274',
