@@ -47,7 +47,7 @@ const EvaluationTable = tsx.componentFactoryOf<IEvaluationEvents>().create({
           Evaluation Table
         </v-card-title>
         <v-responsive>
-          <v-data-table>
+          <v-data-table items={items}>
             <tr>{fields.map(field =>
               <th>{field}</th>  
               )}
