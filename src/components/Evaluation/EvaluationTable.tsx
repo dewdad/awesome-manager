@@ -41,31 +41,21 @@ const EvaluationTable = tsx.componentFactoryOf<IEvaluationEvents>().create({
   },
   render(): VNode {
     const { items, fields } = this
-    return (
-      <v-card>
-        <v-card-title>
-          Evaluation Table
-        </v-card-title>
-        <v-responsive>
-          <v-data-table items={items}>
-            <tr>{fields.map(field =>
-              <th>{field}</th>  
-              )}
+    return <VCard>
+        <VCardTitle>Evaluation Table</VCardTitle>
+        <VResponsive>
+          <VDataTable items={items}>
+            <tr>
+              {fields.map(field => <th>{field}</th>)}
             </tr>
             {items.map((item: any) => {
               return <tr>
-                {Object.keys(item).map(key =>
-                <td class="text-xs-left">
-                    { item[key] }
-                </td>
-                )}
-              </tr>
-              }
-            )}
-          </v-data-table>
-        </v-responsive>
-      </v-card>
-    )
+                  {Object.keys(item).map(key => <td class="text-xs-left">{item[key]}</td>)}
+                </tr>;
+            })}
+          </VDataTable>
+        </VResponsive>
+      </VCard>;
   }
 })
 

@@ -12,7 +12,7 @@ module.exports = {
     config
       .entry("app")
       .clear()
-      .add("./src/main.play.ts")
+      .add("./src/entry/main.play.ts")
       .end();
     /* config.module.rule('vue') */
     config.module
@@ -47,6 +47,8 @@ module.exports = {
         },
       ];
     });
+    /* add vue hotloader */
+    addVueJSXHotLoader(config);
   },
   pluginOptions: {
     i18n: {
@@ -70,3 +72,12 @@ module.exports = {
     },
   },
 };
+
+function addVueJSXHotLoader(config) {
+  config.module
+    .rule(/\.(j|t)sx$/)
+    .test(/\.(j|t)sx$/)
+    .use("vue-jsx-hot-loader")
+    .before("babel-loader")
+    .loader("vue-jsx-hot-loader");
+}
