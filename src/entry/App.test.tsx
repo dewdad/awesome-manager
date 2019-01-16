@@ -36,9 +36,7 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
   },
   render(): VNode {
     return (
-      <v-content>
-        <EvaluationTable selectedItem={""}/>
-      </v-content>
+      <router-view />
     );
   },
 });

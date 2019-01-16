@@ -15909,10 +15909,20 @@ vue-router@^3.0.1:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
   integrity sha512-vLLoY452L+JBpALMP5UHum9+7nzR9PeIBCghU9ZtJ1eWm6ieUI8Zb/DI3MYxH32bxkjzYV1LRjNv4qr8d+uX/w==
 
+vue-router@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
+  integrity sha512-opKtsxjp9eOcFWdp6xLQPLmRGgfM932Tl56U9chYTnoWqKxQ8M20N7AkdEbM5beUh6wICoFGYugAX9vQjyJLFg==
+
 vue-rx@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/vue-rx/-/vue-rx-6.0.1.tgz#4e4e9234339cbfa4e1968d67595cfe00293c6edc"
   integrity sha512-KapdvAjJolCezpuN0ScYZnd6yO6iG5wVa1idqduhEh6tO/7EJlPF6kVbsmgOVULLP0XotTAJQdN9PVh/ckPFNA==
+
+vue-strict-prop@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/vue-strict-prop/-/vue-strict-prop-0.3.2.tgz#4c0776cec166a2c0568d8ee8b846fcbafb7c10e5"
+  integrity sha512-xX06TDkPePa8w3uDMyoKz5E013aJ+mjfpp/bgs5BoI2dBHgVCvsE6o33t0sIgmeDS+u9xrnROkjzAJ4vHoYbwg==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
@@ -15935,7 +15945,7 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   integrity sha512-x3LV3wdmmERhVCYy3quqA57NJW7F3i6faas++pJQWtknWT+n7k30F4TVdHvCLn48peTJFRvCpxs3UuFPqgeELg==
 
-vue-tsx-support@^2.1.1:
+vue-tsx-support@^2.1.1, vue-tsx-support@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/vue-tsx-support/-/vue-tsx-support-2.2.2.tgz#318f6dd25e5f1ee451a7bc5bcb4669eb7810460c"
   integrity sha512-VykX5OnMYUCyJje7Ke2cVMk0c22eCzuyCQjchRsMpRg72SLZ0eDicT4oTZTJRGAHJ/7TDV+Pwtnpt+LHVr62jg==
@@ -15950,6 +15960,11 @@ vue@^2.5.16, vue@^2.5.17:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
   integrity sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
 
+vue@^2.5.21:
+  version "2.5.22"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
+  integrity sha512-pxY3ZHlXNJMFQbkjEgGVMaMMkSV1ONpz+4qB55kZuJzyJOhn6MSy/YZdzhdnumegNzVTL/Dn3Pp4UrVBYt1j/g==
+
 vuetify-loader@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.0.5.tgz#da04cdab6b4fc49f9d14964ee23e6f26564ce310"
@@ -15957,6 +15972,16 @@ vuetify-loader@^1.0.5:
   dependencies:
     gm "^1.23.1"
     loader-utils "^1.1.0"
+
+vuetify-tsx@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/vuetify-tsx/-/vuetify-tsx-0.24.0.tgz#a269e1323ebe4722dbc85f5a2797309b1660b358"
+  integrity sha512-Pa0OJyEx5UJiKMtYZMCqq7SVxA8mLMl/dCDZ1abJfYns0KgAWXmnK6hlIOJUOoVF2cd/ZVX9mJ8EVBM2jYJieQ==
+  dependencies:
+    vue "^2.5.21"
+    vue-router "^3.0.2"
+    vue-strict-prop "^0.3.2"
+    vue-tsx-support "^2.2.2"
 
 vuetify@^1.3.0:
   version "1.3.3"

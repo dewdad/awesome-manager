@@ -8,6 +8,7 @@ Install in by running `vue add tsx-support` or `yarn add vue-tsx-support`.
 */
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
+import { VCard, VCardText, VResponsive, VCardTitle, VDataTable } from 'vuetify-tsx';
 
 import crudMixin from "@/mixins/crudMixin";
 
@@ -46,7 +47,7 @@ const EvaluationTable = tsx.componentFactoryOf<IEvaluationEvents>().create({
           Evaluation Table
         </v-card-title>
         <v-responsive>
-          <table>
+          <v-data-table>
             <tr>{fields.map(field =>
               <th>{field}</th>  
               )}
@@ -61,7 +62,7 @@ const EvaluationTable = tsx.componentFactoryOf<IEvaluationEvents>().create({
               </tr>
               }
             )}
-          </table>
+          </v-data-table>
         </v-responsive>
       </v-card>
     )

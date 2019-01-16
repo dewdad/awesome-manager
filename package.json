@@ -122,6 +122,7 @@
         "vue-quill-editor": "^3.0.6",
         "vue-template-compiler": "^2.5.17",
         "vuetify-loader": "^1.0.5",
+        "vuetify-tsx": "^0.24.0",
         "vuex-class": "^0.3.1",
         "vuex-pathify": "^1.1.3"
     },
