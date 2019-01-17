@@ -3,28 +3,22 @@ import { join } from "path";
 import { map, pick, pullAll } from "lodash/fp";
 import User from "@/api/models/User";
 import Entity from "@/api/models/Entity";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
       editing: false,
       mini: false,
       model: {},
+      modelName: "user",
     };
   },
-  mixins: [baseUrlMixin],
+  mixins: [ crudMixin ],
   created() {
-    this.model = new User();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.UserForm = this;
   },
   computed: {
-    relationFields: () => User.relationFieldsList().filter(r => r.match(/.*_id/)),
     selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-    fields: () => pullAll(User.relationFieldsList(), User.fieldsList()),
     computeCardLayout() {
       return this.mini ? "row" : "column";
     },
@@ -37,20 +31,11 @@ export default {
     computeAvatarMan1: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
   },
   methods: {
-    reset() {
-      this.editing = false;
-      this.model = new User();
-    },
     saveItem() {
-      if (!this.editing) {
-        User.insert({
-          data: this.model,
-        });
-        this.model = new User();
+      if (this.editing) {
+        this.updateItem();
       } else {
-        User.update(this.model);
-        this.editing = false;
-        this.model = new User();
+        this.createItem();
       }
     },
     militantInformation() {
@@ -78,6 +63,7 @@ export default {
           class="layout pa-2 align-center avatar"
           :class="computeCardLayout">
         <v-avatar
+            class="mt-15"
             :size="computeAvatarSize"
             color="primary">
           <img
@@ -100,7 +86,7 @@ export default {
             row
             wrap>
           <v-flex
-              v-for="field in fields"
+              v-for="field in nonRelationFields"
               :key="field"
               lg6
               sm6>
@@ -113,7 +99,7 @@ export default {
               lg6
               sm6>
             <v-select
-                v-for="relationField in relationFields"
+                v-for="relationField in relationFieldsWithId"
                 v-model="model[relationField]"
                 :key="relationField"
                 :label=" $t(relationField) "
@@ -149,5 +135,9 @@ export default {
 }
 .avatar {
   padding-top: 100px;
+}
+.mt-15 {
+  padding-top: 15px;
+  margin-top: 15px;
 }
 </style>

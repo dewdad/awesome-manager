@@ -16,7 +16,7 @@ export default {
     window.NotificationForm = this;
   },
   computed: {
-    fields: () => Notification.fieldsList(),
+    fields: () => Notification.fieldsKeys(),
   },
   methods: {
     reset() {

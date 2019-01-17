@@ -1,12 +1,6 @@
-import { Model } from "@vuex-orm/core";
-export default class Mail extends Model {
+import { BaseModel } from "./BaseModel";
+export default class Mail extends BaseModel {
   static entity = "mail";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

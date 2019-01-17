@@ -1,12 +1,7 @@
-import { Model } from "@vuex-orm/core";
-export default class Social extends Model {
+import { BaseModel } from "./BaseModel";
+
+export default class Social extends BaseModel {
   static entity = "social";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

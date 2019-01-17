@@ -25,7 +25,27 @@
               <v-btn
                   @click="$router.push('/users/user-table')"
                   flat
-                  small>查看</v-btn>
+                  small>试一下</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <v-flex
+            lg4
+            sm12>
+          <v-card
+              color="indigo"
+              dark>
+            <v-card-title class="pb-0">
+              <h2>开始文件管理</h2>
+            </v-card-title>
+            <v-card-text>
+              {{cardText}}
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                  @click="$router.push('/document-table')"
+                  flat
+                  small>试一下</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -45,25 +65,7 @@
               <v-btn
                   @click="$router.push('/entity-table')"
                   flat
-                  small>查看</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-        <v-flex
-            lg4
-            sm12>
-          <v-card>
-            <v-card-title class="pb-0">
-              <h2>开始文件管理</h2>
-            </v-card-title>
-            <v-card-text>
-              {{cardText}}
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                  @click="$router.push('/document-table')"
-                  flat
-                  small>查看</v-btn>
+                  small>试一下</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -72,7 +74,7 @@
           row
           wrap>
         <v-flex sm12>
-          <h3>查看实例</h3>
+          <h3>查看操作实例，优化工作流程</h3>
         </v-flex>
         <v-flex
             lg4
@@ -82,7 +84,7 @@
                 :src="computeBg1"
                 height="250">
               <h2 class="white--text pa-3">
-                制作标准的人员编制表格
+                制作标准规范的人员编制表格
               </h2>
             </v-card-media>
             <v-card-text>
@@ -95,7 +97,7 @@
               <v-btn
                   @click="$router.push('/users/user-table')"
                   flat
-                  small>查看</v-btn>
+                  small>深入了解</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -127,7 +129,7 @@
               <v-btn
                   @click="$router.push('/document-table')"
                   flat
-                  small>查看</v-btn>
+                  small>深入了解</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -160,7 +162,7 @@
               <v-btn
                   @click="$router.push('/users/militant')"
                   flat
-                  small>查看</v-btn>
+                  small>深入了解</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -169,7 +171,7 @@
           row
           wrap>
         <v-flex sm12>
-          <h3>已有自己的历史数据,导入导出帮助你事半功倍</h3>
+          <h3>已有自己的历史数据,导入导出让你事半功倍</h3>
         </v-flex>
         <v-flex
             lg4
@@ -192,7 +194,7 @@
                   <v-btn
                       @click="$router.push('/database-manager')"
                       flat
-                      small>查看</v-btn>
+                      small>深入了解</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -210,7 +212,7 @@
                   <v-btn
                       @click="$router.push('/database-manager')"
                       flat
-                      small>查看</v-btn>
+                      small>开始导出</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -228,7 +230,7 @@
                   <v-btn
                       @click="$router.push('/database-manager')"
                       flat
-                      small>查看</v-btn>
+                      small>深入了解</v-btn>
                 </v-card-actions>
               </v-card>
             </v-carousel-item>
@@ -242,9 +244,8 @@
 <script>
 import { join } from "path";
 import VWidget from "@/components/VWidget";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+
 export default {
-  mixins: [baseUrlMixin],
   components: {
     VWidget,
   },
@@ -263,8 +264,7 @@ export default {
     computeBg6: () => join(process.env.BASE_URL, "bg/6.jpg"),
     computeBg10: () => join(process.env.BASE_URL, "bg/10.jpg"),
     computeAvatarMan4: () => join(process.env.BASE_URL, "avatar/man_4.jpg"),
-  },
-  methods: {},
+  }
 };
 </script>
 <style lang="stylus" scoped>

@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     modelName: () => Evaluation.entity,
-    fields: () => Evaluation.fieldsList(),
+    fields: () => Evaluation.fieldsKeys(),
   },
   methods: {
     reset() {

@@ -1,5 +1,4 @@
-import { Model, BelongsTo } from "@vuex-orm/core";
-import { keys } from "lodash";
+import { BaseModel } from "./BaseModel";
 
 export interface IResummee {
   _id: string;
@@ -10,28 +9,8 @@ export interface IResummee {
   role: string;
 }
 
-export default class Resummee extends Model {
+export default class Resummee extends BaseModel {
   static entity = "resummee";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return keys(this.fields());
-  }
-
-  static relationFieldsList() {
-    /**
-     * fields that has relations
-     * return {Array} fields which value are BelongsTo
-     */
-    return keys(this.fields()).reduce((list, field) => {
-      if (this.fields()[field] instanceof BelongsTo) {
-        list.push(`${field}_id`);
-        list.push(field);
-      }
-      return list;
-    }, []);
-  }
 
   static fields() {
     return {

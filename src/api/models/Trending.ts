@@ -1,12 +1,7 @@
-import { Model } from "@vuex-orm/core";
-export default class Trending extends Model {
+import { BaseModel } from "./BaseModel";
+
+export default class Trending extends BaseModel {
   static entity = "trending";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

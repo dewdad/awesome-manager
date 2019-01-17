@@ -6,7 +6,7 @@ module.exports = {
     const questions = [{
         type: "input",
         name: "model",
-        message: "Name of model (ex: Test)",
+        message: "Name of model (ex: User)",
         validate(value) {
           if (!value.length) {
             return "Vuex ORM models must have a name, better capitalized.";
@@ -20,7 +20,7 @@ module.exports = {
       {
         type: "input",
         name: "fieldName",
-        message: "Default Field Name (ex: title)",
+        message: "Default Field Name (ex: name)",
         validate(value) {
           if (!value.length) {
             return "Field must have a name, better lowercase";
@@ -42,10 +42,10 @@ module.exports = {
       {
         type: "input",
         name: "fieldValue",
-        message: "Default Field Value(ex: coder)",
+        message: "Default Field Value(ex: Daniel)",
         validate(value) {
           if (!value.length) {
-            return "Field must have a name, better lowercase";
+            return "Field must have a value, please name it";
           }
           return true;
         },
@@ -53,7 +53,7 @@ module.exports = {
       {
         type: "input",
         name: "fieldNames",
-        message: 'Need More Fields?(just input names separate by comma: "field1,field2,field3")',
+        message: 'Need More Fields?(just input names separate by comma: "age,gender,title")',
       },
     ];
 

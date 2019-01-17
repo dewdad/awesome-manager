@@ -18,11 +18,11 @@ export default class <%= ModelName %> extends Model {
 
   static primaryKey = "_id";
 
-  static fieldsList() {
+  static fieldsKeys() {
     return keys(this.fields());
   }
 
-  static relationFieldsList() {
+  static relationFields() {
     /**
      * fields that has relations
      * return {Array} fields which value are BelongsTo

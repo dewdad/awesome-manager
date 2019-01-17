@@ -1,5 +1,6 @@
 <script>
 import Entity from "@/api/models/Entity";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
@@ -7,36 +8,10 @@ export default {
       model: {},
     };
   },
+  mixins: [ crudMixin ],
   created() {
-    this.model = new Entity();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.EntityForm = this;
-  },
-  computed: {
-    fields: () => Entity.fieldsList(),
-  },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new Entity();
-    },
-    saveItem() {
-      if (!this.editing) {
-        Entity.insert({
-          data: this.model,
-        });
-        this.model = new Entity();
-      } else {
-        Entity.update(this.model);
-        this.editing = false;
-        this.model = new Entity();
-      }
-      console.log(Entity.all());
-    },
-  },
+  }
 };
 </script>
 
@@ -68,7 +43,7 @@ export default {
               sm6>
             <v-text-field
                 v-model="model[field]"
-                :label=" $t !== undefined ? $t(field) : field">
+                :label=" tryT(field) ">
             </v-text-field>
           </v-flex>
         </v-layout>

@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     modelName: () => <%= modelName %>.entity,
-    fields: () => <%= modelName %>.fieldsList()
+    fields: () => <%= modelName %>.fieldsKeys()
   },
   methods: {
     reset() {

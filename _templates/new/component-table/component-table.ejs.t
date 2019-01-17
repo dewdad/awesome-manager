@@ -9,28 +9,25 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   components: {
     <%= modelFormName %>
   },
   data() {
     return {
-      editing: false,
+      modelName: <%= modelName.toLowerCase() %>
     }
   },
   computed: {
-    modelName: () => <%= modelName %>.entity,
     all: () =><%= modelName %>.query().withAll().get(),
-    headers: () => <%= modelName %>.fieldsList(),
+    headers: () => <%= modelName %>.fieldsKeys(),
   },
-  mixins: [exportMixin],
+  mixins: [ exportMixin, crudMixin ],
   created() {
     window.<%= modelTableName %> = this;
   },
   methods: {
-    deleteItem(item) {
-      <%= modelName %>.delete(item._id);
-    },
     editItem(item) {
       window.<%= modelFormName %>.$emit("SET_EDITING", item);
     }
@@ -59,7 +56,7 @@ export default {
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
+              {{ tryT(header) }}
             </th>
           </tr>
         </template>

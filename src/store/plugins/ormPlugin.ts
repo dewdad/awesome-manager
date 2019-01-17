@@ -11,7 +11,7 @@ import { LowdbForElectron } from "@/api/lowdb";
 Query.on("afterCreate", function(model: Model) {
   // NOTE https://vuex-orm.github.io/vuex-orm/guide/components/models.html#model-conventions
   // Get class static property with instance method $self
-  // FIXMED afterCreate Hook, the model is a Model class project instead of a plain object
+  // FIXMED afterCreate Hook, the model is a Model class instead of a plain object
   const entity = model.$self().entity;
   console.log("Create Hook in " + entity);
   const DB: LowdbForElectron = new LowdbForElectron(entity);
@@ -20,7 +20,7 @@ Query.on("afterCreate", function(model: Model) {
 
 Query.on("beforeDelete", function(model: Model) {
   // FIXMED beforeDelete, the model is just a plain object
-  // So use the callback function scope this to get entity namespace
+  // So use the callback function scope [this] to get entity namespace
   // eslint-disable-next-line
   const { entity } = (this as Query);
   console.log("Delete Hook in " + entity);

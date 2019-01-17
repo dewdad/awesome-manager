@@ -5992,7 +5992,7 @@ dotenv@^5.0.1:
   resolved "http://registry.npmjs.org/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
   integrity sha512-4As8uPrjfwb7VXC+WnLCbXK7y+Ueb2B3zgNCePYfhxS1PYeaO1YTeplffTEcbfLhvFNGLAz90VvJs9yomG7bow==
 
-dotenv@^6.0.0, dotenv@latest:
+dotenv@^6.0.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.1.0.tgz#9853b6ca98292acb7dec67a95018fa40bccff42c"
   integrity sha512-/veDn2ztgRlB7gKmE3i9f6CmDIyXAy6d5nBq+whO9SLX+Zs1sXEgFLPi+aSuWqUuusMfbi84fT8j34fs1HaYUw==
@@ -7294,15 +7294,6 @@ fs-extra@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
   integrity sha512-EglNDLRpmaTWiD/qraZn6HREAEAHJcJOmxNEYwq6xeMKnVMAy3GUcFB+wXt2C6k4CNvB/mP1y/U3dzvKKj5OtQ==
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
-fs-extra@latest:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
-  integrity sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -15583,9 +15574,6 @@ vue-cli-plugin-i18n@^0.5.1:
     vue "^2.5.16"
     vue-i18n "^8.0.0"
 
-"vue-cli-plugin-prisma@file:lib/vue-cli-plugins/vue-cli-plugin-prisma":
-  version "0.1.6"
-
 vue-cli-plugin-pug@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-pug/-/vue-cli-plugin-pug-1.0.7.tgz#6ba0b3d402fdae80c0e788323df63fb9ea2e1598"
@@ -15612,21 +15600,6 @@ vue-cli-plugin-vuetify@^0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.4.5.tgz#f85ee699fbff46131457a89220de95b8203f279a"
   integrity sha512-OXeKzTZY2Fp6FX0XuF8TosjzO1eCNzbafWierS33/zzKMgWOTdVF4dj/CUDIW7fav/6brBxebsu6RD4rnSF9qg==
-
-vue-cli-plugin-vuex-nedb-module-generator@*:
-  version "0.1.31"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuex-nedb-module-generator/-/vue-cli-plugin-vuex-nedb-module-generator-0.1.31.tgz#bd0491a863b325b9db55aac0e812b6cf866303d0"
-  integrity sha512-VqYn3OavCYbJ7cjMUGGa3ZG7XbKNwYE5yFW+BdhnlhrvEAQEBvskpC0D0FsJRQTl5SddVdd2nfabeHxv1ElBuQ==
-  dependencies:
-    dotenv latest
-
-vue-cli-plugin-vuex-orm-generator@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuex-orm-generator/-/vue-cli-plugin-vuex-orm-generator-0.1.6.tgz#77ca3b1b69647930a3f72be004010843134e509f"
-  integrity sha512-+ie1EtAWwqtEp8fQfPSo8XiTXiDv2WxGR0K9ocExjsf+KylhrhiFu7orHtt4S5UzJ4ix/rYbq/CnHG9T7OzR0g==
-  dependencies:
-    dotenv latest
-    fs-extra latest
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"

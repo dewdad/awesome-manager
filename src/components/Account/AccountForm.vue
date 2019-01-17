@@ -18,7 +18,7 @@ export default {
     window.AccountForm = this;
   },
   computed: {
-    fields: () => Account.fieldsList(),
+    fields: () => Account.fieldsKeys(),
   },
   methods: {
     reset() {

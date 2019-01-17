@@ -18,7 +18,7 @@ export default {
   computed: {
     modelName: () => Entity.entity,
     all: () => Entity.all(),
-    headers: () => Entity.fieldsList(),
+    headers: () => Entity.fieldsKeys(),
   },
   mixins: [exportMixin],
   created() {

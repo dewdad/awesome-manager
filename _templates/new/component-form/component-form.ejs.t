@@ -7,43 +7,17 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
-      editing: false,
-      model: {},
+      modelName: "<%= modelName.toLowerCase() %>"
     }
   },
+  mixins: [ crudMixin ],
   created() {
-    this.model = new <%= modelName %>();
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    });
     window.<%= modelFormName %> = this;
   },
-  computed: {
-    modelName: () => <%= modelName %>.entity,
-    fields: () => <%= modelName %>.fieldsList()
-  },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new <%= modelName %>();
-    },
-    saveItem() {
-      if(!this.editing) {
-        <%= modelName %>.insert({
-          data: this.model
-        });
-        this.model = new <%= modelName %>();
-      } else {
-        <%= modelName %>.update(this.model);
-        this.editing = false;
-        this.model = new <%= modelName %>();
-      }
-    }
-  }
 }
 </script>
 
@@ -76,7 +50,7 @@ export default {
             <v-text-field
                 v-model="model[field]"
                 :name="field"
-                :label=" $t !== undefined ? $t(field) : field">
+                :label="tryT(field) ">
             </v-text-field>
           </v-flex>
         </v-layout>

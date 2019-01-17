@@ -1,24 +1,19 @@
-import { Model } from "@vuex-orm/core";
-export default class Address extends Model {
+import { BaseModel } from "./BaseModel";
+export default class Address extends BaseModel {
   static entity = "address";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {
       _id: this.increment(),
-      direction: this.string("none"),
-      street: this.string("none"),
-      suite: this.string("none"),
-      area: this.string("none"),
-      city: this.string("none"),
-      state: this.string("none"),
-      country: this.string("none"),
-      zipcode: this.string("none"),
+      name: this.string("name"),
+      direction: this.string("direction name"),
+      street: this.string("street name"),
+      suite: this.string("suite number"),
+      area: this.string("area name"),
+      city: this.string("city name"),
+      state: this.string("state name"),
+      country: this.string("country name"),
+      zipcode: this.string("zipcode number"),
     };
   }
 }

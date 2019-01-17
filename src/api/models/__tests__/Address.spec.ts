@@ -4,12 +4,12 @@ describe("@/api/models/Address", () => {
   it("exports a valid Vuex ORM Model", () => {
     const model = new AddressModel();
 
-    expect(model.direction).toBe("none");
+    expect(model.name).toBe("name");
   });
 
   it("expect string field", () => {
-    expect(new AddressModel({}).direction).toBe("none");
-    expect(new AddressModel({ direction: "none" }).direction).toBe("none");
+    expect(new AddressModel({}).name).toBe("name");
+    expect(new AddressModel({ name: "name" }).name).toBe("name");
   });
 
   it("expect to json", () => {
@@ -18,10 +18,10 @@ describe("@/api/models/Address", () => {
 
     const expected = {
       _id: 1,
-      direction: "none",
+      name: "name",
     };
 
     expect(json).not.toBeInstanceOf(AddressModel);
-    expect(json.direction).toEqual(expected.direction);
+    expect(json.name).toEqual(expected.name);
   });
 });

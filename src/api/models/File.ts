@@ -1,12 +1,6 @@
-import { Model } from "@vuex-orm/core";
-export default class File extends Model {
+import { BaseModel } from "./BaseModel";
+export default class File extends BaseModel {
   static entity = "file";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

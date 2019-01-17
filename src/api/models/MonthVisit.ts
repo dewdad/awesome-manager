@@ -1,12 +1,7 @@
-import { Model } from "@vuex-orm/core";
-export default class MonthVisit extends Model {
+import { BaseModel } from "./BaseModel";
+
+export default class MonthVisit extends BaseModel {
   static entity = "monthvisit";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

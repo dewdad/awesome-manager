@@ -1,4 +1,4 @@
-import { Model } from "@vuex-orm/core";
+import { BaseModel } from "./BaseModel";
 
 export interface IApp {
   _id: string;
@@ -7,14 +7,8 @@ export interface IApp {
   description: string;
 }
 
-export default class App extends Model {
+export default class App extends BaseModel {
   static entity = "app";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
 
   static fields() {
     return {

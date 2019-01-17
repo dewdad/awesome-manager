@@ -18,7 +18,7 @@ export default {
       Document.query()
         .withAll()
         .get(),
-    headers: () => pullAll(Document.fieldsList(), Document.relationFieldsList()),
+    headers: () => pullAll(Document.fieldsKeys(), Document.relationFields()),
   },
   mixins: [exportMixin],
   created() {

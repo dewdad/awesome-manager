@@ -17,7 +17,7 @@ export default {
       Activity.query()
         .withAll()
         .get(),
-    headers: () => Activity.fieldsList(),
+    headers: () => Activity.fieldsKeys(),
   },
   mixins: [exportMixin],
   created() {

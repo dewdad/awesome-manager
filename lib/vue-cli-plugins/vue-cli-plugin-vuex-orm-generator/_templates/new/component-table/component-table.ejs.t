@@ -21,7 +21,7 @@ export default {
   computed: {
     modelName: () => <%= modelName %>.entity,
     all: () =><%= modelName %>.query().withAll().get(),
-    headers: () => <%= modelName %>.fieldsList(),
+    headers: () => <%= modelName %>.fieldsKeys(),
   },
   mixins: [exportMixin],
   created() {

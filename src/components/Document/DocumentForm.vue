@@ -3,47 +3,25 @@ import { map, pick, pullAll } from "lodash/fp";
 import Document from "@/api/models/Document";
 import Entity from "@/api/models/Entity";
 import User from "@/api/models/User";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
       editing: false,
       model: {},
+      modelName: "document",
       startDateMenu: false,
     };
   },
+  mixins: [ crudMixin ],
   created() {
-    this.model = new Document();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.DocumentForm = this;
   },
   computed: {
-    relationFields: () => Document.relationFieldsList().filter(r => r.match(/.*_id/)),
     selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-    selectUsers: () => map(pick(["_id", "name"]), User.all()),
-    fields: () => pullAll(Document.relationFieldsList(), Document.fieldsList()),
+    selectUsers: () => map(pick(["_id", "name"]), User.all()),  
   },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new Document();
-    },
-    saveItem() {
-      if (!this.editing) {
-        Document.insert({
-          data: this.model,
-        });
-        this.model = new Document();
-      } else {
-        Document.update(this.model);
-        this.editing = false;
-        this.model = new Document();
-      }
-      console.log(Document.all());
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -169,7 +147,7 @@ export default {
             </v-text-field>
           </v-flex>
           <v-flex
-              v-for="relationField in relationFields"
+              v-for="relationField in relationFieldsWithId"
               v-if="relationField !== 'author_id'"
               :key="relationField"
               lg6

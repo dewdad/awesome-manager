@@ -18,7 +18,7 @@ export default {
       Account.query()
         .withAll()
         .get(),
-    headers: () => Account.fieldsList(),
+    headers: () => Account.fieldsKeys(),
   },
   created() {
     window.AccountTable = this;

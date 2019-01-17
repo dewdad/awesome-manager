@@ -16,7 +16,7 @@ export default {
     window.TrendingForm = this;
   },
   computed: {
-    fields: () => Trending.fieldsList(),
+    fields: () => Trending.fieldsKeys(),
   },
   methods: {
     reset() {

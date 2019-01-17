@@ -1,29 +1,9 @@
-import { Model, BelongsTo } from "@vuex-orm/core";
-import { keys } from "lodash";
+import { BaseModel } from "./BaseModel";
 import User from "./User";
 import Entity from "./Entity";
-export default class Document extends Model {
+
+export default class Document extends BaseModel {
   static entity = "document";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
-
-  static relationFieldsList() {
-    /**
-     * fields that has relations
-     * return {Array} fields which value are BelongsTo
-     */
-    return keys(this.fields()).reduce((list, field) => {
-      if (this.fields()[field] instanceof BelongsTo) {
-        list.push(`${field}_id`);
-        list.push(field);
-      }
-      return list;
-    }, []);
-  }
 
   static fields() {
     return {

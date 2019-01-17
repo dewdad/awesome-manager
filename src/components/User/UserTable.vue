@@ -18,7 +18,7 @@ export default {
       User.query()
         .withAll()
         .get(),
-    headers: () => pullAll(User.fieldsList(), User.relationFieldsList()),
+    headers: () => pullAll(User.fieldsKeys(), User.relationFields()),
   },
   mixins: [exportMixin],
   created() {

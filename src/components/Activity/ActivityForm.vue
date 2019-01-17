@@ -314,7 +314,7 @@ export default {
     window.ActivityForm = this;
   },
   computed: {
-    fields: () => Activity.fieldsList()
+    fields: () => Activity.fieldsKeys()
   },
   methods: {
     reset() {

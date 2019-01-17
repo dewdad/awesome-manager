@@ -1,41 +1,15 @@
 <script>
 import Militant from "@/api/models/Militant";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
-      editing: false,
-      model: {},
+      modelName: "militant"
     };
   },
+  mixins: [ crudMixin ],
   created() {
-    this.model = new Militant();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.MilitantForm = this;
-  },
-  computed: {
-    fields: () => Militant.fieldsList(),
-  },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new Militant();
-    },
-    saveItem() {
-      if (!this.editing) {
-        Militant.insert({
-          data: this.model,
-        });
-        this.model = new Militant();
-      } else {
-        Militant.update(this.model);
-        this.editing = false;
-        this.model = new Militant();
-      }
-      console.log(Militant.all());
-    },
   },
 };
 </script>
@@ -67,7 +41,7 @@ export default {
             sm6>
           <v-text-field
               v-model="model[field]"
-              :label=" $t !== undefined ? $t(field) : field">
+              :label=" tryT(field) ">
           </v-text-field>
         </v-flex>
       </v-layout>

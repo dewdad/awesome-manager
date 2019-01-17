@@ -17,7 +17,7 @@ export default {
       Entity.query()
         .withAll()
         .get(),
-    headers: () => Entity.fieldsList(),
+    headers: () => Entity.fieldsKeys(),
   },
   mixins: [exportMixin],
   created() {

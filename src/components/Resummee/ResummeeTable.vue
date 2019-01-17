@@ -16,7 +16,7 @@ export default {
       Resummee.query()
         .withAll()
         .get(),
-    headers: () => Resummee.fieldsList(),
+    headers: () => Resummee.fieldsKeys(),
     modelName: () => Resummee.entity,
   },
   mixins: [exportMixin],

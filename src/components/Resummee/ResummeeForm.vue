@@ -16,7 +16,7 @@ export default {
     window.ResummeeForm = this;
   },
   computed: {
-    fields: () => Resummee.fieldsList(),
+    fields: () => Resummee.fieldsKeys(),
   },
   methods: {
     reset() {

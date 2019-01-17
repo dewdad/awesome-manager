@@ -2,6 +2,7 @@
 import Militant from "@/api/models/Militant";
 import MilitantForm from "./MilitantForm";
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   components: {
     MilitantForm,
@@ -9,17 +10,17 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "militant"
     };
   },
   computed: {
-    modelName: () => Militant.entity,
     all: () =>
       Militant.query()
         .withAll()
         .get(),
-    headers: () => Militant.fieldsList(),
+    headers: () => Militant.fieldsKeys(),
   },
-  mixins: [exportMixin],
+  mixins: [exportMixin, crudMixin ],
   created() {
     window.MilitantTable = this;
   },
@@ -55,7 +56,7 @@ export default {
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
+              {{ tryT(header) }}
             </th>
           </tr>
         </template>

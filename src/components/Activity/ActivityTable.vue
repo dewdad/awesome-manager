@@ -79,7 +79,7 @@ export default {
   computed: {
     modelName: () => Activity.entity,
     all: () => Activity.all(),
-    headers: () => Activity.fieldsList()
+    headers: () => Activity.fieldsKeys()
   },
   mixins: [ exportMixin ],
   created() {

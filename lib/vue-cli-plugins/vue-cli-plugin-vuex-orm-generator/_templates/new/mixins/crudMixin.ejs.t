@@ -19,7 +19,7 @@ export default {
       return this.Model.query().get();
     },
     fields: function(): any[] {
-      return this.Model.fieldsList();
+      return this.Model.fieldsKeys();
     },
   },
   created() {

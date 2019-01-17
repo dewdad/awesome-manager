@@ -5,7 +5,7 @@ export default class Activity extends Model {
 
   static primaryKey = "_id";
 
-  static fieldsList() {
+  static fieldsKeys() {
     return Object.keys(this.fields());
   }
 
