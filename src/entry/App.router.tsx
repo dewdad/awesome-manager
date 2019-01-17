@@ -12,12 +12,15 @@ import {
 
 const App = component({
   name: "App",
+  components: {
+    AppDrawer
+  },
   render(): VNode {
     return (
       <div id="appRoot">
         <VApp>
           <AppToolbar />
-          <AppDrawer />
+          <app-drawer />
           <VContent>
             <div class="page-wrapper">
               <router-view />
