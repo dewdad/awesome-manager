@@ -7356,6 +7356,15 @@ fs-extra@^7.0.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@latest:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
+  integrity sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-minipass@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
@@ -15825,6 +15834,14 @@ vue-cli-plugin-vuetify@^0.4.5:
   version "0.1.31"
   dependencies:
     dotenv latest
+
+vue-cli-plugin-vuex-orm-generator@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuex-orm-generator/-/vue-cli-plugin-vuex-orm-generator-0.1.6.tgz#77ca3b1b69647930a3f72be004010843134e509f"
+  integrity sha512-+ie1EtAWwqtEp8fQfPSo8XiTXiDv2WxGR0K9ocExjsf+KylhrhiFu7orHtt4S5UzJ4ix/rYbq/CnHG9T7OzR0g==
+  dependencies:
+    dotenv latest
+    fs-extra latest
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
