@@ -1,12 +1,14 @@
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
 
-import { VToolbar, VToolbarItems, VToolbarTitle, VTextField, VBtn, VIcon, VSpacer } from "vuetify-tsx";
+import { VToolbar, VToolbarTitle, VTextField, VBtn, VIcon, VSpacer } from "vuetify-tsx";
 
 interface IAppToolbarEvents {
   handleDrawerToggle: () => void;
+  goHomeRoute: () => void;
   getApp: any;
-}
+};
+
 const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
   name: "app-toolbar",
   data: () => ({
@@ -38,12 +40,19 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
     handleDrawerToggle() {
       (window as any).getApp.$emit("APP_DRAWER_TOGGLED");
     },
+    goHomeRoute() {
+      this.$router.push("/");
+    },
   },
   render(): VNode {
     return (
       <VToolbar
         color={"primary"}
         app>
+        <VBtn icon onClick={() => this.handleDrawerToggle}>
+          <VIcon>star</VIcon>
+        </VBtn>
+        <VToolbarTitle class="ml-0 pl-3">Awesome Management</VToolbarTitle>
         <VTextField
           flat
           solo-inverted
@@ -53,11 +62,15 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
         />
         <VSpacer />
 
+        <VBtn icon onClick={() => this.goHomeRoute}>
+          <VIcon>home</VIcon>
+        </VBtn>
+
         <VBtn icon href="mailto:linuxing3@qq.com">
           <VIcon>email</VIcon>
         </VBtn>
 
-        <VBtn icon href="https://github.com/linuxing3/official-manager">
+        <VBtn icon href="https://github.com/linuxing3/awesome-manager">
           <VIcon>fab fa-github</VIcon>
         </VBtn>
       </VToolbar>
