@@ -1,7 +1,7 @@
 import { VNode } from "vue";
 import { component } from "vue-tsx-support";
 
-import { AppToolbar } from "@/components/AppToolbar";
+import { AppToolbar } from "@/components/AppToolbar.tsx";
 
 import {
   VApp,

@@ -1,5 +1,8 @@
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
+
+import { VToolbar, VToolbarItems, VToolbarTitle, VTextField, VBtn, VIcon, VSpacer } from "vuetify-tsx";
+
 interface IAppToolbarEvents {
   handleDrawerToggle: () => void;
   getApp: any;
@@ -38,27 +41,26 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
   },
   render(): VNode {
     return (
-      <v-toolbar color="primary" fixed dark app>
-        <v-toolbar-title class="ml-0 pl-3">
-          <v-toolbar-side-icon onClick={this.handleDrawerToggle} />
-        </v-toolbar-title>
-        <v-text-field
+      <VToolbar
+        color={"primary"}
+        app>
+        <VTextField
           flat
           solo-inverted
-          prepend-icon="search"
-          label="Search"
-          class="hidden-sm-and-down"
+          prepend-icon={"search"}
+          label={"Search"}
+          class={"hidden-sm-and-down"}
         />
-        <v-spacer />
+        <VSpacer />
 
-        <v-btn icon href="mailto:linuxing3@qq.com">
-          <v-icon>email</v-icon>
-        </v-btn>
+        <VBtn icon href="mailto:linuxing3@qq.com">
+          <VIcon>email</VIcon>
+        </VBtn>
 
-        <v-btn icon href="https://github.com/linuxing3/official-manager">
-          <v-icon>fab fa-github</v-icon>
-        </v-btn>
-      </v-toolbar>
+        <VBtn icon href="https://github.com/linuxing3/official-manager">
+          <VIcon>fab fa-github</VIcon>
+        </VBtn>
+      </VToolbar>
     );
   },
 });
