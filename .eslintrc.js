@@ -12,7 +12,7 @@ module.exports = {
     "no-unreachable": "off",
     "no-empty": "warn",
     "no-trailing-spaces": "warn",
-    "vue/not-use-v-if-with-v-for": "off",
+    "vue/no-use-v-if-with-v-for": "off",
     "vue/html-indent": [
       "warn",
       2,
