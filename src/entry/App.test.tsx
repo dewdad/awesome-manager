@@ -1,3 +1,4 @@
+import { VNode } from "vue";
 import { component } from "vue-tsx-support";
 
 import {
@@ -5,14 +6,13 @@ import {
   VApp,
   VAvatar,
   VBadge,
-  VBreadcrumbs,
   VBtn,
   VBtnToggle,
   VContainer,
   VContent,
   VFlex,
   VIcon,
-  VLayout,
+  VLayout
 } from "vuetify-tsx";
 
 
@@ -49,7 +49,7 @@ const App = component({
       },
     ],
   }),
-  render() {
+  render(): VNode {
     return (
       <VApp>
         <VContent>
@@ -84,14 +84,6 @@ const App = component({
                 </VBadge>
 
                 <SubTitle>Breadcrumbs</SubTitle>
-                <VBreadcrumbs items={this.breadcrumbs} divider=">" />
-                <VBreadcrumbs
-                  items={this.breadcrumbs}
-                  divider=">"
-                  scopedSlots={{
-                    item: (props: any) => [<a href={props.item.href}>{props.item.text}</a>],
-                  }}
-                />
 
                 <SubTitle>Button</SubTitle>
                 <VBtn color="primary">Click Me!</VBtn>

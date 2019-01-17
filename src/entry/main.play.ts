@@ -3,13 +3,20 @@ import Router, { RouteConfig } from "vue-router";
 import store from "../store";
 import i18n from "../plugins/i18n";
 // Register styles
-import Vuetify from "vuetify-tsx";
+import { directives, transitions, Vuetify } from 'vuetify-tsx';
 import "../plugins/styles";
-import App from "./App.test";
+// App
+import App from "./App.router";
 
-Vue.use(({
-  install: () => Vue.prototype.$vuetify = Vuetify
-}));
+// Vuetify
+Vue.use(Vuetify, {
+  directives,
+  components: {
+    transitions,
+  },
+});
+
+// VueRouter
 Vue.use(Router);
 
 const path = [
@@ -33,6 +40,7 @@ const router = new Router({
 
 Vue.config.productionTip = false;
 
+// Bootstrap
 new Vue({
   store,
   router,

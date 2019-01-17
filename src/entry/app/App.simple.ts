@@ -2,9 +2,9 @@ import Vue from "vue";
 import { VueRouter } from "vue-router/types/router";
 import { Store } from "vuex";
 import VueI18n from "vue-i18n";
-import router from "../router";
-import store from "../store";
-import i18n from "../plugins/i18n";
+import router from "../../router";
+import store from "../../store";
+import i18n from "../../plugins/i18n";
 import App from "./App.awesome.vue";
 
 export interface IApp {
