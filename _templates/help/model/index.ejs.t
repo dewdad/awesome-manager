@@ -6,7 +6,6 @@ message: |
   注入:
      `store/index.ts`
      `store/plugins/index.ts`
-     `api/globals.ts`
   创建:
      `api/Model.ts`
      `api/__tests__/Model.spec.ts`

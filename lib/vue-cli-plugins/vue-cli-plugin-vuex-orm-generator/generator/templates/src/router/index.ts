@@ -4,6 +4,8 @@ import Router, { RouteConfig } from "vue-router";
 
 Vue.use(Router);
 
+import { routes } from "./routes";
+
 /**
  * 动态路由
  */
@@ -11,11 +13,11 @@ let requiredRoute = require.context(".", false, /\.ts$/);
 
 requiredRoute.keys().forEach(key => {
   if (key === "./index.ts" || key === "./path.awesome.ts") return;
-  path.push(requiredRoute(key).default || requiredRoute(key));
+  routes.push(requiredRoute(key).default || requiredRoute(key));
 });
 
 const router = new Router({
-  routes: path as RouteConfig[],
+  routes: routes as RouteConfig[],
 });
 
 // router gards
