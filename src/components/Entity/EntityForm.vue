@@ -8,10 +8,10 @@ export default {
       model: {},
     };
   },
-  mixins: [ crudMixin ],
+  mixins: [crudMixin],
   created() {
     window.EntityForm = this;
-  }
+  },
 };
 </script>
 

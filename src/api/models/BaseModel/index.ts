@@ -2,7 +2,6 @@ import { Model, BelongsTo } from "@vuex-orm/core";
 import { keys, pullAll } from "lodash";
 
 export class BaseModel extends Model {
-
   static primaryKey = "_id";
 
   static fieldsKeys(): string[] {
@@ -32,12 +31,11 @@ export class BaseModel extends Model {
   }
 
   // 关系型数据键值中包括_id的
-  static  relationFieldsWithId(): string[] {
-      return this.relationFields().filter(r => r.match(/.*_id/));
-    }
+  static relationFieldsWithId(): string[] {
+    return this.relationFields().filter(r => r.match(/.*_id/));
+  }
   // 关系型数据键值中不包括_id的
   static nonRelationFieldsNoId(): string[] {
     return this.relationFields().filter(r => !r.match(/.*_id/));
   }
-
 }

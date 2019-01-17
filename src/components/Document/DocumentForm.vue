@@ -13,13 +13,13 @@ export default {
       startDateMenu: false,
     };
   },
-  mixins: [ crudMixin ],
+  mixins: [crudMixin],
   created() {
     window.DocumentForm = this;
   },
   computed: {
     selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-    selectUsers: () => map(pick(["_id", "name"]), User.all()),  
+    selectUsers: () => map(pick(["_id", "name"]), User.all()),
   },
   methods: {},
 };

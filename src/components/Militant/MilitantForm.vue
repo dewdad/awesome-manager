@@ -4,10 +4,10 @@ import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
-      modelName: "militant"
+      modelName: "militant",
     };
   },
-  mixins: [ crudMixin ],
+  mixins: [crudMixin],
   created() {
     window.MilitantForm = this;
   },

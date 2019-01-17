@@ -13,7 +13,7 @@ export default {
       modelName: "user",
     };
   },
-  mixins: [ crudMixin ],
+  mixins: [crudMixin],
   created() {
     window.UserForm = this;
   },

@@ -7,11 +7,11 @@ module.exports = {
   extends: ["plugin:vue/essential", "@vue/prettier", "@vue/typescript"],
   rules: {
     // "prettier/prettier": "warn"
-    "no-console":"off",
-    "no-debugger":"off",
-    "no-unreachable":  "off",
-    "no-empty":"warn",
-    "no-trailing-spaces":  "warn",
+    "no-console": "off",
+    "no-debugger": "off",
+    "no-unreachable": "off",
+    "no-empty": "warn",
+    "no-trailing-spaces": "warn",
     "vue/not-use-v-if-with-v-for": "off",
     "vue/html-indent": [
       "warn",
@@ -34,8 +34,7 @@ module.exports = {
         },
       },
     ],
-    "vue/no-side-effects-in-computed-properties":
-     "off",
+    "vue/no-side-effects-in-computed-properties": "off",
   },
   parserOptions: {
     parser: "typescript-eslint-parser",

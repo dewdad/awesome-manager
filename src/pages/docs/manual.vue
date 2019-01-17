@@ -264,7 +264,7 @@ export default {
     computeBg6: () => join(process.env.BASE_URL, "bg/6.jpg"),
     computeBg10: () => join(process.env.BASE_URL, "bg/10.jpg"),
     computeAvatarMan4: () => join(process.env.BASE_URL, "avatar/man_4.jpg"),
-  }
+  },
 };
 </script>
 <style lang="stylus" scoped>

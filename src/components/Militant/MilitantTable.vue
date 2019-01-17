@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       editing: false,
-      modelName: "militant"
+      modelName: "militant",
     };
   },
   computed: {
@@ -20,7 +20,7 @@ export default {
         .get(),
     headers: () => Militant.fieldsKeys(),
   },
-  mixins: [exportMixin, crudMixin ],
+  mixins: [exportMixin, crudMixin],
   created() {
     window.MilitantTable = this;
   },

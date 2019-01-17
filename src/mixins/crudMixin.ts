@@ -54,11 +54,11 @@ export default {
       this.Model.delete(this.model._id);
     },
     saveItem() {
-      if (this.editing) { 
-        this.updateItem() 
+      if (this.editing) {
+        this.updateItem();
       } else {
         this.createItem();
-      };
+      }
     },
     updateItem() {
       if (this.editing) {
@@ -79,11 +79,11 @@ export default {
       // this.$emit("SET_EDITING", item);
     },
     tryT(text: string) {
-      if (this.$t !== undefined) { 
-        return this.$t(text); 
+      if (this.$t !== undefined) {
+        return this.$t(text);
       } else {
         return text;
-      } 
+      }
     },
   },
 };

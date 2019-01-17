@@ -12,9 +12,8 @@ import {
   VContent,
   VFlex,
   VIcon,
-  VLayout
+  VLayout,
 } from "vuetify-tsx";
-
 
 const Title = component({
   render() {

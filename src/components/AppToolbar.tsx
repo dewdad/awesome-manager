@@ -7,7 +7,7 @@ interface IAppToolbarEvents {
   handleDrawerToggle: () => void;
   goHomeRoute: () => void;
   getApp: any;
-};
+}
 
 const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
   name: "app-toolbar",
@@ -46,9 +46,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
   },
   render(): VNode {
     return (
-      <VToolbar
-        color={"primary"}
-        app>
+      <VToolbar color={"primary"} app>
         <VBtn icon onClick={() => this.handleDrawerToggle}>
           <VIcon>star</VIcon>
         </VBtn>
