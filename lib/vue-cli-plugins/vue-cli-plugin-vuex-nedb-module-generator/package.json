@@ -6,6 +6,10 @@
   "dependencies": {
     "dotenv": "latest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linuxing3/vue-cli-plugin-vuex-nedb-module-generator.git"
+  },
   "author": "linuxing3<linuxing3@qq.com>",
   "license": "MIT"
 }

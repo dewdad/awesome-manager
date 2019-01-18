@@ -8,5 +8,9 @@
     "fs-extra": "^7.0.0"
   },
   "author": "linuxing3<linuxing3@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linuxing3/vue-cli-plugin-vuex-orm-generator.git"
+  },
   "license": "MIT"
 }
