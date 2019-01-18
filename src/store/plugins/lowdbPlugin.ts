@@ -1,54 +1,44 @@
-import { LowdbForElectron } from "@/api/lowdb";
-import { stateObjectFromArray } from "@/util/transformer";
-import { Model } from "@vuex-orm/core";
+/**
+ * Lowdb插件将vuex状态持久化
+ * @example
+ * await Model.$fetch() -> load data from Lowdb
+ * await Model.$get(id) -> get data by id from Lowdb
+ * await Model.$create({ title: ""}) -> create data from Lowdb
+ * await Model.$update(id, { title: "localforage"}) -> load data from Lowdb
+ * await Model.$delete(id) -> load data from Lowdb
+ */
+
+import VuexORM, { Database } from "@vuex-orm/core";
+import VuexORMLowdbPlugin from "vuex-orm-lowdb";
 import models from "@/api/models";
-const lowdbPlugin = options => {
-  const entity = options.namespace || "data";
-  return store => {
-    /**
-     * Load the data from lowdb and commit to initial State
-     */
-    const DB: LowdbForElectron = new LowdbForElectron(entity);
-    const entityArray: any[] = DB.all(entity);
-    const NSModel: Model = models[entity];
-    // NOTE https://vuex-orm.github.io/vuex-orm/guide/advanced/interact-with-store-from-model.html#interacting-with-state
-    if (Array.isArray(entityArray)) {
-      NSModel.commit(state => (state.data = stateObjectFromArray(entityArray)));
-      // entityArray.map(item => NSModel.insert({data: item}))
-    }
-    /**
-     * Subscription to actions for logging each entity mutation
-     * payload before persiste to state
-     //  */
-    // store.subscribeAction((action, state) => {
-    //   let { entity } = action.payload;
-    //   if (entity !== entity) return;
+import modules from "@/store/modules";
 
-    //   if (action.type === "entities/insert") {
-    //     console.log(`Insert ${entity} entity`);
-    //     console.log(action.type);
-    //     console.log(action.payload);
-    //   }
-    //   if (action.type === "entities/delete") {
-    //     console.log(`Delete ${entity} entity`);
-    //     console.log(action.type);
-    //     console.log(action.payload);
-    //   }
-    //   if (action.type === "entities/update") {
-    //     console.log(`Update ${entity} entity`);
-    //     console.log(action.type);
-    //     console.log(action.payload);
-    //   }
-    // });
-  };
-};
-
-const lowdbPlugins = () => {
-  let plugins = [];
-  Object.keys(models).forEach(entity => {
-    plugins.push(lowdbPlugin({ namespace: entity }));
+    
+/**
+ * 在数据库中注册模型和模块
+ */
+export const registerDatabase = (models: any, modules: any): Database => {
+  const database = new Database();
+  Object.keys(models).map(key => {
+    console.log(`Registering ORM for ${key} model`);
+    database.register(models[key], modules[key] || {});
   });
-  return plugins;
+  return database;
 };
 
-export default lowdbPlugins;
+/**
+ * 生成数据库
+ */
+export const database = registerDatabase(models, modules);
+
+/**
+ * 载入LocalForage插件
+ */
+VuexORM.use(VuexORMLowdbPlugin, { database });
+
+/**
+ * 安装localForage ORM databse
+ */
+const lowdbPlugin = VuexORM.install(database);
+
+export default lowdbPlugin;

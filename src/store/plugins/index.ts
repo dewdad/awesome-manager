@@ -1,11 +1,17 @@
 import pathifyPlugin from "./pathifyPlugin";
-import ormPlugin from "./ormPlugin";
-import lowdbPlugins from "./lowdbPlugin";
+// import ormPlugin from "./ormPlugin";
+import localForagePlugin from "./localForagePlugin";
+// import lowdbPlugin from "./lowdbPlugin";
+
 export default [
-  // pathify plugins stuff
+
   pathifyPlugin.plugin,
-  // orm plugins stuff
-  ormPlugin,
-  ...lowdbPlugins(),
-  // lowdb plugins stuff
+
+  // lowdbPlugin,
+
+  // ormPlugin,
+
+  // ...lowdbPlugin,
+
+  localForagePlugin
 ];
