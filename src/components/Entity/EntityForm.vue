@@ -6,6 +6,7 @@ export default {
     return {
       editing: false,
       model: {},
+      modelName: "entity",
     };
   },
   mixins: [crudMixin],

@@ -26,7 +26,7 @@ export default {
       return this.mini ? "text-sm-right" : "text-sm-center";
     },
     computeAvatarSize() {
-      return this.mini ? "48" : "96";
+      return this.mini ? "48" : "192";
     },
     computeAvatarMan1: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
   },
@@ -59,24 +59,6 @@ export default {
         extended
         color="primary"
         dark="">
-      <div
-          class="layout pa-2 align-center avatar"
-          :class="computeCardLayout">
-        <v-avatar
-            class="mt-15"
-            :size="computeAvatarSize"
-            color="primary">
-          <img
-              :src="computeAvatarMan1"
-              :alt="model.name">
-        </v-avatar>
-        <div
-            class="flex"
-            :class="computeTextAlgin">
-          <div class="subheading">{{model.name}}</div>
-          <span class="caption">{{model.position}}</span>
-        </div>
-      </div>
       <v-spacer></v-spacer>
       <v-toolbar-title>{{editing ? "你在进行编辑更新" : "你在添加模式"}}</v-toolbar-title>
     </v-toolbar>
@@ -92,7 +74,7 @@ export default {
               sm6>
             <v-text-field
                 v-model="model[field]"
-                :label=" $t !== undefined ? $t(field) : field">
+                :label=" tryT(field) ">
             </v-text-field>
           </v-flex>
           <v-flex
@@ -102,7 +84,7 @@ export default {
                 v-for="relationField in relationFieldsWithId"
                 v-model="model[relationField]"
                 :key="relationField"
-                :label=" $t(relationField) "
+                :label=" tryT(relationField) "
                 :items="selectEntities"
                 item-text="name"
                 item-value="_id">
@@ -133,11 +115,11 @@ export default {
 .headline {
   padding: 20px;
 }
-.avatar {
-  padding-top: 100px;
-}
 .mt-15 {
   padding-top: 15px;
   margin-top: 15px;
+}
+.mt-56 {
+  margin-top: 56px;
 }
 </style>

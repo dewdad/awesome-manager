@@ -1,12 +1,12 @@
 import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
+import { join } from "path";
 
-import { VToolbar, VToolbarTitle, VTextField, VBtn, VIcon, VSpacer } from "vuetify-tsx";
+import { VToolbar, VToolbarSideIcon, VMenu, VList, VListTile, VListTileContent, VListTileTitle, VTextField, VBtn, VAvatar, VIcon, VSpacer } from "vuetify-tsx";
 
 interface IAppToolbarEvents {
-  handleDrawerToggle: () => void;
-  goHomeRoute: () => void;
-  getApp: any;
+  handleDrawerToggle: (e: any) => void;
+  goHomeRoute: (e: any) => void;
 }
 
 const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
@@ -35,22 +35,21 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav;
     },
+    computeAvatar: () => join(process.env.BASE_URL, "avatar/mf-avatar.svg"),
   },
   methods: {
-    handleDrawerToggle() {
+    handleDrawerToggle(e) {
       (window as any).getApp.$emit("APP_DRAWER_TOGGLED");
     },
-    goHomeRoute() {
-      this.$router.push("/");
+    goHomeRoute(e) {
+      this.$router.push("/docs/manual");
     },
   },
   render(): VNode {
+    let { items } = this;
     return (
       <VToolbar color={"primary"} app>
-        <VBtn icon onClick={() => this.handleDrawerToggle}>
-          <VIcon>star</VIcon>
-        </VBtn>
-        <VToolbarTitle class="ml-0 pl-3">Awesome Management</VToolbarTitle>
+        <VToolbarSideIcon nativeOn-click={this.handleDrawerToggle} />
         <VTextField
           flat
           solo-inverted
@@ -60,7 +59,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
         />
         <VSpacer />
 
-        <VBtn icon onClick={() => this.goHomeRoute}>
+        <VBtn icon nativeOn-click={this.goHomeRoute}>
           <VIcon>home</VIcon>
         </VBtn>
 
@@ -71,6 +70,25 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
         <VBtn icon href="https://github.com/linuxing3/awesome-manager">
           <VIcon>fab fa-github</VIcon>
         </VBtn>
+
+        <VMenu nudgeBottom={10} offsetY origin="center center" transition={"scale-transition"}>
+          <VAvatar size={30} slot={"activator"}>
+            <img src={this.computeAvatar} alt="Avatar Image"></img>
+          </VAvatar>
+          <VList>
+            {items.map(item => 
+            <VListTile 
+              ripple
+              nativeOn-click={item.click}>
+              <VListTileContent>
+                <VListTileTitle>
+                  {item.title}
+                </VListTileTitle>
+              </VListTileContent>
+            </VListTile>
+              )}
+          </VList>
+        </VMenu>
       </VToolbar>
     );
   },

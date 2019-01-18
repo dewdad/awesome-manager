@@ -38,4 +38,8 @@ export class BaseModel extends Model {
   static nonRelationFieldsNoId(): string[] {
     return this.relationFields().filter(r => !r.match(/.*_id/));
   }
+
+  static count(): number {
+    return this.query().count();
+  }
 }
