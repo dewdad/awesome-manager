@@ -1,11 +1,19 @@
 import pathifyPlugin from "./pathifyPlugin";
 import ormPlugin from "./ormPlugin";
-import lowdbPlugins from "./lowdbPlugin";
+import { genLowdbPlugins, lowdbPlugin } from "./lowdbPlugin.simple";
+// import lowdbPlugin from "./lowdbPlugin";
+// import localForagePlugin from "./localForagePlugin";
+
 export default [
-  // pathify plugins stuff
   pathifyPlugin.plugin,
-  // orm plugins stuff
   ormPlugin,
-  ...lowdbPlugins(),
-  // lowdb plugins stuff
+  // ...genLowdbPlugins(),
+  lowdbPlugin({ namespace: "entity"}),
+  lowdbPlugin({ namespace: "user"}),
+  lowdbPlugin({ namespace: "evaluation"}),
+  lowdbPlugin({ namespace: "document"}),
+  lowdbPlugin({ namespace: "activity"}),
+  lowdbPlugin({ namespace: "militant"}),
+  lowdbPlugin({ namespace: "resummee"}),
+  lowdbPlugin({ namespace: "activity"}),
 ];

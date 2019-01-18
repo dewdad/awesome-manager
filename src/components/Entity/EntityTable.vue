@@ -4,6 +4,7 @@ import EntityForm from "./EntityForm";
 import EntityIterator from "./EntityIterator";
 import EntityList from "./EntityList";
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   components: {
     EntityForm,
