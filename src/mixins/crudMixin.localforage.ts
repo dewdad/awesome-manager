@@ -45,6 +45,9 @@ export default {
       this.model = item;
     });
   },
+  async mouted() {
+    await this.Model.$fetch();
+  },
   methods: {
     reset() {
       this.editing = false;
@@ -52,6 +55,8 @@ export default {
     },
     deleteItem() {
       this.Model.delete(this.model._id);
+      // localforage
+      this.Model.$destroy(this.model);
     },
     saveItem() {
       if (this.editing) {
@@ -63,6 +68,8 @@ export default {
     updateItem() {
       if (this.editing) {
         this.Model.update(this.model);
+        // localforage
+        this.Model.$update(this.model);
         this.editing = false;
         this.model = new this.Model();
       }
@@ -72,6 +79,8 @@ export default {
         this.Model.insert({
           data: this.model,
         });
+        // localforage
+        this.Model.$create(this.model);
         // reset default
         this.model = new this.Model();
       }

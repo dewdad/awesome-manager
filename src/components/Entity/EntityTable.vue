@@ -23,8 +23,6 @@ export default {
   },
   mixins: [exportMixin],
   created() {
-    Entity.$fetch();  
-    console.log(Entity.$fetch);
     window.EntityTable = this;
   },
   methods: {

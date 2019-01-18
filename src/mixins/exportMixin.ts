@@ -4,6 +4,8 @@ import { remote, shell } from "electron";
 import { LowdbForElectron } from "@/api/lowdb";
 import * as keysDef from "@/locales/cn.json";
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from "@/util";
+import { stateObjectFromArray } from "@/util/transformer";
+
 export default {
   data() {
     return {
@@ -42,9 +44,19 @@ export default {
       return this.resolvePath(this.outputDocFile, "doc");
     },
   },
+  mouted() {
+    this.loadItems();
+  },
   methods: {
     resolvePath(fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`);
+    },
+    /**
+     * 加载数据函数
+     */
+    loadItems() {
+      // let data = this.entityDb.all(this.modelName);
+      // this.Model.commit(state => (state.data = stateObjectFromArray(data)));
     },
     /**
      * 导入数据函数
