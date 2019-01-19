@@ -15768,13 +15768,13 @@ vuex-orm-localforage@^0.1.4:
     localforage "^1.7.2"
     lodash "^4.17.11"
 
-vuex-orm-lowdb@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.1.2.tgz#75745879ffe04f86ab1b4e3be9bf240869870597"
-  integrity sha512-Q/ktaGHg6b7VaAN+lTI7HV41BsNNN2A6eO9woRDvlXxy9fSUNYjBbe9uL9suRvYbM58E9dLcqRx9UdXmI+O0XA==
+vuex-orm-lowdb@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.2.2.tgz#19308e523b53b984ca2daaabcfa8758e0643ba0d"
+  integrity sha512-VBHhDeI/ARuyqLu4mMVrDYuDjR0MbFRvJQfnvrsT7fTvk3i8aA68NpPFsoT5E3F56ZTq0MIqLdjSH/IwzeA5lw==
   dependencies:
     "@babel/preset-env" "^7.0.0"
-    "@vuex-orm/core" "^0.26.4"
+    "@vuex-orm/core" "^0.29.0"
     lodash "^4.17.11"
     lodash-id "^0.14.0"
     lowdb "^1.0.0"
