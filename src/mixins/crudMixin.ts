@@ -55,7 +55,7 @@ export default {
     },
     deleteItem() {
       // this.Model.delete(this.model._id);
-      this.Model.$delete({ _id: this.model._id });
+      this.Model.$delete(this.model._id);
     },
     saveItem() {
       if (this.editing) {

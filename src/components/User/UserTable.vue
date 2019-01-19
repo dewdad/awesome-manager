@@ -3,31 +3,26 @@ import User from "@/api/models/User";
 import UserForm from "./UserForm";
 import { pullAll } from "lodash";
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   components: {
     UserForm,
   },
   data() {
     return {
-      editing: false,
+      modelName: "user",
     };
   },
-  computed: {
-    modelName: () => User.entity,
-    all: () =>
-      User.query()
-        .withAll()
-        .get(),
-    headers: () => pullAll(User.fieldsKeys(), User.relationFields()),
-  },
-  mixins: [exportMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.UserApp = this;
   },
-  methods: {
-    deleteItem(item) {
-      User.delete(item._id);
+  computed: {
+    headers() {
+      return this.Model.nonRelationFields();
     },
+  },
+  methods: {
     editItem(item) {
       window.UserForm.$emit("SET_EDITING", item);
     },
@@ -40,7 +35,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template
