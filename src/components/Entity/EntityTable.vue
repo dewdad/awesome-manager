@@ -21,14 +21,11 @@ export default {
     all: () => Entity.all(),
     headers: () => Entity.fieldsKeys(),
   },
-  mixins: [exportMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.EntityTable = this;
   },
   methods: {
-    deleteItem(item) {
-      Entity.delete(item._id);
-    },
     editItem(item) {
       window.EntityForm.$emit("SET_EDITING", item);
     },

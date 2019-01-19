@@ -292,11 +292,13 @@
 </template>
 <script lang="js">
 import Activity from "@/api/models/Activity";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
       editing: false,
       model: {},
+      modelName: "activity",
       occurenceDateMenu: false,
       currentDateMenu: false,
       reportDateMenu: false,
@@ -305,35 +307,9 @@ export default {
       endTimeMenu: false,
     }
   },
+  mixins: [crudMixin],
   created() {
-    this.model = new Activity()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
     window.ActivityForm = this;
   },
-  computed: {
-    fields: () => Activity.fieldsKeys()
-  },
-  methods: {
-    reset() {
-      this.editing = false
-      this.model = new Activity()
-    },
-    saveItem() {
-      if(!this.editing) {
-        Activity.insert({
-          data: this.model
-        })
-        this.model = new Activity()
-      } else {
-        Activity.update(this.model)
-        this.editing = false
-        this.model = new Activity()
-      }
-      console.log(Activity.all())
-    }
-  }
 }
 </script>

@@ -38,6 +38,9 @@ export default {
       return this.Model.nonRelationFieldsNoId();
     },
   },
+  async mounted() {
+    await this.Model.$fetch();
+  },
   created() {
     this.model = new this.Model();
     this.$on("SET_EDITING", item => {
@@ -51,7 +54,8 @@ export default {
       this.model = new this.Model();
     },
     deleteItem() {
-      this.Model.delete(this.model._id);
+      // this.Model.delete(this.model._id);
+      this.Model.$delete({ _id: this.model._id });
     },
     saveItem() {
       if (this.editing) {
@@ -62,14 +66,20 @@ export default {
     },
     updateItem() {
       if (this.editing) {
-        this.Model.update(this.model);
+        // this.Model.update(this.model);
+        this.Model.$update({
+          data: this.model,
+        });
         this.editing = false;
         this.model = new this.Model();
       }
     },
     createItem() {
       if (!this.editing) {
-        this.Model.insert({
+        // this.Model.insert({
+        //   data: this.model,
+        // });
+        this.Model.$create({
           data: this.model,
         });
         // reset default
