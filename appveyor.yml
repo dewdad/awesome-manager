@@ -39,7 +39,7 @@ deploy:
   prerelease: false
   skip_tags: true
   on:
-    branch: master
+    branch: publish
 
 skip_tags: true
 

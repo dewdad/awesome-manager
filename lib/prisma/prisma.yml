@@ -1,7 +1,8 @@
 endpoint: https://eu1.prisma.sh/wenju-xing-3d984a/demo/dev
 datamodel:
-  - datamodel/enums.prisma
-  - datamodel/types.prisma
+  # - datamodel/enums.prisma
+  # - datamodel/types.prisma
+  - ../../src/api/prisma/*.prisma
 
 seed:
   import: seed/seed.graphql
