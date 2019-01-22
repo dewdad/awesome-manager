@@ -31,7 +31,6 @@
   "sendingEntity": "派出单位",
   "sendingEntity_id": "派出单位",
   "arrivingDate": "到馆时间",
-  "leavingDate": "离馆时间",
   "fromEntity": "出国前单位",
   "fromEntity_id": "出国前单位",
   "memo": "备注",
