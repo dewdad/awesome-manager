@@ -26,19 +26,23 @@ export class BaseModel extends Model {
      */
     return this.fieldsKeys().reduce((list, field) => {
       // TODO !this.isConnection()
-      if (
-        this.fields()[field] instanceof BelongsTo || 
-        this.fields()[field] instanceof HasOne ||
-        this.fields()[field] instanceof HasMany ||
-        this.fields()[field] instanceof MorphOne ||
-        this.fields()[field] instanceof MorphMany
-      ) 
-      {
+      let fieldAttribute = this.fields()[field];
+      if (this.isRelationAndForeignKey(fieldAttribute)) {
         list.push(`${field}_id`);
         list.push(field);
       }
       return list;
     }, []);
+  }
+
+  static isRelationAndForeignKey(field: any): boolean {
+    return (
+      field instanceof BelongsTo || 
+      field instanceof HasOne ||
+      field instanceof HasMany ||
+      field instanceof MorphOne ||
+      field instanceof MorphMany
+    );
   }
   
   /**
