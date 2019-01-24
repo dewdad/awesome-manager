@@ -2,13 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
-      "request": "launch",
-      "name": "打开Chrome，端口9229",
-      "url": "http://localhost:9229",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
       "type": "node",
       "request": "launch",
       "name": "通过node调试fp程序，端口随机",
@@ -47,13 +40,6 @@
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "electron",
-      "request": "launch",
-      "name": "启动Electron调试安装压缩包",
-      "appDir": "/dist_electron/bundled",
-      "sourceMaps": true
     },
     {
       "type": "node",

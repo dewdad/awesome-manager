@@ -22,24 +22,12 @@ install:
   - ps: Install-Product node 8 x86
   - yarn
 
-# test_script:
-#   - yarn test:unit
+test_script:
+  - yarn test:unit
 
 build_script:
   - yarn electron:build
 
-deploy:
-  provider: GitHub
-  release: awesome-manager-v$(appveyor_build_version)
-  description: "A dashboard management system for general purpose"
-  auth_token:
-    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  artifact: bin
-  draft: false
-  prerelease: false
-  skip_tags: true
-  on:
-    branch: publish
 
 skip_tags: true
 
