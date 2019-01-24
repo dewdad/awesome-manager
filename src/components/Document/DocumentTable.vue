@@ -1,8 +1,10 @@
 <script>
 import Document from "@/api/models/Document";
 import DocumentForm from "./DocumentForm";
-import { pullAll } from "lodash";
+
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     DocumentForm,
@@ -10,26 +12,22 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "document",
     };
   },
   computed: {
-    modelName: () => Document.entity,
-    all: () =>
-      Document.query()
-        .withAll()
-        .get(),
-    headers: () => pullAll(Document.fieldsKeys(), Document.relationFields()),
+    headers() {
+      return this.Model.nonRelationFields();
+    },
   },
-  mixins: [exportMixin],
+  mixins: [exportMixin, crudMixin],
   created() {
     window.DocumentTable = this;
   },
   methods: {
-    deleteItem(item) {
-      Document.delete(item._id);
-    },
     editItem(item) {
-      window.DocumentForm.$emit("SET_EDITING", item);
+      this.$emit("SET_EDITING", item);
+      window.UserForm.$emit("SET_EDITING", item);
     },
   },
 };
@@ -43,7 +41,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template

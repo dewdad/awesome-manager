@@ -14,11 +14,9 @@ export default {
     };
   },
   computed: {
-    all: () =>
-      Militant.query()
-        .withAll()
-        .get(),
-    headers: () => Militant.fieldsKeys(),
+    headers() {
+      return this.Model.nonRelationFields();
+    },
   },
   mixins: [exportMixin, crudMixin],
   created() {

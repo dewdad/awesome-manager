@@ -1,9 +1,10 @@
 <script>
 import User from "@/api/models/User";
 import UserForm from "./UserForm";
-import { pullAll } from "lodash";
+
 import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     UserForm,

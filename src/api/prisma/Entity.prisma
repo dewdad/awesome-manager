@@ -1,0 +1,5 @@
+type Entity {
+  id: ID! @id
+  name: String!
+  age: String!gender: String!
+}

@@ -1,9 +1,12 @@
 <script>
 import { join } from "path";
 import { map, pick, pullAll } from "lodash/fp";
+
 import User from "@/api/models/User";
 import Entity from "@/api/models/Entity";
+
 import crudMixin from "@/mixins/crudMixin";
+
 export default {
   data() {
     return {
@@ -90,7 +93,7 @@ export default {
       <v-spacer></v-spacer>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
-          @click="saveItem">{{editing ? "更新": "添加"}}信息</v-btn>
+          @click="saveItem(model)">{{editing ? "更新": "添加"}}信息</v-btn>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
           @click="militantInformation">党员信息</v-btn>

@@ -8,6 +8,7 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import crudMixin from "@/mixins/crudMixin";
+
 export default {
   data() {
     return {

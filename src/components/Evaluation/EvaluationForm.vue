@@ -7,37 +7,11 @@ export default {
       startDateMenu: false,
       editing: false,
       model: {},
+      modelName: "evaluation",
     };
   },
   created() {
-    this.model = new Evaluation();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.EvaluationForm = this;
-  },
-  computed: {
-    modelName: () => Evaluation.entity,
-    fields: () => Evaluation.fieldsKeys(),
-  },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new Evaluation();
-    },
-    saveItem() {
-      if (!this.editing) {
-        Evaluation.insert({
-          data: this.model,
-        });
-        this.model = new Evaluation();
-      } else {
-        Evaluation.update(this.model);
-        this.editing = false;
-        this.model = new Evaluation();
-      }
-    },
   },
 };
 </script>

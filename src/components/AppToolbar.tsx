@@ -2,7 +2,20 @@ import * as tsx from "vue-tsx-support";
 import { VNode } from "vue";
 import { join } from "path";
 
-import { VToolbar, VToolbarSideIcon, VMenu, VList, VListTile, VListTileContent, VListTileTitle, VTextField, VBtn, VAvatar, VIcon, VSpacer } from "vuetify-tsx";
+import {
+  VToolbar,
+  VToolbarSideIcon,
+  VMenu,
+  VList,
+  VListTile,
+  VListTileContent,
+  VListTileTitle,
+  VTextField,
+  VBtn,
+  VAvatar,
+  VIcon,
+  VSpacer,
+} from "vuetify-tsx";
 
 interface IAppToolbarEvents {
   handleDrawerToggle: (e: any) => void;
@@ -73,20 +86,16 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
 
         <VMenu nudgeBottom={10} offsetY origin="center center" transition={"scale-transition"}>
           <VAvatar size={30} slot={"activator"}>
-            <img src={this.computeAvatar} alt="Avatar Image"></img>
+            <img src={this.computeAvatar} alt="Avatar Image" />
           </VAvatar>
           <VList>
-            {items.map(item => 
-            <VListTile 
-              ripple
-              nativeOn-click={item.click}>
-              <VListTileContent>
-                <VListTileTitle>
-                  {item.title}
-                </VListTileTitle>
-              </VListTileContent>
-            </VListTile>
-              )}
+            {items.map(item => (
+              <VListTile ripple nativeOn-click={item.click}>
+                <VListTileContent>
+                  <VListTileTitle>{item.title}</VListTileTitle>
+                </VListTileContent>
+              </VListTile>
+            ))}
           </VList>
         </VMenu>
       </VToolbar>

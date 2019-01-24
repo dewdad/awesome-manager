@@ -7,7 +7,7 @@
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0">
         <template
             slot="headers"
@@ -64,7 +64,9 @@
 import Activity from "@/api/models/Activity";
 import ActivityForm from "./ActivityForm";
 import ActivityTimeline from "./ActivityTimeline";
+
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 
 export default {
   components: {
@@ -74,22 +76,16 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "activity"
     }
   },
-  computed: {
-    modelName: () => Activity.entity,
-    all: () => Activity.all(),
-    headers: () => Activity.fieldsKeys()
-  },
-  mixins: [ exportMixin ],
+  mixins: [ exportMixin, crudMixin ],
   created() {
     window.ActivityTable = this;
   },
   methods: {
-    deleteItem(item) {
-      Activity.delete(item._id)
-    },
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.activityForm.$emit("SET_EDITING", item)
     }
   }

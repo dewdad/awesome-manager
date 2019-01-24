@@ -1,17 +1,19 @@
 /**
  * Lowdb插件将vuex状态持久化
- * @example
- * await Model.$fetch() -> load data from Lowdb
- * await Model.$get(id) -> get data by id from Lowdb
- * await Model.$create({ title: "lowdb"}) -> create data from Lowdb
- * await Model.$update(id, { title: "lowdb"}) -> load data from Lowdb
- * await Model.$delete(id) -> load data from Lowdb
  */
 
 import VuexORM, { Database } from "@vuex-orm/core";
 import VuexORMLowdbPlugin from "vuex-orm-lowdb";
+
+// 获取模型和模块
 import models from "@/api/models";
 import modules from "@/store/modules";
+
+// 获取文件路径
+import { remote } from "electron";
+
+const dbPath = remote.app || "/public/data";
+
 /**
  * 在数据库中注册模型和模块
  */
@@ -30,9 +32,9 @@ export const registerDatabase = (models: any, modules: any): Database => {
 export const database = registerDatabase(models, modules);
 
 /**
- * 载入LocalForage插件
+ * 载入Lowdb插件
  */
-VuexORM.use(VuexORMLowdbPlugin, { database, dbPath: "./public/data" });
+VuexORM.use(VuexORMLowdbPlugin, { database, dbPath });
 
 /**
  * 安装localForage ORM databse

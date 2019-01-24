@@ -1,7 +1,10 @@
 <script>
 import Resummee from "@/api/models/Resummee";
 import ResummeeForm from "./ResummeeForm";
+
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     ResummeeForm,
@@ -9,25 +12,21 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "resummee",
     };
   },
+  mixins: [exportMixin, crudMixin],
   computed: {
-    all: () =>
-      Resummee.query()
-        .withAll()
-        .get(),
-    headers: () => Resummee.fieldsKeys(),
-    modelName: () => Resummee.entity,
+    headers() {
+      return this.Model.nonRelationFields();
+    },
   },
-  mixins: [exportMixin],
   created() {
     window.ResummeeTable = this;
   },
   methods: {
-    deleteItem(item) {
-      Resummee.delete(item._id);
-    },
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.ResummeeForm.$emit("SET_EDITING", item);
     },
   },
@@ -39,7 +38,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template

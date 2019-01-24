@@ -286,7 +286,7 @@
       <v-spacer></v-spacer>
       <v-btn
           color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

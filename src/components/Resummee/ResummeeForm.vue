@@ -1,41 +1,17 @@
 <script>
 import Resummee from "@/api/models/Resummee";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
       editing: false,
       model: {},
+      modelName: "resummee",
     };
   },
+  mixins: [crudMixin],
   created() {
-    this.model = new Resummee();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
     window.ResummeeForm = this;
-  },
-  computed: {
-    fields: () => Resummee.fieldsKeys(),
-  },
-  methods: {
-    reset() {
-      this.editing = false;
-      this.model = new Resummee();
-    },
-    saveItem() {
-      if (!this.editing) {
-        Resummee.insert({
-          data: this.model,
-        });
-        this.model = new Resummee();
-      } else {
-        Resummee.update(this.model);
-        this.editing = false;
-        this.model = new Resummee();
-      }
-      console.log(Resummee.all());
-    },
   },
 };
 </script>
@@ -76,7 +52,7 @@ export default {
       <v-spacer></v-spacer>
       <v-btn
           color="primary"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

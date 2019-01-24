@@ -3,8 +3,10 @@ import Entity from "@/api/models/Entity";
 import EntityForm from "./EntityForm";
 import EntityIterator from "./EntityIterator";
 import EntityList from "./EntityList";
+
 import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     EntityForm,
@@ -14,19 +16,21 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "entity",
     };
   },
-  computed: {
-    modelName: () => Entity.entity,
-    all: () => Entity.all(),
-    headers: () => Entity.fieldsKeys(),
-  },
   mixins: [crudMixin, exportMixin],
+  computed: {
+    headers() {
+      return this.Model.nonRelationFields();
+    },
+  },
   created() {
     window.EntityTable = this;
   },
   methods: {
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.EntityForm.$emit("SET_EDITING", item);
     },
   },
@@ -36,31 +40,47 @@ export default {
 <template>
   <v-card>
     <v-responsive>
-      <v-data-table :headers="headers" :items="all" class="elevation-0">
-        <template slot="headers" slot-scope="props">
+      <v-data-table
+          :headers="headers"
+          :items="all"
+          class="elevation-0">
+        <template
+            slot="headers"
+            slot-scope="props">
           <tr>
             <th
-              v-for="header in props.headers"
-              class="text-xs-left"
-              :key="header"
+                v-for="header in props.headers"
+                class="text-xs-left"
+                :key="header"
             >{{ $t !== undefined ? $t(header) : header }}</th>
           </tr>
         </template>
-        <template slot="items" slot-scope="props">
+        <template
+            slot="items"
+            slot-scope="props">
           <td
-            class="text-xs-left"
-            :key="header"
-            :autocomplete="props.item[header]"
-            v-for="header in headers"
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers"
           >{{ props.item[header] }}</td>
           <td class="justify-center layout px-0">
-            <v-btn icon class="mx-0" @click="editItem(props.item)">
+            <v-btn
+                icon
+                class="mx-0"
+                @click="editItem(props.item)">
               <v-icon color="teal">edit</v-icon>
             </v-btn>
-            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+            <v-btn
+                icon
+                class="mx-0"
+                @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
-            <v-btn icon class="mx-0" @click="exportItem(props.item)">
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
               <v-icon color="pink">fas fa-print</v-icon>
             </v-btn>
           </td>

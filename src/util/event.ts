@@ -1,12 +1,14 @@
 // Events for app
 import { dirname, resolve, join } from "path";
 
-interface Event {
+export interface Event {
   name: string;
   callback: Function;
   snackbar?: any;
   $router?: any;
   $message?: any;
+  editing?: boolean;
+  model?: any;
 }
 
 const events: Event[] = [
@@ -18,7 +20,6 @@ const events: Event[] = [
         color: "green",
         text: "登录成功!",
       };
-      this.$router.push({ path: "/projects" });
     },
   },
   {
@@ -120,6 +121,14 @@ const events: Event[] = [
         color,
         text: "在线状态改变!",
       };
+    },
+  },
+  {
+    name: "EDITING_STATUS_CHANGED",
+    // @component listen editing status
+    callback: function(item: object) {
+      this.editing = true;
+      this.model = item;
     },
   },
   {

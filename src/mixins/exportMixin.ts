@@ -14,6 +14,7 @@ export default {
       reverseTranslate: false,
       onlyKeepStringValue: true,
       needMergeWord: false,
+      modelName: "",
     };
   },
   computed: {

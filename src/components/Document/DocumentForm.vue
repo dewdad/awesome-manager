@@ -1,9 +1,12 @@
 <script>
 import { map, pick, pullAll } from "lodash/fp";
 import Document from "@/api/models/Document";
+
 import Entity from "@/api/models/Entity";
 import User from "@/api/models/User";
+
 import crudMixin from "@/mixins/crudMixin";
+
 export default {
   data() {
     return {
@@ -179,7 +182,7 @@ export default {
       <v-spacer></v-spacer>
       <v-btn
           :color="editing ? 'warning' : 'primary'"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

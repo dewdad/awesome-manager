@@ -1,4 +1,17 @@
-import { Model, BelongsTo, Increment, Boolean, Number, Attr, HasMany, HasOne, MorphOne, MorphMany, MorphTo, Attribute } from "@vuex-orm/core";
+import {
+  Model,
+  BelongsTo,
+  Increment,
+  Boolean,
+  Number,
+  Attr,
+  HasMany,
+  HasOne,
+  MorphOne,
+  MorphMany,
+  MorphTo,
+  Attribute,
+} from "@vuex-orm/core";
 import { keys, pullAll } from "lodash";
 
 export class BaseModel extends Model {
@@ -22,7 +35,7 @@ export class BaseModel extends Model {
       return list;
     }, []);
   }
-  
+
   /**
    * 非关系型字段，同isFieldAttribute
    * @returns {Array<string>} fields which value are not BelongsTo
@@ -33,7 +46,8 @@ export class BaseModel extends Model {
 
   /**
    * 关系型数据键值中包括_id的
-   */ 
+   */
+
   static relationFieldsWithId(): string[] {
     return this.relationFields().filter(r => r.match(/.*_id/));
   }
@@ -54,18 +68,15 @@ export class BaseModel extends Model {
    */
   static isFieldNumber(field: Attribute): boolean {
     if (!field) return false;
-    return (
-      field instanceof Number || field instanceof Increment
-    );
+    return field instanceof Number || field instanceof Increment;
   }
 
- /**
+  /**
    * 判断某一字段是否为属性型(即不属于关系型)
    * @param {Attribute} field
    * @returns {boolean}
    */
   static isFieldAttribute(field: Attribute): boolean {
-
     return (
       field instanceof Increment ||
       field instanceof Attr ||
@@ -97,13 +108,11 @@ export class BaseModel extends Model {
    * @returns {boolean}
    */
   skipField(field: string): boolean {
-
     let shouldSkipField: boolean = false;
 
-    this.getRelations().forEach((relation) => {
+    this.getRelations().forEach(relation => {
       if (
-        (relation instanceof BelongsTo ||
-          relation instanceof HasOne) &&
+        (relation instanceof BelongsTo || relation instanceof HasOne) &&
         relation.foreignKey === field
       ) {
         shouldSkipField = true;
@@ -115,15 +124,13 @@ export class BaseModel extends Model {
     return shouldSkipField;
   }
 
-
   /**
    * Returns a record of this model with the given ID.
    * @param {number} id
    * @returns {any}
    */
   getRecordWithId(id: number): any {
-    return this
-      .query()
+    return this.query()
       .withAllRecursive()
       .where("id", id)
       .first();
@@ -139,12 +146,7 @@ export class BaseModel extends Model {
    * @returns {boolean}
    */
   shouldEagerLoadRelation(fieldName: string, field: Attribute, relatedModel: Model): boolean {
-
-    if (
-      field instanceof HasOne ||
-      field instanceof BelongsTo ||
-      field instanceof MorphOne
-    ) {
+    if (field instanceof HasOne || field instanceof BelongsTo || field instanceof MorphOne) {
       return true;
     }
 
@@ -156,17 +158,21 @@ export class BaseModel extends Model {
     );
   }
 
-    /**
+  /**
    * 获取所有的关系型字段
    * @returns {Map<string, Attribute>} all relations of the model
    */
   getRelations(): Map<string, Attribute> {
-    return this.fields().reduce(function (relations: Map<string, Attribute>, field: Attribute, name: string) {
+    return this.fields().reduce(function(
+      relations: Map<string, Attribute>,
+      field: Attribute,
+      name: string,
+    ) {
       if (!this.isFieldAttribute(field)) {
         relations.set(name, field);
       }
       return relations;
-    }, []);
+    },
+    []);
   }
-
 }
