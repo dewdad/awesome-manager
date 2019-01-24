@@ -66,7 +66,11 @@ export default {
      * 如果配合exportMixin混入中定义EntityDb
      */
     async fetch() {
-      await this.Model.$fetch();
+      if (this.Model.$fetch !== null) {
+        await this.Model.$fetch();
+      } else {
+        this.loadFromDb();
+      }
     },
     /**
      * 如果存在db，直接从lowdb中获取数据
