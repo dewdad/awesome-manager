@@ -1,12 +1,5 @@
-import { Model, BelongsTo, Increment, Boolean, Number, Attr, HasMany, HasOne, MorphOne, MorphMany, MorphTo } from "@vuex-orm/core";
+import { Model, BelongsTo, Increment, Boolean, Number, Attr, HasMany, HasOne, MorphOne, MorphMany, MorphTo, Attribute } from "@vuex-orm/core";
 import { keys, pullAll } from "lodash";
-
-export interface Field {
-  related?: Model;
-  parent?: Model;
-  localKey?: string;
-  foreignKey?: string;
-}
 
 export class BaseModel extends Model {
   static primaryKey = "_id";
@@ -20,56 +13,27 @@ export class BaseModel extends Model {
    * @returns {Array<string>} all relations of the model
    */
   static relationFields(): string[] {
-    /**
-     * fields that has relations
-     * @returns {Array} fields which value are BelongsTo
-     */
-    return this.fieldsKeys().reduce((list, field) => {
-      // TODO !this.isConnection()
-      let fieldAttribute = this.fields()[field];
-      if (this.isRelationAndForeignKey(fieldAttribute)) {
+    return this.fieldsKeys().reduce((list: string[], field: string) => {
+      let fieldAttribute: Attribute = this.fields()[field];
+      if (this.isFieldRelation(fieldAttribute)) {
         list.push(`${field}_id`);
         list.push(field);
       }
       return list;
     }, []);
   }
-
-  static isRelationAndForeignKey(field: any): boolean {
-    return (
-      field instanceof BelongsTo || 
-      field instanceof HasOne ||
-      field instanceof HasMany ||
-      field instanceof MorphOne ||
-      field instanceof MorphMany
-    );
-  }
   
   /**
-   * 获取所有的关系型字段
-   * @returns {Map<string, Field>} all relations of the model
+   * 非关系型字段，同isFieldAttribute
+   * @returns {Array<string>} fields which value are not BelongsTo
    */
-  getRelations(): Map<string, Field> {
-    const relations = new Map<string, Field>();
-
-    this.fields.forEach((field: Field, name: string) => {
-      if (!this.isFieldAttribute(field)) {
-        relations.set(name, field);
-      }
-    });
-
-    return relations;
-  }
-
   static nonRelationFields(): string[] {
-    /**
-     * fields that has no relations
-     * @returns {Array} fields which value are not BelongsTo
-     */
     return pullAll(this.fieldsKeys(), this.relationFields());
   }
 
-  // 关系型数据键值中包括_id的
+  /**
+   * 关系型数据键值中包括_id的
+   */ 
   static relationFieldsWithId(): string[] {
     return this.relationFields().filter(r => r.match(/.*_id/));
   }
@@ -85,10 +49,10 @@ export class BaseModel extends Model {
   /**
    * 判断某一字段是否为数字型
    *
-   * @param {Field | undefined} field
+   * @param {Attribute | undefined} field
    * @returns {boolean}
    */
-  static isFieldNumber(field: Field): boolean {
+  static isFieldNumber(field: Attribute): boolean {
     if (!field) return false;
     return (
       field instanceof Number || field instanceof Increment
@@ -97,10 +61,10 @@ export class BaseModel extends Model {
 
  /**
    * 判断某一字段是否为属性型(即不属于关系型)
-   * @param {Field} field
+   * @param {Attribute} field
    * @returns {boolean}
    */
-  static isFieldAttribute(field: Field): boolean {
+  static isFieldAttribute(field: Attribute): boolean {
 
     return (
       field instanceof Increment ||
@@ -111,16 +75,18 @@ export class BaseModel extends Model {
     );
   }
   /**
-   * 判断某一字段是否为多重连接.
-   * @param {Field} field
+   * 判断某一字段是否为关系
+   * @param {Attribute} field
    * @returns {boolean}
    */
-  static isConnection(field: Field): boolean {
-    return !(
+  static isFieldRelation(field: Attribute): boolean {
+    return (
       field instanceof BelongsTo ||
       field instanceof HasOne ||
+      field instanceof HasMany ||
       field instanceof MorphTo ||
-      field instanceof MorphOne
+      field instanceof MorphOne ||
+      field instanceof MorphMany
     );
   }
 
@@ -130,7 +96,7 @@ export class BaseModel extends Model {
    * @param {string} field
    * @returns {boolean}
    */
-  skipField(field: string) {
+  skipField(field: string): boolean {
 
     let shouldSkipField: boolean = false;
 
@@ -168,11 +134,11 @@ export class BaseModel extends Model {
    * hasOne related entities are always eager loaded. Others can be added to the `eagerLoad` array of the model.
    *
    * @param {string} fieldName Name of the field
-   * @param {Field} field Relation field
+   * @param {Attribute} field Relation field
    * @param {Model} relatedModel Related model
    * @returns {boolean}
    */
-  shouldEagerLoadRelation(fieldName: string, field: Field, relatedModel: Model): boolean {
+  shouldEagerLoadRelation(fieldName: string, field: Attribute, relatedModel: Model): boolean {
 
     if (
       field instanceof HasOne ||
@@ -189,4 +155,18 @@ export class BaseModel extends Model {
       }) !== undefined
     );
   }
+
+    /**
+   * 获取所有的关系型字段
+   * @returns {Map<string, Attribute>} all relations of the model
+   */
+  getRelations(): Map<string, Attribute> {
+    return this.fields().reduce(function (relations: Map<string, Attribute>, field: Attribute, name: string) {
+      if (!this.isFieldAttribute(field)) {
+        relations.set(name, field);
+      }
+      return relations;
+    }, []);
+  }
+
 }

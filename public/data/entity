@@ -1,31 +1,3 @@
 {
-  "entity": [
-    {
-      "$id": 1,
-      "_id": 1,
-      "name": "CEVE",
-      "fullName": "Chinese Embassy",
-      "abbr": "CEVE",
-      "address": "Mercedez, Baruta",
-      "avatar": "mfa"
-    },
-    {
-      "$id": 2,
-      "_id": 2,
-      "name": "CEVE",
-      "fullName": "Chinese Embassy in Venezuela",
-      "abbr": "CEVE",
-      "address": "Mercedez, Baruta",
-      "avatar": "mfa"
-    },
-    {
-      "$id": 3,
-      "_id": 3,
-      "name": "CEVE",
-      "fullName": "Chinese Embassy in Venezuela",
-      "abbr": "CEVE",
-      "address": "Mercedez, Baruta",
-      "avatar": "mfa"
-    }
-  ]
+  "entity": []
 }

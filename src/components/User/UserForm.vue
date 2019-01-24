@@ -31,13 +31,6 @@ export default {
     computeAvatarMan1: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
   },
   methods: {
-    saveItem() {
-      if (this.editing) {
-        this.updateItem();
-      } else {
-        this.createItem();
-      }
-    },
     militantInformation() {
       this.$router.push("/users/militant");
     },

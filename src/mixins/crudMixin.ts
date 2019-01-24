@@ -53,9 +53,10 @@ export default {
       this.editing = false;
       this.model = new this.Model();
     },
-    deleteItem() {
+    deleteItem(item) {
+      this.editItem(item);
+      this.Model.$delete(this.model);
       // this.Model.delete(this.model._id);
-      this.Model.$delete(this.model._id);
     },
     saveItem() {
       if (this.editing) {
@@ -64,7 +65,8 @@ export default {
         this.createItem();
       }
     },
-    updateItem() {
+    updateItem(item) {
+      this.editItem(item);
       if (this.editing) {
         // this.Model.update(this.model);
         this.Model.$update({
@@ -74,7 +76,8 @@ export default {
         this.model = new this.Model();
       }
     },
-    createItem() {
+    createItem(item) {
+      this.editItem(item);
       if (!this.editing) {
         // this.Model.insert({
         //   data: this.model,
@@ -85,9 +88,6 @@ export default {
         // reset default
         this.model = new this.Model();
       }
-    },
-    editItem(item) {
-      // this.$emit("SET_EDITING", item);
     },
     tryT(text: string) {
       if (this.$t !== undefined) {

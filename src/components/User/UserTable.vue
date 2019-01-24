@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.UserForm.$emit("SET_EDITING", item);
     },
   },
