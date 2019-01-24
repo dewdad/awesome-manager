@@ -27,7 +27,7 @@ export default {
   methods: {
     editItem(item) {
       this.$emit("SET_EDITING", item);
-      window.UserForm.$emit("SET_EDITING", item);
+      window.DocumentForm.$emit("SET_EDITING", item);
     },
   },
 };
@@ -41,7 +41,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="items"
+          :items="all"
           class="elevation-0"
         >
         <template

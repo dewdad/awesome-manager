@@ -1,5 +1,6 @@
 <script>
 import Evaluation from "@/api/models/Evaluation";
+import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
@@ -10,6 +11,7 @@ export default {
       modelName: "evaluation",
     };
   },
+  mixins: [crudMixin],
   created() {
     window.EvaluationForm = this;
   },

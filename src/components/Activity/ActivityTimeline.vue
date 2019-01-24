@@ -1,7 +1,10 @@
 <script>
 import Activity from "@/api/models/Activity";
 import ActivityForm from "./ActivityForm";
+
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     ActivityForm,
@@ -9,25 +12,16 @@ export default {
   data() {
     return {
       editing: false,
+      modelName: "activity"
     };
   },
-  computed: {
-    modelName: () => Activity.entity,
-    all: () =>
-      Activity.query()
-        .withAll()
-        .get(),
-    headers: () => Activity.fieldsKeys(),
-  },
-  mixins: [exportMixin],
+  mixins: [exportMixin, crudMixin],
   created() {
     window.ActivityTimeline = this;
   },
   methods: {
-    deleteItem(item) {
-      Activity.delete(item._id);
-    },
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.ActivityForm.$emit("SET_EDITING", item);
     },
   },

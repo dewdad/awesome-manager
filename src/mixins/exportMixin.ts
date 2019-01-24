@@ -14,7 +14,6 @@ export default {
       reverseTranslate: false,
       onlyKeepStringValue: true,
       needMergeWord: false,
-      modelName: "",
     };
   },
   computed: {
@@ -51,13 +50,6 @@ export default {
   methods: {
     resolvePath(fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`);
-    },
-    /**
-     * 加载数据函数
-     */
-    loadItems() {
-      // let data = this.entityDb.all(this.modelName);
-      // this.Model.commit(state => (state.data = stateObjectFromArray(data)));
     },
     /**
      * 导入数据函数

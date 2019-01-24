@@ -10,9 +10,10 @@ import models from "@/api/models";
 import modules from "@/store/modules";
 
 // 获取文件路径
+import { join } from "path";
 import { remote } from "electron";
 
-const dbPath = remote.app || "/public/data";
+const dbPath = join(remote.app.getPath("userData"), "data") || "/public/data";
 
 /**
  * 在数据库中注册模型和模块
