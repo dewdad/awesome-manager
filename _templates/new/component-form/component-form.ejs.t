@@ -7,6 +7,8 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
+
+import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
 
 export default {
@@ -15,7 +17,7 @@ export default {
       modelName: "<%= modelName.toLowerCase() %>"
     }
   },
-  mixins: [ crudMixin ],
+  mixins: [ crudMixin, exportMixin ],
   created() {
     window.<%= modelFormName %> = this;
   },

@@ -8,30 +8,26 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
+
 import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     <%= modelFormName %>
   },
   data() {
     return {
-      editing: false,
+      modelName: <%= modelName.toLowerCase() %>
     }
   },
-  computed: {
-    modelName: () =><%= modelName %>.entity,
-    all: () =><%= modelName %>.query().withAll().get(),
-    headers: () =><%= modelName %>.fieldsKeys(),
-  },
-  mixins: [exportMixin],
+  mixins: [ exportMixin, crudMixin ],
   created() {
     window.<%= modelIteratorName %> = this;
   },
   methods: {
-    deleteItem(item) {
-      <%= modelName %>.delete(item._id)
-    },
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.<%= modelFormName %>.$emit("SET_EDITING", item)
     }
   },
