@@ -17,7 +17,7 @@ export default {
       modelName: 'user'
     }
   },
-  mixins: [crudMixin,exportMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.UserForm = this
   },

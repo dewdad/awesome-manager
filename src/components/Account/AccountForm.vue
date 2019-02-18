@@ -13,19 +13,19 @@ const accountDb = new LowdbForElectron('account')
 export default {
   data() {
     return {
-      modelName: "account"
+      modelName: 'account'
     }
   },
-  mixins: [crudMixin,exportMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.AccountForm = this
   },
   async mounted() {
-    this.model = accountDb.find("account", { hash: this.cached[0].hash})
+    this.model = accountDb.find('account', { hash: this.cached[0].hash })
   },
   computed: {
     cached: get('entities/account/cached'),
-    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
   methods: {
     saveAccount(item) {
@@ -50,7 +50,7 @@ export default {
               icon
               class="mr-3"
               @click="editing = !editing"
-              >
+            >
             <v-icon>edit</v-icon>
           </v-btn>
         </v-card-title>

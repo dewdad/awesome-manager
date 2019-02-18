@@ -1,41 +1,41 @@
 <script>
-import Document from "@/api/models/Document";
+import Document from '@/api/models/Document'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   data() {
     return {
-      modelName: "document"
+      modelName: 'document'
     }
   },
-  mixins: [ exportMixin, crudMixin ],
+  mixins: [exportMixin, crudMixin],
   created() {
-    window.DocumentTimeline = this;
+    window.DocumentTimeline = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.DocumentForm.$emit("SET_EDITING", item);
+      this.$emit('SET_EDITING', item)
+      window.DocumentForm.$emit('SET_EDITING', item)
     }
-  },
+  }
 }
 </script>
 
 <template>
   <div class="mt-15">
-     <v-timeline>
+    <v-timeline>
       <v-timeline-item
-        v-for="(item, i) in all"
-        color="primary"
-        :key="i"
-        small
-      >
+          v-for="(item, i) in all"
+          color="primary"
+          :key="i"
+          small
+        >
         <span
-          slot="opposite"
-          :class="`headline font-weight-bold white--text`"
-          v-text="item.occurenceDate"
+            slot="opposite"
+            :class="`headline font-weight-bold white--text`"
+            v-text="item.occurenceDate"
         ></span>
         <div class="py-3">
           <h2 :class="`headline font-weight-light mb-3 white--text`">{{ item.content }}</h2>
@@ -43,9 +43,9 @@ export default {
             {{ item.instruction }}
           </div>
           <v-btn
-             icon
-             class="mx-0"
-             @click="deleteItem(item)">
+              icon
+              class="mx-0"
+              @click="deleteItem(item)">
             <v-icon color="pink">delete</v-icon>
           </v-btn>
         </div>

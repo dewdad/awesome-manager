@@ -1,9 +1,9 @@
 <script>
-import Document from "@/api/models/Document";
-import DocumentForm from "./DocumentForm";
+import Document from '@/api/models/Document'
+import DocumentForm from './DocumentForm'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
@@ -11,19 +11,19 @@ export default {
   },
   data() {
     return {
-      modelName: "document"
+      modelName: 'document'
     }
   },
-  mixins: [ exportMixin, crudMixin ],
+  mixins: [exportMixin, crudMixin],
   created() {
-    window.DocumentIterator = this;
+    window.DocumentIterator = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.DocumentForm.$emit("SET_EDITING", item)
+      this.$emit('SET_EDITING', item)
+      window.DocumentForm.$emit('SET_EDITING', item)
     }
-  },
+  }
 }
 </script>
 

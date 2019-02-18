@@ -33,8 +33,7 @@ const mutations: any = {
 const AccountActions = {
   async signup(ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = DB
-      .find(`${ctx.state.name}`, { name: signupData.name })
+    let authedAccount = DB.find(`${ctx.state.name}`, { name: signupData.name })
 
     if (authedAccount === undefined) {
       try {
