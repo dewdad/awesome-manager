@@ -1,42 +1,42 @@
 <script>
-import Account from "@/api/models/Account";
-import AccountForm from "./AccountForm";
-import { join } from "path";
-import { remote, shell } from "electron";
-import { GenerateCSV } from "@/util";
+import Account from '@/api/models/Account'
+import AccountForm from './AccountForm'
+import { join } from 'path'
+import { remote, shell } from 'electron'
+import { GenerateCSV } from '@/util'
 export default {
   components: {
-    AccountForm,
+    AccountForm
   },
   data() {
     return {
-      editing: false,
-    };
+      editing: false
+    }
   },
   computed: {
     all: () =>
       Account.query()
         .withAll()
         .get(),
-    headers: () => Account.fieldsKeys(),
+    headers: () => Account.fieldsKeys()
   },
   created() {
-    window.AccountTable = this;
+    window.AccountTable = this
   },
   methods: {
     deleteItem(item) {
-      Account.delete(item._id);
+      Account.delete(item._id)
     },
     editItem(item) {
-      window.AccountForm.$emit("SET_EDITING", item);
+      window.AccountForm.$emit('SET_EDITING', item)
     },
     exportItem(item) {
-      let filePath = join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
-    },
-  },
-};
+      let filePath = join(remote.app.getPath('home'), '/Documents/template/db.csv')
+      GenerateCSV([item], filePath)
+      shell.showItemInFolder(filePath)
+    }
+  }
+}
 </script>
 
 <template>

@@ -45,30 +45,30 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   mixins: [baseUrlMixin],
   computed: {
     items: () => {
       return [
         {
-          src: join(process.env.BASE_URL, "bg/1.jpg"),
+          src: join(process.env.BASE_URL, 'bg/1.jpg')
         },
         {
-          src: join(process.env.BASE_URL, "bg/2.jpg"),
+          src: join(process.env.BASE_URL, 'bg/2.jpg')
         },
         {
-          src: join(process.env.BASE_URL, "bg/3.jpg"),
+          src: join(process.env.BASE_URL, 'bg/3.jpg')
         },
         {
-          src: join(process.env.BASE_URL, "bg/4.jpg"),
-        },
-      ];
-    },
-  },
-};
+          src: join(process.env.BASE_URL, 'bg/4.jpg')
+        }
+      ]
+    }
+  }
+}
 </script>

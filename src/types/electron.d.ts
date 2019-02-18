@@ -1,35 +1,35 @@
-declare module "configstore" {
+declare module 'configstore' {
   class ConfigStore {
-    path: string;
+    path: string
 
-    all: any;
+    all: any
 
-    constructor(name: string, defaults?: any);
+    constructor(name: string, defaults?: any)
 
     /*
      Set an item
      */
-    set(key: string, val: any): void;
+    set(key: string, val: any): void
 
     /*
      Get an item
      */
-    get(key: string): any;
+    get(key: string): any
 
     /*
      Delete an item
      */
-    del(key: string): void;
+    del(key: string): void
   }
 
-  export = ConfigStore;
+  export = ConfigStore
 }
 
 // Type definitions for keytar 3.0.0
 // Project: http://atom.github.io/node-keytar/
 // Definitions by: Milan Burda <https://github.com/miniak/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-declare module "keytar" {
+declare module 'keytar' {
   /**
    * Get the stored password for the service and account.
    *
@@ -38,7 +38,7 @@ declare module "keytar" {
    *
    * @returns the string password or null on failures.
    */
-  export function getPassword(service: string, account: string): string;
+  export function getPassword(service: string, account: string): string
 
   /**
    * Add the password for the service and account to the keychain.
@@ -49,7 +49,7 @@ declare module "keytar" {
    *
    * @returns true on success, false on failure.
    */
-  export function addPassword(service: string, account: string, password: string): boolean;
+  export function addPassword(service: string, account: string, password: string): boolean
 
   /**
    * Delete the stored password for the service and account.
@@ -59,7 +59,7 @@ declare module "keytar" {
    *
    * @returns the string password or null on failures.
    */
-  export function deletePassword(service: string, account: string): string;
+  export function deletePassword(service: string, account: string): string
 
   /**
    * Replace the password for the service and account in the keychain.
@@ -73,7 +73,7 @@ declare module "keytar" {
    *
    * @returns true on success, false on failure.
    */
-  export function replacePassword(service: string, account: string, password: string): boolean;
+  export function replacePassword(service: string, account: string, password: string): boolean
 
   /**
    * Find a password for the service in the keychain.
@@ -82,5 +82,5 @@ declare module "keytar" {
    *
    * @returns the string password or null on failures.
    */
-  export function findPassword(service: string): string;
+  export function findPassword(service: string): string
 }

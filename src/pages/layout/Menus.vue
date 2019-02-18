@@ -95,32 +95,32 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       items: [
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me 2" },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' }
       ],
       nudge: {
         top: 0,
         bottom: 0,
         left: 0,
-        right: 0,
-      },
-    };
+        right: 0
+      }
+    }
   },
   computed: {},
   methods: {
     handleClick(e) {
-      e.preventDefault();
-    },
-  },
-};
+      e.preventDefault()
+    }
+  }
+}
 </script>

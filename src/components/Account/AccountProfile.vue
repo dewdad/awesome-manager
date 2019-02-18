@@ -88,14 +88,14 @@
 </template>
 
 <script>
-import { join } from "path";
-import Account from "@/api/models/Account";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import { join } from 'path'
+import Account from '@/api/models/Account'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   mixins: [baseUrlMixin],
   computed: {
     fields: () => Account.fieldsKeys(),
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
-  },
-};
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  }
+}
 </script>

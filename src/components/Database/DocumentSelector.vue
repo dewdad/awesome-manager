@@ -9,30 +9,30 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { get, sync, call } from "vuex-pathify";
-import { remote, shell } from "electron";
+import Vue from 'vue'
+import { get, sync, call } from 'vuex-pathify'
+import { remote, shell } from 'electron'
 
-import path from "path";
+import path from 'path'
 
-import { log, getFilesByExtentionInDir } from "@/util";
-import fs from "fs";
+import { log, getFilesByExtentionInDir } from '@/util'
+import fs from 'fs'
 
 export default {
   props: {
     docFiles: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   methods: {
-    ...call("database/*"),
+    ...call('database/*'),
     updateDocPath() {
-      this.$store.set("database/export@docPath", this.docPath);
-      window.getApp.$emit("DOCPATH_CHANGED");
-    },
+      this.$store.set('database/export@docPath', this.docPath)
+      window.getApp.$emit('DOCPATH_CHANGED')
+    }
   },
   computed: {
-    docPath: sync("database/export@docPath"),
-  },
-};
+    docPath: sync('database/export@docPath')
+  }
+}
 </script>

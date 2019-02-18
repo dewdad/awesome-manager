@@ -67,22 +67,22 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       drawer: true,
       miniDrawer: false,
-      items: [{ title: "Home", icon: "dashboard" }, { title: "About", icon: "question_answer" }],
-      right: null,
-    };
+      items: [{ title: 'Home', icon: 'dashboard' }, { title: 'About', icon: 'question_answer' }],
+      right: null
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style lang="stylus">

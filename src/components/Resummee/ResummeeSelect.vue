@@ -1,24 +1,24 @@
 <script>
-import { map, pick } from "lodash/fp";
-import Resummee from "@/api/models/Resummee";
+import { map, pick } from 'lodash/fp'
+import Resummee from '@/api/models/Resummee'
 export default {
   data() {
     return {
-      model: { _id: 1, label: "Select Resummee" },
-    };
+      model: { _id: 1, label: 'Select Resummee' }
+    }
   },
   created() {
-    window.ResummeeSelect = this;
+    window.ResummeeSelect = this
   },
   computed: {
-    resummees: () => map(pick(["_id", "text"]), Resummee.all()),
+    resummees: () => map(pick(['_id', 'text']), Resummee.all())
   },
   methods: {
     change() {
-      this.$emit("Resummee_CHANGED", this.model._id);
-    },
-  },
-};
+      this.$emit('Resummee_CHANGED', this.model._id)
+    }
+  }
+}
 </script>
 <template>
   <v-select

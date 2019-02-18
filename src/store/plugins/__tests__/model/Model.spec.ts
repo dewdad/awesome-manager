@@ -1,321 +1,321 @@
-import VuexORM, { Database, Query, Model } from "@vuex-orm/core";
+import VuexORM, { Database, Query, Model } from '@vuex-orm/core'
 
-describe("Unit – Model", () => {
-  it("can fetch empty fields when model fields is not declared", () => {
+describe('Unit – Model', () => {
+  it('can fetch empty fields when model fields is not declared', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
     }
 
-    expect(User.fields()).toEqual({});
-  });
+    expect(User.fields()).toEqual({})
+  })
 
-  it("should set default field values as a property on instantiation", () => {
+  it('should set default field values as a property on instantiation', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr("John Doe"),
-          email: this.attr("john@example.com"),
-        };
+          name: this.attr('John Doe'),
+          email: this.attr('john@example.com')
+        }
       }
     }
 
-    const user = new User();
+    const user = new User()
 
-    expect(user.name).toBe("John Doe");
-    expect(user.email).toBe("john@example.com");
-  });
+    expect(user.name).toBe('John Doe')
+    expect(user.email).toBe('john@example.com')
+  })
 
-  it("should set given field values as a property on instanctiation", () => {
+  it('should set given field values as a property on instanctiation', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr("John Doe"),
-          email: this.attr("john@example.com"),
-        };
+          name: this.attr('John Doe'),
+          email: this.attr('john@example.com')
+        }
       }
     }
 
-    const user = new User({ name: "Jane Doe", age: 32 });
+    const user = new User({ name: 'Jane Doe', age: 32 })
 
-    expect(user.name).toBe("Jane Doe");
-    expect(user.email).toBe("john@example.com");
-    expect(user.age).toBe(undefined);
-  });
+    expect(user.name).toBe('Jane Doe')
+    expect(user.email).toBe('john@example.com')
+    expect(user.age).toBe(undefined)
+  })
 
-  it("should mutate data if closure was given to the attr when instantiating", () => {
+  it('should mutate data if closure was given to the attr when instantiating', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr("", value => value.toUpperCase()),
-        };
+          name: this.attr('', value => value.toUpperCase())
+        }
       }
     }
 
-    const user = new User({ name: "john doe" });
+    const user = new User({ name: 'john doe' })
 
-    expect(user.name).toBe("JOHN DOE");
-  });
+    expect(user.name).toBe('JOHN DOE')
+  })
 
-  it("should mutate data if mutators are present", () => {
+  it('should mutate data if mutators are present', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr(""),
-        };
+          name: this.attr('')
+        }
       }
 
       static mutators() {
         return {
           name(value) {
-            return value.toUpperCase();
-          },
-        };
+            return value.toUpperCase()
+          }
+        }
       }
     }
 
-    const user = new User({ name: "john doe" });
+    const user = new User({ name: 'john doe' })
 
-    expect(user.name).toBe("JOHN DOE");
-  });
+    expect(user.name).toBe('JOHN DOE')
+  })
 
-  it("attr mutator should take precedent over static mutators", () => {
+  it('attr mutator should take precedent over static mutators', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr("", value => value.toUpperCase()),
-        };
+          name: this.attr('', value => value.toUpperCase())
+        }
       }
 
       static mutators() {
         return {
           name(value) {
-            return "Not Expected";
-          },
-        };
+            return 'Not Expected'
+          }
+        }
       }
     }
 
-    const user = new User({ name: "john doe" });
+    const user = new User({ name: 'john doe' })
 
-    expect(user.name).toBe("JOHN DOE");
-  });
+    expect(user.name).toBe('JOHN DOE')
+  })
 
-  it("can get a value of the primary key", () => {
+  it('can get a value of the primary key', () => {
     class User extends Model {
       static fields() {
         return {
-          id: this.attr(null),
-        };
+          id: this.attr(null)
+        }
       }
     }
 
-    const data = { id: 1 };
+    const data = { id: 1 }
 
-    expect(User.id(data)).toBe(1);
-  });
+    expect(User.id(data)).toBe(1)
+  })
 
-  it("can get a value of the composit primary key", () => {
+  it('can get a value of the composit primary key', () => {
     class Vote extends Model {
-      static primaryKey = ["vote_id", "user_id"];
+      static primaryKey = ['vote_id', 'user_id']
 
       static fields() {
         return {
           vote_id: this.attr(null),
-          user_id: this.attr(null),
-        };
+          user_id: this.attr(null)
+        }
       }
     }
 
-    const data = { user_id: 1, vote_id: 2 };
+    const data = { user_id: 1, vote_id: 2 }
 
-    expect(Vote.id(data)).toBe("2_1");
-  });
+    expect(Vote.id(data)).toBe('2_1')
+  })
 
-  it("can get local key of the model", () => {
+  it('can get local key of the model', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
-      static primaryKey = ["name", "email"];
+      static primaryKey = ['name', 'email']
 
       static fields() {
         return {
-          name: this.attr("John Doe"),
-          email: this.attr("john@example.com"),
-        };
+          name: this.attr('John Doe'),
+          email: this.attr('john@example.com')
+        }
       }
     }
 
-    expect(User.localKey()).toBe("id");
-  });
+    expect(User.localKey()).toBe('id')
+  })
 
-  it("throws error when trying to fetch attribute class that does not exist", () => {
+  it('throws error when trying to fetch attribute class that does not exist', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
-          name: this.attr("John Doe"),
-          email: this.attr("john@example.com"),
-        };
+          name: this.attr('John Doe'),
+          email: this.attr('john@example.com')
+        }
       }
     }
 
     expect(() => {
-      User.getAttributeClass("blah");
-    }).toThrow();
-  });
+      User.getAttributeClass('blah')
+    }).toThrow()
+  })
 
-  it("can hydrate given record", () => {
+  it('can hydrate given record', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          name: this.attr("Default Doe"),
-        };
+          name: this.attr('Default Doe')
+        }
       }
     }
 
-    const record = User.hydrate({ id: 1, age: 24 });
+    const record = User.hydrate({ id: 1, age: 24 })
 
-    expect(record).toEqual({ id: 1, name: "Default Doe" });
-  });
+    expect(record).toEqual({ id: 1, name: 'Default Doe' })
+  })
 
-  it("can hydrate without passing any record", () => {
+  it('can hydrate without passing any record', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          name: this.attr("Default Doe"),
-        };
+          name: this.attr('Default Doe')
+        }
       }
     }
 
-    const record = User.hydrate();
+    const record = User.hydrate()
 
-    expect(record).toEqual({ id: null, name: "Default Doe" });
-  });
+    expect(record).toEqual({ id: null, name: 'Default Doe' })
+  })
 
-  it("can hydrate relationship data", () => {
+  it('can hydrate relationship data', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          phone: this.hasOne(Phone, "user_id"),
-          posts: this.hasMany(Post, "user_id"),
-        };
+          phone: this.hasOne(Phone, 'user_id'),
+          posts: this.hasMany(Post, 'user_id')
+        }
       }
     }
 
     class Phone extends Model {
-      static entity = "phones";
+      static entity = 'phones'
 
       static fields() {
         return {
           id: this.attr(null),
           user_id: this.attr(null),
-          number: this.attr("12-3456-7891"),
-        };
+          number: this.attr('12-3456-7891')
+        }
       }
     }
 
     class Post extends Model {
-      static entity = "posts";
+      static entity = 'posts'
 
       static fields() {
         return {
           id: this.attr(null),
           user_id: this.attr(null),
-          title: this.attr("Default Title"),
-        };
+          title: this.attr('Default Title')
+        }
       }
     }
 
     const record = User.hydrate({
       id: 1,
       phone: { id: 1 },
-      posts: [{ id: 1, title: "Title 001" }, { id: 2 }],
-    });
+      posts: [{ id: 1, title: 'Title 001' }, { id: 2 }]
+    })
 
     const expected = {
       id: 1,
-      phone: { id: 1, user_id: null, number: "12-3456-7891" },
+      phone: { id: 1, user_id: null, number: '12-3456-7891' },
       posts: [
-        { id: 1, user_id: null, title: "Title 001" },
-        { id: 2, user_id: null, title: "Default Title" },
-      ],
-    };
+        { id: 1, user_id: null, title: 'Title 001' },
+        { id: 2, user_id: null, title: 'Default Title' }
+      ]
+    }
 
-    expect(record).toEqual(expected);
-  });
+    expect(record).toEqual(expected)
+  })
 
-  it("can serialize own fields into json", () => {
+  it('can serialize own fields into json', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          name: this.attr(""),
-        };
+          name: this.attr('')
+        }
       }
     }
 
-    const user = new User({ $id: 1, id: 1, name: "John Doe" });
+    const user = new User({ $id: 1, id: 1, name: 'John Doe' })
 
-    const json = user.$toJson();
+    const json = user.$toJson()
 
-    expect(json).not.toBeInstanceOf(User);
-    expect(json).toEqual({ id: 1, name: "John Doe" });
-  });
+    expect(json).not.toBeInstanceOf(User)
+    expect(json).toEqual({ id: 1, name: 'John Doe' })
+  })
 
-  it("can serialize nested fields into json", () => {
+  it('can serialize nested fields into json', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          phone: this.hasOne(Phone, "user_id"),
-          posts: this.hasMany(Post, "user_id"),
-        };
+          phone: this.hasOne(Phone, 'user_id'),
+          posts: this.hasMany(Post, 'user_id')
+        }
       }
     }
 
     class Phone extends Model {
-      static entity = "phones";
+      static entity = 'phones'
 
       static fields() {
         return {
           id: this.attr(null),
-          user_id: this.attr(null),
-        };
+          user_id: this.attr(null)
+        }
       }
     }
 
     class Post extends Model {
-      static entity = "posts";
+      static entity = 'posts'
 
       static fields() {
         return {
           id: this.attr(null),
-          user_id: this.attr(null),
-        };
+          user_id: this.attr(null)
+        }
       }
     }
 
@@ -323,41 +323,41 @@ describe("Unit – Model", () => {
       $id: 1,
       id: 1,
       phone: { $id: 2, id: 2, user_id: 1 },
-      posts: [{ $id: 3, id: 3, user_id: 1 }, { $id: 4, id: 4, user_id: 1 }],
-    });
+      posts: [{ $id: 3, id: 3, user_id: 1 }, { $id: 4, id: 4, user_id: 1 }]
+    })
 
-    const json = user.$toJson();
+    const json = user.$toJson()
 
     const expected = {
       id: 1,
       phone: { id: 2, user_id: 1 },
-      posts: [{ id: 3, user_id: 1 }, { id: 4, user_id: 1 }],
-    };
+      posts: [{ id: 3, user_id: 1 }, { id: 4, user_id: 1 }]
+    }
 
-    expect(json).not.toBeInstanceOf(User);
-    expect(json.phone).not.toBeInstanceOf(Phone);
-    expect(json.posts[0]).not.toBeInstanceOf(Post);
-    expect(json.posts[1]).not.toBeInstanceOf(Post);
-    expect(json).toEqual(expected);
-  });
+    expect(json).not.toBeInstanceOf(User)
+    expect(json.phone).not.toBeInstanceOf(Phone)
+    expect(json.posts[0]).not.toBeInstanceOf(Post)
+    expect(json.posts[1]).not.toBeInstanceOf(Post)
+    expect(json).toEqual(expected)
+  })
 
-  it("can serialize the array field", () => {
+  it('can serialize the array field', () => {
     class User extends Model {
-      static entity = "users";
+      static entity = 'users'
 
       static fields() {
         return {
           id: this.attr(null),
-          array: this.attr([]),
-        };
+          array: this.attr([])
+        }
       }
     }
 
-    const user = new User({ $id: 1, id: 1, array: [1, 2] });
+    const user = new User({ $id: 1, id: 1, array: [1, 2] })
 
-    const json = user.$toJson();
+    const json = user.$toJson()
 
-    expect(json).not.toBeInstanceOf(User);
-    expect(json).toEqual({ id: 1, array: [1, 2] });
-  });
-});
+    expect(json).not.toBeInstanceOf(User)
+    expect(json).toEqual({ id: 1, array: [1, 2] })
+  })
+})

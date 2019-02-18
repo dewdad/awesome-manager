@@ -285,29 +285,29 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       basic: {
-        dialog: false,
+        dialog: false
       },
       fullscreen: {
         dialog: false,
         notifications: false,
         sound: true,
-        widgets: false,
+        widgets: false
       },
       scrollable: {
-        name: "",
-        dialog: false,
-      },
-    };
+        name: '',
+        dialog: false
+      }
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

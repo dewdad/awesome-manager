@@ -1,26 +1,26 @@
-import { IAppConfig } from "./config/IAppConfig";
+import { IAppConfig } from './config/IAppConfig'
 
 export interface IAppState {
-  locale: string;
-  config: IAppConfig;
-  defaultMessages: any;
-  redirectTo: string;
-  cookieConsentVersion: string;
+  locale: string
+  config: IAppConfig
+  defaultMessages: any
+  redirectTo: string
+  cookieConsentVersion: string
 }
 
 export const AppDefaultState = (): IAppState => {
   return {
-    locale: "",
+    locale: '',
     config: {
       api: {
-        baseUrl: "",
+        baseUrl: ''
       },
       features: {
-        disableParticles: false,
-      },
+        disableParticles: false
+      }
     },
     defaultMessages: {},
-    redirectTo: "",
-    cookieConsentVersion: "",
-  };
-};
+    redirectTo: '',
+    cookieConsentVersion: ''
+  }
+}

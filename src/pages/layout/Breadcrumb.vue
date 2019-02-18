@@ -64,15 +64,15 @@
 <script>
 export default {
   props: {
-    source: String,
+    source: String
   },
   data() {
     return {
-      alert: true,
-    };
+      alert: true
+    }
   },
   created() {
-    console.log(this.$route);
-  },
-};
+    console.log(this.$route)
+  }
+}
 </script>

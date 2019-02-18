@@ -128,33 +128,33 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      icons: ["fa-facebook", "fa-twitter", "fa-google-plus", "fa-linkedin", "fa-instagram"],
+      icons: ['fa-facebook', 'fa-twitter', 'fa-google-plus', 'fa-linkedin', 'fa-instagram'],
       rows: [
         {
-          title: "Company Name",
+          title: 'Company Name',
           children: [
-            "Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-          ],
+            'Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit'
+          ]
         },
         {
-          title: "Products",
-          children: ["MDBootstrap", "MDWordPress", "BrandFlow", "Bootstrap Angular"],
+          title: 'Products',
+          children: ['MDBootstrap', 'MDWordPress', 'BrandFlow', 'Bootstrap Angular']
         },
         {
-          title: "Useful Links",
-          children: ["Your account", "Become an Affiliate", "Shipping Rates", "Helper"],
-        },
-      ],
-    };
+          title: 'Useful Links',
+          children: ['Your account', 'Become an Affiliate', 'Shipping Rates', 'Helper']
+        }
+      ]
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

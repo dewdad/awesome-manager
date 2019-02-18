@@ -199,26 +199,26 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      items: ["Item One", "Item Seventeen", "Item Five"],
+      items: ['Item One', 'Item Seventeen', 'Item Five'],
       tab: null,
       tabs: null,
-      more: ["News", "Maps", "Books", "Flights", "Apps"],
+      more: ['News', 'Maps', 'Books', 'Flights', 'Apps'],
       text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    };
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    }
   },
   computed: {},
   methods: {
     handleClick(e) {
-      e.preventDefault();
-    },
-  },
-};
+      e.preventDefault()
+    }
+  }
+}
 </script>

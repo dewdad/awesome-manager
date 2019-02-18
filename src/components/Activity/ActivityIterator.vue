@@ -1,15 +1,15 @@
 <script>
-import Activity from "@/api/models/Activity";
-import ActivityForm from "./ActivityForm";
-import exportMixin from "@/mixins/exportMixin";
+import Activity from '@/api/models/Activity'
+import ActivityForm from './ActivityForm'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   components: {
-    ActivityForm,
+    ActivityForm
   },
   data() {
     return {
-      editing: false,
-    };
+      editing: false
+    }
   },
   computed: {
     modelName: () => Activity.entity,
@@ -17,21 +17,21 @@ export default {
       Activity.query()
         .withAll()
         .get(),
-    headers: () => Activity.fieldsKeys(),
+    headers: () => Activity.fieldsKeys()
   },
   mixins: [exportMixin],
   created() {
-    window.ActivityIterator = this;
+    window.ActivityIterator = this
   },
   methods: {
     deleteItem(item) {
-      Activity.delete(item._id);
+      Activity.delete(item._id)
     },
     editItem(item) {
-      window.ActivityForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      window.ActivityForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

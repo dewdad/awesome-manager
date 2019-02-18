@@ -146,27 +146,27 @@
 </template>
 
 <script>
-import { join } from "path";
-import { getUserById } from "@/api/user";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import { join } from 'path'
+import { getUserById } from '@/api/user'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   data() {
     return {
       chat: null,
-      selectedTab: null,
-    };
+      selectedTab: null
+    }
   },
   mixins: [baseUrlMixin],
   computed: {
     user() {
       let Origin = {
-        name: "Chat",
-        avatar: "",
-      };
-      let user = getUserById(this.$route.params.uuid);
-      return Object.assign(Origin, user);
-    },
+        name: 'Chat',
+        avatar: ''
+      }
+      let user = getUserById(this.$route.params.uuid)
+      return Object.assign(Origin, user)
+    }
   },
-  computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
-};
+  computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+}
 </script>

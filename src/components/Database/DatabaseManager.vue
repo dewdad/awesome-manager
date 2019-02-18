@@ -198,85 +198,85 @@
 </template>
 
 <script>
-import { join } from "path";
-import { shell } from "electron";
-import { LowdbForElectron } from "@/api/lowdb";
-import { entities } from "@/api/globals";
-import models from "@/api/models";
+import { join } from 'path'
+import { shell } from 'electron'
+import { LowdbForElectron } from '@/api/lowdb'
+import { entities } from '@/api/globals'
+import models from '@/api/models'
 
-import exportMixin from "@/mixins/exportMixin";
+import exportMixin from '@/mixins/exportMixin'
 
-import DatabasesIterator from "./DatabasesIterator.vue";
-import DatabaseChips from "./DatabaseChips.vue";
+import DatabasesIterator from './DatabasesIterator.vue'
+import DatabaseChips from './DatabaseChips.vue'
 
-import { log, ImportCSV } from "@/util";
+import { log, ImportCSV } from '@/util'
 
 export default {
   components: {
     DatabasesIterator,
-    DatabaseChips,
+    DatabaseChips
   },
   mixins: [exportMixin],
   data() {
     return {
       // entity file name/ csv file name / modelname
-      modelName: "user",
+      modelName: 'user',
       importDatasource: {},
       // Switch between import/export/reset
       activeTab: 0,
-      actionGroup: "导入",
+      actionGroup: '导入',
       // Import and clear
-      clearGroup: "保留",
-      changeHeaderGroup: false,
-    };
+      clearGroup: '保留',
+      changeHeaderGroup: false
+    }
   },
   created() {
-    this.findDocuments();
-    this.$on("SELECT_MODEL", modelName => {
-      this.modelName = modelName;
-    });
-    window.dbApp = this;
+    this.findDocuments()
+    this.$on('SELECT_MODEL', modelName => {
+      this.modelName = modelName
+    })
+    window.dbApp = this
   },
   computed: {
     // models instance for vuex/orm
     Model: function() {
-      return models[`${this.modelName}`];
+      return models[`${this.modelName}`]
     },
     // entity name list
     entities: () => entities,
-    cardImage: () => join(process.env.BASE_URL, "bg/17.jpg"),
+    cardImage: () => join(process.env.BASE_URL, 'bg/17.jpg')
   },
   methods: {
     findDocuments() {
-      log.suc("Template Directory is: " + this.templateDir);
-      this.templateDocs.forEach(t => log.suc(t));
+      log.suc('Template Directory is: ' + this.templateDir)
+      this.templateDocs.forEach(t => log.suc(t))
     },
     getImportFile(e) {
       // 从选择控件获取文件对象
-      this.importDatasource = e.target.files[0];
-      console.log(this.importDatasource);
+      this.importDatasource = e.target.files[0]
+      console.log(this.importDatasource)
     },
     exportEntities() {
       let data = this.Model.query()
         .withAll()
-        .get();
+        .get()
 
       // 导出csv文件, 并更改列标题和对应键
-      this.exportItem(data);
+      this.exportItem(data)
     },
     resetEntities() {
       // 删除文件中的数据
-      let { entityDb, modelName } = this;
-      if (entityDb === undefined || modelName === undefined) return;
+      let { entityDb, modelName } = this
+      if (entityDb === undefined || modelName === undefined) return
 
-      entityDb.clear(modelName);
-      entityDb.dbInit([modelName]);
+      entityDb.clear(modelName)
+      entityDb.dbInit([modelName])
       // 删除物理文件
-      alert("如需删除物理文件，请手动删除：" + entityDb.adapter.source);
-      shell.showItemInFolder(entityDb.adapter.source);
-    },
-  },
-};
+      alert('如需删除物理文件，请手动删除：' + entityDb.adapter.source)
+      shell.showItemInFolder(entityDb.adapter.source)
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -1,6 +1,6 @@
 <script>
-import Evaluation from "@/api/models/Evaluation";
-import crudMixin from "@/mixins/crudMixin";
+import Evaluation from '@/api/models/Evaluation'
+import crudMixin from '@/mixins/crudMixin'
 export default {
   data() {
     return {
@@ -8,14 +8,14 @@ export default {
       startDateMenu: false,
       editing: false,
       model: {},
-      modelName: "evaluation",
-    };
+      modelName: 'evaluation'
+    }
   },
   mixins: [crudMixin],
   created() {
-    window.EvaluationForm = this;
-  },
-};
+    window.EvaluationForm = this
+  }
+}
 </script>
 
 <template>

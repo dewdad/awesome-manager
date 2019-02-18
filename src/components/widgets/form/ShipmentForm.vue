@@ -95,40 +95,40 @@
 </template>
 
 <script>
-import Countries from "@/api/country";
+import Countries from '@/api/country'
 export default {
   $_veeValidate: {
-    validator: "new",
+    validator: 'new'
   },
   data: () => ({
     formModel: {
-      country: null,
+      country: null
     },
     countries: Countries,
     states: [
-      { name: "Florida", abbr: "FL", id: 1, country_id: 1 },
-      { name: "Georgia", abbr: "GA", id: 2, country_id: 1 },
-      { name: "Nebraska", abbr: "NE", id: 3, country_id: 1 },
-      { name: "California", abbr: "CA", id: 4, country_id: 1 },
+      { name: 'Florida', abbr: 'FL', id: 1, country_id: 1 },
+      { name: 'Georgia', abbr: 'GA', id: 2, country_id: 1 },
+      { name: 'Nebraska', abbr: 'NE', id: 3, country_id: 1 },
+      { name: 'California', abbr: 'CA', id: 4, country_id: 1 }
     ],
     cities: [
-      { name: "New York", abbr: "NY", id: 1, country_id: 1 },
-      { name: "Tample", abbr: "TA", id: 2, country_id: 1 },
-      { name: "San Francisco", abbr: "SF", id: 3, country_id: 1 },
+      { name: 'New York', abbr: 'NY', id: 1, country_id: 1 },
+      { name: 'Tample', abbr: 'TA', id: 2, country_id: 1 },
+      { name: 'San Francisco', abbr: 'SF', id: 3, country_id: 1 }
     ],
-    valid: true,
+    valid: true
   }),
   mounted() {
-    this.$validator.localize("en", this.dictionary);
+    this.$validator.localize('en', this.dictionary)
   },
   methods: {
     submit() {
-      this.$validator.validateAll();
+      this.$validator.validateAll()
     },
     clear() {
-      this.formModel = {};
-      this.$validator.reset();
-    },
-  },
-};
+      this.formModel = {}
+      this.$validator.reset()
+    }
+  }
+}
 </script>

@@ -1,24 +1,24 @@
 <script>
-import { map, pick } from "lodash/fp";
-import Entity from "@/api/models/Entity";
+import { map, pick } from 'lodash/fp'
+import Entity from '@/api/models/Entity'
 export default {
   data() {
     return {
-      model: { _id: 1, label: "Select Entity" },
-    };
+      model: { _id: 1, label: 'Select Entity' }
+    }
   },
   created() {
-    window.EntitySelect = this;
+    window.EntitySelect = this
   },
   computed: {
-    entities: () => map(pick(["_id", "text"]), Entity.all()),
+    entities: () => map(pick(['_id', 'text']), Entity.all())
   },
   methods: {
     change() {
-      this.$emit("Entity_CHANGED", this.model._id);
-    },
-  },
-};
+      this.$emit('Entity_CHANGED', this.model._id)
+    }
+  }
+}
 </script>
 <template>
   <v-select

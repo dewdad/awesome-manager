@@ -93,20 +93,20 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      gradient: "to top, #7B1FA2, #E1BEE7",
-      gradient2: "to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)",
-    };
+      gradient: 'to top, #7B1FA2, #E1BEE7',
+      gradient2: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)'
+    }
   },
   mixins: [baseUrlMixin],
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

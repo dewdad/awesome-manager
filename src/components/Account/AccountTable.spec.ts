@@ -1,7 +1,7 @@
-import AccountTable from "./AccountTable.vue";
+import AccountTable from './AccountTable.vue'
 
-describe("@/components/Account/AccountTable", () => {
-  it("exports a valid component", () => {
-    expect(AccountTable).toBeAComponent();
-  });
-});
+describe('@/components/Account/AccountTable', () => {
+  it('exports a valid component', () => {
+    expect(AccountTable).toBeAComponent()
+  })
+})

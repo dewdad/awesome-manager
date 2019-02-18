@@ -81,44 +81,44 @@
   </v-card>
 </template>
 <script>
-import { getChatById } from "@/api/chat";
-import { getUserById } from "@/api/user";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import { getChatById } from '@/api/chat'
+import { getUserById } from '@/api/user'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
   props: {
     uuid: {
       type: String,
-      default: "",
+      default: ''
     },
     height: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   computed: {
     chat() {
       let chatOrigin = {
-        title: "Chat",
+        title: 'Chat',
         users: [],
-        messages: [],
-      };
-      let chat = getChatById(this.$route.params.uuid);
-      return Object.assign(chatOrigin, chat);
+        messages: []
+      }
+      let chat = getChatById(this.$route.params.uuid)
+      return Object.assign(chatOrigin, chat)
     },
     computeHeight() {
       return {
-        height: this.height || "",
-      };
-    },
+        height: this.height || ''
+      }
+    }
   },
 
   methods: {
     getAvatar(uid) {
-      return getUserById(uid).avatar;
-    },
-  },
-};
+      return getUserById(uid).avatar
+    }
+  }
+}
 </script>

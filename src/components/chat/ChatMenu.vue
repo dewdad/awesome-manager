@@ -32,19 +32,19 @@
 </template>
 
 <script>
-import { join } from "path";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   props: {
     items: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   computed: {
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
-  mixins: [baseUrlMixin],
-};
+  mixins: [baseUrlMixin]
+}
 </script>
 
 <style lang="stylus">

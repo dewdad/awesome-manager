@@ -87,23 +87,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       sheet: false,
       tiles: [
-        { img: "keep.png", title: "Keep" },
-        { img: "inbox.png", title: "Inbox" },
-        { img: "hangouts.png", title: "Hangouts" },
-        { img: "google.png", title: "Google+" },
-      ],
-    };
+        { img: 'keep.png', title: 'Keep' },
+        { img: 'inbox.png', title: 'Inbox' },
+        { img: 'hangouts.png', title: 'Hangouts' },
+        { img: 'google.png', title: 'Google+' }
+      ]
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

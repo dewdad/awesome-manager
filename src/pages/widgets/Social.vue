@@ -73,58 +73,58 @@
 </template>
 
 <script>
-import NameCard from "@/components/widgets/card/NameCard";
-import ProfileCard from "@/components/widgets/card/ProfileCard";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import NameCard from '@/components/widgets/card/NameCard'
+import ProfileCard from '@/components/widgets/card/ProfileCard'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
     NameCard,
-    ProfileCard,
+    ProfileCard
   },
   mixins: [baseUrlMixin],
   data() {
     return {
       users: [
         {
-          jobTitle: "Web Developer",
-          name: "Michael Wang",
+          jobTitle: 'Web Developer',
+          name: 'Michael Wang',
           avatar: {
-            src: "https://randomuser.me/api/portraits/men/1.jpg",
-            size: "36",
-          },
+            src: 'https://randomuser.me/api/portraits/men/1.jpg',
+            size: '36'
+          }
         },
         {
-          jobTitle: "Web Designer",
-          name: "Jessie J",
-          color: "pink",
+          jobTitle: 'Web Designer',
+          name: 'Jessie J',
+          color: 'pink',
           dark: true,
           avatar: {
-            src: "https://randomuser.me/api/portraits/women/1.jpg",
-            size: "36",
-          },
+            src: 'https://randomuser.me/api/portraits/women/1.jpg',
+            size: '36'
+          }
         },
         {
-          jobTitle: "Web Developer",
-          name: "Jim J",
-          color: "teal",
+          jobTitle: 'Web Developer',
+          name: 'Jim J',
+          color: 'teal',
           dark: true,
           avatar: {
-            src: "https://randomuser.me/api/portraits/men/10.jpg",
-            size: "36",
-          },
+            src: 'https://randomuser.me/api/portraits/men/10.jpg',
+            size: '36'
+          }
         },
         {
-          jobTitle: "Product Manager",
-          name: "John Doe",
+          jobTitle: 'Product Manager',
+          name: 'John Doe',
           dark: true,
           cardBgImage: `${this.baseUrl}bg/15.jpg`,
           avatar: {
-            src: "https://randomuser.me/api/portraits/men/5.jpg",
-            size: "36",
-          },
-        },
-      ],
-    };
-  },
-};
+            src: 'https://randomuser.me/api/portraits/men/5.jpg',
+            size: '36'
+          }
+        }
+      ]
+    }
+  }
+}
 </script>

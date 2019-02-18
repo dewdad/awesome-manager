@@ -1,7 +1,7 @@
-import { Evaluation } from "./Evaluation";
+import { Evaluation } from './Evaluation'
 
-describe("@components/Evaluation/Evaluation", () => {
-  it("exports a valid component", () => {
-    expect(Evaluation).toBeAComponent();
-  });
-});
+describe('@components/Evaluation/Evaluation', () => {
+  it('exports a valid component', () => {
+    expect(Evaluation).toBeAComponent()
+  })
+})

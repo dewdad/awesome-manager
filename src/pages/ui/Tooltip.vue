@@ -107,17 +107,17 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      show: false,
-    };
+      show: false
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

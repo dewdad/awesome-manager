@@ -23,24 +23,24 @@
 </template>
 
 <script>
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
-import { quillEditor } from "vue-quill-editor";
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
 export default {
   components: {
-    quillEditor,
+    quillEditor
   },
   data() {
     return {
-      content: "Compose Epic Story...",
-      editorOption: {},
-    };
+      content: 'Compose Epic Story...',
+      editorOption: {}
+    }
   },
   computed: {},
 
-  methods: {},
-};
+  methods: {}
+}
 </script>
 <style lang="stylus" scoped>
   .quill

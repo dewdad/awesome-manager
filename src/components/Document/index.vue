@@ -1,18 +1,18 @@
 <script>
-import DocumentForm from "./DocumentForm";
-import DocumentTable from "./DocumentTable";
+import DocumentForm from './DocumentForm'
+import DocumentTable from './DocumentTable'
 export default {
   components: {
     DocumentForm,
-    DocumentTable,
+    DocumentTable
   },
   data() {},
   computed: {},
   created() {
-    window.DocumentApp = this;
+    window.DocumentApp = this
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <template>

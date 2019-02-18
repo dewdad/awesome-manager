@@ -229,11 +229,11 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import Countries from "@/api/country";
+import VWidget from '@/components/VWidget'
+import Countries from '@/api/country'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
@@ -253,27 +253,27 @@ export default {
       multi3: [],
       multi4: [],
       multi5: [],
-      countries: Countries,
-    };
+      countries: Countries
+    }
   },
   computed: {},
   watch: {
     search(val) {
-      val && this.querySelections(val);
-    },
+      val && this.querySelections(val)
+    }
   },
   methods: {
     querySelections(v) {
-      console.log(v);
-      this.loading = true;
+      console.log(v)
+      this.loading = true
       // Simulated ajax query
       setTimeout(() => {
         this.items = this.countries.filter(e => {
-          return (e.country || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-        });
-        this.loading = false;
-      }, 500);
-    },
-  },
-};
+          return (e.country || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+        })
+        this.loading = false
+      }, 500)
+    }
+  }
+}
 </script>

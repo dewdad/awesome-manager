@@ -47,23 +47,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import EventForm from "@/components/widgets/form/EventForm";
-import ContactForm from "@/components/widgets/form/ContactForm";
-import PaymentForm from "@/components/widgets/form/PaymentForm";
-import ShipmentForm from "@/components/widgets/form/ShipmentForm";
+import VWidget from '@/components/VWidget'
+import EventForm from '@/components/widgets/form/EventForm'
+import ContactForm from '@/components/widgets/form/ContactForm'
+import PaymentForm from '@/components/widgets/form/PaymentForm'
+import ShipmentForm from '@/components/widgets/form/ShipmentForm'
 export default {
   components: {
     VWidget,
     ContactForm,
     PaymentForm,
     ShipmentForm,
-    EventForm,
+    EventForm
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

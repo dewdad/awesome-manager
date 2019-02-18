@@ -1,7 +1,7 @@
-import EvaluationForm from "./EvaluationForm.vue";
+import EvaluationForm from './EvaluationForm.vue'
 
-describe("@/components/Evaluation/EvaluationForm", () => {
-  it("exports a valid component", () => {
-    expect(EvaluationForm).toBeAComponent();
-  });
-});
+describe('@/components/Evaluation/EvaluationForm', () => {
+  it('exports a valid component', () => {
+    expect(EvaluationForm).toBeAComponent()
+  })
+})

@@ -1,18 +1,18 @@
 <script>
-import UserForm from "./UserForm";
-import UserTable from "./UserTable";
+import UserForm from './UserForm'
+import UserTable from './UserTable'
 export default {
   components: {
     UserForm,
-    UserTable,
+    UserTable
   },
   data() {},
   computed: {},
   created() {
-    window.UserApp = this;
+    window.UserApp = this
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <template>

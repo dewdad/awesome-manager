@@ -156,25 +156,25 @@
 
 <script>
 // General Components
-import EChart from "@/components/chart/echart";
-import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
-import WeatherCard from "@/components/widgets/card/WeatherCard";
-import VWidget from "@/components/VWidget";
-import Material from "vuetify/es5/util/colors";
-import VCircle from "@/components/circle/VCircle";
-import BoxChart from "@/components/widgets/chart/BoxChart";
-import ChatWindow from "@/components/chat/ChatWindow";
+import EChart from '@/components/chart/echart'
+import MiniStatistic from '@/components/widgets/statistic/MiniStatistic'
+import WeatherCard from '@/components/widgets/card/WeatherCard'
+import VWidget from '@/components/VWidget'
+import Material from 'vuetify/es5/util/colors'
+import VCircle from '@/components/circle/VCircle'
+import BoxChart from '@/components/widgets/chart/BoxChart'
+import ChatWindow from '@/components/chat/ChatWindow'
 
 // Statistic Components
-import CircleStatistic from "@/components/widgets/statistic/CircleStatistic";
-import LinearStatistic from "@/components/widgets/statistic/LinearStatistic";
+import CircleStatistic from '@/components/widgets/statistic/CircleStatistic'
+import LinearStatistic from '@/components/widgets/statistic/LinearStatistic'
 
 // ORM Models
-import Activity from "@/api/models/Activity";
-import Trending from "@/api/models/Trending";
-import MonthVisit from "@/api/models/MonthVisit";
-import Generic from "@/api/models/Generic";
-import Social from "@/api/models/Social";
+import Activity from '@/api/models/Activity'
+import Trending from '@/api/models/Trending'
+import MonthVisit from '@/api/models/MonthVisit'
+import Generic from '@/api/models/Generic'
+import Social from '@/api/models/Social'
 
 export default {
   components: {
@@ -186,18 +186,18 @@ export default {
     EChart,
     BoxChart,
     CircleStatistic,
-    LinearStatistic,
+    LinearStatistic
   },
   data: () => ({
     color: Material,
-    selectedTab: "tab-1",
+    selectedTab: 'tab-1'
   }),
   created() {
-    Trending.new();
-    MonthVisit.new();
-    Generic.new();
-    Activity.new();
-    Social.new();
+    Trending.new()
+    MonthVisit.new()
+    Generic.new()
+    Activity.new()
+    Social.new()
   },
   computed: {
     activityData: () => Activity.all(),
@@ -205,7 +205,7 @@ export default {
     locationData: () => Generic.all(),
     trendingData: () => Trending.all(),
     socialData: () => Social.all(),
-    linearTrendingData: () => Trending.all(),
-  },
-};
+    linearTrendingData: () => Trending.all()
+  }
+}
 </script>

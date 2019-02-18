@@ -138,17 +138,17 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style lang="css" scoped>

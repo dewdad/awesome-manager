@@ -1,21 +1,21 @@
-import { Module } from "vuex";
-import { AppDefaultState, IAppState } from "./state";
-import { AppActions } from "./actions";
-import { AppGetters } from "./getters";
-import { AppMutations } from "./mutations";
+import { Module } from 'vuex'
+import { AppDefaultState, IAppState } from './state'
+import { AppActions } from './actions'
+import { AppGetters } from './getters'
+import { AppMutations } from './mutations'
 
 export const AppModule: Module<IAppState, IAppState> = {
   namespaced: true,
   actions: {
-    ...AppActions,
+    ...AppActions
   },
   getters: {
-    ...AppGetters,
+    ...AppGetters
   },
   state: {
-    ...AppDefaultState(),
+    ...AppDefaultState()
   },
   mutations: {
-    ...AppMutations,
-  },
-};
+    ...AppMutations
+  }
+}

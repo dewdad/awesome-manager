@@ -52,19 +52,19 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   mixins: [baseUrlMixin],
   data() {
     return {
-      page: 1,
-    };
+      page: 1
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

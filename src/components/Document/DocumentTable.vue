@@ -1,36 +1,36 @@
 <script>
-import Document from "@/api/models/Document";
-import DocumentForm from "./DocumentForm";
+import Document from '@/api/models/Document'
+import DocumentForm from './DocumentForm'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    DocumentForm,
+    DocumentForm
   },
   data() {
     return {
       editing: false,
-      modelName: "document",
-    };
+      modelName: 'document'
+    }
   },
   computed: {
     headers() {
-      return this.Model.nonRelationFields();
-    },
+      return this.Model.nonRelationFields()
+    }
   },
   mixins: [exportMixin, crudMixin],
   created() {
-    window.DocumentTable = this;
+    window.DocumentTable = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.DocumentForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.DocumentForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

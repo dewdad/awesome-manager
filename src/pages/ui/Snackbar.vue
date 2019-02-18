@@ -127,23 +127,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       snackbar: false,
-      y: "top",
+      y: 'top',
       x: null,
-      mode: "",
+      mode: '',
       timeout: 6000,
-      color: "",
-      text: "Hello, I'm a snackbar",
-    };
+      color: '',
+      text: "Hello, I'm a snackbar"
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

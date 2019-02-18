@@ -242,30 +242,30 @@
 </template>
 
 <script>
-import { join } from "path";
-import VWidget from "@/components/VWidget";
+import { join } from 'path'
+import VWidget from '@/components/VWidget'
 
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       show: true,
-      cardText: "请查看手册, 了解具体使用方法",
-    };
+      cardText: '请查看手册, 了解具体使用方法'
+    }
   },
   computed: {
-    computeBg1: () => join(process.env.BASE_URL, "bg/1.jpg"),
-    computeBg2: () => join(process.env.BASE_URL, "bg/2.jpg"),
-    computeBg3: () => join(process.env.BASE_URL, "bg/3.jpg"),
-    computeBg4: () => join(process.env.BASE_URL, "bg/4.jpg"),
-    computeBg5: () => join(process.env.BASE_URL, "bg/5.jpg"),
-    computeBg6: () => join(process.env.BASE_URL, "bg/6.jpg"),
-    computeBg10: () => join(process.env.BASE_URL, "bg/10.jpg"),
-    computeAvatarMan4: () => join(process.env.BASE_URL, "avatar/man_4.jpg"),
-  },
-};
+    computeBg1: () => join(process.env.BASE_URL, 'bg/1.jpg'),
+    computeBg2: () => join(process.env.BASE_URL, 'bg/2.jpg'),
+    computeBg3: () => join(process.env.BASE_URL, 'bg/3.jpg'),
+    computeBg4: () => join(process.env.BASE_URL, 'bg/4.jpg'),
+    computeBg5: () => join(process.env.BASE_URL, 'bg/5.jpg'),
+    computeBg6: () => join(process.env.BASE_URL, 'bg/6.jpg'),
+    computeBg10: () => join(process.env.BASE_URL, 'bg/10.jpg'),
+    computeAvatarMan4: () => join(process.env.BASE_URL, 'avatar/man_4.jpg')
+  }
+}
 </script>
 <style lang="stylus" scoped>
   .mt-45

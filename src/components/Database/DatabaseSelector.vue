@@ -16,29 +16,29 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { get, sync, call } from "vuex-pathify";
-import { remote, shell } from "electron";
+import Vue from 'vue'
+import { get, sync, call } from 'vuex-pathify'
+import { remote, shell } from 'electron'
 
-import path from "path";
+import path from 'path'
 
-import { log, getFilesByExtentionInDir } from "@/util";
-import fs from "fs";
+import { log, getFilesByExtentionInDir } from '@/util'
+import fs from 'fs'
 
 export default {
   props: {
     dataFiles: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   methods: {
-    ...call("database/*"),
+    ...call('database/*'),
     updateDataPath() {
-      this.$store.set("database/export@dataPath", this.dataPath);
-    },
+      this.$store.set('database/export@dataPath', this.dataPath)
+    }
   },
   computed: {
-    dataPath: sync("database/export@dataPath"),
-  },
-};
+    dataPath: sync('database/export@dataPath')
+  }
+}
 </script>

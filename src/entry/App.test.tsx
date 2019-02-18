@@ -1,5 +1,5 @@
-import { VNode } from "vue";
-import { component } from "vue-tsx-support";
+import { VNode } from 'vue'
+import { component } from 'vue-tsx-support'
 
 import {
   VAlert,
@@ -12,41 +12,41 @@ import {
   VContent,
   VFlex,
   VIcon,
-  VLayout,
-} from "vuetify-tsx";
+  VLayout
+} from 'vuetify-tsx'
 
 const Title = component({
   render() {
-    return <h1 class="display-1 font-weight-bold mb-4">{this.$slots.default}</h1>;
-  },
-});
+    return <h1 class="display-1 font-weight-bold mb-4">{this.$slots.default}</h1>
+  }
+})
 
 const SubTitle = component({
   render() {
-    return <h2 class="title font-weight-bold my-5">{this.$slots.default}</h2>;
-  },
-});
+    return <h2 class="title font-weight-bold my-5">{this.$slots.default}</h2>
+  }
+})
 
 const App = component({
-  name: "App",
+  name: 'App',
   data: () => ({
     breadcrumbs: [
       {
-        text: "Dashboard",
+        text: 'Dashboard',
         disabled: false,
-        href: "breadcrumbs_dashboard",
+        href: 'breadcrumbs_dashboard'
       },
       {
-        text: "Link 1",
+        text: 'Link 1',
         disabled: false,
-        href: "breadcrumbs_link_1",
+        href: 'breadcrumbs_link_1'
       },
       {
-        text: "Link 2",
+        text: 'Link 2',
         disabled: true,
-        href: "breadcrumbs_link_2",
-      },
-    ],
+        href: 'breadcrumbs_link_2'
+      }
+    ]
   }),
   render(): VNode {
     return (
@@ -109,8 +109,8 @@ const App = component({
           </VContainer>
         </VContent>
       </VApp>
-    );
-  },
-});
+    )
+  }
+})
 
-export default App;
+export default App

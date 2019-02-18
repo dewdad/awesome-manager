@@ -1,31 +1,31 @@
 <script>
-import { map, pick, pullAll } from "lodash/fp";
-import Document from "@/api/models/Document";
+import { map, pick, pullAll } from 'lodash/fp'
+import Document from '@/api/models/Document'
 
-import Entity from "@/api/models/Entity";
-import User from "@/api/models/User";
+import Entity from '@/api/models/Entity'
+import User from '@/api/models/User'
 
-import crudMixin from "@/mixins/crudMixin";
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   data() {
     return {
       editing: false,
       model: {},
-      modelName: "document",
-      startDateMenu: false,
-    };
+      modelName: 'document',
+      startDateMenu: false
+    }
   },
   mixins: [crudMixin],
   created() {
-    window.DocumentForm = this;
+    window.DocumentForm = this
   },
   computed: {
-    selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
-    selectUsers: () => map(pick(["_id", "name"]), User.all()),
+    selectEntities: () => map(pick(['_id', 'name']), Entity.all()),
+    selectUsers: () => map(pick(['_id', 'name']), User.all())
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <template>

@@ -1,36 +1,36 @@
 <script>
-import Resummee from "@/api/models/Resummee";
-import ResummeeForm from "./ResummeeForm";
+import Resummee from '@/api/models/Resummee'
+import ResummeeForm from './ResummeeForm'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    ResummeeForm,
+    ResummeeForm
   },
   data() {
     return {
       editing: false,
-      modelName: "resummee",
-    };
+      modelName: 'resummee'
+    }
   },
   mixins: [exportMixin, crudMixin],
   computed: {
     headers() {
-      return this.Model.nonRelationFields();
-    },
+      return this.Model.nonRelationFields()
+    }
   },
   created() {
-    window.ResummeeTable = this;
+    window.ResummeeTable = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.ResummeeForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.ResummeeForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

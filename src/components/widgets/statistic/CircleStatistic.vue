@@ -37,9 +37,9 @@ export default {
     subTitle: String,
     caption: String,
     value: Number,
-    color: String,
-  },
-};
+    color: String
+  }
+}
 </script>
 
 <style>

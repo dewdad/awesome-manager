@@ -72,39 +72,39 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       selectedTab: null,
       tabs: null,
       material: null,
-      ft: null,
-    };
+      ft: null
+    }
   },
   computed: {},
   created() {
-    fetch("/static/data/material.json")
+    fetch('/static/data/material.json')
       .then(response => {
-        return response.json();
+        return response.json()
       })
       .then(json => {
-        this.material = json.icons.splice(0, 100);
-      });
-    fetch("/static/data/font-awesome.json")
+        this.material = json.icons.splice(0, 100)
+      })
+    fetch('/static/data/font-awesome.json')
       .then(response => {
-        return response.json();
+        return response.json()
       })
       .then(json => {
-        const version = "4.7.0";
-        this.ft = json[version].splice(0, 100);
-      });
+        const version = '4.7.0'
+        this.ft = json[version].splice(0, 100)
+      })
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped>
@@ -143,7 +143,7 @@ export default {
   margin: 0 10px;
 }
 
-.demo-icons-list li [data-provide~="emoji"] svg {
+.demo-icons-list li [data-provide~='emoji'] svg {
   width: 32px;
   height: 32px;
 }

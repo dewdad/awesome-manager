@@ -91,43 +91,43 @@
   </v-toolbar>
 </template>
 <script>
-import NotificationList from "@/components/widgets/list/NotificationList";
-import Notification from "@/api/models/Notification";
-import { toggleFullScreen } from "@/util";
-import { join } from "path";
+import NotificationList from '@/components/widgets/list/NotificationList'
+import Notification from '@/api/models/Notification'
+import { toggleFullScreen } from '@/util'
+import { join } from 'path'
 export default {
-  name: "app-toolbar",
+  name: 'app-toolbar',
   components: {
-    NotificationList,
+    NotificationList
   },
   data: () => ({
     baseUrl: process.env.BASE_URL,
     items: [
       {
-        icon: "settings",
-        href: "#",
-        title: "个人设置",
+        icon: 'settings',
+        href: '#',
+        title: '个人设置',
         click(e) {
-          window.getApp.$emit("APP_ACCOUNTSETTING");
-        },
+          window.getApp.$emit('APP_ACCOUNTSETTING')
+        }
       },
       {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "登出",
+        icon: 'fullscreen_exit',
+        href: '#',
+        title: '登出',
         click(e) {
-          window.getApp.$emit("APP_LOGOUT");
-        },
-      },
-    ],
+          window.getApp.$emit('APP_LOGOUT')
+        }
+      }
+    ]
   }),
   computed: {
-    computeAvatar: () => join(process.env.BASE_URL, "avatar/mf-avatar.svg"),
+    computeAvatar: () => join(process.env.BASE_URL, 'avatar/mf-avatar.svg'),
     toolbarColor: () => this.$vuetify.options.extra.mainNav,
-    notificationCount: () => Notification.query().count(),
+    notificationCount: () => Notification.query().count()
   },
   methods: {
-    handleDrawerToggle: () => window.getApp.$emit("APP_DRAWER_TOGGLED"),
-  },
-};
+    handleDrawerToggle: () => window.getApp.$emit('APP_DRAWER_TOGGLED')
+  }
+}
 </script>

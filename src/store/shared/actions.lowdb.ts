@@ -1,13 +1,13 @@
-import db from "@/api/lowdb";
+import db from '@/api/lowdb'
 export default {
   async createItemInDB(ctx, data) {
     try {
       db.read()
         .get(`${ctx.state.name}`)
         .push(data)
-        .write();
+        .write()
     } catch (e) {
-      throw new Error("添加数据失败!");
+      throw new Error('添加数据失败!')
     }
   },
   async deleteItemInDB(ctx, data) {
@@ -15,9 +15,9 @@ export default {
       db.read()
         .get(`${ctx.state.name}`)
         .remove({ _id: data._id })
-        .write();
+        .write()
     } catch (e) {
-      throw new Error("删除数据失败!");
+      throw new Error('删除数据失败!')
     }
   },
   async updateItemInDB(ctx, data) {
@@ -26,9 +26,9 @@ export default {
         .get(`${ctx.state.name}`)
         .find({ _id: data._id })
         .assign(data)
-        .write();
+        .write()
     } catch (e) {
-      throw new Error("更新数据失败!");
+      throw new Error('更新数据失败!')
     }
   },
   async readItemInDB(ctx, data) {
@@ -36,11 +36,11 @@ export default {
       let docs = db
         .read()
         .get(`${ctx.state.name}`)
-        .value();
-      return docs;
+        .value()
+      return docs
     } catch (e) {
       // Do something
-      throw new Error("读取单个数据失败!");
+      throw new Error('读取单个数据失败!')
     }
-  },
-};
+  }
+}

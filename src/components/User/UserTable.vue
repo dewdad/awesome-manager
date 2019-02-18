@@ -1,35 +1,35 @@
 <script>
-import User from "@/api/models/User";
-import UserForm from "./UserForm";
+import User from '@/api/models/User'
+import UserForm from './UserForm'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    UserForm,
+    UserForm
   },
   data() {
     return {
-      modelName: "user",
-    };
+      modelName: 'user'
+    }
   },
   mixins: [crudMixin, exportMixin],
   created() {
-    window.UserApp = this;
+    window.UserApp = this
   },
   computed: {
     headers() {
-      return this.Model.nonRelationFields();
-    },
+      return this.Model.nonRelationFields()
+    }
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.UserForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.UserForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

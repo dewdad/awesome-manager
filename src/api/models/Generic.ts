@@ -1,16 +1,16 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from './BaseModel'
 export interface IGeneric {
-  _id: string;
-  name: string;
+  _id: string
+  name: string
 }
 
 export default class Generic extends BaseModel {
-  static entity = "generic";
+  static entity = 'generic'
 
   static fields() {
     return {
       _id: this.increment(),
-      name: this.string("name"),
-    };
+      name: this.string('name')
+    }
   }
 }

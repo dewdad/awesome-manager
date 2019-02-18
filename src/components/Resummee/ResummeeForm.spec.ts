@@ -1,7 +1,7 @@
-import ResummeeForm from "./ResummeeForm.vue";
+import ResummeeForm from './ResummeeForm.vue'
 
-describe("@/components/Resummee/ResummeeForm", () => {
-  it("exports a valid component", () => {
-    expect(ResummeeForm).toBeAComponent();
-  });
-});
+describe('@/components/Resummee/ResummeeForm', () => {
+  it('exports a valid component', () => {
+    expect(ResummeeForm).toBeAComponent()
+  })
+})

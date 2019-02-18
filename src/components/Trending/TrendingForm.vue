@@ -1,43 +1,43 @@
 <script>
-import Trending from "@/api/models/Trending";
+import Trending from '@/api/models/Trending'
 export default {
   data() {
     return {
       editing: false,
-      model: {},
-    };
+      model: {}
+    }
   },
   created() {
-    this.model = new Trending();
-    this.$on("SET_EDITING", item => {
-      this.editing = true;
-      this.model = item;
-    });
-    window.TrendingForm = this;
+    this.model = new Trending()
+    this.$on('SET_EDITING', item => {
+      this.editing = true
+      this.model = item
+    })
+    window.TrendingForm = this
   },
   computed: {
-    fields: () => Trending.fieldsKeys(),
+    fields: () => Trending.fieldsKeys()
   },
   methods: {
     reset() {
-      this.editing = false;
-      this.model = new Trending();
+      this.editing = false
+      this.model = new Trending()
     },
     saveItem() {
       if (!this.editing) {
         Trending.insert({
-          data: this.model,
-        });
-        this.model = new Trending();
+          data: this.model
+        })
+        this.model = new Trending()
       } else {
-        Trending.update(this.model);
-        this.editing = false;
-        this.model = new Trending();
+        Trending.update(this.model)
+        this.editing = false
+        this.model = new Trending()
       }
-      console.log(Trending.all());
-    },
-  },
-};
+      console.log(Trending.all())
+    }
+  }
+}
 </script>
 
 <template>

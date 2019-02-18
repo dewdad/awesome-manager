@@ -138,23 +138,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import API from "@/api";
-import VCircle from "@/components/circle/VCircle.js";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import VWidget from '@/components/VWidget'
+import API from '@/api'
+import VCircle from '@/components/circle/VCircle.js'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
     VWidget,
-    VCircle,
+    VCircle
   },
   mixins: [baseUrlMixin],
   computed: {
     activity() {
-      return API.getActivity();
+      return API.getActivity()
     },
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
 
-  methods: {},
-};
+  methods: {}
+}
 </script>

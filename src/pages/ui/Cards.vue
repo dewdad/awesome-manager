@@ -231,23 +231,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   mixins: [baseUrlMixin],
   data() {
     return {
       show: true,
       cardText:
-        "Hey there, I am a very simple card. I am good at containing small bits of information. I am quite convenient because I require little markup to use effectively.",
-    };
+        'Hey there, I am a very simple card. I am good at containing small bits of information. I am quite convenient because I require little markup to use effectively.'
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 <style lang="stylus" scoped>
   .mt-45

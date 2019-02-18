@@ -1,11 +1,11 @@
 <script>
-import { join } from "path";
-import { map, pick, pullAll } from "lodash/fp";
+import { join } from 'path'
+import { map, pick, pullAll } from 'lodash/fp'
 
-import User from "@/api/models/User";
-import Entity from "@/api/models/Entity";
+import User from '@/api/models/User'
+import Entity from '@/api/models/Entity'
 
-import crudMixin from "@/mixins/crudMixin";
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   data() {
@@ -13,38 +13,38 @@ export default {
       editing: false,
       mini: false,
       model: {},
-      modelName: "user",
-    };
+      modelName: 'user'
+    }
   },
   mixins: [crudMixin],
   created() {
-    window.UserForm = this;
+    window.UserForm = this
   },
   computed: {
-    selectEntities: () => map(pick(["_id", "name"]), Entity.all()),
+    selectEntities: () => map(pick(['_id', 'name']), Entity.all()),
     computeCardLayout() {
-      return this.mini ? "row" : "column";
+      return this.mini ? 'row' : 'column'
     },
     computeTextAlgin() {
-      return this.mini ? "text-sm-right" : "text-sm-center";
+      return this.mini ? 'text-sm-right' : 'text-sm-center'
     },
     computeAvatarSize() {
-      return this.mini ? "48" : "192";
+      return this.mini ? '48' : '192'
     },
-    computeAvatarMan1: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
+    computeAvatarMan1: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
   methods: {
     militantInformation() {
-      this.$router.push("/users/militant");
+      this.$router.push('/users/militant')
     },
     resummeeInformation() {
-      this.$router.push("/users/resummee");
+      this.$router.push('/users/resummee')
     },
     writeEvaluation() {
-      this.$router.push("/users/evaluation");
-    },
-  },
-};
+      this.$router.push('/users/evaluation')
+    }
+  }
+}
 </script>
 
 <template>

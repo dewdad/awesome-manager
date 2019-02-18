@@ -191,24 +191,24 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      chips: ["Programming", "Watching", "Sleeping"],
+      chips: ['Programming', 'Watching', 'Sleeping'],
       chip1: true,
-      chip2: true,
-    };
+      chip2: true
+    }
   },
   computed: {},
   methods: {
     remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1);
-      this.chips = [...this.chips];
-    },
-  },
-};
+      this.chips.splice(this.chips.indexOf(item), 1)
+      this.chips = [...this.chips]
+    }
+  }
+}
 </script>

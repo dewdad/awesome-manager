@@ -1,15 +1,15 @@
 <script>
-import Entity from "@/api/models/Entity";
-import EntityForm from "./EntityForm";
-import exportMixin from "@/mixins/exportMixin";
+import Entity from '@/api/models/Entity'
+import EntityForm from './EntityForm'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   components: {
-    EntityForm,
+    EntityForm
   },
   data() {
     return {
-      editing: false,
-    };
+      editing: false
+    }
   },
   computed: {
     modelName: () => Entity.entity,
@@ -17,21 +17,21 @@ export default {
       Entity.query()
         .withAll()
         .get(),
-    headers: () => Entity.fieldsKeys(),
+    headers: () => Entity.fieldsKeys()
   },
   mixins: [exportMixin],
   created() {
-    window.EntityIterator = this;
+    window.EntityIterator = this
   },
   methods: {
     deleteItem(item) {
-      Entity.delete(item._id);
+      Entity.delete(item._id)
     },
     editItem(item) {
-      window.EntityForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      window.EntityForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

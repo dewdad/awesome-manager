@@ -6,10 +6,7 @@
     {
       "type": "npm",
       "script": "storybook:serve",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "problemMatcher": []
     },
     {
@@ -20,7 +17,11 @@
     {
       "type": "npm",
       "script": "dev",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
       "type": "npm",
@@ -57,6 +58,6 @@
         "reveal": "always",
         "panel": "new"
       }
-    },
+    }
   ]
 }

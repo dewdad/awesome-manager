@@ -265,10 +265,10 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
@@ -286,12 +286,12 @@ export default {
       radio5: false,
       s1: false,
       s2: false,
-      ex7: "red",
-      ex8: "primary",
-      colors: ["red", "indigo", "orange", "primary"],
-    };
+      ex7: 'red',
+      ex8: 'primary',
+      colors: ['red', 'indigo', 'orange', 'primary']
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

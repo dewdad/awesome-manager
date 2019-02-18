@@ -1,19 +1,19 @@
 <script>
-import Resummee from "@/api/models/Resummee";
-import crudMixin from "@/mixins/crudMixin";
+import Resummee from '@/api/models/Resummee'
+import crudMixin from '@/mixins/crudMixin'
 export default {
   data() {
     return {
       editing: false,
       model: {},
-      modelName: "resummee",
-    };
+      modelName: 'resummee'
+    }
   },
   mixins: [crudMixin],
   created() {
-    window.ResummeeForm = this;
-  },
-};
+    window.ResummeeForm = this
+  }
+}
 </script>
 
 <template>

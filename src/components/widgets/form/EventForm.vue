@@ -213,12 +213,12 @@ export default {
     endDate: null,
     endTimeMenu: false,
     endTime: null,
-    modal: false,
+    modal: false
   }),
   methods: {
     closeDialog() {
-      this.$parent.isActive = false;
-    },
-  },
-};
+      this.$parent.isActive = false
+    }
+  }
+}
 </script>

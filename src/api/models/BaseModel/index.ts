@@ -10,15 +10,15 @@ import {
   MorphOne,
   MorphMany,
   MorphTo,
-  Attribute,
-} from "@vuex-orm/core";
-import { keys, pullAll } from "lodash";
+  Attribute
+} from '@vuex-orm/core'
+import { keys, pullAll } from 'lodash'
 
 export class BaseModel extends Model {
-  static primaryKey = "_id";
+  static primaryKey = '_id'
 
   static fieldsKeys(): string[] {
-    return keys(this.fields());
+    return keys(this.fields())
   }
 
   /**
@@ -27,13 +27,13 @@ export class BaseModel extends Model {
    */
   static relationFields(): string[] {
     return this.fieldsKeys().reduce((list: string[], field: string) => {
-      let fieldAttribute: Attribute = this.fields()[field];
+      let fieldAttribute: Attribute = this.fields()[field]
       if (this.isFieldRelation(fieldAttribute)) {
-        list.push(`${field}_id`);
-        list.push(field);
+        list.push(`${field}_id`)
+        list.push(field)
       }
-      return list;
-    }, []);
+      return list
+    }, [])
   }
 
   /**
@@ -41,7 +41,7 @@ export class BaseModel extends Model {
    * @returns {Array<string>} fields which value are not BelongsTo
    */
   static nonRelationFields(): string[] {
-    return pullAll(this.fieldsKeys(), this.relationFields());
+    return pullAll(this.fieldsKeys(), this.relationFields())
   }
 
   /**
@@ -49,15 +49,15 @@ export class BaseModel extends Model {
    */
 
   static relationFieldsWithId(): string[] {
-    return this.relationFields().filter(r => r.match(/.*_id/));
+    return this.relationFields().filter(r => r.match(/.*_id/))
   }
   // 关系型数据键值中不包括_id的
   static nonRelationFieldsNoId(): string[] {
-    return this.relationFields().filter(r => !r.match(/.*_id/));
+    return this.relationFields().filter(r => !r.match(/.*_id/))
   }
 
   static count(): number {
-    return this.query().count();
+    return this.query().count()
   }
 
   /**
@@ -67,8 +67,8 @@ export class BaseModel extends Model {
    * @returns {boolean}
    */
   static isFieldNumber(field: Attribute): boolean {
-    if (!field) return false;
-    return field instanceof Number || field instanceof Increment;
+    if (!field) return false
+    return field instanceof Number || field instanceof Increment
   }
 
   /**
@@ -83,7 +83,7 @@ export class BaseModel extends Model {
       field instanceof String ||
       field instanceof Number ||
       field instanceof Boolean
-    );
+    )
   }
   /**
    * 判断某一字段是否为关系
@@ -98,7 +98,7 @@ export class BaseModel extends Model {
       field instanceof MorphTo ||
       field instanceof MorphOne ||
       field instanceof MorphMany
-    );
+    )
   }
 
   /**
@@ -108,20 +108,20 @@ export class BaseModel extends Model {
    * @returns {boolean}
    */
   skipField(field: string): boolean {
-    let shouldSkipField: boolean = false;
+    let shouldSkipField: boolean = false
 
     this.getRelations().forEach(relation => {
       if (
         (relation instanceof BelongsTo || relation instanceof HasOne) &&
         relation.foreignKey === field
       ) {
-        shouldSkipField = true;
-        return false;
+        shouldSkipField = true
+        return false
       }
-      return true;
-    });
+      return true
+    })
 
-    return shouldSkipField;
+    return shouldSkipField
   }
 
   /**
@@ -132,8 +132,8 @@ export class BaseModel extends Model {
   getRecordWithId(id: number): any {
     return this.query()
       .withAllRecursive()
-      .where("id", id)
-      .first();
+      .where('id', id)
+      .first()
   }
 
   /**
@@ -147,15 +147,15 @@ export class BaseModel extends Model {
    */
   shouldEagerLoadRelation(fieldName: string, field: Attribute, relatedModel: Model): boolean {
     if (field instanceof HasOne || field instanceof BelongsTo || field instanceof MorphOne) {
-      return true;
+      return true
     }
 
-    const eagerLoadList: Array<String> = this.eagerLoad || [];
+    const eagerLoadList: Array<String> = this.eagerLoad || []
     return (
       eagerLoadList.find(n => {
-        return n === relatedModel.singularName || n === relatedModel.pluralName || n === fieldName;
+        return n === relatedModel.singularName || n === relatedModel.pluralName || n === fieldName
       }) !== undefined
-    );
+    )
   }
 
   /**
@@ -166,13 +166,13 @@ export class BaseModel extends Model {
     return this.fields().reduce(function(
       relations: Map<string, Attribute>,
       field: Attribute,
-      name: string,
+      name: string
     ) {
       if (!this.isFieldAttribute(field)) {
-        relations.set(name, field);
+        relations.set(name, field)
       }
-      return relations;
+      return relations
     },
-    []);
+    [])
   }
 }

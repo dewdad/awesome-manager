@@ -1,24 +1,24 @@
 <script>
-import { map, pick } from "lodash/fp";
-import Notification from "@/api/models/Notification";
+import { map, pick } from 'lodash/fp'
+import Notification from '@/api/models/Notification'
 export default {
   data() {
     return {
-      model: { _id: 1, label: "Select Notification" },
-    };
+      model: { _id: 1, label: 'Select Notification' }
+    }
   },
   created() {
-    window.NotificationSelect = this;
+    window.NotificationSelect = this
   },
   computed: {
-    notifications: () => map(pick(["_id", "text"]), Notification.all()),
+    notifications: () => map(pick(['_id', 'text']), Notification.all())
   },
   methods: {
     change() {
-      this.$emit("Notification_CHANGED", this.model._id);
-    },
-  },
-};
+      this.$emit('Notification_CHANGED', this.model._id)
+    }
+  }
+}
 </script>
 <template>
   <v-select

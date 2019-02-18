@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import EChart from "@/components/chart/echart";
+import EChart from '@/components/chart/echart'
 export default {
   components: {
-    EChart,
+    EChart
   },
   props: {
     title: String,
@@ -34,40 +34,40 @@ export default {
     icon: String,
     iconColor: {
       type: String,
-      default: "success",
+      default: 'success'
     },
     type: String,
     chartColor: String,
-    data: Array,
+    data: Array
   },
   data() {
     return {
       defaultOption: [
-        ["dataset.source", this.data],
-        ["xAxis.show", false],
-        ["yAxis.show", false],
-        ["color", [this.chartColor]],
-      ],
-    };
+        ['dataset.source', this.data],
+        ['xAxis.show', false],
+        ['yAxis.show', false],
+        ['color', [this.chartColor]]
+      ]
+    }
   },
 
   computed: {
     computeChartOption() {
       switch (this.type) {
-        case "bar":
-          this.defaultOption.push(["series[0].type", "bar"]);
-          break;
-        case "area":
-          this.defaultOption.push(["series[0].type", "line"]);
-          this.defaultOption.push(["series[0].areaStyle", {}]);
-          break;
+        case 'bar':
+          this.defaultOption.push(['series[0].type', 'bar'])
+          break
+        case 'area':
+          this.defaultOption.push(['series[0].type', 'line'])
+          this.defaultOption.push(['series[0].areaStyle', {}])
+          break
         default:
-          break;
+          break
       }
-      return this.defaultOption;
-    },
-  },
-};
+      return this.defaultOption
+    }
+  }
+}
 </script>
 
 <style>

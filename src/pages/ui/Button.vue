@@ -532,15 +532,15 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      text: "center",
-      icon: "justify",
+      text: 'center',
+      icon: 'justify',
       toggle_none: null,
       toggle_one: 0,
       toggle_exclusive: 2,
@@ -549,23 +549,23 @@ export default {
       loading: false,
       loading2: false,
       loading3: false,
-      loading4: false,
-    };
+      loading4: false
+    }
   },
   computed: {},
   watch: {
     loader() {
-      const l = this.loader;
-      this[l] = !this[l];
+      const l = this.loader
+      this[l] = !this[l]
 
       setTimeout(() => {
-        this[l] = false;
-      }, 3000);
-      this.loader = null;
-    },
+        this[l] = false
+      }, 3000)
+      this.loader = null
+    }
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style>

@@ -7,28 +7,28 @@ declare namespace NodeJS {
     /**
      * index Signiture to allow any property
      */
-    [propName: string]: any;
-    (...args: any): any;
-    (): any;
+    [propName: string]: any
+    (...args: any): any
+    (): any
     /**
      * All properties and methods are exposed to global
      */
     // https://vue-test-utils.vuejs.org/api/#mount
-    mount(component: any, options: any): any;
+    mount(component: any, options: any): any
     // https://vue-test-utils.vuejs.org/api/#shallowmount
-    shallowMount(component: any, options: any): any;
+    shallowMount(component: any, options: any): any
 
-    shallowMountView(component: any, options: any): any;
+    shallowMountView(component: any, options: any): any
 
-    mountView(component: any, options: any): any;
+    mountView(component: any, options: any): any
 
-    createVuexModule(vuexModule: any, options: any): any;
+    createVuexModule(vuexModule: any, options: any): any
 
-    createVueRouter(path: any[]): any;
+    createVueRouter(path: any[]): any
 
-    createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any;
+    createFullComponent(vuexModule: any, path: never[], vuexOptions: any, routerOptions: any): any
 
-    createVuetifyComponent(): any;
+    createVuetifyComponent(): any
 
     /**
      * Create a options while mocking component
@@ -54,45 +54,45 @@ declare namespace NodeJS {
      * If using `router: true`, we'll automatically stub out
      * components from Vue Router.
      */
-    createComponentMocks(mountOptions: any): any;
+    createComponentMocks(mountOptions: any): any
 
     /**
      * Create a new Vuex Store with ORM plugin.
      * @param {Array<entity>} enties to pull, in format [{ model:..., module?:... }]
      * @param {String} namespace, normally is `entities` to use `state.entities`
      */
-    createORMStore(entities: any[], namespace: string): any;
+    createORMStore(entities: any[], namespace: string): any
     /**
      * expect is property exposed to global
      */
-    expect: jest.Expect;
+    expect: jest.Expect
   }
 }
 
 declare namespace jest {
   interface Matchers<R> {
-    toBeAComponent(options?: any): R;
-    toBeAModel(options?: any): R;
-    toBeAViewComponent(options?: any, mockInstance?: any): R;
-    toBeAViewComponentUsing(options?: any): R;
-    toBeAVuexModule(options?: any, mockInsance?: any): R;
+    toBeAComponent(options?: any): R
+    toBeAModel(options?: any): R
+    toBeAViewComponent(options?: any, mockInstance?: any): R
+    toBeAViewComponentUsing(options?: any): R
+    toBeAVuexModule(options?: any, mockInsance?: any): R
   }
 }
 
-declare module "marked" {
-  const marked: any;
-  export = marked;
+declare module 'marked' {
+  const marked: any
+  export = marked
 }
-declare var nodeRequire: any;
-declare var CLIENT: boolean;
-declare var SERVER: boolean;
-declare var TEST: boolean;
-declare var DEVELOPMENT: boolean;
-declare var PRODUCTION: boolean;
+declare var nodeRequire: any
+declare var CLIENT: boolean
+declare var SERVER: boolean
+declare var TEST: boolean
+declare var DEVELOPMENT: boolean
+declare var PRODUCTION: boolean
 
-declare type RequireContext = __WebpackModuleApi.RequireContext;
+declare type RequireContext = __WebpackModuleApi.RequireContext
 
 interface Window {
-  store: any;
-  __INITIAL_STATE__: any;
+  store: any
+  __INITIAL_STATE__: any
 }

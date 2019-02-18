@@ -1,24 +1,24 @@
 <script>
-import { map, pick } from "lodash/fp";
-import Evaluation from "@/api/models/Evaluation";
+import { map, pick } from 'lodash/fp'
+import Evaluation from '@/api/models/Evaluation'
 export default {
   data() {
     return {
-      model: { _id: 1, label: "Select Evaluation" },
-    };
+      model: { _id: 1, label: 'Select Evaluation' }
+    }
   },
   created() {
-    window.EvaluationSelect = this;
+    window.EvaluationSelect = this
   },
   computed: {
-    evaluations: () => map(pick(["_id", "text"]), Evaluation.all()),
+    evaluations: () => map(pick(['_id', 'text']), Evaluation.all())
   },
   methods: {
     change() {
-      this.$emit("Evaluation_CHANGED", this.model._id);
-    },
-  },
-};
+      this.$emit('Evaluation_CHANGED', this.model._id)
+    }
+  }
+}
 </script>
 <template>
   <v-select

@@ -101,31 +101,31 @@
 </template>
 
 <script>
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
-import { sync, call } from "vuex-pathify";
+import { sync, call } from 'vuex-pathify'
 
-const isDevelopment = process.env.NODE_ENV !== "production";
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 @Component({
   props: {
     drawer: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   computed: {
     showDrawer: function() {
-      return this.drawer;
+      return this.drawer
     },
-    MenuItemsProd: sync("uiSetting@MenuItemsProd"),
-    MenuItemsDev: sync("uiSetting@MenuItemsDev"),
-  },
+    MenuItemsProd: sync('uiSetting@MenuItemsProd'),
+    MenuItemsDev: sync('uiSetting@MenuItemsDev')
+  }
 })
 export default class NavigationDrawer extends Vue {
   // Navigation routes
   navigate(to, payload) {
-    this.$router.push({ path: to });
+    this.$router.push({ path: to })
   }
 }
 </script>

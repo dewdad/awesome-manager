@@ -1,7 +1,7 @@
-import ResummeeTable from "./ResummeeTable.vue";
+import ResummeeTable from './ResummeeTable.vue'
 
-describe("@/components/Resummee/ResummeeTable", () => {
-  it("exports a valid component", () => {
-    expect(ResummeeTable).toBeAComponent();
-  });
-});
+describe('@/components/Resummee/ResummeeTable', () => {
+  it('exports a valid component', () => {
+    expect(ResummeeTable).toBeAComponent()
+  })
+})

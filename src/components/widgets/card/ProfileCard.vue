@@ -88,12 +88,12 @@
 </template>
 
 <script>
-import { join } from "path";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   mixins: [baseUrlMixin],
   computed: {
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
-  },
-};
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  }
+}
 </script>

@@ -74,15 +74,15 @@
 </template>
 
 <script>
-import { join } from "path";
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   mixins: [baseUrlMixin],
   props: {
-    items: { type: [Array, Object] },
+    items: { type: [Array, Object] }
   },
   computed: {
-    computeImgePath: () => join(process.env.BASE_URL, "avatar/man_1.jpg"),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
   methods: {
     handleThumb() {
@@ -93,9 +93,9 @@ export default {
     },
     handleFavorite() {
       // implement your own method here
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

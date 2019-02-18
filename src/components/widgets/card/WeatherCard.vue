@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
-  mixins: [baseUrlMixin],
-};
+  mixins: [baseUrlMixin]
+}
 </script>

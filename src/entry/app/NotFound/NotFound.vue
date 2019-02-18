@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: "NotFound",
+  name: 'NotFound',
   props: {},
   data() {
-    return {};
+    return {}
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

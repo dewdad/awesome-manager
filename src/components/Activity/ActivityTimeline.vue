@@ -1,31 +1,31 @@
 <script>
-import Activity from "@/api/models/Activity";
-import ActivityForm from "./ActivityForm";
+import Activity from '@/api/models/Activity'
+import ActivityForm from './ActivityForm'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    ActivityForm,
+    ActivityForm
   },
   data() {
     return {
       editing: false,
-      modelName: "activity"
-    };
+      modelName: 'activity'
+    }
   },
   mixins: [exportMixin, crudMixin],
   created() {
-    window.ActivityTimeline = this;
+    window.ActivityTimeline = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.ActivityForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.ActivityForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

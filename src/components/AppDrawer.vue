@@ -119,51 +119,51 @@
   </v-navigation-drawer>
 </template>
 <script>
-import menu from "@/api/menu";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import { join } from "path";
+import menu from '@/api/menu'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { join } from 'path'
 export default {
-  name: "app-drawer",
+  name: 'app-drawer',
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
   props: {
     expanded: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   data: () => ({
     mini: false,
     drawer: true,
     menus: menu,
     scrollSettings: {
-      maxScrollbarLength: 160,
-    },
+      maxScrollbarLength: 160
+    }
   }),
   computed: {
     computeGroupActive: () => true,
-    computeLogo: () => join(process.env.BASE_URL, "icon/google.png"),
-    sideToolbarColor: () => this.$vuetify.options.extra.sideNav,
+    computeLogo: () => join(process.env.BASE_URL, 'icon/google.png'),
+    sideToolbarColor: () => this.$vuetify.options.extra.sideNav
   },
   created() {
-    window.getApp.$on("APP_DRAWER_TOGGLED", () => {
-      this.drawer = !this.drawer;
-    });
+    window.getApp.$on('APP_DRAWER_TOGGLED', () => {
+      this.drawer = !this.drawer
+    })
   },
 
   methods: {
     genChildTarget(item, subItem) {
-      if (subItem.href) return;
+      if (subItem.href) return
       if (subItem.component) {
         return {
-          name: subItem.component,
-        };
+          name: subItem.component
+        }
       }
-      return { name: `${item.group}/${subItem.name}` };
-    },
-  },
-};
+      return { name: `${item.group}/${subItem.name}` }
+    }
+  }
+}
 </script>
 
 <style>

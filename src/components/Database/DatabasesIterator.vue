@@ -23,15 +23,15 @@
   </div>
 </template>
 <script>
-import { entities } from "@/api/globals";
+import { entities } from '@/api/globals'
 export default {
   data() {
     return {
-      entities: [],
-    };
+      entities: []
+    }
   },
   created() {
-    this.entities = entities;
-  },
-};
+    this.entities = entities
+  }
+}
 </script>

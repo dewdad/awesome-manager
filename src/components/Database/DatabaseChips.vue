@@ -11,21 +11,21 @@
   </v-flex>
 </template>
 <script>
-import { entities } from "@/api/globals";
+import { entities } from '@/api/globals'
 export default {
   data() {
     return {
       entities: [],
-      selectedColor: "primary",
-    };
+      selectedColor: 'primary'
+    }
   },
   methods: {
     select(item) {
-      window.dbApp.$emit("SELECT_MODEL", item);
-    },
+      window.dbApp.$emit('SELECT_MODEL', item)
+    }
   },
   created() {
-    this.entities = entities;
-  },
-};
+    this.entities = entities
+  }
+}
 </script>

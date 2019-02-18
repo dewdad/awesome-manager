@@ -84,16 +84,16 @@
   </div>
 </template>
 <script>
-import AppDrawer from "@/components/AppDrawer";
-import AppToolbar from "@/components/AppToolbar";
-import AppFab from "@/components/AppFab";
-import PageHeader from "@/components/PageHeader";
+import AppDrawer from '@/components/AppDrawer'
+import AppToolbar from '@/components/AppToolbar'
+import AppFab from '@/components/AppFab'
+import PageHeader from '@/components/PageHeader'
 
-import menu from "@/api/menu";
+import menu from '@/api/menu'
 
-import ThemeSettings from "@/components/ThemeSettings";
+import ThemeSettings from '@/components/ThemeSettings'
 
-import AppEvents from "@/util/event";
+import AppEvents from '@/util/event'
 
 export default {
   components: {
@@ -101,33 +101,33 @@ export default {
     AppToolbar,
     AppFab,
     PageHeader,
-    ThemeSettings,
+    ThemeSettings
   },
   data: () => ({
     expanded: true,
     rightDrawer: false,
     snackbar: {
       show: false,
-      text: "",
-      color: "",
-    },
+      text: '',
+      color: ''
+    }
   }),
 
   computed: {},
 
   created() {
     AppEvents.forEach(item => {
-      this.$on(item.name, item.callback);
-    });
-    window.getApp = this;
+      this.$on(item.name, item.callback)
+    })
+    window.getApp = this
   },
   methods: {
     openThemeSettings() {
-      this.$vuetify.goTo(0);
-      this.rightDrawer = !this.rightDrawer;
-    },
-  },
-};
+      this.$vuetify.goTo(0)
+      this.rightDrawer = !this.rightDrawer
+    }
+  }
+}
 </script>
 
 
@@ -136,12 +136,12 @@ export default {
 // stylelint-disable selector-max-type, selector-class-pattern
 // Normalize default styles across browsers,
 // https://necolas.github.io/normalize.css/
-@import "~normalize.css/normalize.css";
+@import '~normalize.css/normalize.css';
 // Style loading bar between pages.
 // https://github.com/rstacruz/nprogress
-@import "~nprogress/nprogress.css";
+@import '~nprogress/nprogress.css';
 // Design variables and utilities from src/design.
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .setting-fab {
   top: 50% !important;

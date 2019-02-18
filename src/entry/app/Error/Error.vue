@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: "Error",
+  name: 'Error',
   props: {},
   data() {
-    return {};
+    return {}
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

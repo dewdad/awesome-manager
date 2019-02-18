@@ -1,19 +1,19 @@
 <script>
-import Entity from "@/api/models/Entity";
-import crudMixin from "@/mixins/crudMixin";
+import Entity from '@/api/models/Entity'
+import crudMixin from '@/mixins/crudMixin'
 export default {
   data() {
     return {
       editing: false,
       model: {},
-      modelName: "entity",
-    };
+      modelName: 'entity'
+    }
   },
   mixins: [crudMixin],
   created() {
-    window.EntityForm = this;
-  },
-};
+    window.EntityForm = this
+  }
+}
 </script>
 
 <template>

@@ -1,6 +1,6 @@
-import * as tsx from "vue-tsx-support";
-import { VNode } from "vue";
-import { join } from "path";
+import * as tsx from 'vue-tsx-support'
+import { VNode } from 'vue'
+import { join } from 'path'
 
 import {
   VToolbar,
@@ -14,61 +14,61 @@ import {
   VBtn,
   VAvatar,
   VIcon,
-  VSpacer,
-} from "vuetify-tsx";
+  VSpacer
+} from 'vuetify-tsx'
 
 interface IAppToolbarEvents {
-  handleDrawerToggle: (e: any) => void;
-  goHomeRoute: (e: any) => void;
+  handleDrawerToggle: (e: any) => void
+  goHomeRoute: (e: any) => void
 }
 
 const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
-  name: "app-toolbar",
+  name: 'app-toolbar',
   data: () => ({
     items: [
       {
-        icon: "settings",
-        href: "#",
-        title: "个人设置",
+        icon: 'settings',
+        href: '#',
+        title: '个人设置',
         click(e) {
-          (window as any).getApp.$emit("APP_ACCOUNTSETTING");
-        },
+          ;(window as any).getApp.$emit('APP_ACCOUNTSETTING')
+        }
       },
       {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "登出",
+        icon: 'fullscreen_exit',
+        href: '#',
+        title: '登出',
         click(e) {
-          (window as any).getApp.$emit("APP_LOGOUT");
-        },
-      },
-    ],
+          ;(window as any).getApp.$emit('APP_LOGOUT')
+        }
+      }
+    ]
   }),
   computed: {
     toolbarColor() {
-      return this.$vuetify.options.extra.mainNav;
+      return this.$vuetify.options.extra.mainNav
     },
-    computeAvatar: () => join(process.env.BASE_URL, "avatar/mf-avatar.svg"),
+    computeAvatar: () => join(process.env.BASE_URL, 'avatar/mf-avatar.svg')
   },
   methods: {
     handleDrawerToggle(e) {
-      (window as any).getApp.$emit("APP_DRAWER_TOGGLED");
+      ;(window as any).getApp.$emit('APP_DRAWER_TOGGLED')
     },
     goHomeRoute(e) {
-      this.$router.push("/docs/manual");
-    },
+      this.$router.push('/docs/manual')
+    }
   },
   render(): VNode {
-    let { items } = this;
+    let { items } = this
     return (
-      <VToolbar color={"primary"} app>
+      <VToolbar color={'primary'} app>
         <VToolbarSideIcon nativeOn-click={this.handleDrawerToggle} />
         <VTextField
           flat
           solo-inverted
-          prepend-icon={"search"}
-          label={"Search"}
-          class={"hidden-sm-and-down"}
+          prepend-icon={'search'}
+          label={'Search'}
+          class={'hidden-sm-and-down'}
         />
         <VSpacer />
 
@@ -84,8 +84,8 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
           <VIcon>fab fa-github</VIcon>
         </VBtn>
 
-        <VMenu nudgeBottom={10} offsetY origin="center center" transition={"scale-transition"}>
-          <VAvatar size={30} slot={"activator"}>
+        <VMenu nudgeBottom={10} offsetY origin="center center" transition={'scale-transition'}>
+          <VAvatar size={30} slot={'activator'}>
             <img src={this.computeAvatar} alt="Avatar Image" />
           </VAvatar>
           <VList>
@@ -99,7 +99,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
           </VList>
         </VMenu>
       </VToolbar>
-    );
-  },
-});
-export { AppToolbar };
+    )
+  }
+})
+export { AppToolbar }

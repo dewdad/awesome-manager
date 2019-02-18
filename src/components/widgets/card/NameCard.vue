@@ -75,73 +75,73 @@
 </template>
 
 <script>
-import baseUrlMixin from "@/mixins/baseUrlMixin";
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   mixins: [baseUrlMixin],
   props: {
     name: {
       type: String,
-      default: "",
+      default: ''
     },
     avatar: {
       type: Object,
-      default: null,
+      default: null
     },
     jobTitle: {
       type: String,
-      default: "",
+      default: ''
     },
     cardBgImage: {
-      type: String,
+      type: String
     },
     color: {
       type: String,
-      default: "",
+      default: ''
     },
     dark: {
       type: Boolean,
-      default: false,
+      default: false
     },
     bottomNav: {
       type: Boolean,
-      default: false,
+      default: false
     },
     topNav: {
       type: Boolean,
-      default: false,
+      default: false
     },
     mini: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data: () => ({}),
 
   computed: {
     computeCardLayout() {
-      return this.mini ? "row" : "column";
+      return this.mini ? 'row' : 'column'
     },
     computeTextAlgin() {
-      return this.mini ? "text-sm-right" : "text-sm-center";
+      return this.mini ? 'text-sm-right' : 'text-sm-center'
     },
     computeAvatarSize() {
-      return this.mini ? "48" : "96";
+      return this.mini ? '48' : '96'
     },
     showAvatar() {
-      return this.avatar !== null && this.avatar.src;
+      return this.avatar !== null && this.avatar.src
     },
 
     showBottomNav() {
-      return this.mini === false && this.bottomNav;
+      return this.mini === false && this.bottomNav
     },
 
     showTopNav() {
-      return this.mini === false && this.topNav;
-    },
+      return this.mini === false && this.topNav
+    }
   },
 
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style lang="stylus" scoped>

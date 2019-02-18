@@ -1,29 +1,29 @@
-import AppDrawer from "@/components/AppDrawer.vue";
-import AppFab from "@/components/AppFab.vue";
-import { AppToolbar } from "@/components/AppToolbar.tsx";
-import { Evaluation } from "@/components/Evaluation/Evaluation.tsx";
-import PageHeader from "@/components/PageHeader.vue";
-import ThemeSettings from "@/components/ThemeSettings.vue";
-import AppEvents from "@/util/event";
-import { VNode } from "vue";
-import * as tsx from "vue-tsx-support";
+import AppDrawer from '@/components/AppDrawer.vue'
+import AppFab from '@/components/AppFab.vue'
+import { AppToolbar } from '@/components/AppToolbar.tsx'
+import { Evaluation } from '@/components/Evaluation/Evaluation.tsx'
+import PageHeader from '@/components/PageHeader.vue'
+import ThemeSettings from '@/components/ThemeSettings.vue'
+import AppEvents from '@/util/event'
+import { VNode } from 'vue'
+import * as tsx from 'vue-tsx-support'
 // Customized events and data interface
 interface IAppEvents {
-  changeItem: (value: String) => void;
-  openThemeSettings: () => void;
+  changeItem: (value: String) => void
+  openThemeSettings: () => void
 }
 
 // Component Definition
 const App = tsx.componentFactoryOf<IAppEvents>().create({
-  name: "App",
+  name: 'App',
   data: () => ({
     expanded: true,
     rightDrawer: false,
     snackbar: {
       show: false,
-      text: "",
-      color: "",
-    },
+      text: '',
+      color: ''
+    }
   }),
   components: {
     Evaluation,
@@ -31,22 +31,22 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
     AppDrawer,
     AppFab,
     PageHeader,
-    ThemeSettings,
+    ThemeSettings
   },
   created() {
     AppEvents.forEach(item => {
-      this.$on(item.name, item.callback);
-    });
-    (window as any).getApp = this;
+      this.$on(item.name, item.callback)
+    })
+    ;(window as any).getApp = this
   },
   methods: {
     changeItem: (value: string) => console.log(value),
     openThemeSettings() {
-      console.log("Open Theme Settings");
-      this.$vuetify.goTo(0);
-      this.rightDrawer = !this.rightDrawer;
-      console.log(this.rightDrawer);
-    },
+      console.log('Open Theme Settings')
+      this.$vuetify.goTo(0)
+      this.rightDrawer = !this.rightDrawer
+      console.log(this.rightDrawer)
+    }
   },
   render(): VNode {
     return (
@@ -62,7 +62,7 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
             <v-footer height="auto" class="white pa-3 app--footer">
               <span class="caption">embajadachina.com Design</span>
               <v-spacer />
-              <span class="caption mr-1">Official Manager</span>{" "}
+              <span class="caption mr-1">Official Manager</span>{' '}
               <v-icon color="pink" small>
                 favorite
               </v-icon>
@@ -88,7 +88,7 @@ const App = tsx.componentFactoryOf<IAppEvents>().create({
           </v-navigation-drawer>
         </v-app>
       </div>
-    );
-  },
-});
-export { App };
+    )
+  }
+})
+export { App }

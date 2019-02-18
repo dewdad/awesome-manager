@@ -18,54 +18,54 @@
 </template>
 
 <script lang="ts">
-import axios, { AxiosResponse } from "axios";
-import { Component, Vue } from "vue-property-decorator";
-import { from, Observable, SchedulerLike } from "rxjs";
-import { debounceTime, map, pluck, switchMap } from "rxjs/operators";
+import axios, { AxiosResponse } from 'axios'
+import { Component, Vue } from 'vue-property-decorator'
+import { from, Observable, SchedulerLike } from 'rxjs'
+import { debounceTime, map, pluck, switchMap } from 'rxjs/operators'
 
 interface HackerNewsResult {
-  objectID: string;
-  title?: string;
-  url?: string;
+  objectID: string
+  title?: string
+  url?: string
 }
 
 interface HackerNewsSearchResponse {
-  hits: Array<HackerNewsResult>;
+  hits: Array<HackerNewsResult>
 }
 
 interface HandleObservableOptions {
-  time?: number;
-  scheduler?: SchedulerLike;
+  time?: number
+  scheduler?: SchedulerLike
 }
 
-const hackerNewsEndpoint: string = "http://hn.algolia.com/api/v1/search?query=";
+const hackerNewsEndpoint: string = 'http://hn.algolia.com/api/v1/search?query='
 
 export const handleObservable = function(
   observable: Observable<Event>,
-  options: HandleObservableOptions = {},
+  options: HandleObservableOptions = {}
 ): Observable<Array<HackerNewsResult>> {
-  const { time = 300, scheduler } = options;
+  const { time = 300, scheduler } = options
   return observable.pipe(
     debounceTime(time, scheduler),
-    pluck<Event, string>("target", "value"),
+    pluck<Event, string>('target', 'value'),
     switchMap(value => from(axios.get<HackerNewsSearchResponse>(`${hackerNewsEndpoint}${value}`))),
-    pluck<AxiosResponse, Array<HackerNewsResult>>("data", "hits"),
+    pluck<AxiosResponse, Array<HackerNewsResult>>('data', 'hits'),
     map((results: Array<HackerNewsResult>) =>
-      results.filter((news: HackerNewsResult) => Boolean(news.title && news.url)),
-    ),
-  );
-};
+      results.filter((news: HackerNewsResult) => Boolean(news.title && news.url))
+    )
+  )
+}
 
 @Component<Search>({
-  name: "rx-search",
+  name: 'rx-search',
   subscriptions(this: Vue) {
     return {
-      news: handleObservable(this.$fromDOMEvent("input", "keyup")),
-    };
-  },
+      news: handleObservable(this.$fromDOMEvent('input', 'keyup'))
+    }
+  }
 })
 export default class Search extends Vue {
-  news: Array<HackerNewsResult> = [];
+  news: Array<HackerNewsResult> = []
 }
 </script>
 

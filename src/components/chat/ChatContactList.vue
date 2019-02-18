@@ -51,32 +51,32 @@
 </template>
 
 <script>
-import { getUser } from "@/api/user";
-import VCircle from "@/components/circle/VCircle";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import { getUser } from '@/api/user'
+import VCircle from '@/components/circle/VCircle'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
     VuePerfectScrollbar,
-    VCircle,
+    VCircle
   },
   data: () => ({}),
   computed: {
     users() {
-      return getUser();
-    },
+      return getUser()
+    }
   },
   methods: {
     contactRoute(id) {
-      return "/chat/contact/" + id;
+      return '/chat/contact/' + id
     },
     firstLetter(name) {
-      return name.charAt(0);
+      return name.charAt(0)
     },
     userStatusColor(item) {
-      return item.active ? "green" : "grey";
-    },
-  },
-};
+      return item.active ? 'green' : 'grey'
+    }
+  }
+}
 </script>
 
 <style>

@@ -53,44 +53,44 @@
 </template>
 
 <script>
-import { Groups } from "@/api/chat";
-import { getUserById } from "@/api/user";
-import VCircle from "@/components/circle/VCircle";
-import { randomElement } from "@/util";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import { Groups } from '@/api/chat'
+import { getUserById } from '@/api/user'
+import VCircle from '@/components/circle/VCircle'
+import { randomElement } from '@/util'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
     VuePerfectScrollbar,
-    VCircle,
+    VCircle
   },
 
   data: () => ({
-    chats: Groups,
+    chats: Groups
   }),
 
   methods: {
     chatRoute(id) {
-      return "/chat/messaging/" + id;
+      return '/chat/messaging/' + id
     },
     firstLetter(title) {
-      return title.charAt(0);
+      return title.charAt(0)
     },
     formatChatTime(s) {
-      return new Date(s).toLocaleDateString();
+      return new Date(s).toLocaleDateString()
     },
     computeTitle(item) {
-      let username = item.users.length === 1 ? getUserById(item.users[0]).username : "";
-      return item.users.length === 1 ? username : item.title;
+      let username = item.users.length === 1 ? getUserById(item.users[0]).username : ''
+      return item.users.length === 1 ? username : item.title
     },
     randomAvatarColor(item) {
       return item.users.length === 1
-        ? ""
-        : randomElement(["blue", "indigo", "success", "error", "pink"]);
+        ? ''
+        : randomElement(['blue', 'indigo', 'success', 'error', 'pink'])
     },
 
     chatStatusColor(item) {
-      return randomElement(["blue", "indigo", "success", "error", "pink"]);
-    },
-  },
-};
+      return randomElement(['blue', 'indigo', 'success', 'error', 'pink'])
+    }
+  }
+}
 </script>

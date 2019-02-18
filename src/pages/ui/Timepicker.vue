@@ -126,10 +126,10 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
@@ -142,10 +142,10 @@ export default {
       //
       date: null,
       menu: false,
-      modal: false,
-    };
+      modal: false
+    }
   },
 
-  methods: {},
-};
+  methods: {}
+}
 </script>

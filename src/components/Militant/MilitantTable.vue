@@ -1,36 +1,36 @@
 <script>
-import Militant from "@/api/models/Militant";
-import MilitantForm from "./MilitantForm";
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import Militant from '@/api/models/Militant'
+import MilitantForm from './MilitantForm'
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 export default {
   components: {
-    MilitantForm,
+    MilitantForm
   },
   data() {
     return {
       editing: false,
-      modelName: "militant",
-    };
+      modelName: 'militant'
+    }
   },
   computed: {
     headers() {
-      return this.Model.nonRelationFields();
-    },
+      return this.Model.nonRelationFields()
+    }
   },
   mixins: [exportMixin, crudMixin],
   created() {
-    window.MilitantTable = this;
+    window.MilitantTable = this
   },
   methods: {
     deleteItem(item) {
-      Militant.delete(item._id);
+      Militant.delete(item._id)
     },
     editItem(item) {
-      window.MilitantForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      window.MilitantForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>

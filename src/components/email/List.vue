@@ -123,72 +123,72 @@
   </v-container>
 </template>
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import { getMailByType } from "@/api/mail";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { getMailByType } from '@/api/mail'
 export default {
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
   props: {
     mailType: {
       type: String,
-      default: "All",
-    },
+      default: 'All'
+    }
   },
   data: () => ({
     selected: [2],
     mailActions: [
       {
-        href: "#",
-        title: "Delete",
+        href: '#',
+        title: 'Delete',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Mark as read",
-        title: "Mark as read",
+        href: 'Mark as read',
+        title: 'Mark as read',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Spam",
-        title: "Spam",
+        href: 'Spam',
+        title: 'Spam',
         click: e => {
-          console.log(e);
-        },
-      },
-    ],
+          console.log(e)
+        }
+      }
+    ]
   }),
   computed: {
     mails() {
-      return getMailByType(this.$route.params.mailType);
-    },
+      return getMailByType(this.$route.params.mailType)
+    }
   },
 
   created() {
-    this.$on("MAIL_REPLY_DIALOG_CLOSE", () => {
-      this.replayDialog = false;
-    });
-    window.AppMail = this;
+    this.$on('MAIL_REPLY_DIALOG_CLOSE', () => {
+      this.replayDialog = false
+    })
+    window.AppMail = this
   },
   methods: {
     computeMailPath(id) {
-      return { path: "/mail/0/" + id };
+      return { path: '/mail/0/' + id }
     },
     formatDate(s) {
-      return new Date(s).toLocaleString();
+      return new Date(s).toLocaleString()
     },
 
     toggle(index) {
-      const i = this.selected.indexOf(index);
+      const i = this.selected.indexOf(index)
       if (i > -1) {
-        this.selected.splice(i, 1);
+        this.selected.splice(i, 1)
       } else {
-        this.selected.push(index);
+        this.selected.push(index)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

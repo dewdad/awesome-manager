@@ -1,8 +1,8 @@
 export interface IAppConfig {
   api: {
-    baseUrl: string;
-  };
+    baseUrl: string
+  }
   features: {
-    disableParticles: boolean;
-  };
+    disableParticles: boolean
+  }
 }

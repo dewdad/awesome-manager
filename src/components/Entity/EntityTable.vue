@@ -1,40 +1,40 @@
 <script>
-import Entity from "@/api/models/Entity";
-import EntityForm from "./EntityForm";
-import EntityIterator from "./EntityIterator";
-import EntityList from "./EntityList";
+import Entity from '@/api/models/Entity'
+import EntityForm from './EntityForm'
+import EntityIterator from './EntityIterator'
+import EntityList from './EntityList'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
     EntityForm,
     EntityIterator,
-    EntityList,
+    EntityList
   },
   data() {
     return {
       editing: false,
-      modelName: "entity",
-    };
+      modelName: 'entity'
+    }
   },
   mixins: [crudMixin, exportMixin],
   computed: {
     headers() {
-      return this.Model.nonRelationFields();
-    },
+      return this.Model.nonRelationFields()
+    }
   },
   created() {
-    window.EntityTable = this;
+    window.EntityTable = this
   },
   methods: {
     editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.EntityForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.EntityForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>
