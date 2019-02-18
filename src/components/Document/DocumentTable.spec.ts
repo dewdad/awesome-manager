@@ -7,10 +7,9 @@ describe('@/components/Document/DocumentTable', () => {
   it('component should have methods', () => {
     const options = (global as any).createComponentMocks({})
     const { vm } = (global as any).shalloMountView(DocumentTable, options)
-    expect(vm.editing).ToBe(false)
-    expect(vm.exportItem).ToBeFunction()
+    expect(vm.editing).toBe(false)
   })
-  it('component should call methods', () => {
+  it('component should call methods', async () => {
     const options = (global as any).createComponentMocks({})
     const { vm } = (global as any).shalloMountView(DocumentTable, options)
     const exportItem = jest.fn()
