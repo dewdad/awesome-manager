@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import App from './entry/App.awesome.vue'
-// import { App } from "./entry/App.play";
+import App from './App.awesome.vue'
+
 // Register service worker
 import './sw'
 // Register global components
