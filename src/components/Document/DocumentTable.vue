@@ -1,9 +1,9 @@
 <script>
-import Document from '@/api/models/Document'
-import DocumentForm from './DocumentForm'
+import Document from "@/api/models/Document";
+import DocumentForm from "./DocumentForm";
 
-import exportMixin from '@/mixins/exportMixin'
-import crudMixin from '@/mixins/crudMixin'
+import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 
 export default {
   components: {
@@ -11,37 +11,28 @@ export default {
   },
   data() {
     return {
-      editing: false,
-      modelName: 'document'
+      modelName: "document"
     }
   },
-  computed: {
-    headers() {
-      return this.Model.nonRelationFields()
-    }
-  },
-  mixins: [exportMixin, crudMixin],
+  mixins: [ exportMixin, crudMixin ],
   created() {
-    window.DocumentTable = this
+    window.DocumentTable = this;
   },
   methods: {
     editItem(item) {
-      this.$emit('SET_EDITING', item)
-      window.DocumentForm.$emit('SET_EDITING', item)
+      this.$emit("SET_EDITING", item);
+      window.DocumentForm.$emit("SET_EDITING", item);
     }
-  }
+  },
 }
 </script>
 
 <template>
   <v-card>
-    <v-card-title v-show="false">
-      DocumentTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template
@@ -57,7 +48,7 @@ export default {
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
+              {{ tryT(header) }}
             </th>
           </tr>
         </template>
@@ -77,12 +68,6 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
-            <v-btn
-                icon
-                class="mx-0"
-                @click="exportItem(props.item)">
-              <v-icon color="pink">fas fa-print</v-icon>
-            </v-btn>
           </td>
           <td
               class="text-xs-left"
@@ -93,13 +78,11 @@ export default {
           </td>
         </template>
       </v-data-table>
-
     </v-responsive>
     <v-responsive>
-      <DocumentForm></DocumentForm>
+      <DocumentForm></DocumentForm> 
     </v-responsive>
   </v-card>
 </template>
-
-<style lang="scss" module>
+<style scoped>
 </style>

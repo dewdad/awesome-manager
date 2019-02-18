@@ -413,5 +413,9 @@ export const matchFileName = (filename: string) => {
  * 值为对象的, 使用其 name 字段作为新值
  */
 export const preferValueAsString = (value: any) => {
-  return typeof value === 'object' ? value['name'] : value
+  if (value === null) return ''
+  if (typeof value === 'string') return value
+  if (typeof value === 'object') {
+    return value.name && value.name
+  }
 }

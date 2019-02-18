@@ -113,6 +113,7 @@ export default {
      */
     mergeWordApp() {
       alert('进行Word邮件合并...')
+      this.changeCSVHeader()
       this.copyModelNameCSV()
       shell.showItemInFolder(this.defaultDatasource)
       shell.openItem(this.modelTemplate)

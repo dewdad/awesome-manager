@@ -1,12 +1,5 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Timeline.vue"
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-  const modelTimelineName = h.capitalize(h.inflection.singularize(model)) + 'Timeline'
-%><script>
-import <%= modelName %> from "@/api/models/<%= modelName %>";
+<script>
+import Document from "@/api/models/Document";
 
 import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
@@ -14,17 +7,17 @@ import crudMixin from "@/mixins/crudMixin";
 export default {
   data() {
     return {
-      modelName: "<%= modelName.toLowerCase() %>"
+      modelName: "document"
     }
   },
   mixins: [ exportMixin, crudMixin ],
   created() {
-    window.<%= modelTimelineName %> = this;
+    window.DocumentTimeline = this;
   },
   methods: {
     editItem(item) {
       this.$emit("SET_EDITING", item);
-      window.<%= modelFormName %>.$emit("SET_EDITING", item);
+      window.DocumentForm.$emit("SET_EDITING", item);
     }
   },
 }

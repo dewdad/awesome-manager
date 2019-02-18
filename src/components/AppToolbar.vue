@@ -22,35 +22,9 @@
 
     <v-btn
         icon
-        href="mailto:linuxing3@qq.com">
-      <v-icon>email</v-icon>
+        @click="$router.push('/docs/manual')">
+      <v-icon>home</v-icon>
     </v-btn>
-
-    <v-btn
-        icon
-        href="https://github.com/linuxing3/awesome-manager">
-      <v-icon>fab fa-github</v-icon>
-    </v-btn>
-
-    <v-menu
-        offset-y
-        origin="center center"
-        class="elelvation-1"
-        :nudge-bottom="14"
-        transition="scale-transition">
-      <v-btn
-          icon
-          flat
-          slot="activator">
-        <v-badge
-            color="red"
-            overlap>
-          <span slot="badge">{{ notificationCount }}</span>
-          <v-icon medium>notifications</v-icon>
-        </v-badge>
-      </v-btn>
-      <notification-list></notification-list>
-    </v-menu>
 
     <v-menu
         offset-y

@@ -27,7 +27,7 @@
         </v-card-title>
         <v-spacer></v-spacer>
         <v-card-title class="white--text pl-5 pt-5">
-          <div class="display-1 pl-5 pt-5">Ali Conners</div>
+          <div class="display-1 pl-5 pt-5">{{currentUser.username}}</div>
         </v-card-title>
       </v-layout>
     </v-img>
@@ -90,12 +90,19 @@
 <script>
 import { join } from 'path'
 import Account from '@/api/models/Account'
-import baseUrlMixin from '@/mixins/baseUrlMixin'
+import crudMixin from '@/mixins/crudMixin'
 export default {
-  mixins: [baseUrlMixin],
+  data() {
+    return {
+      modelName: 'account'
+    }
+  },
+  mixins: [crudMixin],
   computed: {
-    fields: () => Account.fieldsKeys(),
-    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
+    currentUser: function() {
+      return this.items[0]
+    }
   }
 }
 </script>

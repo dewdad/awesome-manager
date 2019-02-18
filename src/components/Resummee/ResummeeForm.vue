@@ -1,6 +1,7 @@
 <script>
 import Resummee from '@/api/models/Resummee'
 import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   data() {
     return {
@@ -9,7 +10,7 @@ export default {
       modelName: 'resummee'
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.ResummeeForm = this
   }

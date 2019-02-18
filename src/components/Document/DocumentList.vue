@@ -1,34 +1,27 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>List.vue"
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelListName = h.capitalize(h.inflection.singularize(model)) + 'List'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from "@/api/models/<%= modelName %>";
-import <%= modelFormName %> from "./<%= modelFormName %>";
+<script>
+import Document from "@/api/models/Document";
+import DocumentForm from "./DocumentForm";
 
 import crudMixin from "@/mixins/crudMixin";
 import exportMixin from "@/mixins/exportMixin";
 
 export default {
   components: {
-    <%= modelFormName %>
+    DocumentForm
   },
   data() {
     return {
-      modelName: "<%= modelName.toLowerCase() %>"
+      modelName: "document"
     }
   },
   mixins: [ exportMixin, crudMixin ],
   created() {
-    window.<%= modelListName %> = this;
+    window.DocumentList = this;
   },
   methods: {
     editItem(item) {
       this.$emit("SET_EDITING", item);
-      window.<%= modelFormName %>.$emit("SET_EDITING", item);
+      window.DocumentForm.$emit("SET_EDITING", item);
     }
   },
 }

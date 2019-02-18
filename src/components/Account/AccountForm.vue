@@ -1,41 +1,35 @@
 <script>
+import { join } from 'path'
+import { get, sync, call } from 'vuex-pathify'
+
 import Account from '@/api/models/Account'
-import AccountProfile from './AccountProfile.vue'
+
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
+
+import { LowdbForElectron } from '@/api/lowdb'
+const accountDb = new LowdbForElectron('account')
+
 export default {
-  components: { AccountProfile },
   data() {
     return {
-      editing: false,
-      model: {}
+      modelName: "account"
     }
   },
+  mixins: [crudMixin,exportMixin],
   created() {
-    this.model = new Account()
-    this.$on('SET_EDITING', item => {
-      this.editing = true
-      this.model = item
-    })
     window.AccountForm = this
   },
+  async mounted() {
+    this.model = accountDb.find("account", { hash: this.cached[0].hash})
+  },
   computed: {
-    fields: () => Account.fieldsKeys()
+    cached: get('entities/account/cached'),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
   },
   methods: {
-    reset() {
-      this.editing = false
-      this.model = new Account()
-    },
-    saveItem() {
-      if (!this.editing) {
-        Account.insert({
-          data: this.model
-        })
-        this.model = new Account()
-      } else {
-        Account.update(this.model)
-        this.editing = false
-        this.model = new Account()
-      }
+    saveAccount(item) {
+      accountDb.update('account', item)
     }
   }
 }
@@ -43,31 +37,39 @@ export default {
 
 <template>
   <v-card>
-    <AccountProfile></AccountProfile>
-    <v-toolbar
-        card
-        prominent
-        extended
-        color="primary"
-        dark="">
-      <v-toolbar-title class="headline">
-        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-          icon
-          @click="reset">
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-toolbar>
+    <v-img
+        :src="computeImgePath"
+        height="390">
+      <v-layout
+          column
+          class="media ma-0">
+        <v-card-title>
+          <v-spacer></v-spacer>
+          <v-btn
+              dark
+              icon
+              class="mr-3"
+              @click="editing = !editing"
+              >
+            <v-icon>edit</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-spacer></v-spacer>
+        <v-card-title class="white--text pl-5 pt-5">
+          <div class="display-1 pl-5 pt-5">{{model.name}}</div>
+        </v-card-title>
+      </v-layout>
+    </v-img>
     <v-card-text>
       <v-form>
         <v-layout wrap>
           <v-flex
               v-for="field in fields"
+              v-show="field !== 'hash'"
               :key="field"
-              lg6
-              sm6>
+              lg12
+              md12
+              sm12>
             <v-text-field
                 v-model="model[field]"
                 :name="field"
@@ -80,8 +82,9 @@ export default {
     <v-card-actions class="pb-3">
       <v-spacer></v-spacer>
       <v-btn
-          :color="editing ? 'warning' : 'primary'"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          v-if="editing"
+          color="primary"
+          @click="saveAccount(model)">更新</v-btn>
     </v-card-actions>
   </v-card>
 </template>

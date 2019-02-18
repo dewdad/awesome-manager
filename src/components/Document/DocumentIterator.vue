@@ -1,34 +1,27 @@
----
-to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Iterator.vue"
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelIteratorName = h.capitalize(h.inflection.singularize(model)) + 'Iterator'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from "@/api/models/<%= modelName %>";
-import <%= modelFormName %> from "./<%= modelFormName %>";
+<script>
+import Document from "@/api/models/Document";
+import DocumentForm from "./DocumentForm";
 
 import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
 
 export default {
   components: {
-    <%= modelFormName %>
+    DocumentForm
   },
   data() {
     return {
-      modelName: "<%= modelName.toLowerCase() %>"
+      modelName: "document"
     }
   },
   mixins: [ exportMixin, crudMixin ],
   created() {
-    window.<%= modelIteratorName %> = this;
+    window.DocumentIterator = this;
   },
   methods: {
     editItem(item) {
       this.$emit("SET_EDITING", item);
-      window.<%= modelFormName %>.$emit("SET_EDITING", item)
+      window.DocumentForm.$emit("SET_EDITING", item)
     }
   },
 }

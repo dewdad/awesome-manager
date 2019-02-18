@@ -1,6 +1,7 @@
 <script>
 import Entity from '@/api/models/Entity'
 import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   data() {
     return {
@@ -9,7 +10,7 @@ export default {
       modelName: 'entity'
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.EntityForm = this
   }
@@ -55,6 +56,12 @@ export default {
       <v-btn
           :color="editing ? 'warning' : 'primary'"
           @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>

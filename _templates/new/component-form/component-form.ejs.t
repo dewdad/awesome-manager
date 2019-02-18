@@ -8,8 +8,8 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 
-import exportMixin from "@/mixins/exportMixin";
 import crudMixin from "@/mixins/crudMixin";
+import exportMixin from "@/mixins/exportMixin";
 
 export default {
   data() {
@@ -64,8 +64,14 @@ export default {
       <v-btn
           :color="editing ? 'warning' : 'primary'"
           @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>
-<style lang="scss" module>
+<style scoped>
 </style>

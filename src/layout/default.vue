@@ -10,6 +10,7 @@
         <v-content>
           <!-- Page Header -->
           <page-header v-if="$route.meta.breadcrumb"></page-header>
+          <!-- App Wrapper -->
           <div class="page-wrapper">
             <slot></slot>
           </div>
@@ -40,6 +41,7 @@
             @click="openThemeSettings">
           <v-icon>settings</v-icon>
         </v-btn>
+        <!-- Theme Setting drawer -->
         <v-navigation-drawer
             class="setting-drawer"
             temporary

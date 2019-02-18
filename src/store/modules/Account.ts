@@ -33,24 +33,23 @@ const mutations: any = {
 const AccountActions = {
   async signup(ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = DB.db
-      .read()
-      .get(`${ctx.state.name}`)
-      .find({ name: signupData.name })
-      .value()
+    let authedAccount = DB
+      .find(`${ctx.state.name}`, { name: signupData.name })
+
     if (authedAccount === undefined) {
       try {
         console.log('Account Does not Exists, creating!')
+
         // 1 hash the password
         signupData.hash = await bcrypt.hash(signupData.password, 10)
+
         // 2 save the password and hash
-        let createdAccount = DB.db
-          .read()
-          .get(`${ctx.state.name}`)
-          .push(signupData)
-          .write()
-        // 3 check the password and hash
-        let valid = await bcrypt.compare(signupData.password, createdAccount.hash)
+        DB.insert(`${ctx.state.name}`, signupData)
+        let createdAccount = DB.find(`${ctx.state.name}`, { name: signupData.name })
+        console.log(createdAccount)
+        let correctHash = (createdAccount as any).hash
+
+        let valid = await bcrypt.compare(signupData.password, correctHash)
         if (valid) {
           console.log('Valid password')
           ctx.dispatch('signin', createdAccount)
@@ -64,6 +63,7 @@ const AccountActions = {
       }
     } else {
       console.log('Account Exists, go ahead to login!')
+      // Check account hash and password are correct
       let authHash = (authedAccount as any).hash
       let valid = await bcrypt.compare(signupData.password, authHash)
       if (valid) {

@@ -1,6 +1,7 @@
 <script>
 import Evaluation from '@/api/models/Evaluation'
 import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   data() {
     return {
@@ -11,7 +12,7 @@ export default {
       modelName: 'evaluation'
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.EvaluationForm = this
   }
@@ -107,8 +108,14 @@ export default {
     <v-card-actions class="pb-3">
       <v-spacer></v-spacer>
       <v-btn
-          @click="saveItem"
-          color="primary">Save</v-btn>
+          @click="saveItem(model)"
+          color="primary">保存</v-btn>
+      <v-btn
+          flat
+          @click="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>

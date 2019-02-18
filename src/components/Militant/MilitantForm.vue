@@ -1,13 +1,14 @@
 <script>
 import Militant from '@/api/models/Militant'
 import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 export default {
   data() {
     return {
       modelName: 'militant'
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.MilitantForm = this
   }

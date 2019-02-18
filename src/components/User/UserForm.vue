@@ -6,6 +6,7 @@ import User from '@/api/models/User'
 import Entity from '@/api/models/Entity'
 
 import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 
 export default {
   data() {
@@ -16,7 +17,7 @@ export default {
       modelName: 'user'
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin,exportMixin],
   created() {
     window.UserForm = this
   },
@@ -32,17 +33,6 @@ export default {
       return this.mini ? '48' : '192'
     },
     computeAvatarMan1: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
-  },
-  methods: {
-    militantInformation() {
-      this.$router.push('/users/militant')
-    },
-    resummeeInformation() {
-      this.$router.push('/users/resummee')
-    },
-    writeEvaluation() {
-      this.$router.push('/users/evaluation')
-    }
   }
 }
 </script>
@@ -95,14 +85,11 @@ export default {
           :color="editing ? 'warning' : 'primary'"
           @click="saveItem(model)">{{editing ? "更新": "添加"}}信息</v-btn>
       <v-btn
-          :color="editing ? 'warning' : 'primary'"
-          @click="militantInformation">党员信息</v-btn>
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
       <v-btn
-          :color="editing ? 'warning' : 'primary'"
-          @click="resummeeInformation">填写简历</v-btn>
-      <v-btn
-          :color="editing ? 'warning' : 'primary'"
-          @click="writeEvaluation">进行考核</v-btn>
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>

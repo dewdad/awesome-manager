@@ -6,9 +6,9 @@ import { entities } from '@/api/globals'
  * @return {Object} entitiesDb, ex: {user: DB}
  */
 const pool = entities.reduce((entitiesDb, entity) => {
-  const DB = new LowdbForElectron(entity)
-  DB.dbCreate(entity)
-  entitiesDb[entity] = DB
+  const namedDb = new LowdbForElectron(entity)
+  namedDb.dbCreate(entity)
+  entitiesDb[entity] = namedDb
   return entitiesDb
 }, {})
 

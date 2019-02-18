@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      modelName: <%= modelName.toLowerCase() %>
+      modelName: "<%= modelName.toLowerCase() %>"
     }
   },
   mixins: [ exportMixin, crudMixin ],
@@ -39,7 +39,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template
@@ -75,12 +75,6 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
-            <v-btn
-                icon
-                class="mx-0"
-                @click="exportItem(props.item)">
-              <v-icon color="pink">fas fa-print</v-icon>
-            </v-btn>
           </td>
           <td
               class="text-xs-left"
@@ -91,11 +85,11 @@ export default {
           </td>
         </template>
       </v-data-table>
-
     </v-responsive>
     <v-responsive>
+      <<%= modelFormName %>></<%= modelFormName %>> 
     </v-responsive>
   </v-card>
 </template>
-<style lang="scss" module>
+<style scoped>
 </style>

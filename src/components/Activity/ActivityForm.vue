@@ -287,12 +287,19 @@
       <v-btn
           color="primary"
           @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script lang="js">
 import Activity from "@/api/models/Activity";
 import crudMixin from "@/mixins/crudMixin";
+import exportMixin from "@/mixins/exportMixin";
 export default {
   data() {
     return {
@@ -307,7 +314,7 @@ export default {
       endTimeMenu: false,
     }
   },
-  mixins: [crudMixin],
+  mixins: [crudMixin, exportMixin],
   created() {
     window.ActivityForm = this;
   },
