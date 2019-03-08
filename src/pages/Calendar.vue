@@ -21,39 +21,39 @@
 </template>
 
 <script>
-import FullCalendar from "vue-fullcalendar";
-import EventForm from "../components/widgets/form/EventForm";
+import FullCalendar from 'vue-fullcalendar'
+import EventForm from '../components/widgets/form/EventForm'
 
 export default {
   components: {
     FullCalendar,
-    EventForm,
+    EventForm
   },
   data: () => ({
-    size: "sm",
+    size: 'sm',
     dialog: false,
     dialogData: null,
     fcEvents: [
       {
-        title: "Sunny Out of Office",
-        start: "2018-03-30",
-        end: "2018-04-02",
-      },
-    ],
+        title: 'Sunny Out of Office',
+        start: '2018-03-30',
+        end: '2018-04-02'
+      }
+    ]
   }),
 
   methods: {
     handleDayClick(day, e) {
-      this.dialog = true;
+      this.dialog = true
     },
     handleEventClick(e, event, pos) {
-      this.dialog = true;
-      this.$refs.eForm.title = e.title;
-      this.$refs.eForm.startDate = e.start;
-      this.$refs.eForm.endDate = e.end;
-    },
-  },
-};
+      this.dialog = true
+      this.$refs.eForm.title = e.title
+      this.$refs.eForm.startDate = e.start
+      this.$refs.eForm.endDate = e.end
+    }
+  }
+}
 </script>
 <style scoped>
 .fullwidth {

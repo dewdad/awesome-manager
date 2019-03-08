@@ -11,18 +11,41 @@
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
+    "noImplicitThis": false,
     "strictNullChecks": false,
     "allowUnreachableCode": false,
     "noEmitOnError": true,
     "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["node", "lodash", "webpack", "webpack-env", "jest"],
+    "types": [
+      "vue-tsx-support/enable-check",
+      "node",
+      "lodash",
+      "webpack",
+      "webpack-env",
+      "jest"
+    ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

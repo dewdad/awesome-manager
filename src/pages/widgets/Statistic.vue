@@ -102,23 +102,23 @@
 </template>
 
 <script>
-import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
-import LinearStatistic from "@/components/widgets/statistic/LinearStatistic";
-import CircleStatistic from "@/components/widgets/statistic/CircleStatistic";
+import MiniStatistic from '@/components/widgets/statistic/MiniStatistic'
+import LinearStatistic from '@/components/widgets/statistic/LinearStatistic'
+import CircleStatistic from '@/components/widgets/statistic/CircleStatistic'
 
-import Trending from "@/api/models/Trending";
+import Trending from '@/api/models/Trending'
 
 export default {
   components: {
     CircleStatistic,
     MiniStatistic,
-    LinearStatistic,
+    LinearStatistic
   },
   computed: {
     trending: () => Trending.all,
-    trending2: () => Trending.all,
-  },
-};
+    trending2: () => Trending.all
+  }
+}
 </script>
 <style lang="stylus" scoped>
 

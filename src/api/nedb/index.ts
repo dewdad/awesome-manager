@@ -1,27 +1,27 @@
-import { join } from "path";
-import fs from "fs-extra";
-import { remote, app, App } from "electron";
-import Database from "nedb";
+import { join } from 'path'
+import fs from 'fs-extra'
+import { remote, app, App } from 'electron'
+import Database from 'nedb'
 
 export class NedbForElectron {
-  isElectron: boolean;
-  hasdbPath: boolean;
-  hasdb: boolean;
-  electronApp: App;
-  db: Database;
-  dbPath: string;
+  isElectron: boolean
+  hasdbPath: boolean
+  hasdb: boolean
+  electronApp: App
+  db: Database
+  dbPath: string
 
   constructor(dbName: string) {
-    this.isElectron = this.ensureElectronEnv();
-    this.hasdbPath = this.ensuredbPath("nedb");
-    this.hasdb = this.createPersistence(dbName);
+    this.isElectron = this.ensureElectronEnv()
+    this.hasdbPath = this.ensuredbPath('nedb')
+    this.hasdb = this.createPersistence(dbName)
   }
 
   ensureElectronEnv() {
-    this.electronApp = process.type === "renderer" ? remote.app : app;
+    this.electronApp = process.type === 'renderer' ? remote.app : app
     // add to window/global object
-    (window as any).electronApp = process.type === "renderer" ? remote.app : app;
-    return true;
+    ;(window as any).electronApp = process.type === 'renderer' ? remote.app : app
+    return true
   }
 
   /**
@@ -30,15 +30,15 @@ export class NedbForElectron {
    */
   ensuredbPath(subDir: string) {
     if (this.electronApp !== undefined) {
-      this.dbPath = join(this.electronApp.getPath("userData"), subDir);
+      this.dbPath = join(this.electronApp.getPath('userData'), subDir)
     } else {
-      this.dbPath = join(__dirname, subDir);
+      this.dbPath = join(__dirname, subDir)
     }
 
     if (!fs.pathExistsSync(this.dbPath)) {
-      fs.mkdirpSync(this.dbPath);
+      fs.mkdirpSync(this.dbPath)
     }
-    return true;
+    return true
   }
 
   /**
@@ -47,11 +47,11 @@ export class NedbForElectron {
    */
   createPersistence(dbName: string) {
     if (this.dbPath !== undefined) {
-      this.db = new Database({ filename: join(this.dbPath, `${dbName}`), autoload: true });
+      this.db = new Database({ filename: join(this.dbPath, `${dbName}`), autoload: true })
     } else {
-      this.db = new Database({ filename: `${dbName}`, autoload: true });
+      this.db = new Database({ filename: `${dbName}`, autoload: true })
     }
-    return this.db === undefined ? false : true;
+    return this.db === undefined ? false : true
   }
 
   /**
@@ -63,7 +63,7 @@ export class NedbForElectron {
    */
   dbInit(nodes: string[]) {
     // Create user-level nodes like user.json
-    nodes && this.dbCreateUserLevelnode(nodes);
+    nodes && this.dbCreateUserLevelnode(nodes)
   }
 
   /**
@@ -72,8 +72,8 @@ export class NedbForElectron {
   dbCreateUserLevelnode(nodes: string[]) {
     nodes &&
       nodes.forEach(node => {
-        this.dbCreate(node);
-      });
+        this.dbCreate(node)
+      })
   }
   /**
    * Set a array as fefault value of a key or key or entity
@@ -81,14 +81,14 @@ export class NedbForElectron {
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbCreate(node: string) {
-    console.log(`creating default value in ${node} neddb`);
+    console.log(`creating default value in ${node} neddb`)
   }
   /**
    * Remove a key
    * @param {String} node key or key or entity name, i.e. activity
    */
   dbRemove(node: string) {
-    console.log(`removing default value in ${node} neddb`);
+    console.log(`removing default value in ${node} neddb`)
   }
   /**
    * 通过查询语句，获取数据，返回一个Promise<数据[]>
@@ -99,12 +99,12 @@ export class NedbForElectron {
     return new Promise((resolve, reject) => {
       this.db.find(query, (err: Error, documents: any[]) => {
         if (err !== null) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(documents);
+          resolve(documents)
         }
-      });
-    });
+      })
+    })
   }
 
   /**
@@ -115,12 +115,12 @@ export class NedbForElectron {
     return new Promise((resolve, reject) => {
       this.db.insert(data, (err: Error, insertedDoc: any) => {
         if (err !== null) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(insertedDoc);
+          resolve(insertedDoc)
         }
-      });
-    });
+      })
+    })
   }
   /**
    * 获取Vuex中传递的载荷，如果有就删除Id字段，更改并返回Promise<修改数据的数量>
@@ -131,12 +131,12 @@ export class NedbForElectron {
     return new Promise((resolve, reject) => {
       this.db.update(query, data, {}, (err: Error, numberOfUpdated: number) => {
         if (err !== null) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(numberOfUpdated);
+          resolve(numberOfUpdated)
         }
-      });
-    });
+      })
+    })
   }
 
   /**
@@ -148,15 +148,15 @@ export class NedbForElectron {
     return new Promise((resolve, reject) => {
       this.db.remove(query, {}, (err: Error, numberOfDeleted: number) => {
         if (err !== null) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(numberOfDeleted);
+          resolve(numberOfDeleted)
         }
-      });
-    });
+      })
+    })
   }
 }
 
-export const defaultDB = new NedbForElectron("nedb");
+export const defaultDB = new NedbForElectron('nedb')
 
-export default defaultDB.db;
+export default defaultDB.db

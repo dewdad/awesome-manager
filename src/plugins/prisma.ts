@@ -1,7 +1,7 @@
-import { prisma } from "@/api/prisma/index";
+import { prisma } from '@/api/prisma/index'
 
 export default {
   install(Vue, options) {
-    Vue.prototype.$prisma = prisma;
-  },
-};
+    Vue.prototype.$prisma = prisma
+  }
+}

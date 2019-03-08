@@ -27,15 +27,15 @@
   </v-layout>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { State, Mutation, Action, Getter } from "vuex-class";
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { State, Mutation, Action, Getter } from 'vuex-class'
 
 @Component({
-  components: {},
+  components: {}
 })
 export default class App extends Vue {
   navigate(to: string, payload?: string) {
-    this.$router.push({ path: to });
+    this.$router.push({ path: to })
   }
 }
 </script>

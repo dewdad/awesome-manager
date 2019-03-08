@@ -8,7 +8,7 @@
           slot="activator">
         <v-avatar>
           <img
-              src="/static/avatar/man_4.jpg"
+              :src="computeImgePath"
               alt="Micahel Wang">
         </v-avatar>
       </v-btn>
@@ -32,13 +32,19 @@
 </template>
 
 <script>
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   props: {
     items: {
-      type: Array,
-    },
+      type: Array
+    }
   },
-};
+  computed: {
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  },
+  mixins: [baseUrlMixin]
+}
 </script>
 
 <style lang="stylus">

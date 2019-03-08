@@ -131,71 +131,71 @@
 </template>
 
 <script>
-import Bytes from "bytes";
+import Bytes from 'bytes'
 
-import { getFileMenu, getFile } from "@/api/file";
-import { get, sync, call } from "vuex-pathify";
+import { getFileMenu, getFile } from '@/api/file'
+import { get, sync, call } from 'vuex-pathify'
 
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
   props: {
     type: {
       type: String,
-      default: "image",
-    },
+      default: 'image'
+    }
   },
   data: () => ({
-    size: "lg",
-    view: "grid",
+    size: 'lg',
+    view: 'grid',
     selectedFile: {
-      path: "/public/icon/empty_file.svg",
+      path: '/public/icon/empty_file.svg'
     },
-    imageMime: ["image/jpeg", "image/png", "image/svg+xml"],
+    imageMime: ['image/jpeg', 'image/png', 'image/svg+xml'],
 
     folders: [
       {
-        name: "bg",
-        lastModified: "2018-03-03",
+        name: 'bg',
+        lastModified: '2018-03-03'
       },
       {
-        name: "cards",
-        lastModified: "2018-03-03",
+        name: 'cards',
+        lastModified: '2018-03-03'
       },
       {
-        name: "avatar",
-        lastModified: "2018-03-03",
-      },
-    ],
+        name: 'avatar',
+        lastModified: '2018-03-03'
+      }
+    ]
   }),
   computed: {
-    mediaMenu: get("file/menus"),
-    files: get("file/items"),
+    mediaMenu: get('file/menus'),
+    files: get('file/items')
   },
   mounted() {},
   methods: {
     isImage(file) {
-      return this.imageMime.includes(file.fileType);
+      return this.imageMime.includes(file.fileType)
     },
     mimeIcons(file) {
-      return this.imageMime.includes(file.fileType) ? "image" : "insert_drive_file";
+      return this.imageMime.includes(file.fileType) ? 'image' : 'insert_drive_file'
     },
     showDetail(file) {
-      this.selectedFile = file;
+      this.selectedFile = file
     },
     fileSize(number) {
-      return Bytes.format(number);
+      return Bytes.format(number)
     },
     formateDate(string) {
-      return string ? new Date(string).toLocaleDateString() : "";
+      return string ? new Date(string).toLocaleDateString() : ''
     },
     computeFileImage(file) {
-      return this.isImage(file) ? file.path : "/public/icon/file_empty.svg";
-    },
-  },
-};
+      return this.isImage(file) ? file.path : '/public/icon/file_empty.svg'
+    }
+  }
+}
 </script>
 <style lang="stylus" scoped>
 .media {

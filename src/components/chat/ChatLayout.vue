@@ -64,26 +64,26 @@
 </template>
 
 <script>
-import API from "@/api";
-import ChatMenu from "./ChatMenu";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import API from '@/api'
+import ChatMenu from './ChatMenu'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
     VuePerfectScrollbar,
-    ChatMenu,
+    ChatMenu
   },
   data: () => ({
-    menus: API.getChatMenu,
+    menus: API.getChatMenu
   }),
   computed: {
     hideBottomNav() {
-      return this.$route.params.uuid !== undefined && this.$route.name === "ChatMessaging";
-    },
+      return this.$route.params.uuid !== undefined && this.$route.name === 'ChatMessaging'
+    }
   },
   methods: {
     handleClick() {
-      this.$router.go(-1);
-    },
-  },
-};
+      this.$router.go(-1)
+    }
+  }
+}
 </script>

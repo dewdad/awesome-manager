@@ -7,14 +7,10 @@ platform:
   - x86
 
 environment:
-  APPVEYOR_REPO_TAG: true
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  access_token:
+  ACCESS_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-  APPVEYOR_SSH_KEY: AAAAB3NzaC1yc2EAAAADAQABAAABAQDb4cZ5qhWjV8GOeRJ24nVBWuwrRVXQ8P8kMJS3LWgNS9apAhhWtlOXoLvOCevOsZMWHdS2nRATu8GSvp7QDAREr4ynhZfjICRwzD7CRLKbdfwKKOAyUGMleoAssa7CQkguOgU8XjdiP5GAtXl3h9OjKBx8PLLjWxDPnw5xi5vLEA
-  APPVEYOR_SSH_BLOCK: false
-  APPVEYOR_RDP_PASSWORD: WroirOn#2009
 
 cache:
   - node_modules
@@ -26,50 +22,15 @@ install:
   - ps: Install-Product node 8 x86
   - yarn
 
+test_script:
+  - yarn test:unit
+
 build_script:
   - yarn electron:build
+
+
+skip_tags: true
 
 artifacts:
   - path: dist_electron\*.exe
     name: bin
-
-deploy:
-  - provider: GitHub
-    release: awesome-manager-v$(appveyor_build_version)
-    description: "A awesome dashbaord manager powered by vue and electron"
-    artifacts: bin
-    tag: $(APPVEYOR_REPO_TAG_NAME)
-    force_update: true
-    prerelease: false
-    draft: true
-    auth_token:
-      secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
-    on:
-      # branch: master
-      appveyor_repo_tag: true
-
-test: off
-
-branches:
-  only:
-    - master
-
-init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-
-# For Linux only
-# image: ubuntu
-# install:
-# - yarn 
-# test_script:
-# - yarn test
-# build: off
-# init:
-#   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
-# on_finish:
-#   - sh: export APPVEYOR_SSH_BLOCK=true
-#   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -

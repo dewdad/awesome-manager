@@ -7,7 +7,9 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelSelectName = h.capitalize(h.inflection.singularize(model)) + 'Select'
 %><script>
 import { map, pick } from "lodash/fp";
+
 import <%= modelName %> from "@/api/models/<%= modelName %>";
+
 export default {
   data() {
     return {

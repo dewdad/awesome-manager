@@ -56,17 +56,17 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
-      page: 1,
-    };
+      page: 1
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

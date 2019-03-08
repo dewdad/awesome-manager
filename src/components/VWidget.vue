@@ -21,24 +21,24 @@
 
 <script>
 export default {
-  name: "v-widget",
+  name: 'v-widget',
   props: {
     title: {
-      type: String,
+      type: String
     },
     enableHeader: {
       type: Boolean,
-      default: true,
+      default: true
     },
     contentBg: {
       type: String,
-      default: "white",
-    },
+      default: 'white'
+    }
   },
 
   data() {
-    return {};
+    return {}
   },
-  computed: {},
-};
+  computed: {}
+}
 </script>

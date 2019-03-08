@@ -19,7 +19,7 @@
 
                 <div class="layout column align-center">
                   <img
-                      :src="`/avatar/man_1.jpg`"
+                      :src="computeAvatar"
                       alt="Admin Panel"
                       width="120"
                       height="120">
@@ -77,57 +77,58 @@
 </template>
 
 <script>
-import { get, sync, call } from "vuex-pathify";
+import { get, sync, call } from 'vuex-pathify'
+import { join } from 'path'
 export default {
   data: () => ({
     loading: false,
     model: {
-      name: "embajadachina",
-      password: "embajadachina",
-      email: "embajachina@gmail.com",
-      hash: "",
-      role: "manager",
+      name: 'embajadachina',
+      password: 'embajadachina',
+      email: 'embajachina@gmail.com',
+      hash: '',
+      role: 'manager'
     },
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL
   }),
   computed: {
-    currentItem: sync("entities/account/currentItem"),
-    status: sync("entities/account/status"),
+    computeAvatar: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
+    currentItem: sync('entities/account/currentItem'),
+    loggedIn: sync('entities/account/loggedIn')
   },
   mounted() {
-    console.log(this.baseUrl);
+    console.log(this.baseUrl)
   },
-
   methods: {
-    signup: call("entities/account/signup"),
+    signup: call('entities/account/signup'),
     async login() {
       // account/signin/signup
-      if ((this.model.name !== "" && this.model.password !== "") || this.model.email !== "") {
-        await this.signup(this.model);
-        this.loading = true;
+      if ((this.model.name !== '' && this.model.password !== '') || this.model.email !== '') {
+        await this.signup(this.model)
+        this.loading = true
         setTimeout(() => {
-          if (this.status) {
-            this.$router.push("/activity");
+          if (this.loggedIn) {
+            this.$router.push('/docs/manual')
           } else {
-            this.loading = false;
-            window.getApp.$emit("APP_LOGIN_DATA_INVALID");
+            this.loading = false
+            window.getApp.$emit('APP_LOGIN_DATA_INVALID')
           }
-        }, 1000);
+        }, 1000)
       } else {
-        this.loading = false;
-        window.getApp.$emit("APP_LOGIN_FAILED");
+        this.loading = false
+        window.getApp.$emit('APP_LOGIN_FAILED')
       }
     },
     logout() {
-      this.model.name = "";
-      this.model.password = "";
-      this.model.email = "";
+      this.model.name = ''
+      this.model.password = ''
+      this.model.email = ''
       setTimeout(() => {
-        this.$router.push("/login");
-      }, 1000);
-    },
-  },
-};
+        this.$router.push('/login')
+      }, 1000)
+    }
+  }
+}
 </script>
 <style scoped lang="css">
 #login {

@@ -1,6 +1,9 @@
 <template>
   <v-card>
-    <v-card-title> Activity </v-card-title>
+    <v-responsive v-show="false">
+      <ActivityTimeline>
+      </ActivityTimeline>
+    </v-responsive>
     <v-responsive>
       <v-data-table
           :headers="headers"
@@ -42,6 +45,12 @@
                 @click="deleteItem(props.item);">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item);">
+              <v-icon color="pink">fas fa-print</v-icon>
+            </v-btn>
           </td>
         </template>
       </v-data-table>
@@ -52,31 +61,31 @@
   </v-card>
 </template>
 <script lang="js">
-import { cloneDeep } from 'lodash';
 import Activity from "@/api/models/Activity";
 import ActivityForm from "./ActivityForm";
+import ActivityTimeline from "./ActivityTimeline";
+
+import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
 
 export default {
   components: {
-    ActivityForm
+    ActivityForm,
+    ActivityTimeline
   },
   data() {
     return {
       editing: false,
+      modelName: "activity"
     }
   },
-  computed: {
-    all: () => Activity.all(),
-    headers: () => Activity.fieldsList()
-  },
+  mixins: [ exportMixin, crudMixin ],
   created() {
-    window.activityTable = this;
+    window.ActivityTable = this;
   },
   methods: {
-    deleteItem(item) {
-      Activity.delete(item._id)
-    },
     editItem(item) {
+      this.$emit("SET_EDITING", item);
       window.activityForm.$emit("SET_EDITING", item)
     }
   }

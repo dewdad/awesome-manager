@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>awesome-manager</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons"> -->
   </head>
   <body>
     <noscript>
@@ -15,5 +15,26 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      const { ipcRenderer } = require('electron')
+      function updateOnlineStatus () {
+        // Listen to ipcMain
+        ipcRenderer.on("ONLINE_STATUS_CHANGED", (event, status) => {
+          console.log(status);
+        })
+        // Emit to Vue Event
+        if (window.getApp !== undefined) {
+          console.log("Changed online status!")
+          window.getApp.$emit("ONLINE_STATUS_CHANGED", status)
+        }
+        // Send to ipcMain
+        ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
+        // Write to Document
+        // document.write(navigator.onLine ? 'You are online' : 'You are offline')
+      }
+      window.addEventListener('online', updateOnlineStatus)
+      window.addEventListener('offline', updateOnlineStatus)
+      updateOnlineStatus()
+    </script>
   </body>
 </html>

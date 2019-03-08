@@ -4,16 +4,16 @@
  *   "user" : [user: UserModule extends VuexModel]
  * }
  */
-import { toLower } from "lodash";
+import { toLower } from 'lodash'
 
-let files = require["context"](".", false, /\.ts$/);
-let modules = {};
+let files = require['context']('.', false, /\.ts$/)
+let modules = {}
 
 files.keys().forEach(key => {
-  if (key === "./index.ts") return;
-  let moduleName = toLower(key.replace(/(\.\/|\.ts)/g, ""));
-  modules[moduleName] = files(key).default;
-});
+  if (key === './index.ts') return
+  let moduleName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
+  modules[moduleName] = files(key).default
+})
 
-console.log(modules);
-export default modules;
+console.log(modules)
+export default modules

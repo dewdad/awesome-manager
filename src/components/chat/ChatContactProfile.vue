@@ -10,7 +10,7 @@
       <v-card class="elevation-0">
         <v-card-media
             height="380"
-            src="/static/bg/4.jpg">
+            :src="computeImgePath">
           <v-layout
               column
               align-center
@@ -146,23 +146,27 @@
 </template>
 
 <script>
-import { getUserById } from "@/api/user";
+import { join } from 'path'
+import { getUserById } from '@/api/user'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   data() {
     return {
       chat: null,
-      selectedTab: null,
-    };
+      selectedTab: null
+    }
   },
+  mixins: [baseUrlMixin],
   computed: {
     user() {
       let Origin = {
-        name: "Chat",
-        avatar: "",
-      };
-      let user = getUserById(this.$route.params.uuid);
-      return Object.assign(Origin, user);
-    },
+        name: 'Chat',
+        avatar: ''
+      }
+      let user = getUserById(this.$route.params.uuid)
+      return Object.assign(Origin, user)
+    }
   },
-};
+  computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+}
 </script>

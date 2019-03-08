@@ -111,54 +111,54 @@
   </v-container>
 </template>
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import { getMailById } from "@/api/mail";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { getMailById } from '@/api/mail'
 export default {
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
   data: () => ({
     selected: [2],
     mailActions: [
       {
-        href: "#",
-        title: "Delete",
+        href: '#',
+        title: 'Delete',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Mark as read",
-        title: "Mark as read",
+        href: 'Mark as read',
+        title: 'Mark as read',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Spam",
-        title: "Spam",
+        href: 'Spam',
+        title: 'Spam',
         click: e => {
-          console.log(e);
-        },
-      },
-    ],
+          console.log(e)
+        }
+      }
+    ]
   }),
   computed: {
     mail() {
-      return getMailById(this.$route.params.uuid);
-    },
+      return getMailById(this.$route.params.uuid)
+    }
   },
 
   created() {
-    window.AppMail = this;
+    window.AppMail = this
   },
   methods: {
     computeMailPath(id) {
-      return "/mail/0/" + id;
+      return '/mail/0/' + id
     },
     formatDate(s) {
-      return new Date(s).toLocaleDateString();
-    },
-  },
-};
+      return new Date(s).toLocaleDateString()
+    }
+  }
+}
 </script>

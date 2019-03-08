@@ -8757,6 +8757,7 @@ export type Int = number;
 
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
-  endpoint: `https://eu1.prisma.sh/wenju-xing-3d984a/demo/dev`
+  endpoint: `https://eu1.prisma.sh/wenju-xing-3d984a/demo/dev`,
+  models: []
 });
 export const prisma = new Prisma();

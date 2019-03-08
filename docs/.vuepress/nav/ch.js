@@ -1,16 +1,21 @@
 module.exports = [
   { text: "指南", link: "/zh/guide/markdown/" },
   {
-    text: "配置",
+    text: "项目手册",
     items: [
-      { text: "Markdown", link: "/zh/guide/markdown/" },
+      { text: "Project", link: "/zh/guide/zero/" },
+    ],
+  },
+  {
+    text: "Vue全家桶",
+    items: [
       { text: "Vue Cli", link: "/zh/guide/vue-cli/" },
       { text: "Vuex", link: "/zh/guide/vuex/" },
       { text: "Vue Router", link: "/zh/guide/vue-router/" },
     ],
   },
   {
-    text: "进阶",
+    text: "相关功能",
     items: [
       { text: "Electron", link: "/zh/guide/electron/" },
       { text: "Typescript", link: "/zh/guide/typescript/" },

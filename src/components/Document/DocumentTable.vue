@@ -1,48 +1,38 @@
 <script>
-import Document from "@/api/models/Document";
-import DocumentForm from "./DocumentForm";
-import { remote, shell } from "electron";
+import Document from '@/api/models/Document'
+import DocumentForm from './DocumentForm'
+
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
+
 export default {
   components: {
-    DocumentForm,
+    DocumentForm
   },
   data() {
     return {
-      editing: false,
-    };
+      modelName: 'document'
+    }
   },
-  computed: {
-    all: () => Document.all(),
-    headers: () => Document.fieldsList(),
-  },
+  mixins: [exportMixin, crudMixin],
   created() {
-    window.DocumentTable = this;
+    window.DocumentTable = this
   },
   methods: {
-    deleteItem(item) {
-      Document.delete(item._id);
-    },
     editItem(item) {
-      window.DocumentForm.$emit("SET_EDITING", item);
-    },
-    exportItem(item) {
-      let filePath = path.join(remote.app.getPath("home"), "/Documents/template/db.csv");
-      GenerateCSV([item], filePath);
-      shell.showItemInFolder(filePath);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.DocumentForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>
   <v-card>
-    <v-card-title v-show="false">
-      DocumentTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template
@@ -50,23 +40,21 @@ export default {
             slot-scope="props">
           <tr>
             <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
+            <th
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
+              {{ tryT(header) }}
             </th>
           </tr>
         </template>
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -80,22 +68,21 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
-            <v-btn
-                icon
-                class="mx-0"
-                @click="exportItem(props.item)">
-              <v-icon color="pink">fas fa-print</v-icon>
-            </v-btn>
+          </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
           </td>
         </template>
       </v-data-table>
-
     </v-responsive>
     <v-responsive>
       <DocumentForm></DocumentForm>
     </v-responsive>
   </v-card>
 </template>
-
-<style lang="scss" module>
+<style scoped>
 </style>

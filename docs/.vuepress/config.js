@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
-  title: "Emacser & Vimer & Vuer",
-  description: "A sturnborn Emacser-Vimer-Vuer development notes",
+  title: "美妙管理器",
+  description: "美妙管理器使用说明",
   markdown: {
     lineNumbers: true,
   },
@@ -18,18 +18,18 @@ module.exports = {
   locales: {
     "/": {
       lang: "zh-CN",
-      title: "Emacser & Vimer & Vuer",
-      description: "Emacser-Vimer-Vuer开发者笔记",
+      title: "美妙管理器",
+      description: "美妙管理器使用说明",
     },
     "/en/": {
       lang: "en-US", // 将会被设置为 <html> 的 lang 属性
-      title: "Emacser & Vimer & Vuer",
-      description: "A sturnborn Emacser-Vimer-Vuer development notes",
+      title: "Awesome Manager System",
+      description: "Awesome Manager System Notes",
     },
   },
   themeConfig: {
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: "linuxing3/cp-general-management",
+    repo: "linuxing3/awesome-manager",
     // 当你的文档不是仓库的根目录时需要设置
     docsDir: "docs",
     // 可选的, 默认是  master

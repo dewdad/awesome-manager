@@ -5,92 +5,73 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><%
-if (blocks.indexOf('script') !== -1) {
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
+
+import crudMixin from "@/mixins/crudMixin";
+import exportMixin from "@/mixins/exportMixin";
+
 export default {
   data() {
     return {
-      editing: false,
-      model: {},
+      modelName: "<%= modelName.toLowerCase() %>"
     }
   },
+  mixins: [ crudMixin, exportMixin ],
   created() {
-    this.model = new <%= modelName %>()
-    this.$on("SET_EDITING", (item) => {
-      this.editing = true
-      this.model = item
-    })
     window.<%= modelFormName %> = this;
   },
-  computed: {
-    fields: () => <%= modelName %>.fieldsList()
-  },
-  methods: {
-    reset() {
-      this.editing = false
-      this.model = new <%= modelName %>()
-    },
-    saveItem() {
-      if(!this.editing) {
-        <%= modelName %>.insert({
-          data: this.model
-        })
-        this.model = new <%= modelName %>()
-      } else {
-        <%= modelName %>.update(this.model)
-        this.editing = false
-        this.model = new <%= modelName %>()
-      }
-      console.log(<%= modelName %>.all())
-    }
-  }
-  <% if (blocks.indexOf('template') === -1) {
-  %>render(h) {
-    return <div/>
-  }<% } %>
 }
 </script>
-<%
-}
 
-if (blocks.indexOf('template') !== -1) {
-%>
 <template>
-  <v-container grid-list-md>
-    <v-layout wrap>
-      <v-flex
-          @click="reset"
-          xs12
-          md12
-          sm12>
-        <v-btn
-            color="primary"
-            @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
-        <span class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</span>
-      </v-flex>
-      <v-flex
-          xs12
-          md4
-          sm6>
-      <v-text-field
-          v-for="field in fields"
-          v-model="model[field]"
-          :key="field"
-          :label=" $t !== undefined ? $t(field) : field">
-      </v-text-field>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-card>
+    <v-toolbar
+        card
+        prominent
+        extended
+        color="primary"
+        dark="">
+      <v-toolbar-title class="headline">
+        {{editing ? "你在进行编辑更新" : "你在添加模式"}}
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+          icon
+          @click="reset">
+        <v-icon>close</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <v-card-text>
+      <v-form>
+        <v-layout wrap>
+          <v-flex
+              v-for="field in fields"
+              :key="field"
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model[field]"
+                :name="field"
+                :label="tryT(field) ">
+            </v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-form>
+    </v-card-text>
+    <v-card-actions class="pb-3">
+      <v-spacer></v-spacer>
+      <v-btn
+          :color="editing ? 'warning' : 'primary'"
+          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
-<%
-}
-
-if (blocks.indexOf('style') !== -1) {
-%>
-<style lang="scss" module>
-
-</style><%
-}
-%>
+<style scoped>
+</style>

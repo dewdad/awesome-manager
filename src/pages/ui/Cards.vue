@@ -76,7 +76,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/bg/8.jpg"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -100,7 +100,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/nature/n3.jpeg"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -111,7 +111,7 @@
                   size="64px"
                   class="right mt-56">
                 <img
-                    src="/static/avatar/man_2.jpg"
+                    :src="computeImgePath"
                     alt="">
               </v-avatar>
               <div>
@@ -131,7 +131,7 @@
             sm12>
           <v-card>
             <v-card-media
-                src="/static/nature/n4.jpeg"
+                :src="computeImgePath"
                 height="250">
               <h2 class="white--text pa-3">
                 Card with image
@@ -231,21 +231,23 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
+  mixins: [baseUrlMixin],
   data() {
     return {
       show: true,
       cardText:
-        "Hey there, I am a very simple card. I am good at containing small bits of information. I am quite convenient because I require little markup to use effectively.",
-    };
+        'Hey there, I am a very simple card. I am good at containing small bits of information. I am quite convenient because I require little markup to use effectively.'
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 <style lang="stylus" scoped>
   .mt-45

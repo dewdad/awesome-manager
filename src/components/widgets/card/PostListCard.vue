@@ -23,7 +23,7 @@
               class=" post--link pa-4 layout row ma-0 text--primary">
             <div class="post--media">
               <img
-                  src="/public/discover_word/thumb/ds_3.jpg"
+                  :src="computeImgePath"
                   alt=""
                   height="100"
                   class="image-scale">
@@ -74,11 +74,16 @@
 </template>
 
 <script>
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
+  mixins: [baseUrlMixin],
   props: {
-    items: { type: [Array, Object] },
+    items: { type: [Array, Object] }
   },
-
+  computed: {
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  },
   methods: {
     handleThumb() {
       // implement your own method here
@@ -88,9 +93,9 @@ export default {
     },
     handleFavorite() {
       // implement your own method here
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

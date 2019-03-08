@@ -161,10 +161,10 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
@@ -177,23 +177,23 @@ export default {
       //
       date: null,
       menu: false,
-      modal: false,
-    };
+      modal: false
+    }
   },
   mounted() {
     this.arrayEvents = [...Array(6)].map(() => {
-      const day = Math.floor(Math.random() * 30);
-      const d = new Date();
-      d.setDate(day);
-      return d.toISOString().substr(0, 10);
-    });
+      const day = Math.floor(Math.random() * 30)
+      const d = new Date()
+      d.setDate(day)
+      return d.toISOString().substr(0, 10)
+    })
   },
 
   methods: {
     functionEvents(date) {
-      const [, , day] = date.split("-");
-      return parseInt(day, 10) % 3 === 0;
-    },
-  },
-};
+      const [, , day] = date.split('-')
+      return parseInt(day, 10) % 3 === 0
+    }
+  }
+}
 </script>

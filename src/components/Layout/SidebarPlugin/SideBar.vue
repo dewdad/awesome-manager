@@ -39,57 +39,59 @@
   </div>
 </template>
 <script>
-import SidebarLink from "./SidebarLink.vue";
-import MobileMenu from "@/components/Layout/MobileMenu.vue";
+import SidebarLink from './SidebarLink.vue'
+import MobileMenu from '@/components/Layout/MobileMenu.vue'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 
 export default {
+  mixins: [baseUrlMixin],
   components: {
     SidebarLink,
-    MobileMenu,
+    MobileMenu
   },
   props: {
     title: {
       type: String,
-      default: "通用管理系统",
+      default: '通用管理系统'
     },
     backgroundImage: {
       type: String,
-      default: require("/bg/2.jpg"),
+      default: require('@/assets/logo.png')
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/logo.png"),
+      default: require('@/assets/logo.png')
     },
     activeColor: {
       type: String,
-      default: "green",
+      default: 'green',
       validator: value => {
-        let acceptedValues = ["", "purple", "blue", "green", "orange", "red"];
-        return acceptedValues.indexOf(value) !== -1;
-      },
+        let acceptedValues = ['', 'purple', 'blue', 'green', 'orange', 'red']
+        return acceptedValues.indexOf(value) !== -1
+      }
     },
     sidebarLinks: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     autoClose: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   provide() {
     return {
-      autoClose: this.autoClose,
-    };
+      autoClose: this.autoClose
+    }
   },
   computed: {
     sidebarStyle() {
       return {
-        backgroundImage: `url(${this.backgroundImage})`,
-      };
-    },
-  },
-};
+        backgroundImage: `url(${this.backgroundImage})`
+      }
+    }
+  }
+}
 </script>
 <style>
 @media screen and (min-width: 991px) {

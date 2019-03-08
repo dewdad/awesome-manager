@@ -1,4 +1,4 @@
-import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } from "lodash";
+import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } from 'lodash'
 /**
  * Utility function to create a string array from keys of any object
  *
@@ -7,22 +7,22 @@ import { keyBy, reduce, map, mapKeys, mapValues, pick, pickBy, get, find, set } 
  */
 export function stringArrayFromClassKeys<T extends object>(o: T): string[] {
   return Object.keys(o).reduce((res: any[], key: string) => {
-    if (typeof o[key] === "string") res.push(key);
-    return res;
-  }, []);
+    if (typeof o[key] === 'string') res.push(key)
+    return res
+  }, [])
 }
 
 export function objectArrayFromClassKeys<T extends object>(o: T): string[] {
   return Object.keys(o).reduce((res: any[], key: string) => {
-    if (typeof o[key] === "object") res.push(key);
-    return res;
-  }, []);
+    if (typeof o[key] === 'object') res.push(key)
+    return res
+  }, [])
 }
 export function objectFromClassKeys<T extends object>(o: T): T {
   return Object.keys(o).reduce((res: T, key: string) => {
-    if (typeof o[key] === "object") res[key] = o[key];
-    return res;
-  }, Object.create(null));
+    if (typeof o[key] === 'object') res[key] = o[key]
+    return res
+  }, Object.create(null))
 }
 /**
  * Utility function to create a K:V from a list of strings
@@ -34,9 +34,9 @@ export function objectFromClassKeys<T extends object>(o: T): T {
  */
 export function classFromStringArray<T extends string>(o: Array<T>): { [K in T]: K } {
   return o.reduce((res, key) => {
-    res[key] = key;
-    return res;
-  }, Object.create(null));
+    res[key] = key
+    return res
+  }, Object.create(null))
 }
 
 /**
@@ -51,14 +51,14 @@ export function classFromStringArray<T extends string>(o: Array<T>): { [K in T]:
  */
 export function selectedDeepClone<T extends object, S extends string>(
   o: T,
-  f: S,
+  f: S
 ): { [K in keyof T]: any } {
   return Object.keys(o).reduce((res, key) => {
     if (typeof o[key] === f) {
-      res[key] = o[key];
+      res[key] = o[key]
     }
-    return res;
-  }, Object.create(null));
+    return res
+  }, Object.create(null))
 }
 
 /**
@@ -73,13 +73,13 @@ export function selectedDeepClone<T extends object, S extends string>(
  */
 export function selectedDeepMining<T extends object, S extends string>(o: T, f: S): S[] {
   return Object.keys(o).reduce((res, key) => {
-    if (typeof o[key] !== "object") {
-      res.push(key);
+    if (typeof o[key] !== 'object') {
+      res.push(key)
     } else {
-      res.push(selectedDeepMining(o[key], "object"));
+      res.push(selectedDeepMining(o[key], 'object'))
     }
-    return res;
-  }, []);
+    return res
+  }, [])
 }
 
 /**
@@ -94,16 +94,16 @@ export function selectedDeepMining<T extends object, S extends string>(o: T, f: 
  */
 export function stateObjectFromArray<T extends any, K extends string>(a: Array<T>): { K: T } {
   return a.reduce((res, item) => {
-    res[item["_id"]] = item;
-    return res;
-  }, Object.create(null));
+    res[item['_id']] = item
+    return res
+  }, Object.create(null))
 }
 
 export function pullFromArray(array: any[], matched: any) {
   return array.reduce((arr, item) => {
     if (!item.match(matched)) {
-      arr.push(item);
+      arr.push(item)
     }
-    return arr;
-  }, []);
+    return arr
+  }, [])
 }

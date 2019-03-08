@@ -1,15 +1,22 @@
 ---
 to: src/store/modules/<%= h.capitalize(h.inflection.singularize(name)) %>.ts
 ---
-import { make } from "vuex-pathify";
+<%
+const stateName = h.inflection.camelize(h.inflection.singularize(name))
+%>import { make } from "vuex-pathify";
 export const state = {
-  name: "<%= h.inflection.camelize(h.inflection.singularize(name)) %>",
+  name: "<%= stateName %>",
   items: [],
+  cached: [],
   currentItem: {},
-  status: "",
+  loggedIn: false,
   filter: {
     search: "",
     sort: "",
+  },
+  token: {
+    secret: "daniel",
+    simpleToken: "",
   },
 }
 

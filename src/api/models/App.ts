@@ -1,27 +1,21 @@
-import { Model } from "@vuex-orm/core";
+import { BaseModel } from './BaseModel'
 
 export interface IApp {
-  _id: string;
-  name: string;
-  title: string;
-  description: string;
+  _id: string
+  name: string
+  title: string
+  description: string
 }
 
-export default class App extends Model {
-  static entity = "app";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
+export default class App extends BaseModel {
+  static entity = 'app'
 
   static fields() {
     return {
       _id: this.increment(),
-      name: this.string("coder"),
-      title: this.string("title"),
-      description: this.string("description"),
-    };
+      name: this.string('coder'),
+      title: this.string('title'),
+      description: this.string('description')
+    }
   }
 }

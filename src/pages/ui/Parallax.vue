@@ -11,7 +11,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax src="/static/bg/12.jpg">
+              <v-parallax :src="computeImgePath">
               </v-parallax>
             </div>
           </v-widget>
@@ -21,7 +21,7 @@
             <div
                 slot="widget-content"
                 class="text-xs-center">
-              <v-parallax src="/static/bg/1.jpg">
+              <v-parallax :src="computeImgePath">
                 <v-layout
                     column
                     align-center
@@ -39,7 +39,7 @@
                 slot="widget-content"
                 class="text-xs-center">
               <v-parallax
-                  src="/static/bg/21.jpg"
+                  :src="computeImgePath"
                   height="700"
                   jumbotron
               ></v-parallax>
@@ -52,17 +52,19 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
+  mixins: [baseUrlMixin],
   data() {
     return {
-      page: 1,
-    };
+      page: 1
+    }
   },
   computed: {},
-  methods: {},
-};
+  methods: {}
+}
 </script>

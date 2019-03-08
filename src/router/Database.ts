@@ -1,8 +1,8 @@
 export default {
-  path: "/component/database",
-  name: "Database",
+  path: '/database-manager',
+  name: 'Database',
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Database/DatabaseManager.vue`),
-};
+    `@/components/Database/DatabaseManager.vue`)
+}

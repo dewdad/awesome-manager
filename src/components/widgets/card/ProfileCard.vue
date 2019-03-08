@@ -1,7 +1,7 @@
 <template>
   <v-card>
-    <v-card-media
-        src="/bg/10.jpg"
+    <v-img
+        :src="computeImgePath"
         height="390">
       <v-layout
           column
@@ -30,7 +30,7 @@
           <div class="display-1 pl-5 pt-5">Ali Conners</div>
         </v-card-title>
       </v-layout>
-    </v-card-media>
+    </v-img>
     <v-list
         two-line
         class="pa-0">
@@ -88,5 +88,12 @@
 </template>
 
 <script>
-export default {};
+import { join } from 'path'
+import baseUrlMixin from '@/mixins/baseUrlMixin'
+export default {
+  mixins: [baseUrlMixin],
+  computed: {
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  }
+}
 </script>

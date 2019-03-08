@@ -43,15 +43,15 @@
   </v-card>
 </template>
 <script>
-import messages from "@/api/message";
+import messages from '@/api/message'
 export default {
   data: () => ({
-    items: messages,
+    items: messages
   }),
   methods: {
     handleClick: e => {
-      console.log(e);
-    },
-  },
-};
+      console.log(e)
+    }
+  }
+}
 </script>

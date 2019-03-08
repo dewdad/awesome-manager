@@ -1,18 +1,18 @@
 <script>
-import ActivityForm from "./ActivityForm";
-import ActivityTable from "./ActivityTable";
+import ActivityForm from './ActivityForm'
+import ActivityTable from './ActivityTable'
 export default {
   components: {
     ActivityForm,
-    ActivityTable,
+    ActivityTable
   },
   data() {},
   computed: {},
   created() {
-    window.ActivityApp = this;
+    window.ActivityApp = this
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <template>

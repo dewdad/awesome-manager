@@ -1,18 +1,19 @@
 /**
+ * 自动注册全部的数据模型
  * models is object to hold
  * {
  *   "user" : [user: User extends Model]
  * }
  */
-import { toLower } from "lodash";
+import { toLower } from 'lodash'
 
-let files = require.context(".", false, /\.ts$/);
-let models = {};
+let requiredModels: RequireContext = require.context('.', false, /\.ts$/)
+let models = {}
 
-files.keys().forEach(key => {
-  if (key === "./index.ts") return;
-  let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ""));
-  models[modelName] = files(key).default;
-});
+requiredModels.keys().forEach(key => {
+  if (key === './index.ts') return
+  let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
+  models[modelName] = requiredModels(key).default || requiredModels(key)
+})
 
-export default models;
+export default models

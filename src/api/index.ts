@@ -1,13 +1,13 @@
 // implement your own methods in here, if your data is coming from A rest API
 
-import User from "./user";
-import Activity from "./activity";
-import Chat from "./chat";
-import Files from "./file";
-import Mail from "./mail";
-import Post from "./post";
-import Chart from "./chart";
-import Project from "./project";
+import User from './user'
+import Activity from './activity'
+import Chat from './chat'
+import Files from './file'
+import Mail from './mail'
+import Post from './post'
+import Chart from './chart'
+import Project from './project'
 export default {
   // user
   getUser: User.getUser,
@@ -33,5 +33,5 @@ export default {
   // chart data
   getMonthVisit: Chart.monthVisitData,
   getCampaign: Chart.campaignData,
-  getLocation: Chart.locationData,
-};
+  getLocation: Chart.locationData
+}

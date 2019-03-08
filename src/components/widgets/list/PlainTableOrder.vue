@@ -39,39 +39,39 @@
 </template>
 
 <script>
-import items from "@/api/order";
+import items from '@/api/order'
 export default {
   data() {
     return {
       headers: [
         {
-          text: "#",
-          align: "left",
+          text: '#',
+          align: 'left',
           sortable: false,
-          value: "id",
+          value: 'id'
         },
-        { text: "Product", value: "deadline" },
-        { text: "Price", value: "progress" },
-        { text: "Status", value: "status" },
+        { text: 'Product', value: 'deadline' },
+        { text: 'Price', value: 'progress' },
+        { text: 'Status', value: 'status' }
       ],
       items: items,
       colors: {
-        processing: "blue",
-        sent: "red",
-        delivered: "green",
-      },
-    };
+        processing: 'blue',
+        sent: 'red',
+        delivered: 'green'
+      }
+    }
   },
   computed: {
     randomColor() {
-      let item = Math.floor(Math.random() * this.colors.length);
-      return this.colors[item];
-    },
+      let item = Math.floor(Math.random() * this.colors.length)
+      return this.colors[item]
+    }
   },
   methods: {
     getColorByStatus(status) {
-      return this.colors[status];
-    },
-  },
-};
+      return this.colors[status]
+    }
+  }
+}
 </script>

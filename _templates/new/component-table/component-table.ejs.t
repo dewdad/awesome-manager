@@ -5,55 +5,41 @@ to: "src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><%
-if (blocks.indexOf('script') !== -1) {
 %><script>
 import <%= modelName %> from "@/api/models/<%= modelName %>";
 import <%= modelFormName %> from "./<%= modelFormName %>";
+
+import exportMixin from "@/mixins/exportMixin";
+import crudMixin from "@/mixins/crudMixin";
+
 export default {
   components: {
     <%= modelFormName %>
   },
   data() {
     return {
-      editing: false,
+      modelName: "<%= modelName.toLowerCase() %>"
     }
   },
-  computed: {
-    all: ()=><%= modelName %>.all(),
-    headers: ()=><%= modelName %>.fieldsList(),
-  },
+  mixins: [ exportMixin, crudMixin ],
   created() {
-    window.<%= modelName %>Table = this;
+    window.<%= modelTableName %> = this;
   },
   methods: {
-    deleteItem(item) {
-      <%= modelName %>.delete(item._id)
-    },
     editItem(item) {
-      window.<%= h.capitalize(h.inflection.singularize(model)) %>Form.$emit("SET_EDITING", item)
+      this.$emit("SET_EDITING", item);
+      window.<%= modelFormName %>.$emit("SET_EDITING", item);
     }
   },
-  <% if (blocks.indexOf('template') === -1) {
-  %>render(h) {
-    return <div/>
-  }<% } %>
 }
 </script>
-<%
-}
 
-if (blocks.indexOf('template') !== -1) {
-%>
 <template>
   <v-card>
-    <v-card-title>
-      <%= modelTableName %>
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template
@@ -61,23 +47,21 @@ if (blocks.indexOf('template') !== -1) {
             slot-scope="props">
           <tr>
             <th
+                class="text-xs-left"
+                key="action">
+              {{ $t('action') }}
+            </th>
+            <th
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
+              {{ tryT(header) }}
             </th>
           </tr>
         </template>
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -92,21 +76,20 @@ if (blocks.indexOf('template') !== -1) {
               <v-icon color="pink">delete</v-icon>
             </v-btn>
           </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers">
+            {{ props.item[header] }}
+          </td>
         </template>
       </v-data-table>
-
     </v-responsive>
     <v-responsive>
+      <<%= modelFormName %>></<%= modelFormName %>> 
     </v-responsive>
   </v-card>
 </template>
-<%
-}
-
-if (blocks.indexOf('style') !== -1) {
-%>
-<style lang="scss" module>
-
-</style><%
-}
-%>
+<style scoped>
+</style>

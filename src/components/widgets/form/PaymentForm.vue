@@ -84,42 +84,42 @@
 <script>
 export default {
   $_veeValidate: {
-    validator: "new",
+    validator: 'new'
   },
   data: () => ({
     saveCard: true,
     cardTypes: [
       {
         id: 1,
-        name: "Visa Express",
+        name: 'Visa Express'
       },
       {
         id: 2,
-        name: "Mastard",
-      },
+        name: 'Mastard'
+      }
     ],
     valid: true,
     form: {
-      cardNumber: "5105105105105100",
-      cardName: "Mcihael Wang",
+      cardNumber: '5105105105105100',
+      cardName: 'Mcihael Wang',
       cardTypeId: 1,
-      expireDate: "2018-04-09",
-    },
+      expireDate: '2018-04-09'
+    }
   }),
   mounted() {
-    this.$validator.localize("en", this.dictionary);
+    this.$validator.localize('en', this.dictionary)
   },
 
   methods: {
     submit() {
-      this.$validator.validateAll();
+      this.$validator.validateAll()
     },
     clear() {
-      this.form = {};
-      this.$validator.reset();
-    },
-  },
-};
+      this.form = {}
+      this.$validator.reset()
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -1,35 +1,35 @@
 <script>
-import User from "@/api/models/User";
-import UserForm from "./UserForm";
-import { pullAll } from "lodash";
+import User from '@/api/models/User'
+import UserForm from './UserForm'
+
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
+
 export default {
   components: {
-    UserForm,
+    UserForm
   },
   data() {
     return {
-      editing: false,
-    };
+      modelName: 'user'
+    }
+  },
+  mixins: [crudMixin, exportMixin],
+  created() {
+    window.UserApp = this
   },
   computed: {
-    all: () =>
-      User.query()
-        .withAll()
-        .get(),
-    headers: () => pullAll(User.fieldsList(), User.relationFieldsList()),
-  },
-  created() {
-    window.UserApp = this;
+    headers() {
+      return this.Model.nonRelationFields()
+    }
   },
   methods: {
-    deleteItem(item) {
-      User.delete(item._id);
-    },
     editItem(item) {
-      window.UserForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.UserForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>
@@ -73,6 +73,12 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
+            </v-btn>
           </td>
           <td
               class="text-xs-left"
@@ -85,8 +91,8 @@ export default {
       </v-data-table>
 
     </v-responsive>
-    <UserForm></UserForm>
     <v-responsive>
+      <UserForm></UserForm>
     </v-responsive>
   </v-card>
 </template>

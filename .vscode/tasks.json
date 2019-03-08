@@ -6,10 +6,7 @@
     {
       "type": "npm",
       "script": "storybook:serve",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "problemMatcher": []
     },
     {
@@ -20,12 +17,47 @@
     {
       "type": "npm",
       "script": "dev",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
       "type": "npm",
       "script": "lint",
       "problemMatcher": []
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "lib\\util\\tsconfig.json",
+      "option": "watch",
+      "problemMatcher": [
+        "$tsc-watch"
+      ]
+    },
+    {
+      "label": "Remove all release",
+      "type": "shell",
+      "command": "./lib/bin/remove-all-release.sh",
+      "windows": {
+        "command": ".\\lib\\bin\\remove-all=release.cmd"
+      },
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Quick deploy with now",
+      "type": "shell",
+      "command": "now ./dist",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
     }
   ]
 }

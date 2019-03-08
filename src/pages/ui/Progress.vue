@@ -195,29 +195,29 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
       interval: {},
-      value: 0,
-    };
+      value: 0
+    }
   },
   computed: {},
   beforeDestroy() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   },
   mounted() {
     this.interval = setInterval(() => {
       if (this.value === 100) {
-        return this.value === 0;
+        return this.value === 0
       }
-      this.value += 10;
-    }, 1000);
+      this.value += 10
+    }, 1000)
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>

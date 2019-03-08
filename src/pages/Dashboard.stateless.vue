@@ -249,22 +249,22 @@
 </template>
 
 <script>
-import API from "@/api";
-import EChart from "@/components/chart/echart";
-import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
-import PostListCard from "@/components/widgets/card/PostListCard";
-import PostSingleCard from "@/components/widgets/card/PostSingleCard";
-import WeatherCard from "@/components/widgets/card/WeatherCard";
-import VWidget from "@/components/VWidget";
-import Material from "vuetify/es5/util/colors";
-import VCircle from "@/components/circle/VCircle";
-import BoxChart from "@/components/widgets/chart/BoxChart";
-import ChatWindow from "@/components/chat/ChatWindow";
+import API from '@/api'
+import EChart from '@/components/chart/echart'
+import MiniStatistic from '@/components/widgets/statistic/MiniStatistic'
+import PostListCard from '@/components/widgets/card/PostListCard'
+import PostSingleCard from '@/components/widgets/card/PostSingleCard'
+import WeatherCard from '@/components/widgets/card/WeatherCard'
+import VWidget from '@/components/VWidget'
+import Material from 'vuetify/es5/util/colors'
+import VCircle from '@/components/circle/VCircle'
+import BoxChart from '@/components/widgets/chart/BoxChart'
+import ChatWindow from '@/components/chat/ChatWindow'
 
-import CircleStatistic from "@/components/widgets/statistic/CircleStatistic";
-import LinearStatistic from "@/components/widgets/statistic/LinearStatistic";
+import CircleStatistic from '@/components/widgets/statistic/CircleStatistic'
+import LinearStatistic from '@/components/widgets/statistic/LinearStatistic'
 
-import Trending from "@/api/models/Trending";
+import Trending from '@/api/models/Trending'
 
 export default {
   components: {
@@ -278,11 +278,11 @@ export default {
     EChart,
     BoxChart,
     CircleStatistic,
-    LinearStatistic,
+    LinearStatistic
   },
   data: () => ({
     color: Material,
-    selectedTab: "tab-1",
+    selectedTab: 'tab-1'
     // linearTrending: [
     //   {
     //     subheading: "Sales",
@@ -373,27 +373,27 @@ export default {
     // ],
   }),
   created() {
-    Trending.new();
+    Trending.new()
   },
   computed: {
     activity() {
-      return API.getActivity();
+      return API.getActivity()
     },
     posts() {
-      return API.getPost(3);
+      return API.getPost(3)
     },
     siteTrafficData() {
-      return API.getMonthVisit;
+      return API.getMonthVisit
     },
     locationData() {
-      return API.getLocation;
+      return API.getLocation
     },
     trending() {
-      return Trending.all();
+      return Trending.all()
     },
     linearTrending() {
-      return Trending.all();
-    },
-  },
-};
+      return Trending.all()
+    }
+  }
+}
 </script>

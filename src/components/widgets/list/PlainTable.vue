@@ -58,32 +58,32 @@
 </template>
 
 <script>
-import { Projects } from "@/api/project";
+import { Projects } from '@/api/project'
 export default {
   data() {
     return {
       headers: [
         {
-          text: "",
-          align: "center",
+          text: '',
+          align: 'center',
           sortable: false,
-          value: "avatar",
+          value: 'avatar'
         },
         {
-          text: "Name",
-          align: "left",
-          value: "name",
+          text: 'Name',
+          align: 'left',
+          value: 'name'
         },
-        { text: "Deadline", value: "deadline" },
-        { text: "Progress", value: "progress" },
-        { text: "Action", value: "action", align: "right" },
-      ],
-    };
+        { text: 'Deadline', value: 'deadline' },
+        { text: 'Progress', value: 'progress' },
+        { text: 'Action', value: 'action', align: 'right' }
+      ]
+    }
   },
   computed: {
     projects() {
-      return Projects;
-    },
-  },
-};
+      return Projects
+    }
+  }
+}
 </script>

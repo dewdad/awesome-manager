@@ -1,3 +1,3 @@
 module.exports = {
-  template: `<div>Component</div>`,
-};
+  template: `<div>Component</div>`
+}

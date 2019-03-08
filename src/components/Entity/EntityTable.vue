@@ -1,45 +1,49 @@
 <script>
-import Entity from "@/api/models/Entity";
-import EntityForm from "./EntityForm";
+import Entity from '@/api/models/Entity'
+import EntityForm from './EntityForm'
+import EntityIterator from './EntityIterator'
+import EntityList from './EntityList'
+
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
+
 export default {
   components: {
     EntityForm,
+    EntityIterator,
+    EntityList
   },
   data() {
     return {
       editing: false,
-    };
+      modelName: 'entity'
+    }
   },
+  mixins: [crudMixin, exportMixin],
   computed: {
-    all: () => Entity.all(),
-    headers: () => Entity.fieldsList(),
+    headers() {
+      return this.Model.nonRelationFields()
+    }
   },
   created() {
-    window.EntityTable = this;
+    window.EntityTable = this
   },
   methods: {
-    deleteItem(item) {
-      Entity.delete(item._id);
-    },
     editItem(item) {
-      window.EntityForm.$emit("SET_EDITING", item);
-    },
-  },
-};
+      this.$emit('SET_EDITING', item)
+      window.EntityForm.$emit('SET_EDITING', item)
+    }
+  }
+}
 </script>
 
 <template>
   <v-card>
-    <v-card-title>
-      EntityTable
-    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
           :items="all"
-          hide-actions
-          class="elevation-0"
-        >
+          class="elevation-0">
         <template
             slot="headers"
             slot-scope="props">
@@ -47,9 +51,8 @@ export default {
             <th
                 v-for="header in props.headers"
                 class="text-xs-left"
-                :key="header">
-              {{ $t !== undefined ? $t(header) : header }}
-            </th>
+                :key="header"
+            >{{ $t !== undefined ? $t(header) : header }}</th>
           </tr>
         </template>
         <template
@@ -59,9 +62,8 @@ export default {
               class="text-xs-left"
               :key="header"
               :autocomplete="props.item[header]"
-              v-for="header in headers">
-            {{ props.item[header] }}
-          </td>
+              v-for="header in headers"
+          >{{ props.item[header] }}</td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -75,10 +77,15 @@ export default {
                 @click="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
+            <v-btn
+                icon
+                class="mx-0"
+                @click="exportItem(props.item)">
+              <v-icon color="pink">fas fa-print</v-icon>
+            </v-btn>
           </td>
         </template>
       </v-data-table>
-
     </v-responsive>
     <v-responsive>
       <EntityForm></EntityForm>

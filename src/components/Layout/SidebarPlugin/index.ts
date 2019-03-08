@@ -1,31 +1,31 @@
-import Sidebar from "./SideBar.vue";
-import SidebarLink from "./SidebarLink.vue";
+import Sidebar from './SideBar.vue'
+import SidebarLink from './SidebarLink.vue'
 
 const SidebarStore = {
   showSidebar: false,
   displaySidebar(value: any) {
-    this.showSidebar = value;
-  },
-};
+    this.showSidebar = value
+  }
+}
 
 const SidebarPlugin = {
   install(Vue: any) {
     Vue.mixin({
       data() {
         return {
-          sidebarStore: SidebarStore,
-        };
-      },
-    });
+          sidebarStore: SidebarStore
+        }
+      }
+    })
 
-    Object.defineProperty(Vue.prototype, "$sidebar", {
+    Object.defineProperty(Vue.prototype, '$sidebar', {
       get() {
-        return this.$root.sidebarStore;
-      },
-    });
-    Vue.component("side-bar", Sidebar);
-    Vue.component("sidebar-link", SidebarLink);
-  },
-};
+        return this.$root.sidebarStore
+      }
+    })
+    Vue.component('side-bar', Sidebar)
+    Vue.component('sidebar-link', SidebarLink)
+  }
+}
 
-export default SidebarPlugin;
+export default SidebarPlugin

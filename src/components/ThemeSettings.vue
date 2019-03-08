@@ -68,25 +68,25 @@
 </template>
 
 <script>
-import colors from "vuetify/es5/util/colors";
+import colors from 'vuetify/es5/util/colors'
 export default {
   data() {
     return {
-      themeColor: "indigo",
-      sideBarOption: "light",
-      colors: colors,
-    };
+      themeColor: 'indigo',
+      sideBarOption: 'light',
+      colors: colors
+    }
   },
   computed: {
     themeColorOptions() {
       return [
         {
-          key: "blue",
+          key: 'blue',
           value: {
-            sideNav: "blue",
-            mainNav: "blue",
-            sideManu: "white",
-          },
+            sideNav: 'blue',
+            mainNav: 'blue',
+            sideManu: 'white'
+          }
         },
         // {
         //   key: 'lightBlue',
@@ -97,87 +97,87 @@ export default {
         //   }
         // },
         {
-          key: "teal",
+          key: 'teal',
           value: {
-            sideNav: "teal",
-            mainNav: "teal",
-            sideManu: "white",
-          },
+            sideNav: 'teal',
+            mainNav: 'teal',
+            sideManu: 'white'
+          }
         },
         {
-          key: "red",
+          key: 'red',
           value: {
-            sideNav: "red",
-            mainNav: "red",
-            sideManu: "white",
-          },
+            sideNav: 'red',
+            mainNav: 'red',
+            sideManu: 'white'
+          }
         },
         {
-          key: "orange",
+          key: 'orange',
           value: {
-            sideNav: "orange",
-            mainNav: "orange",
-            sideManu: "white",
-          },
+            sideNav: 'orange',
+            mainNav: 'orange',
+            sideManu: 'white'
+          }
         },
         {
-          key: "purple",
+          key: 'purple',
           value: {
-            sideNav: "purple",
-            mainNav: "purple",
-            sideManu: "white",
-          },
+            sideNav: 'purple',
+            mainNav: 'purple',
+            sideManu: 'white'
+          }
         },
         {
-          key: "indigo",
+          key: 'indigo',
           value: {
-            sideNav: "indigo",
-            mainNav: "indigo",
-            sideManu: "white",
-          },
+            sideNav: 'indigo',
+            mainNav: 'indigo',
+            sideManu: 'white'
+          }
         },
         {
-          key: "cyan",
+          key: 'cyan',
           value: {
-            sideNav: "cyan",
-            mainNav: "cyan",
-            sideManu: "white",
-          },
+            sideNav: 'cyan',
+            mainNav: 'cyan',
+            sideManu: 'white'
+          }
         },
         {
-          key: "pink",
+          key: 'pink',
           value: {
-            sideNav: "pink",
-            mainNav: "pink",
-            sideManu: "white",
-          },
+            sideNav: 'pink',
+            mainNav: 'pink',
+            sideManu: 'white'
+          }
         },
         {
-          key: "green",
+          key: 'green',
           value: {
-            sideNav: "green",
-            mainNav: "green",
-            sideManu: "white",
-          },
-        },
-      ];
-    },
+            sideNav: 'green',
+            mainNav: 'green',
+            sideManu: 'white'
+          }
+        }
+      ]
+    }
   },
   watch: {
     themeColor: {
       handler(val) {
-        this.$vuetify.theme.primary = this.colors[val].base;
+        this.$vuetify.theme.primary = this.colors[val].base
       },
-      immediate: true,
+      immediate: true
     },
     sideBarOption: {
       handler(val) {
-        this.$vuetify.dark = val === "dark";
+        this.$vuetify.dark = val === 'dark'
       },
-      immediate: true,
-    },
-  },
-};
+      immediate: true
+    }
+  }
+}
 </script>
 <style lang="stylus" scoped>
 .color-option

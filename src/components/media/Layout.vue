@@ -60,51 +60,51 @@
 <script>
 export default {
   data: () => ({
-    size: "lg",
-    view: "grid",
-    imageMime: ["image/jpeg", "image/png", "image/svg+xml"],
+    size: 'lg',
+    view: 'grid',
+    imageMime: ['image/jpeg', 'image/png', 'image/svg+xml'],
     mediaMenu: [
       {
-        icon: "photo",
-        title: "Images",
-        to: { path: "/media/image" },
+        icon: 'photo',
+        title: 'Images',
+        to: { path: '/media/image' }
       },
       {
-        icon: "videocam",
-        title: "Video",
-        to: { path: "/media/video" },
+        icon: 'videocam',
+        title: 'Video',
+        to: { path: '/media/video' }
       },
       {
-        icon: "volume_down",
-        title: "Audio",
-        to: { path: "/media/audio" },
+        icon: 'volume_down',
+        title: 'Audio',
+        to: { path: '/media/audio' }
       },
       {
-        icon: "insert_drive_file",
-        title: "Document",
-        to: { path: "/media/doc" },
-      },
-    ],
+        icon: 'insert_drive_file',
+        title: 'Document',
+        to: { path: '/media/doc' }
+      }
+    ]
   }),
   computed: {
     files() {
-      return this.$store.state.file.items;
-    },
+      return this.$store.state.file.items
+    }
   },
 
   created() {
-    this.$store.dispatch("listFiles");
+    this.$store.dispatch('listFiles')
   },
 
   methods: {
     isImage(file) {
-      return this.imageMime.includes(file.fileType);
+      return this.imageMime.includes(file.fileType)
     },
     mimeIcons(file) {
-      return this.imageMime.includes(file.fileType) ? "image" : "insert_drive_file";
-    },
-  },
-};
+      return this.imageMime.includes(file.fileType) ? 'image' : 'insert_drive_file'
+    }
+  }
+}
 </script>
 <style lang="stylus" scoped>
 .media-menu {

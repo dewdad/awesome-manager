@@ -1,18 +1,16 @@
-import { Model } from "@vuex-orm/core";
-export default class Generic extends Model {
-  static entity = "generic";
+import { BaseModel } from './BaseModel'
+export interface IGeneric {
+  _id: string
+  name: string
+}
 
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
+export default class Generic extends BaseModel {
+  static entity = 'generic'
 
   static fields() {
     return {
       _id: this.increment(),
-      name: this.string("China"),
-      value: this.string("value"),
-    };
+      name: this.string('name')
+    }
   }
 }

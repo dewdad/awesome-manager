@@ -32,14 +32,14 @@
   </v-footer>
 </template>
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import { Vue } from 'vue-property-decorator'
 export default class Footer extends Vue {
   icons: string[] = [
-    "fab fa-facebook",
-    "fab fa-twitter",
-    "fab fa-google-plus",
-    "fab fa-linkedin",
-    "fab fa-instagram",
-  ];
+    'fab fa-facebook',
+    'fab fa-twitter',
+    'fab fa-google-plus',
+    'fab fa-linkedin',
+    'fab fa-instagram'
+  ]
 }
 </script>

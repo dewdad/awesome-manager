@@ -28,7 +28,7 @@ export default {
     icon: String,
     title: String,
     subTitle: String,
-    color: String,
-  },
-};
+    color: String
+  }
+}
 </script>

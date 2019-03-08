@@ -25,35 +25,35 @@
 </template>
 
 <script>
-import menu from "@/api/menu";
+import menu from '@/api/menu'
 export default {
   data() {
     return {
-      title: "",
-    };
+      title: ''
+    }
   },
   computed: {
     breadcrumbs: function() {
-      let breadcrumbs = [];
+      let breadcrumbs = []
       menu.forEach(item => {
         if (item.items) {
           let child = item.items.find(i => {
-            return i.component === this.$route.name;
-          });
+            return i.component === this.$route.name
+          })
           if (child) {
-            breadcrumbs.push(item.title);
-            breadcrumbs.push(child.title);
-            this.title = child.title;
+            breadcrumbs.push(item.title)
+            breadcrumbs.push(child.title)
+            this.title = child.title
           }
         } else {
           if (item.name === this.$route.name) {
-            this.title = item.title;
-            breadcrumbs.push(item.title);
+            this.title = item.title
+            breadcrumbs.push(item.title)
           }
         }
-      });
-      return breadcrumbs;
-    },
-  },
-};
+      })
+      return breadcrumbs
+    }
+  }
+}
 </script>

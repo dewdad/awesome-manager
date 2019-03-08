@@ -150,10 +150,10 @@
 </template>
 
 <script>
-import VWidget from "@/components/VWidget";
+import VWidget from '@/components/VWidget'
 export default {
   components: {
-    VWidget,
+    VWidget
   },
   data() {
     return {
@@ -161,9 +161,9 @@ export default {
         showSuccess: true,
         showError: true,
         showWarnning: true,
-        showInfo: true,
-      },
-    };
+        showInfo: true
+      }
+    }
   },
   computed: {
     showReset: function() {
@@ -171,16 +171,16 @@ export default {
         (((this.alert.showSuccess === this.alert.showError) === this.alert.showWarnning) ===
           this.alert.showInfo) ===
         false
-      );
-    },
+      )
+    }
   },
   methods: {
     handleReset() {
-      this.alert.showError = true;
-      this.alert.showSuccess = true;
-      this.alert.showWarnning = true;
-      this.alert.showInfo = true;
-    },
-  },
-};
+      this.alert.showError = true
+      this.alert.showSuccess = true
+      this.alert.showWarnning = true
+      this.alert.showInfo = true
+    }
+  }
+}
 </script>

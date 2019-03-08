@@ -133,14 +133,14 @@
 </template>
 
 <script>
-import { MailMenu } from "@/api/mail";
-import Compose from "./Compose";
+import { MailMenu } from '@/api/mail'
+import Compose from './Compose'
 export default {
   components: {
-    Compose,
+    Compose
   },
   props: {
-    source: String,
+    source: String
   },
   data: () => ({
     selected: [2],
@@ -150,81 +150,81 @@ export default {
     menus: MailMenu,
     items: [
       {
-        icon: "account_circle",
-        href: "#",
-        title: "Profile",
+        icon: 'account_circle',
+        href: '#',
+        title: 'Profile',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        icon: "settings",
-        href: "#",
-        title: "Settings",
+        icon: 'settings',
+        href: '#',
+        title: 'Settings',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "Logout",
+        icon: 'fullscreen_exit',
+        href: '#',
+        title: 'Logout',
         click: e => {
-          console.log(e);
-        },
-      },
+          console.log(e)
+        }
+      }
     ],
     mailActions: [
       {
-        href: "#",
-        title: "Delete",
+        href: '#',
+        title: 'Delete',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Mark as read",
-        title: "Mark as read",
+        href: 'Mark as read',
+        title: 'Mark as read',
         click: e => {
-          console.log(e);
-        },
+          console.log(e)
+        }
       },
       {
-        href: "Spam",
-        title: "Spam",
+        href: 'Spam',
+        title: 'Spam',
         click: e => {
-          console.log(e);
-        },
-      },
-    ],
+          console.log(e)
+        }
+      }
+    ]
   }),
 
   created() {
-    this.$on("MAIL_REPLY_DIALOG_CLOSE", () => {
-      this.replayDialog = false;
-    });
-    window.AppMail = this;
+    this.$on('MAIL_REPLY_DIALOG_CLOSE', () => {
+      this.replayDialog = false
+    })
+    window.AppMail = this
   },
   methods: {
     handleClick(e) {
-      console.log(e);
+      console.log(e)
     },
     goBack() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
     toggleDrawer() {
-      this.drawer = this.drawer ? false : true;
+      this.drawer = this.drawer ? false : true
     },
     toggle(index) {
-      const i = this.selected.indexOf(index);
+      const i = this.selected.indexOf(index)
       if (i > -1) {
-        this.selected.splice(i, 1);
+        this.selected.splice(i, 1)
       } else {
-        this.selected.push(index);
+        this.selected.push(index)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style lang="stylus">
 

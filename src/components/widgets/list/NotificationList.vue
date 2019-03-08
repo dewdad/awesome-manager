@@ -14,14 +14,14 @@
         <template v-for="(item, index) in items">
           <v-subheader
               v-if="item.header"
-              :key="item.header">{{ item.header }}</v-subheader>
+              :key="index">{{ item.header }}</v-subheader>
           <v-divider
               v-else-if="item.divider"
               :key="index"></v-divider>
           <v-list-tile
               avatar
               v-else
-              :key="item.title"
+              :key="index"
               @click="handleClick">
             <v-list-tile-avatar :color="item.color">
               <v-icon dark>{{item.icon}}</v-icon>
@@ -41,20 +41,27 @@
           flat
           class="ma-0">All</v-btn>
       <v-divider></v-divider>
+      <notification-form></notification-form>
+      <v-divider></v-divider>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import notes from "@/api/notification";
+// import notes from "@/api/notification";
+import Notification from '@/api/models/Notification'
+import NotificationForm from '@/components/Notification/NotificationForm'
 export default {
-  data: () => ({
-    items: notes,
-  }),
+  components: {
+    NotificationForm
+  },
+  computed: {
+    items: () => Notification.all()
+  },
   methods: {
     handleClick: e => {
-      console.log(e);
-    },
-  },
-};
+      console.log(e)
+    }
+  }
+}
 </script>

@@ -1,18 +1,11 @@
-import { Model } from "@vuex-orm/core";
-export default class Location extends Model {
-  static entity = "location";
-
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
-
+import { BaseModel } from './BaseModel'
+export default class Location extends BaseModel {
+  static entity = 'location'
   static fields() {
     return {
       _id: this.increment(),
-      latitude: this.string("none"),
-      longitude: this.string("longitude"),
-    };
+      latitude: this.string('none'),
+      longitude: this.string('longitude')
+    }
   }
 }

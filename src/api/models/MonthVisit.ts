@@ -1,19 +1,14 @@
-import { Model } from "@vuex-orm/core";
-export default class MonthVisit extends Model {
-  static entity = "monthVisit";
+import { BaseModel } from './BaseModel'
 
-  static primaryKey = "_id";
-
-  static fieldsList() {
-    return Object.keys(this.fields());
-  }
+export default class MonthVisit extends BaseModel {
+  static entity = 'monthvisit'
 
   static fields() {
     return {
       _id: this.increment(),
-      month: this.string("Jan"),
-      inner: this.string("inner"),
-      outer: this.string("outer"),
-    };
+      month: this.string('Jan'),
+      inner: this.string('inner'),
+      outer: this.string('outer')
+    }
   }
 }

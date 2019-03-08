@@ -22,41 +22,9 @@
 
     <v-btn
         icon
-        href="mailto:linuxing3@qq.com">
-      <v-icon>email</v-icon>
+        @click="$router.push('/docs/manual')">
+      <v-icon>home</v-icon>
     </v-btn>
-
-    <v-btn
-        icon
-        href="https://github.com/linuxing3/official-manager">
-      <v-icon>fab fa-github</v-icon>
-    </v-btn>
-
-    <v-btn
-        icon
-        @click="handleFullScreen()">
-      <v-icon>fullscreen</v-icon>
-    </v-btn>
-
-    <v-menu
-        offset-y
-        origin="center center"
-        class="elelvation-1"
-        :nudge-bottom="14"
-        transition="scale-transition">
-      <v-btn
-          icon
-          flat
-          slot="activator">
-        <v-badge
-            color="red"
-            overlap>
-          <span slot="badge">3</span>
-          <v-icon medium>notifications</v-icon>
-        </v-badge>
-      </v-btn>
-      <notification-list></notification-list>
-    </v-menu>
 
     <v-menu
         offset-y
@@ -70,7 +38,7 @@
           slot="activator">
         <v-avatar size="30px">
           <img
-              src="/avatar/mf-avatar.svg"
+              :src="computeAvatar"
               alt="Xing Wenju"/>
         </v-avatar>
       </v-btn>
@@ -94,65 +62,46 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-
   </v-toolbar>
 </template>
 <script>
-import NotificationList from "@/components/widgets/list/NotificationList";
-import { toggleFullScreen } from "@/util";
+import NotificationList from '@/components/widgets/list/NotificationList'
+import Notification from '@/api/models/Notification'
+import { toggleFullScreen } from '@/util'
+import { join } from 'path'
 export default {
-  name: "app-toolbar",
+  name: 'app-toolbar',
   components: {
-    NotificationList,
+    NotificationList
   },
   data: () => ({
+    baseUrl: process.env.BASE_URL,
     items: [
       {
-        icon: "account_circle",
-        href: "#",
-        title: "个人资料",
+        icon: 'settings',
+        href: '#',
+        title: '个人设置',
         click(e) {
-          window.getApp.$emit("APP_ACCOUNTPROFILE");
-        },
+          window.getApp.$emit('APP_ACCOUNTSETTING')
+        }
       },
       {
-        icon: "settings",
-        href: "#",
-        title: "个人设置",
+        icon: 'fullscreen_exit',
+        href: '#',
+        title: '登出',
         click(e) {
-          window.getApp.$emit("APP_ACCOUNTSETTING");
-        },
-      },
-      {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "实验场",
-        click(e) {
-          window.getApp.$emit("APP_PLAYGROUND");
-        },
-      },
-      {
-        icon: "fullscreen_exit",
-        href: "#",
-        title: "登出",
-        click(e) {
-          window.getApp.$emit("APP_LOGOUT");
-        },
-      },
-    ],
+          window.getApp.$emit('APP_LOGOUT')
+        }
+      }
+    ]
   }),
   computed: {
-    toolbarColor() {
-      return this.$vuetify.options.extra.mainNav;
-    },
+    computeAvatar: () => join(process.env.BASE_URL, 'avatar/mf-avatar.svg'),
+    toolbarColor: () => this.$vuetify.options.extra.mainNav,
+    notificationCount: () => Notification.query().count()
   },
   methods: {
-    handleDrawerToggle() {
-      window.getApp.$emit("APP_DRAWER_TOGGLED");
-    },
-    handleFullScreen() {
-      Util.toggleFullScreen();
-    },
-  },
-};
+    handleDrawerToggle: () => window.getApp.$emit('APP_DRAWER_TOGGLED')
+  }
+}
 </script>

@@ -1,8 +1,8 @@
-var map = require("lodash/fp/map"),
-  split = require("lodash/fp/split"),
-  join = require("lodash/fp/join"),
-  concat = require("lodash/fp/concat");
-curry = require("lodash/fp/curry");
+var map = require('lodash/fp/map'),
+  split = require('lodash/fp/split'),
+  join = require('lodash/fp/join'),
+  concat = require('lodash/fp/concat')
+curry = require('lodash/fp/curry')
 
 module.exports = {
   helpers: {
@@ -10,8 +10,8 @@ module.exports = {
     L: s => s.toLowerCase(),
     S: (fieldNames, fieldTypes) => {
       return map(function(k) {
-        return fieldTypes[k + ".type"];
-      }, split(",", fieldNames));
-    },
-  },
-};
+        return fieldTypes[k + '.type']
+      }, split(',', fieldNames))
+    }
+  }
+}

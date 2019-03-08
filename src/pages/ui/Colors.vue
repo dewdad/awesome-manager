@@ -52,56 +52,56 @@
 </template>
 
 <script>
-import colors from "vuetify/es5/util/colors";
-import { kebab } from "@/util";
+import colors from 'vuetify/es5/util/colors'
+import { kebab } from '@/util'
 
 export default {
   data: () => ({
     colors,
-    search: "",
+    search: ''
   }),
 
   computed: {
     computedColors() {
-      const colors = {};
-      const search = this.search.toLowerCase();
+      const colors = {}
+      const search = this.search.toLowerCase()
 
       Object.keys(this.colors).forEach(key => {
-        const kebabKey = kebab(key).toLowerCase();
+        const kebabKey = kebab(key).toLowerCase()
 
         if (kebabKey.indexOf(search) > -1) {
-          colors[kebabKey] = this.colors[key];
+          colors[kebabKey] = this.colors[key]
         }
-      });
+      })
 
-      return colors;
-    },
+      return colors
+    }
   },
 
   methods: {
     endStr(str) {
-      return str[str.length - 1];
+      return str[str.length - 1]
     },
     convertToClass(str) {
-      const end = this.endStr(str);
-      const sub = str.substr(0, str.length - 1);
+      const end = this.endStr(str)
+      const sub = str.substr(0, str.length - 1)
 
-      if (isNaN(parseInt(end, 10))) return str;
+      if (isNaN(parseInt(end, 10))) return str
 
-      return `${sub}-${end}`;
+      return `${sub}-${end}`
     },
     getColorClass(key) {
       if (
-        ["white", "transparent"].includes(key) ||
-        key.indexOf("light") > -1 ||
-        key.indexOf("accent") > -1
+        ['white', 'transparent'].includes(key) ||
+        key.indexOf('light') > -1 ||
+        key.indexOf('accent') > -1
       )
-        return "black--text";
+        return 'black--text'
 
-      return "white--text";
-    },
-  },
-};
+      return 'white--text'
+    }
+  }
+}
 </script>
 
 <style lang="stylus">

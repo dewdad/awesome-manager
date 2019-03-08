@@ -1,73 +1,89 @@
-"use strict";
+'use strict'
 
-import { app, protocol, BrowserWindow } from "electron";
-import { createProtocol, installVueDevtools } from "vue-cli-plugin-electron-builder/lib";
-const isDevelopment = process.env.NODE_ENV !== "production";
+import { app, protocol, BrowserWindow, ipcMain, globalShortcut } from 'electron'
+import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib'
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
+let win: any
+let githubWin: any
 
 // Standard scheme must be registered before the app is ready
-protocol.registerStandardSchemes(["app"], { secure: true });
+protocol.registerStandardSchemes(['app'], { secure: true })
 function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({ width: 800, height: 600 })
 
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
+    if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
-    createProtocol("app");
+    createProtocol('app')
     // Load the index.html when not in development
-    win.loadFile("index.html");
+    win.loadFile('index.html')
+    if (!process.env.IS_TEST) win.webContents.openDevTools()
   }
 
-  win.on("closed", () => {
-    win = null;
-  });
+  win.on('closed', () => {
+    win = null
+  })
+}
+
+function registerShortcuts() {
+  globalShortcut.register('CommandOrControl+X', () => {
+    githubWin = new BrowserWindow({ backgroundColor: '#2e2c29' })
+    githubWin.loadURL('https://github.com/linuxing3/awesome-manager')
+    if (!process.env.IS_TEST) githubWin.webContents.openDevTools()
+    githubWin.show()
+  })
 }
 
 // Quit when all windows are closed.
-app.on("window-all-closed", () => {
+app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== "darwin") {
-    app.quit();
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
-});
+})
 
-app.on("activate", () => {
+app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (win === null) {
-    createWindow();
+    createWindow()
   }
-});
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", async () => {
+app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-    await installVueDevtools();
+    await installVueDevtools()
   }
-  createWindow();
-});
+  createWindow()
+  registerShortcuts()
+})
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
-  if (process.platform === "win32") {
-    process.on("message", data => {
-      if (data === "graceful-exit") {
-        app.quit();
+  if (process.platform === 'win32') {
+    process.on('message', data => {
+      if (data === 'graceful-exit') {
+        app.quit()
       }
-    });
+    })
   } else {
-    process.on("SIGTERM", () => {
-      app.quit();
-    });
+    process.on('SIGTERM', () => {
+      app.quit()
+    })
   }
 }
+
+ipcMain.on('online-status-changed', (event, status) => {
+  event.sender.send('ONLINE-STATUS-CHANGE', `${status}`)
+})
